@@ -2,6 +2,10 @@ package se.miun.dt170g.projektdt170g.API;
 
 import java.util.Date;
 
+/**
+ * this class represent a lunch item
+ */
+
 public class Lunch {
     private int lunch_id;
     private String name;
