@@ -1,5 +1,8 @@
 package se.miun.dt170g.projektdt170g.API;
 
+/**
+ * this class represents a menu item in the a la carte menu
+ */
 public class ALaCarteItem {
     private int dinner_id;
     private int price;
@@ -7,8 +10,7 @@ public class ALaCarteItem {
     private String type;
     private String description;
 
-    // Constructors, getters, and setters
-    public ALaCarteItem() {}
+
 
     public ALaCarteItem(int dinner_id, int price, String name, String type, String description) {
         this.dinner_id = dinner_id;
@@ -18,7 +20,7 @@ public class ALaCarteItem {
         this.description = description;
     }
 
-    // Getters and setters
+
     public String getName() {
         return name;
     }
