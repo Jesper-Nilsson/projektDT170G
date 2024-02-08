@@ -1,41 +1,40 @@
-/* style.css */
-
 .header-content {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    background-color: #333;
+    margin-bottom: 50px;
+
     width: 100%;
 }
 
 .logo {
     width: 200px; /* Adjust if necessary */
-    height: 120px;
+    height: 200px;
+
 }
 
 .nav-toggle {
     position: fixed;
+    background: none;
+    border: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 35px;
     cursor: pointer;
     right: 5%;
-    top: 0%;
 
 }
 
 .main-nav {
-    position: relative; /* For absolute positioning of the menu */
+    position: relative;
 }
 
 .main-nav .menu {
     list-style-type: none;
-    padding: 0;
-    position: absolute; /* Position the menu below the toggle */
+    position: fixed; /* Position the menu below the toggle */
     background-color: #333; /* Match the header background color */
     right: 0;
-    top: 100%;
+    top: 23%;
     width: 200px; /* Width of the dropdown menu */
     display: none;
 }
@@ -54,5 +53,17 @@
 
 .menu li:last-child a {
     border-bottom: none; /* Remove border for the last item */
+}
+
+
+
+.test {
+    background-image: url('./images/background.jpg'); /* Example path to a background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
 }
 
