@@ -10,10 +10,8 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +22,39 @@ public class LunchAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getLunch() {
+    public String getLunch(@QueryParam("week") boolean week,
+                           @QueryParam("today") boolean today,
+                           @QueryParam("limit") Integer limit) {
         List<Lunch> lunches = new ArrayList<>();
 
         String query = "SELECT * FROM lunch_menu";
+        String dateCondition = "";
+
+
+        if (today){
+            LocalDate date = LocalDate.now();
+            dateCondition = " WHERE date = ?";
+        } else if (week) {
+            LocalDate startDate = LocalDate.now().with(java.time.DayOfWeek.MONDAY);
+            LocalDate EndDate = startDate.plusDays(6);
+            dateCondition = " WHERE date >= ? AND date <= ?";
+        }
+
+        query += dateCondition;
+
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
+
+            if (today) {
+                LocalDate date = LocalDate.now();
+                pstmt.setDate(1, Date.valueOf(date)); // Bind the date for "today" condition
+            } else if (week) {
+                LocalDate startDate = LocalDate.now().with(java.time.DayOfWeek.MONDAY);
+                LocalDate endDate = startDate.plusDays(6);
+                pstmt.setDate(1, Date.valueOf(startDate)); // Bind the start date for "week" condition
+                pstmt.setDate(2, Date.valueOf(endDate)); // Bind the end date for "week" condition
+            }
 
             ResultSet rs = pstmt.executeQuery();
 

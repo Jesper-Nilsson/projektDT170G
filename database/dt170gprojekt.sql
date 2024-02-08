@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2024 at 10:52 AM
+-- Generation Time: Feb 08, 2024 at 01:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -112,6 +112,18 @@ CREATE TABLE `lunch_menu` (
   `date` date NOT NULL,
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lunch_menu`
+--
+
+INSERT INTO `lunch_menu` (`lunch_id`, `name`, `description`, `date`, `price`) VALUES
+(1, 'köttbullar och potatis', 'köttbullar och potatis med gräddsås och lingonsylt', '2024-02-08', 99),
+(2, 'fiskgratäng', 'fiskgratäng på torsk', '2024-02-09', 99),
+(3, 'prujolökssoppa', 'en soppa med potatis och purjolök', '2024-02-04', 99),
+(4, 'kycklingspett', 'kyckling spett med potatisgratäng', '2024-02-05', 99),
+(5, 'hasselbackspotatis', 'smörgratinerad hasselbackspotatis med lövbiff', '2024-02-12', 99),
+(6, 'vintergryta', 'vintergryta gjord på älgstek, serveras med ris', '2024-02-10', 99);
 
 -- --------------------------------------------------------
 
@@ -283,7 +295,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `lunch_menu`
 --
 ALTER TABLE `lunch_menu`
-  MODIFY `lunch_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lunch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `receipt`
