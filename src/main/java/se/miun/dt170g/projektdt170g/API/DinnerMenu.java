@@ -17,17 +17,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/items")
-public class ItemsResource {
+@Path("/a_la_carte")
+public class DinnerMenu {
     @Resource(name = "jdbc/database")
     private DataSource dataSource;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getItemsByType(@QueryParam("type") String type) {
-        List<Item> items = new ArrayList<>();
+        List<Dinner> dinners = new ArrayList<>();
 
-        String query = "SELECT * FROM item WHERE type = ?";
+        String query = "SELECT * FROM dinner_menu WHERE type = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
@@ -35,7 +35,7 @@ public class ItemsResource {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                items.add(new Item(rs.getInt("id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
+                dinners.add(new Dinner(rs.getInt("dinner_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -43,6 +43,6 @@ public class ItemsResource {
 
 
         Jsonb jsonb = JsonbBuilder.create();
-        return jsonb.toJson(items); // Convert the list of items to JSON
+        return jsonb.toJson(dinners); // Convert the list of items to JSON
     }
 }

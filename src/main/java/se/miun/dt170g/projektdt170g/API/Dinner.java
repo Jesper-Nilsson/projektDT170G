@@ -1,17 +1,17 @@
 package se.miun.dt170g.projektdt170g.API;
 
-public class Item {
-    private int id;
+public class Dinner {
+    private int dinner_id;
     private int price;
     private String name;
     private String type;
     private String description;
 
     // Constructors, getters, and setters
-    public Item() {}
+    public Dinner() {}
 
-    public Item(int id, int price, String name, String type, String description) {
-        this.id = id;
+    public Dinner(int dinner_id, int price, String name, String type, String description) {
+        this.dinner_id = dinner_id;
         this.price = price;
         this.name = name;
         this.type = type;
@@ -43,12 +43,12 @@ public class Item {
         this.description = description;
     }
 
-    public int getId() {
-        return id;
+    public int getDinner_id() {
+        return dinner_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDinner_id(int dinner_id) {
+        this.dinner_id = dinner_id;
     }
 
     public int getPrice() {
