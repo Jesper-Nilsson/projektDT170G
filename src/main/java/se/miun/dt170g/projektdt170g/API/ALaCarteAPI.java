@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Path("/a_la_carte")
-public class DinnerMenu {
+public class ALaCarteAPI {
     @Resource(name = "jdbc/database")
     private DataSource dataSource;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getItemsByType(@QueryParam("type") String type) {
-        List<Dinner> dinners = new ArrayList<>();
+        List<ALaCarteItem> ALaCarteItems = new ArrayList<>();
 
         String query = "SELECT * FROM dinner_menu WHERE type = ?";
         try (Connection conn = dataSource.getConnection();
@@ -35,7 +35,7 @@ public class DinnerMenu {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                dinners.add(new Dinner(rs.getInt("dinner_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
+                ALaCarteItems.add(new ALaCarteItem(rs.getInt("dinner_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -43,6 +43,6 @@ public class DinnerMenu {
 
 
         Jsonb jsonb = JsonbBuilder.create();
-        return jsonb.toJson(dinners); // Convert the list of items to JSON
+        return jsonb.toJson(ALaCarteItems); // Convert the list of items to JSON
     }
 }

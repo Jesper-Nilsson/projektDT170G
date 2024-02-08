@@ -1,6 +1,6 @@
 package se.miun.dt170g.projektdt170g.API;
 
-public class Dinner {
+public class ALaCarteItem {
     private int dinner_id;
     private int price;
     private String name;
@@ -8,9 +8,9 @@ public class Dinner {
     private String description;
 
     // Constructors, getters, and setters
-    public Dinner() {}
+    public ALaCarteItem() {}
 
-    public Dinner(int dinner_id, int price, String name, String type, String description) {
+    public ALaCarteItem(int dinner_id, int price, String name, String type, String description) {
         this.dinner_id = dinner_id;
         this.price = price;
         this.name = name;
