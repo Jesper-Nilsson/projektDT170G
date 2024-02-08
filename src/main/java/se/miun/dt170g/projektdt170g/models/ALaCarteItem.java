@@ -1,4 +1,4 @@
-package se.miun.dt170g.projektdt170g.API;
+package se.miun.dt170g.projektdt170g.models;
 
 /**
  * this class represents a menu item in the a la carte menu

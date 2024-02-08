@@ -8,6 +8,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import se.miun.dt170g.projektdt170g.models.Lunch;
 
 import javax.sql.DataSource;
 import java.sql.*;
