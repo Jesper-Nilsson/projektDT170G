@@ -6,7 +6,7 @@ import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarts.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import se.miun.dt170g.projektdt170g.models.ALaCarteItem;
 
