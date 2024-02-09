@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 09 feb 2024 kl 11:22
+-- Tid vid skapande: 09 feb 2024 kl 11:45
 -- Serverversion: 10.4.24-MariaDB
 -- PHP-version: 8.1.6
 
@@ -26,11 +26,11 @@ USE `dt170gprojekt`;
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `al_la_carte_menu`
+-- Tabellstruktur `a_la_carte_menu`
 --
 
-DROP TABLE IF EXISTS `al_la_carte_menu`;
-CREATE TABLE `al_la_carte_menu` (
+DROP TABLE IF EXISTS `a_la_carte_menu`;
+CREATE TABLE `a_la_carte_menu` (
   `a_la_carte_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE `al_la_carte_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumpning av Data i tabell `al_la_carte_menu`
+-- Dumpning av Data i tabell `a_la_carte_menu`
 --
 
-INSERT INTO `al_la_carte_menu` (`a_la_carte_id`, `name`, `description`, `type`, `price`) VALUES
+INSERT INTO `a_la_carte_menu` (`a_la_carte_id`, `name`, `description`, `type`, `price`) VALUES
 (1, 'köttbullar', 'köttbullar och potatis med gräddsås', 'huvudrätt', 99),
 (2, 'carbonara', 'Spaghetti carbonara med pancetta och parmesanost', 'huvudrätt', 119),
 (3, 'lax och potatis', 'grillad lax med potatis och dillsås', 'huvudrätt', 139),
@@ -77,6 +77,14 @@ CREATE TABLE `drinks` (
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumpning av Data i tabell `drinks`
+--
+
+INSERT INTO `drinks` (`drink_id`, `name`, `description`, `price`) VALUES
+(1, 'Fanta', 'Läsk', 38),
+(2, 'Somersby cider', '4,5 %', 75);
+
 -- --------------------------------------------------------
 
 --
@@ -87,10 +95,19 @@ DROP TABLE IF EXISTS `employee`;
 CREATE TABLE `employee` (
   `employee_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `role` int(255) NOT NULL,
-  `adress` int(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  `adress` varchar(255) NOT NULL,
   `telephone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumpning av Data i tabell `employee`
+--
+
+INSERT INTO `employee` (`employee_id`, `name`, `role`, `adress`, `telephone`) VALUES
+(1, 'Anton Antonsson', 'Kock', 'Storgatan 12\r\n54822 Sundsvall', 70516546),
+(2, 'Cecilia Servitris', 'Service', 'Storgatan 23\r\n54654 Sundsvall', 7064654),
+(3, 'Benjamin Bok', 'Service', 'Storgatan 3\r\n46545 Sundsvall', 70544654);
 
 -- --------------------------------------------------------
 
@@ -104,7 +121,8 @@ CREATE TABLE `events` (
   `name` varchar(255) NOT NULL,
   `date` datetime NOT NULL,
   `price` int(11) NOT NULL,
-  `image:url` varchar(255) NOT NULL
+  `description` varchar(255) NOT NULL,
+  `image_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -133,27 +151,6 @@ INSERT INTO `lunch_menu` (`lunch_id`, `name`, `description`, `date`, `price`) VA
 (4, 'kycklingspett', 'kyckling spett med potatisgratäng', '2024-02-05', 99),
 (5, 'hasselbackspotatis', 'smörgratinerad hasselbackspotatis med lövbiff', '2024-02-12', 99),
 (6, 'vintergryta', 'vintergryta gjord på älgstek, serveras med ris', '2024-02-10', 99);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur `person`
---
-
-DROP TABLE IF EXISTS `person`;
-CREATE TABLE `person` (
-  `AGE` int(11) NOT NULL,
-  `LENGTH` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumpning av Data i tabell `person`
---
-
-INSERT INTO `person` (`AGE`, `LENGTH`) VALUES
-(80, 178),
-(53, 185),
-(45, 173);
 
 -- --------------------------------------------------------
 
@@ -251,9 +248,9 @@ CREATE TABLE `shift` (
 --
 
 --
--- Index för tabell `al_la_carte_menu`
+-- Index för tabell `a_la_carte_menu`
 --
-ALTER TABLE `al_la_carte_menu`
+ALTER TABLE `a_la_carte_menu`
   ADD PRIMARY KEY (`a_la_carte_id`);
 
 --
@@ -336,9 +333,9 @@ ALTER TABLE `shift`
 --
 
 --
--- AUTO_INCREMENT för tabell `al_la_carte_menu`
+-- AUTO_INCREMENT för tabell `a_la_carte_menu`
 --
-ALTER TABLE `al_la_carte_menu`
+ALTER TABLE `a_la_carte_menu`
   MODIFY `a_la_carte_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
@@ -351,13 +348,13 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT för tabell `drinks`
 --
 ALTER TABLE `drinks`
-  MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT för tabell `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT för tabell `events`
@@ -403,7 +400,7 @@ ALTER TABLE `shift`
 -- Restriktioner för tabell `purchased_a_la_carte`
 --
 ALTER TABLE `purchased_a_la_carte`
-  ADD CONSTRAINT `FK_a_la_carte_id` FOREIGN KEY (`a_la_carte_id`) REFERENCES `al_la_carte_menu` (`a_la_carte_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_a_la_carte_id` FOREIGN KEY (`a_la_carte_id`) REFERENCES `a_la_carte_menu` (`a_la_carte_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_order_id` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
