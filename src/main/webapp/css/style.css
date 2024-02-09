@@ -1,69 +1,72 @@
-.header-content {
-    position: relative;
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.welcome-text {
+    text-align: center;
+    color: #fff;
+}
+
+.welcome-text p {
+    max-width: 600px; /* Centrerar texten för större skärmar */
+    margin: 20px auto;
+
+}
+
+.welcome-text h2 {
+
+}
+
+.daily-lunch {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    width: 50%;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.actions {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-
-    width: 100%;
+    margin-top: 20px;
 }
 
-.logo {
-    width: 200px; /* Adjust if necessary */
-    height: 200px;
-
-}
-
-.nav-toggle {
-    position: fixed;
-    background: none;
+.first_page_btn {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 20px;
     border: none;
-    color: #fff;
-    font-size: 35px;
     cursor: pointer;
-    right: 5%;
+    margin: 10px;
+    font-size: 16px;
 
 }
 
-.main-nav {
-    position: relative;
+.first_page_btn:hover {
+    background-color: #444;
+    color: #ffffff;
 }
 
-.main-nav .menu {
-    list-style-type: none;
-    position: fixed; /* Position the menu below the toggle */
-    background-color: #333; /* Match the header background color */
-    right: 0;
-    top: 23%;
-    width: 200px; /* Width of the dropdown menu */
-    display: none;
+@media (max-width: 768px) {
+    .welcome-text p {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .daily-lunch {
+        width: 100%;
+    }
 }
-
-.main-nav .menu.is-active {
-    display: block; /* Show the menu when is-active is added */
-}
-
-.menu li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    border-bottom: 1px solid #474747; /* Add a border between items */
-}
-
-.menu li:last-child a {
-    border-bottom: none; /* Remove border for the last item */
-}
-
-
-
-.test {
-    background-image: url('./images/background.jpg'); /* Example path to a background image */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100vw;
-    height: 100vh;
-}
-

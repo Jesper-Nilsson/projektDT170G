@@ -1,41 +1,47 @@
-/* style.css */
-
 .header-content {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    background-color: #333;
+    margin-bottom: 50px;
     width: 100%;
 }
 
 .logo {
     width: 200px; /* Adjust if necessary */
-    height: 120px;
+    height: 200px;
+
 }
 
 .nav-toggle {
     position: fixed;
+    border: none;
     color: #fff;
-    font-size: 24px;
+    font-size: 35px;
     cursor: pointer;
     right: 5%;
-    top: 0%;
+    padding: 1%;
+    background: rgba(0, 0, 0, 0.3) none;
+    margin-right: auto;
+    margin-left: auto;
+    transition: transform .4s;
+}
+
+.nav-toggle:hover {
+    transform: scale(1.2);
 
 }
 
 .main-nav {
-    position: relative; /* For absolute positioning of the menu */
+    position: relative;
 }
 
 .main-nav .menu {
     list-style-type: none;
-    padding: 0;
-    position: absolute; /* Position the menu below the toggle */
+    position: fixed; /* Position the menu below the toggle */
     background-color: #333; /* Match the header background color */
     right: 0;
-    top: 100%;
+    top: 23%;
     width: 200px; /* Width of the dropdown menu */
     display: none;
 }
@@ -54,5 +60,12 @@
 
 .menu li:last-child a {
     border-bottom: none; /* Remove border for the last item */
+}
+
+.start-page {
+    position: fixed;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
 }
 
