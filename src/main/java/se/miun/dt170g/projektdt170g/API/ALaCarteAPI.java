@@ -52,7 +52,7 @@ public class ALaCarteAPI {
     private List<ALaCarteItem> fetchItemsFromDatabase(String type) {
         List<ALaCarteItem> aLaCarteItems = new ArrayList<>();
 
-        String query = "SELECT * FROM dinner_menu WHERE type = ?";
+        String query = "SELECT * FROM al_la_carte_menu WHERE type = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
@@ -60,7 +60,7 @@ public class ALaCarteAPI {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                aLaCarteItems.add(new ALaCarteItem(rs.getInt("dinner_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
+                aLaCarteItems.add(new ALaCarteItem(rs.getInt("a_la_carte_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
             }
         } catch (SQLException e) {
             throw new RuntimeException("Database error occurred while fetching a la carte items.", e);

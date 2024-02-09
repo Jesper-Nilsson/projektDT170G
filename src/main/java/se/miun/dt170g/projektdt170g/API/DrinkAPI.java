@@ -13,6 +13,7 @@ import se.miun.dt170g.projektdt170g.models.Lunch;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * REST API endpoint class for managing a la carte menu items.
  * Allows retrieval of dinner menu items filtered by their type.
  */
-@Path("/a_la_carte")
+@Path("/drinks")
 public class DrinkAPI {
     @Resource(name = "jdbc/database")
     private DataSource dataSource;
@@ -38,7 +39,24 @@ public class DrinkAPI {
     }
 
     private List<Drink> fetchDrinks() {
-        return null;
+        List<Drink> drinks = new ArrayList<>();
+        String baseQuery = "SELECT * FROM drinks";
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(baseQuery)) {
+
+            //binding the parameters
+
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                drinks.add(new Drink(rs.getInt("drink_id"), rs.getString("name"), rs.getString("description"), rs.getInt("price")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Database error occurred while fetching lunches.", e);
+        }
+        return drinks;
     }
 }
 

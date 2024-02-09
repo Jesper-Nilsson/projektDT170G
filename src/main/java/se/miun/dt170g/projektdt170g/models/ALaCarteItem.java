@@ -4,7 +4,7 @@ package se.miun.dt170g.projektdt170g.models;
  * this class represents a menu item in the a la carte menu
  */
 public class ALaCarteItem {
-    private int dinner_id;
+    private int aLaCarteID;
     private int price;
     private String name;
     private String type;
@@ -12,8 +12,8 @@ public class ALaCarteItem {
 
 
 
-    public ALaCarteItem(int dinner_id, int price, String name, String type, String description) {
-        this.dinner_id = dinner_id;
+    public ALaCarteItem(int aLaCarteID, int price, String name, String type, String description) {
+        this.aLaCarteID = aLaCarteID;
         this.price = price;
         this.name = name;
         this.type = type;
@@ -45,12 +45,12 @@ public class ALaCarteItem {
         this.description = description;
     }
 
-    public int getDinner_id() {
-        return dinner_id;
+    public int getaLaCarteID() {
+        return aLaCarteID;
     }
 
-    public void setDinner_id(int dinner_id) {
-        this.dinner_id = dinner_id;
+    public void setaLaCarteID(int aLaCarteID) {
+        this.aLaCarteID = aLaCarteID;
     }
 
     public int getPrice() {
