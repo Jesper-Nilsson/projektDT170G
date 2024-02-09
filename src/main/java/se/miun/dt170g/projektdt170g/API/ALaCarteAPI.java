@@ -52,7 +52,7 @@ public class ALaCarteAPI {
     private List<ALaCarteItem> fetchItemsFromDatabase(String type) {
         List<ALaCarteItem> aLaCarteItems = new ArrayList<>();
 
-        String query = "SELECT * FROM al_la_carte_menu WHERE type = ?";
+        String query = "SELECT * FROM a_la_carte_menu WHERE type = ?";
         try (Connection conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
