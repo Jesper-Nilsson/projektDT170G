@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       >
 <f:view>
     <h:head>
@@ -12,6 +13,41 @@
         <h:outputStylesheet name="css/adminStyle.css" />
     </h:head>
     <h:body>
+        <h:form>
+            <h:commandButton value="Add Event" action="#{eventAdminBean.setAction('add')}" styleClass="admin-button" />
+            <h:commandButton value="Update Event" action="#{eventAdminBean.setAction('update')}" styleClass="admin-button" />
+            <h:commandButton value="Delete Event" action="#{eventAdminBean.setAction('delete')}" styleClass="admin-button" />
+
+            <ui:fragment rendered="#{eventAdminBean.action == 'add'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="eventName" value="Name:"/>
+                    <h:inputText id="eventName" value="#{eventAdminBean.eventName}" required="true" requiredMessage="The event name is required."/>
+
+                    <h:outputLabel for="eventDescription" value="Description:"/>
+                    <h:inputTextarea id="eventDescription" value="#{eventAdminBean.eventDescription}" required="true" requiredMessage="The event description is required."/>
+
+                    <h:outputLabel for="eventDate" value="Date:"/>
+                    <p:calendar id="eventDate" value="#{eventAdminBean.eventDate}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
+
+                    <h:outputLabel for="imageUrl" value="Image URL:"/>
+                    <h:inputText id="imageUrl" value="#{eventAdminBean.imageUrl}"/>
+
+                    <p:commandButton value="Submit" action="#{eventAdminBean.addEvent}" update="@form"/>
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+            <ui:fragment rendered="#{eventAdminBean.action == 'update'}">
+                <!-- Form for Updating Event -->
+                <!-- Include your form fields here -->
+            </ui:fragment>
+
+            <ui:fragment rendered="#{eventAdminBean.action == 'delete'}">
+                <!-- Form for Deleting Event -->
+                <!-- Include your form fields here -->
+            </ui:fragment>
+        </h:form>
 
     </h:body>
 </f:view>
