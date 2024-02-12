@@ -175,7 +175,7 @@ DROP TABLE IF EXISTS `purchased_drinks`;
 CREATE TABLE `purchased_drinks` (
   `order_id` int(11) NOT NULL,
   `drink_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `antal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -188,7 +188,7 @@ DROP TABLE IF EXISTS `purchased_lunch`;
 CREATE TABLE `purchased_lunch` (
   `order_id` int(11) NOT NULL,
   `lunch_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `antal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
