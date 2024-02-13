@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Antons</title>
+    <title>Antons Skafferi</title>
     <link rel="stylesheet" type="text/css" href="resources/css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/event_pop_up.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/week-meny.ss.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/week-meny.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/alacarte.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
 <section class="start-page">
-    <img src="resources/images/background.png" alt="Logo" class="start-page" />
+    <img src="resources/images/background.png" alt="Logo" id="image_bg" />
     <header class="site-header">
         <div class="header-content">
             <img src="resources/images/only_logo.png" alt="Logo" class="logo" />
@@ -22,10 +23,10 @@
         </div>
         <nav class="main-nav">
             <ul class="menu" id="menu">
-                <li><a href="index.jsp">Hem</a></li>
-                <li><a href="about.jsp">Om Oss</a></li>
-                <li><a href="services.jsp">Tjänster</a></li>
-                <li><a href="contact.jsp">Kontakt</a></li>
+                <li><a href="index2.xhtml">Hem</a></li>
+                <li><a href="weekly-lunch">Veckans lunch</a></li>
+                <li><a href="alacarte">A la carte</a></li>
+                <li><a href="contact">Kontakt</a></li>
             </ul>
         </nav>
     </header>
@@ -55,13 +56,97 @@
             </div>
         </section>
     </section>
-</section>
-<section class="start-page">
-    <section class="week-meny">
 
-    </section>
 </section>
-<script src="rources/js/nav.js" type="text/javascript"></script>
+<!-- Weeekly lunch section-->
+<section class="menu-container" id="weekly-lunch">
+    <header class="menu-header">
+        <h1>Veckans Lunch v.38</h1>
+        <p>Måndag - Fredag kl. 11.30-14.00</p>
+    </header>
+    <article class="menu-item">
+        <h2>Måndag</h2>
+        <p>Köttfärslimpa, gräddsås, kokt potatis, lingonsylt och gurka</p>
+    </article>
+    <article class="menu-item">
+        <h2>Tisdag</h2>
+        <p>Raggmunk, stekt fläsk och rårörda lingon</p>
+    </article>
+    <article class="menu-item">
+        <h2>Onsdag</h2>
+        <p>Flygande Jakob med ris</p>
+    </article>
+    <article class="menu-item">
+        <h2>Torsdag</h2>
+        <p>Potterstek med kokt potatis</p>
+    </article>
+    <article class="menu-item">
+        <h2>Fredag</h2>
+        <p>Barbequelaserad karré med ugnsrostad potatis</p>
+    </article>
+    <footer class="menu-footer">
+        <p>Lunch 100:-</p>
+        <p class="allergy-info">Allergisk? Fråga personalen så hjälper vi er med era frågor!</p>
+        <p>Hemlagat från grunden och bara riktigt goda, ärliga maträtter!</p>
+        <p>SMÄKLIG MÅLTID</p>
+    </footer>
+</section>
+
+<!-- A la carte section-->
+<section class="menu-container" id="alacarte">
+    <header class="menu-header">
+        <h1>À la Carte Menu</h1>
+    </header>
+
+    <section class="menu-section">
+        <header class="menu-section-header">
+            <h2>Förrätter</h2>
+        </header>
+        <article class="menu-item">
+            <h2>Gravad Lax</h2>
+            <p>Med hovmästarsås och dillstuvad potatis</p>
+        </article>
+        <article class="menu-item">
+            <h2>Soppa</h2>
+            <p>Tomatsoppa serverad med créme fraiche och färsk basilika</p>
+        </article>
+    </section>
+
+    <section class="menu-section">
+        <header class="menu-section-header">
+            <h2>Huvudrätter</h2>
+        </header>
+        <article class="menu-item">
+            <h2>Pepparstek</h2>
+            <p>Med brända grönsaker och rödvinssås</p>
+        </article>
+        <article class="menu-item">
+            <h2>Halstrad Röding</h2>
+            <p>Serverad med potatispuré och skirat smör</p>
+        </article>
+    </section>
+
+    <section class="menu-section">
+        <header class="menu-section-header">
+            <h2>Efterrätter</h2>
+        </header>
+        <article class="menu-item">
+            <h2>Chokladfondant</h2>
+            <p>Med vaniljglass och färska bär</p>
+        </article>
+        <article class="menu-item">
+            <h2>Crème Brûlée</h2>
+            <p>Klassisk Crème Brûlée med karamelliserat socker</p>
+        </article>
+    </section>
+
+    <footer class="menu-footer">
+        <p class="allergy-info">Har ni allergier eller önskemål, tala med vår personal.</p>
+        <p>Vi använder alltid färska råvaror för bästa kvalitet och smakupplevelse.</p>
+    </footer>
+</section>
+
+<script src="resources/js/nav.js" type="text/javascript"></script>
 <script src="resources/js/event.js" type="text/javascript"></script>
 </body>
 </html>

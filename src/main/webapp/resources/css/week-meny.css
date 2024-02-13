@@ -1,0 +1,46 @@
+.menu-container {
+    background: white;
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.menu-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.menu-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.menu-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    text-align: center;
+}
+.menu-item:last-child {
+    border-bottom: none;
+}
+.menu-item h2 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+.menu-item p {
+    margin: 0;
+    color: #666;
+}
+.menu-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+.menu-footer p {
+    margin: 5px 0;
+}
+.allergy-info {
+    color: red;
+    font-weight: bold;
+}
