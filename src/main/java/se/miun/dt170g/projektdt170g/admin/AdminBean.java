@@ -13,6 +13,11 @@ public class AdminBean {
 
         return "eventAdmin?faces-redirect=true"; // Navigate to the eventAdmin.xhtml page
     }
+    public String goToLunchAdmin() {
+        // Preprocess or prepare data here, such as loading event lists, checking permissions, etc.
+
+        return "lunchAdmin?faces-redirect=true"; // Navigate to the eventAdmin.xhtml page
+    }
 
     // You can have additional methods for "insert new event", "update event", and "delete event" actions
 }

@@ -10,6 +10,22 @@ import java.sql.Date;
 @RequestScoped
 public class EventAdminBean {
     private String eventName;
+    private String eventDescription;
+    private Date eventDate;
+    private String imageUrl;
+
+    // Properties specific to other actions
+    private Long eventIdToDelete;
+    private String action; // Define the action property
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    // Other properties and methods...
 
     public String getEventName() {
         return eventName;
@@ -51,22 +67,8 @@ public class EventAdminBean {
         this.eventIdToDelete = eventIdToDelete;
     }
 
-    private String eventDescription;
-    private Date eventDate;
-    private String imageUrl;
 
-    // Properties specific to other actions
-    private Long eventIdToDelete;
-    private String action; // Define the action property
 
     // Getter and setter for the action property
-    public String getAction() {
-        return action;
-    }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    // Other properties and methods...
 }

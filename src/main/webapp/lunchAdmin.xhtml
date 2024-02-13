@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Lunch Administration</title>
+        <h:outputStylesheet name="css/adminStyle.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" />
+            <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" />
+            <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" />
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'add'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="lunchName" value="Name:"/>
+                    <h:inputText id="lunchName" value="#{lunchAdminBean.lunchName}" required="true" requiredMessage="The event name is required."/>
+
+                    <h:outputLabel for="lunchDescription" value="Description:"/>
+                    <h:inputTextarea id="lunchDescription" value="#{lunchAdminBean.lunchDescription}" required="true" requiredMessage="The event description is required."/>
+
+                    <h:outputLabel for="lunchDate" value="Date:"/>
+                    <p:calendar id="lunchDate" value="#{lunchAdminBean.lunchDate}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
+
+                    <h:outputLabel for="lunchPrice" value="Lunch price:"/>
+                    <h:inputText id="lunchPrice" value="#{lunchAdminBean.lunchPrice}"/>
+
+                    <p:commandButton value="Submit" action="#{lunchAdminBean.addLunch}" update="@form"/>
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'update'}">
+                <!-- Form for Updating Event -->
+                <!-- Include your form fields here -->
+            </ui:fragment>
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">
+                <!-- Form for Deleting Event -->
+                <!-- Include your form fields here -->
+            </ui:fragment>
+
+            <h:outputText value="#{lunchAdminBean.message}" />
+
+        </h:form>
+
+
+
+    </h:body>
+</f:view>
+</html>
