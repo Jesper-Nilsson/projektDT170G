@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>Antons Skafferi</title>
+        <h:outputStylesheet name="css/event_pop_up.css"/>
+        <h:outputStylesheet name="css/navbar.css"/>
+        <h:outputStylesheet name="css/style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </h:head>
+    <h:body>
+        <h:panelGroup styleClass="start-page">
+            <h:graphicImage name="images/background.png" alt="Background" styleClass="start-page"/>
+            <h:panelGroup styleClass="site-header">
+                <h:panelGroup styleClass="header-content">
+                    <h:graphicImage name="images/only_logo.png" alt="Logo" styleClass="logo"/>
+                    <h:button styleClass="nav-toggle"> <!-- aria-label="Öppna menyn" -->
+                        <h:outputText styleClass="fa fa-bars"> </h:outputText>
+                    </h:button>
+                </h:panelGroup>
+                <h:panelGroup styleClass="main-nav">
+                    <ul class="menu" id="menu">
+                        <li><h:link value="Home" outcome="index.xhtml"/></li>
+                        <li><h:link value="About" outcome="about.xhtml"/></li>
+                        <li><h:link value="Services" outcome="services.xhtml"/></li>
+                        <li><h:link value="Contact" outcome="contact.xhtml"/></li>
+                    </ul>
+                </h:panelGroup>
+            </h:panelGroup>
+            <div class="welcome-text">
+                <h2>Välkommen till Antons Skafferi</h2>
+                <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
+            </div>
+            <h:panelGroup styleClass="daily-lunch">
+                <h2>Dagens lunch</h2>
+                <p>Köttbullar med potatis</p>
+            </h:panelGroup>
+            <h:panelGroup styleClass="actions">
+                <h:button styleClass="first_page_btn" value="Vår meny"/>
+                <h:button styleClass="first_page_btn" value="Boka bord"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="event-pop-up">
+                <!-- Close button for the popup -->
+
+                <!-- Popup for Upcoming Events -->
+                <h:panelGroup id="popupEvent" styleClass="popup">
+                    <div class="popup-content">
+                        <h:button value="&times;" onclick="closePopup()" styleClass="close-btn" >
+                        </h:button>
+                        <h2 id="popupHeader">Kommande eventer</h2>
+                        <p id="popupText">Missa inte våra speciella helgevenemang!</p>
+                        <ul id="popupList">
+                            <li>25 Dec - Lördag: Livemusikkväll</li>
+                            <li>26 Dec - Söndag: Vinprovningsevenemang</li>
+                        </ul>
+                        <h:button onclick="location.href='/events';" id="pop_btn" value="Mer Info"/>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+            <!-- END START-PAGE -->
+        </h:panelGroup>
+        <h:panelGroup styleClass="next-page-here">
+            <!-- Content for next page -->
+        </h:panelGroup>
+
+        <h:outputScript library="js" name="nav.js"/>
+        <h:outputScript library="js" name="event.js"/>
+    </h:body>
+</f:view>
+</html>
