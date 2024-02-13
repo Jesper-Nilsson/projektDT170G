@@ -7,8 +7,9 @@
     <link rel="stylesheet" type="text/css" href="resources/css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/event_pop_up.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/week-meny.css" />
+    <link rel="stylesheet" type="text/css" href ="resources/css/week-meny.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/alacarte.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/events.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
@@ -24,9 +25,10 @@
         <nav class="main-nav">
             <ul class="menu" id="menu">
                 <li><a href="index2.xhtml">Hem</a></li>
-                <li><a href="weekly-lunch">Veckans lunch</a></li>
-                <li><a href="alacarte">A la carte</a></li>
-                <li><a href="contact">Kontakt</a></li>
+                <li><a href="#weekly-lunch">Veckans lunch</a></li>
+                <li><a href="#alacarte">A la carte</a></li>
+                <li><a href="#events">Eventer</a></li>
+                <li><a href="#contact">Kontakt</a></li>
             </ul>
         </nav>
     </header>
@@ -43,21 +45,21 @@
         <button class="first_page_btn">Boka Bord</button>
     </section>
     <section class="event-pop-up">
-        <section id="popupEvent" class="popup">
+        <div id="popupEvent" class="popup">
             <div class="popup-content">
-                <button value="&times;" onclick="closePopup()" class="close-btn" />
+                <button onclick="closePopup()" class="close-btn">&#215;</button> <!-- Close button -->
                 <h2 id="popupHeader">Kommande eventer</h2>
                 <p id="popupText">Missa inte våra speciella helgevenemang!</p>
                 <ul id="popupList">
-                    <li>25 Dec - Lördag: Livemusikkväll</li>
-                    <li>26 Dec - Söndag: Vinprovningsevenemang</li>
+                    <li><i class="far fa-clock"></i> 25 Dec - Lördag: Livemusikkväll</li>
+                    <li><i class="far fa-clock"></i> 26 Dec - Söndag: Vinprovningsevenemang</li>
                 </ul>
-                <button onclick="location.href='/events';" id="pop_btn">"Mer Info"</button>
+                <button onclick="location.href='/events';" id="pop_btn">Mer Info</button>
             </div>
-        </section>
+        </div>
+    </section>
     </section>
 
-</section>
 <!-- Weeekly lunch section-->
 <section class="menu-container" id="weekly-lunch">
     <header class="menu-header">
@@ -144,6 +146,31 @@
         <p class="allergy-info">Har ni allergier eller önskemål, tala med vår personal.</p>
         <p>Vi använder alltid färska råvaror för bästa kvalitet och smakupplevelse.</p>
     </footer>
+</section>
+
+<!-- Event section -->
+<section class="events-container"  id="events">
+
+    <article class="event-card">
+        <img src="resources/images/thereisnotomorrow.jpg" alt="There is no Tomorrow är här" class="event-image"/>
+        <div class="event-content">
+            <h2 class="event-title">There is no Tomorrow är här</h2>
+            <p class="event-description">En resa genom tid och rum i konstens värld.</p>
+            <time class="event-time">Feb 10 - Dec 31</time>
+        </div>
+    </article>
+
+    <article class="event-card">
+        <img src="resources/images/piacquadio.jpg" alt="Stockholm Fintech Week Event" class="event-image"/>
+        <div class="event-content">
+            <h2 class="event-title">Stockholm piacquadio Week</h2>
+            <p class="event-description">Upplev innovation och kreativitet på Piacquadio, en festival som firar dans, musik och kultur.</p>
+            <time class="event-time">Feb 12 - Feb 16</time>
+        </div>
+    </article>
+
+    <!-- Kan läggas mer , vi fixar dynamisk med loop så vi inte behöver skriva samma kod om här -->
+
 </section>
 
 <script src="resources/js/nav.js" type="text/javascript"></script>
