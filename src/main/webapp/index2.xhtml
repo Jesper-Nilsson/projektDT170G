@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href ="resources/css/week-meny.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/alacarte.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/events.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/contact.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/footer.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
 <body>
@@ -54,7 +56,7 @@
                     <li><i class="far fa-clock"></i> 25 Dec - Lördag: Livemusikkväll</li>
                     <li><i class="far fa-clock"></i> 26 Dec - Söndag: Vinprovningsevenemang</li>
                 </ul>
-                <button onclick="location.href='/events';" id="pop_btn">Mer Info</button>
+                <button onclick="location.href='#events';" id="pop_btn">Mer Info</button>
             </div>
         </div>
     </section>
@@ -172,6 +174,29 @@
     <!-- Kan läggas mer , vi fixar dynamisk med loop så vi inte behöver skriva samma kod om här -->
 
 </section>
+<!-- Footer & Kontakt  info -->
+
+<footer class="site-footer" id="contact">
+    <article class="contact-info">
+        <h2>Kontakta oss</h2>
+        <address>
+            <p><i class="fas fa-map-marker-alt"></i> Centralgatan 23, Sundsvall 123 45</p>
+            <p><i class="fas fa-phone"></i> (46) 708 345676</p>
+            <a href="mailto:antonsskafferi@gmail.com"><i class="fas fa-envelope"></i> antonsskafferi@gmail.com</a>
+        </address>
+        <div class="action-buttons">
+            <button onclick="location.href='menu-url';" class="action-btn">Vår meny</button>
+            <button onclick="location.href='booking-url';" class="action-btn">Boka Bord</button>
+        </div>
+    </article>
+    <div class="social-media">
+        <a href="https://facebook.com/yourpage" target="_blank" title="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://instagram.com/yourpage" target="_blank" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/yourpage" target="_blank" title="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://youtube.com/yourchannel" target="_blank" title="Subscribe to our YouTube channel"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+
 
 <script src="resources/js/nav.js" type="text/javascript"></script>
 <script src="resources/js/event.js" type="text/javascript"></script>
