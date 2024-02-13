@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 09 feb 2024 kl 11:45
+-- Tid vid skapande: 13 feb 2024 kl 10:25
 -- Serverversion: 10.4.24-MariaDB
 -- PHP-version: 8.1.6
 
@@ -220,13 +220,13 @@ CREATE TABLE `restaurant_order` (
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `restaurant_table`
+-- Tabellstruktur `session`
 --
 
-DROP TABLE IF EXISTS `restaurant_table`;
-CREATE TABLE `restaurant_table` (
-  `table_id` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL
+DROP TABLE IF EXISTS `session`;
+CREATE TABLE `session` (
+  `session_id` int(11) NOT NULL,
+  `table_nr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -317,10 +317,10 @@ ALTER TABLE `restaurant_order`
   ADD PRIMARY KEY (`restaurant_order_id`);
 
 --
--- Index för tabell `restaurant_table`
+-- Index för tabell `session`
 --
-ALTER TABLE `restaurant_table`
-  ADD PRIMARY KEY (`table_id`);
+ALTER TABLE `session`
+  ADD PRIMARY KEY (`session_id`);
 
 --
 -- Index för tabell `shift`
@@ -381,10 +381,10 @@ ALTER TABLE `restaurant_order`
   MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT för tabell `restaurant_table`
+-- AUTO_INCREMENT för tabell `session`
 --
-ALTER TABLE `restaurant_table`
-  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `session`
+  MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT för tabell `shift`
