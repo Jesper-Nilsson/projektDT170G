@@ -1,0 +1,81 @@
+package se.miun.dt170g.projektdt170g.models;
+
+import jakarta.persistence.*;
+@NamedQuery(
+        name = "DrinksEntity.findAll",
+        query = "SELECT l FROM DrinksEntity l"
+)
+
+@Entity
+@Table(name = "drinks", schema = "dt170gprojekt")
+public class DrinksEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "drink_id")
+    private int drinkId;
+    @Basic
+    @Column(name = "name")
+    private String name;
+    @Basic
+    @Column(name = "description")
+    private String description;
+    @Basic
+    @Column(name = "price")
+    private int price;
+
+    public int getDrinkId() {
+        return drinkId;
+    }
+
+    public void setDrinkId(int drinkId) {
+        this.drinkId = drinkId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DrinksEntity that = (DrinksEntity) o;
+
+        if (drinkId != that.drinkId) return false;
+        if (price != that.price) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = drinkId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + price;
+        return result;
+    }
+}

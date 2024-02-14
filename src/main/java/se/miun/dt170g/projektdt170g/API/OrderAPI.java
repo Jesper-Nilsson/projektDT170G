@@ -1,23 +1,17 @@
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.annotation.Resource;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import se.miun.dt170g.projektdt170g.models.ALaCarteItem;
-import se.miun.dt170g.projektdt170g.models.Drink;
-import se.miun.dt170g.projektdt170g.models.Lunch;
-import se.miun.dt170g.projektdt170g.models.Order;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
+import se.miun.dt170g.projektdt170g.items.Order;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * REST API endpoint class for managing a la carte menu items.

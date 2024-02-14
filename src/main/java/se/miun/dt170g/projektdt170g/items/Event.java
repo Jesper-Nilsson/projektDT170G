@@ -1,4 +1,4 @@
-package se.miun.dt170g.projektdt170g.models;
+package se.miun.dt170g.projektdt170g.items;
 
 import java.sql.Date;
 

@@ -1,0 +1,77 @@
+package se.miun.dt170g.projektdt170g.models;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "purchased_a_la_carte", schema = "dt170gprojekt", catalog = "")
+public class PurchasedALaCarteEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "purchased_ID")
+    private int purchasedId;
+    @Basic
+    @Column(name = "order_id")
+    private int orderId;
+    @Basic
+    @Column(name = "a_la_carte_id")
+    private int aLaCarteId;
+    @Basic
+    @Column(name = "antal")
+    private int antal;
+
+    public int getPurchasedId() {
+        return purchasedId;
+    }
+
+    public void setPurchasedId(int purchasedId) {
+        this.purchasedId = purchasedId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getaLaCarteId() {
+        return aLaCarteId;
+    }
+
+    public void setaLaCarteId(int aLaCarteId) {
+        this.aLaCarteId = aLaCarteId;
+    }
+
+    public int getAntal() {
+        return antal;
+    }
+
+    public void setAntal(int antal) {
+        this.antal = antal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PurchasedALaCarteEntity that = (PurchasedALaCarteEntity) o;
+
+        if (purchasedId != that.purchasedId) return false;
+        if (orderId != that.orderId) return false;
+        if (aLaCarteId != that.aLaCarteId) return false;
+        if (antal != that.antal) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = purchasedId;
+        result = 31 * result + orderId;
+        result = 31 * result + aLaCarteId;
+        result = 31 * result + antal;
+        return result;
+    }
+}
