@@ -30,7 +30,7 @@
                     <h:outputLabel for="lunchPrice" value="Lunch price:"/>
                     <h:inputText id="lunchPrice" value="#{lunchAdminBean.lunchPrice}"/>
 
-                    <p:commandButton value="Submit" action="#{lunchAdminBean.addLunch}" update="@form"/>
+                    <h:commandButton value="Submit" action="#{lunchAdminBean.addLunch}" update="@form"/>
                 </h:panelGrid>
             </ui:fragment>
 
@@ -38,7 +38,6 @@
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'update'}">
                 <!-- Form for Updating Event -->
-                <!-- Include your form fields here -->
             </ui:fragment>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">

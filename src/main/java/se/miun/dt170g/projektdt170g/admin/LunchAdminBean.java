@@ -1,13 +1,18 @@
 package se.miun.dt170g.projektdt170g.admin;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import se.miun.dt170g.projektdt170g.models.Lunch;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Logger;
 
 @Named
-@RequestScoped
-public class LunchAdminBean  {
+@SessionScoped
+public class LunchAdminBean implements Serializable {
+
 
     private String lunchName;
 
@@ -31,7 +36,11 @@ public class LunchAdminBean  {
     public void addLunch(){
         // call api post lunch
 
+
+
+
         setMessage("tillagd");
+
 
     }
 

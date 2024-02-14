@@ -1,12 +1,15 @@
 package se.miun.dt170g.projektdt170g.models;
 
+import jakarta.enterprise.inject.Model;
+
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * this class represent a lunch item
  */
 
-public class Lunch {
+public class Lunch  {
     private int lunch_id;
     private String name;
     private String description;

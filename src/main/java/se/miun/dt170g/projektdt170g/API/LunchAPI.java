@@ -83,6 +83,7 @@ public class LunchAPI {
             }
 
             ResultSet rs = preparedStatement.executeQuery();
+            //persistance
 
             while (rs.next()) {
                 lunches.add(new Lunch(rs.getInt("lunch_id"), rs.getString("name"), rs.getString("description"), rs.getDate("date"), rs.getInt("price")));
