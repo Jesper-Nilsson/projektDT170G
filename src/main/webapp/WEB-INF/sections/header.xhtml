@@ -1,0 +1,47 @@
+<section class="start-page">
+    <img src="resources/images/background.png" alt="Logo" id="image_bg" />
+    <header class="site-header">
+        <div class="header-content">
+            <img src="resources/images/only_logo.png" alt="Logo" class="logo" />
+            <button class="nav-toggle" aria-label="Öppna menyn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <nav class="main-nav">
+            <ul class="menu" id="menu">
+                <li><a href="index2.xhtml">Hem</a></li>
+                <li><a href="#weekly-lunch">Veckans lunch</a></li>
+                <li><a href="#alacarte">A la carte</a></li>
+                <li><a href="#events">Eventer</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="welcome-text">
+        <h2>Välkommen till Antons Skafferi</h2>
+        <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
+    </div>
+    <section class="daily-lunch">
+        <h2>Dagens lunch</h2>
+        <p>Köttbullar med potatis</p>
+    </section>
+    <section class="actions">
+        <button class="first_page_btn">Vår meny</button>
+        <button class="first_page_btn">Boka Bord</button>
+    </section>
+    <section class="event-pop-up">
+        <div id="popupEvent" class="popup">
+            <div class="popup-content">
+                <button onclick="closePopup()" class="close-btn">&#215;</button> <!-- Close button -->
+                <h2 id="popupHeader">Kommande eventer</h2>
+                <p id="popupText">Missa inte våra speciella helgevenemang!</p>
+                <ul id="popupList">
+                    <li><i class="far fa-clock"></i> 25 Dec - Lördag: Livemusikkväll</li>
+                    <li><i class="far fa-clock"></i> 26 Dec - Söndag: Vinprovningsevenemang</li>
+                </ul>
+                <button onclick="location.href='#events';" id="pop_btn">Mer Info</button>
+            </div>
+        </div>
+    </section>
+</section>

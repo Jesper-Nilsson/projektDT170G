@@ -41,6 +41,12 @@
             <artifactId>jakarta.faces-api</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>11.0.0</version>
+            <classifier>jakarta</classifier>
+        </dependency>
     </dependencies>
 
     <build>
