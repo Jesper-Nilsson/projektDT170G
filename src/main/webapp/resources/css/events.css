@@ -9,8 +9,7 @@
 }
 .event-card {
     width: 20rem;
-    height: 25rem;
-
+    height: 30rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -23,8 +22,8 @@
 }
 .event-image {
     width: 100%;
-    height: 10rem;
-    object-fit: cover;
+    height: 100%;
+
     transition: transform 0.3s ease;
 }
 .event-image:hover {
@@ -52,4 +51,11 @@
     font-size: 14px;
     color: #777;
     margin: 10px 0;
+}
+
+#header_event{
+    color: white;
+    text-align: center;
+    margin-top: 10rem;
+
 }
