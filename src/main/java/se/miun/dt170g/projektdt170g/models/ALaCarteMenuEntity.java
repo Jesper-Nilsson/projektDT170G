@@ -22,22 +22,22 @@ public class ALaCarteMenuEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "a_la_carte_id")
+    @Column(name = "a_la_carte_id", nullable = false)
     private int aLaCarteId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "type")
+    @Column(name = "type", nullable = false, length = 255)
     private String type;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
-    @OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
-    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;
+    /*@OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
+    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;*/
 
     public int getaLaCarteId() {
         return aLaCarteId;
@@ -105,11 +105,11 @@ public class ALaCarteMenuEntity {
         return result;
     }
 
-    public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByALaCarteId() {
+   /* public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByALaCarteId() {
         return purchasedALaCartesByALaCarteId;
     }
 
     public void setPurchasedALaCartesByALaCarteId(Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId) {
         this.purchasedALaCartesByALaCarteId = purchasedALaCartesByALaCarteId;
-    }
+    }*/
 }

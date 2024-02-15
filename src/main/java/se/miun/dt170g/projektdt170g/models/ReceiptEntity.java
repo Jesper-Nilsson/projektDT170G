@@ -9,10 +9,10 @@ import java.sql.Date;
 public class ReceiptEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "receipt_id")
+    @Column(name = "receipt_id", nullable = false)
     private int receiptId;
     @Basic
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Date date;
 
     public int getReceiptId() {

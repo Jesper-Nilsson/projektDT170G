@@ -7,10 +7,11 @@ import jakarta.persistence.*;
 public class TableSessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "session_id")
+    @Basic
+    @Column(name = "session_id", nullable = false)
     private int sessionId;
     @Basic
-    @Column(name = "table_number")
+    @Column(name = "table_number", nullable = false)
     private int tableNumber;
 
     public int getSessionId() {

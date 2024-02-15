@@ -7,22 +7,23 @@ import jakarta.persistence.*;
 public class PurchasedDrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "purchased_ID")
+    @Column(name = "purchased_ID", nullable = false)
     private int purchasedId;
     @Basic
-    @Column(name = "order_id")
+    @Column(name = "order_id", nullable = false)
     private int orderId;
     @Basic
-    @Column(name = "drink_id")
+    @Column(name = "drink_id", nullable = false)
     private int drinkId;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
+
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false)
+    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false,updatable = false, insertable = false)
     private DrinksEntity drinksByDrinkId;
 
     public int getPurchasedId() {

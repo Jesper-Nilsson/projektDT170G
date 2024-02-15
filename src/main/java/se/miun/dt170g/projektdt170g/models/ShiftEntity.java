@@ -9,16 +9,16 @@ import java.sql.Date;
 public class ShiftEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "shift_id")
+    @Column(name = "shift_id", nullable = false)
     private int shiftId;
     @Basic
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Date date;
     @Basic
-    @Column(name = "type")
+    @Column(name = "type", nullable = false, length = 255)
     private String type;
     @Basic
-    @Column(name = "employee_id")
+    @Column(name = "employee_id", nullable = false)
     private int employeeId;
 
     public int getShiftId() {

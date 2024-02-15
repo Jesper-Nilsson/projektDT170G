@@ -7,13 +7,13 @@ import jakarta.persistence.*;
 public class BookingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "booking_id")
+    @Column(name = "booking_id", nullable = false)
     private int bookingId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "telephone")
+    @Column(name = "telephone", nullable = false)
     private int telephone;
 
     public int getBookingId() {

@@ -5,6 +5,18 @@
              version="3.0">
     <persistence-unit name="default" transaction-type="JTA">
         <jta-data-source>jdbc/database</jta-data-source>
+        <mapping-file>ALaCarteMenuEntity.xml</mapping-file>
+        <mapping-file>BookingEntity.xml</mapping-file>
+        <mapping-file>DrinksEntity.xml</mapping-file>
+        <mapping-file>EmployeeEntity.xml</mapping-file>
+        <mapping-file>EventsEntity.xml</mapping-file>
+        <mapping-file>LunchMenuEntity.xml</mapping-file>
+        <mapping-file>PurchasedALaCarteEntity.xml</mapping-file>
+        <mapping-file>PurchasedDrinksEntity.xml</mapping-file>
+        <mapping-file>ReceiptEntity.xml</mapping-file>
+        <mapping-file>RestaurantOrderEntity.xml</mapping-file>
+        <mapping-file>ShiftEntity.xml</mapping-file>
+        <mapping-file>TableSessionEntity.xml</mapping-file>
 
         <class>se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.BookingEntity</class>

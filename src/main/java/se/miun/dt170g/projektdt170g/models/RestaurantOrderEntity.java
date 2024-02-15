@@ -9,26 +9,24 @@ import java.util.Collection;
 public class RestaurantOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "restaurant_order_id")
+    @Column(name = "restaurant_order_id", nullable = false)
     private int restaurantOrderId;
     @Basic
-    @Column(name = "status")
-    private String status;
-    @Basic
-    @Column(name = "restaurant_table_id")
-    private int restaurantTableId;
-    @Basic
-    @Column(name = "comment")
-    private String comment;
-    @Basic
-    @Column(name = "status_appetizer")
+    @Column(name = "status_appetizer", nullable = false, length = 255)
     private String statusAppetizer;
     @Basic
-    @Column(name = "status_main")
+    @Column(name = "status_main", nullable = false, length = 255)
     private String statusMain;
     @Basic
-    @Column(name = "status_dessert")
+    @Column(name = "status_dessert", nullable = false, length = 255)
     private String statusDessert;
+    @Basic
+    @Column(name = "restaurant_table_id", nullable = false)
+    private int restaurantTableId;
+    @Basic
+    @Column(name = "comment", nullable = false, length = 255)
+    private String comment;
+
     @OneToMany(mappedBy = "restaurantOrderByOrderId")
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId;
     @OneToMany(mappedBy = "restaurantOrderByOrderId")
@@ -42,13 +40,7 @@ public class RestaurantOrderEntity {
         this.restaurantOrderId = restaurantOrderId;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public int getRestaurantTableId() {
         return restaurantTableId;
@@ -75,7 +67,11 @@ public class RestaurantOrderEntity {
 
         if (restaurantOrderId != that.restaurantOrderId) return false;
         if (restaurantTableId != that.restaurantTableId) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        if (statusAppetizer != null ? !statusAppetizer.equals(that.statusAppetizer) : that.statusAppetizer != null)
+            return false;
+        if (statusMain != null ? !statusMain.equals(that.statusMain) : that.statusMain != null) return false;
+        if (statusDessert != null ? !statusDessert.equals(that.statusDessert) : that.statusDessert != null)
+            return false;
         if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
 
         return true;
@@ -84,7 +80,9 @@ public class RestaurantOrderEntity {
     @Override
     public int hashCode() {
         int result = restaurantOrderId;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (statusAppetizer != null ? statusAppetizer.hashCode() : 0);
+        result = 31 * result + (statusMain != null ? statusMain.hashCode() : 0);
+        result = 31 * result + (statusDessert != null ? statusDessert.hashCode() : 0);
         result = 31 * result + restaurantTableId;
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         return result;

@@ -1,8 +1,5 @@
 package se.miun.dt170g.projektdt170g.API;
 
-import jakarta.annotation.Resource;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
@@ -10,13 +7,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import se.miun.dt170g.projektdt170g.items.Drink;
 import se.miun.dt170g.projektdt170g.models.DrinksEntity;
-import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

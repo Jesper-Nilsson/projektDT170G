@@ -7,22 +7,22 @@ import jakarta.persistence.*;
 public class PurchasedALaCarteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "purchased_ID")
+    @Column(name = "purchased_ID", nullable = false)
     private int purchasedId;
     @Basic
-    @Column(name = "order_id")
+    @Column(name = "order_id", nullable = false)
     private int orderId;
     @Basic
-    @Column(name = "a_la_carte_id")
+    @Column(name = "a_la_carte_id", nullable = false)
     private int aLaCarteId;
     @Basic
-    @Column(name = "antal")
+    @Column(name = "antal", nullable = false)
     private int antal;
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false)
+    @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false,updatable = false, insertable = false)
     private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;
 
     public int getPurchasedId() {

@@ -14,16 +14,16 @@ import java.util.Collection;
 public class DrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "drink_id")
+    @Column(name = "drink_id", nullable = false)
     private int drinkId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
     @OneToMany(mappedBy = "drinksByDrinkId")
     private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;
