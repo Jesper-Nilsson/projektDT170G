@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2024 at 10:33 AM
+-- Generation Time: Feb 15, 2024 at 01:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -419,14 +419,14 @@ ALTER TABLE `table_session`
 --
 ALTER TABLE `purchased_a_la_carte`
   ADD CONSTRAINT `FK_a_la_carte_id` FOREIGN KEY (`a_la_carte_id`) REFERENCES `a_la_carte_menu` (`a_la_carte_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_order_ID_a_la_carte` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`);
+  ADD CONSTRAINT `FK_order_ID_a_la_carte` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
   ADD CONSTRAINT `FK_drink_id` FOREIGN KEY (`drink_id`) REFERENCES `drinks` (`drink_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_order_ID_drinks` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`);
+  ADD CONSTRAINT `FK_order_ID_drinks` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
