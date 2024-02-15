@@ -18,23 +18,23 @@ import java.sql.Date;
         )
 })
 @Entity
-@Table(name = "lunch_menu", schema = "dt170gprojekt")
+@Table(name = "lunch_menu", schema = "dt170gprojekt", catalog = "")
 public class LunchMenuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "lunch_id")
+    @Column(name = "lunch_id", nullable = false)
     private int lunchId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Date date;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
 
     public int getLunchId() {

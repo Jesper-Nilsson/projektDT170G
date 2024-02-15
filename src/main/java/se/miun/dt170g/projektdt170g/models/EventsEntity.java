@@ -9,22 +9,22 @@ import java.sql.Timestamp;
 public class EventsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "event_id")
+    @Column(name = "event_id", nullable = false)
     private int eventId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Timestamp date;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "image_url")
+    @Column(name = "image_url", nullable = false, length = 255)
     private String imageUrl;
 
     public int getEventId() {

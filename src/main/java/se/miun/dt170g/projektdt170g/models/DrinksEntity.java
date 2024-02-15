@@ -1,27 +1,32 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+
+import java.util.Collection;
+
 @NamedQuery(
         name = "DrinksEntity.findAll",
         query = "SELECT l FROM DrinksEntity l"
 )
 
 @Entity
-@Table(name = "drinks", schema = "dt170gprojekt")
+@Table(name = "drinks", schema = "dt170gprojekt", catalog = "")
 public class DrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "drink_id")
+    @Column(name = "drink_id", nullable = false)
     private int drinkId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
+    /*@OneToMany(mappedBy = "drinksByDrinkId")
+    private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;*/
 
     public int getDrinkId() {
         return drinkId;
@@ -78,4 +83,12 @@ public class DrinksEntity {
         result = 31 * result + price;
         return result;
     }
+
+    /*public Collection<PurchasedDrinksEntity> getPurchasedDrinksByDrinkId() {
+        return purchasedDrinksByDrinkId;
+    }
+
+    public void setPurchasedDrinksByDrinkId(Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId) {
+        this.purchasedDrinksByDrinkId = purchasedDrinksByDrinkId;
+    }*/
 }

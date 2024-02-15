@@ -2,6 +2,8 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @NamedQueries({
         @NamedQuery(
                 name = "ALaCarteMenuEntity.findType",
@@ -13,27 +15,29 @@ import jakarta.persistence.*;
         )
 })
 @Entity
-@Table(name = "a_la_carte_menu", schema = "dt170gprojekt")
+@Table(name = "a_la_carte_menu", schema = "dt170gprojekt", catalog = "")
 public class ALaCarteMenuEntity {
     static public final String findByType = "ALaCarteMenuEntity.findType";
     static public final String findAll = "ALaCarteMenuEntity.findAll";
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "a_la_carte_id")
+    @Column(name = "a_la_carte_id", nullable = false)
     private int aLaCarteId;
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description")
+    @Column(name = "description", nullable = false, length = 255)
     private String description;
     @Basic
-    @Column(name = "type")
+    @Column(name = "type", nullable = false, length = 255)
     private String type;
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private int price;
+    /*@OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
+    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;*/
 
     public int getaLaCarteId() {
         return aLaCarteId;
@@ -100,4 +104,12 @@ public class ALaCarteMenuEntity {
         result = 31 * result + price;
         return result;
     }
+
+    /*public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByALaCarteId() {
+        return purchasedALaCartesByALaCarteId;
+    }
+
+    public void setPurchasedALaCartesByALaCarteId(Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId) {
+        this.purchasedALaCartesByALaCarteId = purchasedALaCartesByALaCarteId;
+    }*/
 }

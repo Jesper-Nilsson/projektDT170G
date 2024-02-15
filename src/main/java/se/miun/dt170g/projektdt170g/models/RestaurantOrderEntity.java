@@ -2,22 +2,35 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+/*@NamedQueries({
+        @NamedQuery(name = "Order.findWithDetails",
+                query = "SELECT o FROM RestaurantOrderEntity o " +
+                        "LEFT JOIN FETCH o.purchasedALaCartesByRestaurantOrderId " +
+                        "LEFT JOIN FETCH o.purchasedDrinksByRestaurantOrderId " +
+                        "WHERE o.restaurantOrderId= :orderId")
+})*/
+
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
 public class RestaurantOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "restaurant_order_id")
+    @Column(name = "restaurant_order_id", nullable = false)
     private int restaurantOrderId;
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = false, length = 255)
     private String status;
     @Basic
-    @Column(name = "restaurant_table_id")
+    @Column(name = "restaurant_table_id", nullable = false)
     private int restaurantTableId;
     @Basic
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false, length = 255)
     private String comment;
+   /* @OneToMany(mappedBy = "restaurantOrderByOrderId")
+    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId;
+    @OneToMany(mappedBy = "restaurantOrderByOrderId")
+    private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;*/
 
     public int getRestaurantOrderId() {
         return restaurantOrderId;
@@ -74,4 +87,20 @@ public class RestaurantOrderEntity {
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
         return result;
     }
+
+    /*public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByRestaurantOrderId() {
+        return purchasedALaCartesByRestaurantOrderId;
+    }
+
+    public void setPurchasedALaCartesByRestaurantOrderId(Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId) {
+        this.purchasedALaCartesByRestaurantOrderId = purchasedALaCartesByRestaurantOrderId;
+    }
+
+    public Collection<PurchasedDrinksEntity> getPurchasedDrinksByRestaurantOrderId() {
+        return purchasedDrinksByRestaurantOrderId;
+    }
+
+    public void setPurchasedDrinksByRestaurantOrderId(Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId) {
+        this.purchasedDrinksByRestaurantOrderId = purchasedDrinksByRestaurantOrderId;
+    }*/
 }
