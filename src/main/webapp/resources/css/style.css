@@ -50,7 +50,7 @@ body {
 
 .first_page_btn {
     background-color: #ffb703; /* Matching the h2 color */
-    color: #ffffff;
+    color: #000;
     padding: 10px 20px;
     border: none;
     cursor: pointer;

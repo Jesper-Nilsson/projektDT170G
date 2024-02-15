@@ -1,0 +1,62 @@
+
+
+<!-- Booking Button -->
+<button id="bookingButton">Boka bord</button>
+
+<!-- Modal for Step 1: Choosing Lunch or Dinner -->
+<aside id="modalStep1" class="modal" aria-labelledby="modalTitle1" aria-hidden="true" role="dialog">
+    <div class="content-container">
+        <div class="booking-titel">
+            <span class="close" onclick="closeModal('modalStep1')">&times;</span>
+            <h2 id="modalTitle1">Antons Skafferi</h2>
+        </div>
+        <!-- Content for choosing lunch or dinner -->
+        <h2 class="header-booking">Välj antal gäster</h2>
+        <!-- Content for choosing the number of guests -->
+        <!-- New ol and li for selecting number of guests -->
+        <ol id="numberOfGuests" class="guest-list">
+            <li value="1">1 gäst</li>
+            <li value="2">2 gäster</li>
+            <li value="3">3 gäster</li>
+            <li value="4">4 gäster</li>
+            <li value="5">5 gäster</li>
+            <li value="6">6 gäster</li>
+        </ol>
+        <button id="chooseGuests">Fortsätt</button>
+    </div>
+</aside>
+
+<!-- Modal for Step 3: Choosing Date -->
+<aside id="modalStep2" class="modal" aria-labelledby="modalTitle2" aria-hidden="true" role="dialog">
+    <div class="content-container">
+        <!-- Add back arrow to each modal except the first one -->
+        <div class="booking-titel">
+            <div class="back-arrow" onclick="goBack('modalStep2', 'modalStep1')">&#x2190;</div>
+            <span class="close" onclick="closeModal('modalStep2')">&times;</span>
+            <h2 id="modalTitle2">Antons Skafferi</h2>
+        </div>
+        <h2 class="header-booking">Välj datum</h2>
+        <!-- Content for choosing a date -->
+        <input type="date" id="bookingDate">
+        <button id="chooseDate">Fortsätt</button>
+    </div>
+</aside>
+
+<!-- Modal for Step 4: Entering User Information -->
+<aside id="modalStep3" class="modal" aria-labelledby="modalTitle3" aria-hidden="true" role="dialog">
+    <div class="content-container">
+        <!-- Add back arrow to each modal except the first one -->
+        <div class="booking-titel">
+            <div class="back-arrow" onclick="goBack('modalStep3', 'modalStep2')">&#x2190;</div>
+            <span class="close" onclick="closeModal('modalStep3')">&times;</span>
+            <h2 id="modalTitle3">Antons Skafferi</h2>
+        </div>
+
+        <h2 class="header-booking">Dina uppgifter</h2>
+        <!-- Content for entering user information -->
+        <input type="text" id="userName" placeholder="Ditt namn">
+        <input type="tel" id="userPhone" placeholder="Ditt telefonnummer">
+        <button id="saveBooking">Boka nu</button>
+    </div>
+</aside>
+
