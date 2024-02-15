@@ -18,6 +18,12 @@ public class PurchasedALaCarteEntity {
     @Basic
     @Column(name = "antal")
     private int antal;
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+    private RestaurantOrderEntity restaurantOrderByOrderId;
+    @ManyToOne
+    @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false)
+    private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;
 
     public int getPurchasedId() {
         return purchasedId;
@@ -73,5 +79,21 @@ public class PurchasedALaCarteEntity {
         result = 31 * result + aLaCarteId;
         result = 31 * result + antal;
         return result;
+    }
+
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
+        return restaurantOrderByOrderId;
+    }
+
+    public void setRestaurantOrderByOrderId(RestaurantOrderEntity restaurantOrderByOrderId) {
+        this.restaurantOrderByOrderId = restaurantOrderByOrderId;
+    }
+
+    public ALaCarteMenuEntity getaLaCarteMenuByALaCarteId() {
+        return aLaCarteMenuByALaCarteId;
+    }
+
+    public void setaLaCarteMenuByALaCarteId(ALaCarteMenuEntity aLaCarteMenuByALaCarteId) {
+        this.aLaCarteMenuByALaCarteId = aLaCarteMenuByALaCarteId;
     }
 }

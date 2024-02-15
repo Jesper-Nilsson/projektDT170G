@@ -2,6 +2,8 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @NamedQueries({
         @NamedQuery(
                 name = "ALaCarteMenuEntity.findType",
@@ -13,7 +15,7 @@ import jakarta.persistence.*;
         )
 })
 @Entity
-@Table(name = "a_la_carte_menu", schema = "dt170gprojekt")
+@Table(name = "a_la_carte_menu", schema = "dt170gprojekt", catalog = "")
 public class ALaCarteMenuEntity {
     static public final String findByType = "ALaCarteMenuEntity.findType";
     static public final String findAll = "ALaCarteMenuEntity.findAll";
@@ -34,6 +36,8 @@ public class ALaCarteMenuEntity {
     @Basic
     @Column(name = "price")
     private int price;
+    @OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
+    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;
 
     public int getaLaCarteId() {
         return aLaCarteId;
@@ -99,5 +103,13 @@ public class ALaCarteMenuEntity {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + price;
         return result;
+    }
+
+    public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByALaCarteId() {
+        return purchasedALaCartesByALaCarteId;
+    }
+
+    public void setPurchasedALaCartesByALaCarteId(Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId) {
+        this.purchasedALaCartesByALaCarteId = purchasedALaCartesByALaCarteId;
     }
 }

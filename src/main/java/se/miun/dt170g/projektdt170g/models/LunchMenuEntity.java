@@ -18,7 +18,7 @@ import java.sql.Date;
         )
 })
 @Entity
-@Table(name = "lunch_menu", schema = "dt170gprojekt")
+@Table(name = "lunch_menu", schema = "dt170gprojekt", catalog = "")
 public class LunchMenuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -18,6 +18,12 @@ public class PurchasedDrinksEntity {
     @Basic
     @Column(name = "price")
     private int price;
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+    private RestaurantOrderEntity restaurantOrderByOrderId;
+    @ManyToOne
+    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false)
+    private DrinksEntity drinksByDrinkId;
 
     public int getPurchasedId() {
         return purchasedId;
@@ -73,5 +79,21 @@ public class PurchasedDrinksEntity {
         result = 31 * result + drinkId;
         result = 31 * result + price;
         return result;
+    }
+
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
+        return restaurantOrderByOrderId;
+    }
+
+    public void setRestaurantOrderByOrderId(RestaurantOrderEntity restaurantOrderByOrderId) {
+        this.restaurantOrderByOrderId = restaurantOrderByOrderId;
+    }
+
+    public DrinksEntity getDrinksByDrinkId() {
+        return drinksByDrinkId;
+    }
+
+    public void setDrinksByDrinkId(DrinksEntity drinksByDrinkId) {
+        this.drinksByDrinkId = drinksByDrinkId;
     }
 }

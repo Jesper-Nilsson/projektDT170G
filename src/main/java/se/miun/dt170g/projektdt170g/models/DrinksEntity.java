@@ -1,13 +1,16 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+
+import java.util.Collection;
+
 @NamedQuery(
         name = "DrinksEntity.findAll",
         query = "SELECT l FROM DrinksEntity l"
 )
 
 @Entity
-@Table(name = "drinks", schema = "dt170gprojekt")
+@Table(name = "drinks", schema = "dt170gprojekt", catalog = "")
 public class DrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -22,6 +25,8 @@ public class DrinksEntity {
     @Basic
     @Column(name = "price")
     private int price;
+    @OneToMany(mappedBy = "drinksByDrinkId")
+    private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;
 
     public int getDrinkId() {
         return drinkId;
@@ -77,5 +82,13 @@ public class DrinksEntity {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + price;
         return result;
+    }
+
+    public Collection<PurchasedDrinksEntity> getPurchasedDrinksByDrinkId() {
+        return purchasedDrinksByDrinkId;
+    }
+
+    public void setPurchasedDrinksByDrinkId(Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId) {
+        this.purchasedDrinksByDrinkId = purchasedDrinksByDrinkId;
     }
 }
