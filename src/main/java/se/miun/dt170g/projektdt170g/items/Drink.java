@@ -1,5 +1,8 @@
 package se.miun.dt170g.projektdt170g.items;
 
+import jakarta.persistence.*;
+
+
 public class Drink {
     private int drink_id;
     private String name;

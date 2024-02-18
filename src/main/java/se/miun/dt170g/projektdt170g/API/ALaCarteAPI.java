@@ -5,14 +5,13 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
+import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -46,6 +45,5 @@ public class ALaCarteAPI {
         }
         return Response.ok(aLaCarteItems).build();
     }
-
 
 }
