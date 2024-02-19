@@ -36,8 +36,8 @@ public class ALaCarteMenuEntity {
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
-    /*@OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
-    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;*/
+    @OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
+    private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;
 
     public int getaLaCarteId() {
         return aLaCarteId;

@@ -40,8 +40,9 @@ public class OrderAPI {
 
         }
         RestaurantOrderEntity test = entityManager.find(RestaurantOrderEntity.class,orderID);
-        test.getPurchasedDrinksByRestaurantOrderId().size();
-        test.getPurchasedALaCartesByRestaurantOrderId().size();
+        test.setPurchasedDrinksByRestaurantOrderId(null);
+        test.setPurchasedALaCartesByRestaurantOrderId(null);
+
 
 
 
