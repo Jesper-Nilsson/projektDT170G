@@ -1,25 +1,27 @@
 package se.miun.dt170g.projektdt170g.items;
 
+import se.miun.dt170g.projektdt170g.models.DrinksEntity;
+
 public class Drink {
-    private int drink_id;
+
     private String name;
     private String description;
     private int price;
 
     public Drink(int drink_id, String name, String description, int price) {
-        this.drink_id = drink_id;
+
         this.name = name;
         this.description = description;
         this.price = price;
     }
+    public Drink(DrinksEntity drink){
 
-    public int getDrink_id() {
-        return drink_id;
+        this.name = drink.getName();
+        this.description = drink.getDescription();
+        this.price = drink.getPrice();
     }
 
-    public void setDrink_id(int drink_id) {
-        this.drink_id = drink_id;
-    }
+
 
     public String getName() {
         return name;
