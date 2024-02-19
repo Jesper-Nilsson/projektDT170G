@@ -3,11 +3,10 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "table_session", schema = "dt170gprojekt", catalog = "")
+@Table(name = "table_session", schema = "dt170gprojekt")
 public class TableSessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Basic
     @Column(name = "session_id", nullable = false)
     private int sessionId;
     @Basic
