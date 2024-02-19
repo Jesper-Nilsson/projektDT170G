@@ -21,6 +21,7 @@ public class LunchAdminBean implements Serializable {
 
     @Inject
     private LunchAPI lunchAPI;
+
     private LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
     private String action; // Define the action property
 
