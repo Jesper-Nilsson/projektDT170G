@@ -1,4 +1,4 @@
-package se.miun.dt170g.projektdt170g.models;
+package se.miun.dt170g.projektdt170g.items;
 
 public class Drink {
     private int drink_id;
