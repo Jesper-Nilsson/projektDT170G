@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "table_session", schema = "dt170gprojekt", catalog = "")
+@Table(name = "table_session", schema = "dt170gprojekt")
 public class TableSessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

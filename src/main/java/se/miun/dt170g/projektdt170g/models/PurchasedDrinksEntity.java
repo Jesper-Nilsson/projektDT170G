@@ -3,7 +3,7 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "purchased_drinks", schema = "dt170gprojekt")
+@Table(name = "purchased_drinks", schema = "dt170gprojekt", catalog = "")
 public class PurchasedDrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,12 +18,13 @@ public class PurchasedDrinksEntity {
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
-    /*@ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false)
-    private DrinksEntity drinksByDrinkId;*/
+    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false,updatable = false, insertable = false)
+    private DrinksEntity drinksByDrinkId;
 
     public int getPurchasedId() {
         return purchasedId;
@@ -81,7 +82,7 @@ public class PurchasedDrinksEntity {
         return result;
     }
 
-    /*public RestaurantOrderEntity getRestaurantOrderByOrderId() {
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;
     }
 
@@ -95,5 +96,5 @@ public class PurchasedDrinksEntity {
 
     public void setDrinksByDrinkId(DrinksEntity drinksByDrinkId) {
         this.drinksByDrinkId = drinksByDrinkId;
-    }*/
+    }
 }

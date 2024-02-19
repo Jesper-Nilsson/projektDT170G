@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="se.miun.dt170g.projektdt170g.models.PurchasedDrinksEntity">
+        <table name="purchased_drinks" schema="dt170gprojekt" catalog=""/>
+        <attributes>
+            <id name="purchasedId">
+                <column name="purchased_ID" precision="11"/>
+            </id>
+            <basic name="orderId">
+                <column name="order_id" precision="11"/>
+            </basic>
+            <basic name="drinkId">
+                <column name="drink_id" precision="11"/>
+            </basic>
+            <basic name="price">
+                <column name="price" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

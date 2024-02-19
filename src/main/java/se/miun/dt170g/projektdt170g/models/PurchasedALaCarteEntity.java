@@ -3,7 +3,7 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "purchased_a_la_carte", schema = "dt170gprojekt")
+@Table(name = "purchased_a_la_carte", schema = "dt170gprojekt", catalog = "")
 public class PurchasedALaCarteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,12 +18,12 @@ public class PurchasedALaCarteEntity {
     @Basic
     @Column(name = "antal", nullable = false)
     private int antal;
-    /*@ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false)
-    private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;*/
+    @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false,updatable = false, insertable = false)
+    private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;
 
     public int getPurchasedId() {
         return purchasedId;
@@ -81,7 +81,7 @@ public class PurchasedALaCarteEntity {
         return result;
     }
 
-    /*public RestaurantOrderEntity getRestaurantOrderByOrderId() {
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;
     }
 
@@ -95,5 +95,5 @@ public class PurchasedALaCarteEntity {
 
     public void setaLaCarteMenuByALaCarteId(ALaCarteMenuEntity aLaCarteMenuByALaCarteId) {
         this.aLaCarteMenuByALaCarteId = aLaCarteMenuByALaCarteId;
-    }*/
+    }
 }

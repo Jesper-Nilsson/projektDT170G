@@ -25,8 +25,8 @@ public class DrinksEntity {
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
-    /*@OneToMany(mappedBy = "drinksByDrinkId")
-    private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;*/
+    @OneToMany(mappedBy = "drinksByDrinkId")
+    private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;
 
     public int getDrinkId() {
         return drinkId;
@@ -84,11 +84,11 @@ public class DrinksEntity {
         return result;
     }
 
-    /*public Collection<PurchasedDrinksEntity> getPurchasedDrinksByDrinkId() {
+    public Collection<PurchasedDrinksEntity> getPurchasedDrinksByDrinkId() {
         return purchasedDrinksByDrinkId;
     }
 
     public void setPurchasedDrinksByDrinkId(Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId) {
         this.purchasedDrinksByDrinkId = purchasedDrinksByDrinkId;
-    }*/
+    }
 }
