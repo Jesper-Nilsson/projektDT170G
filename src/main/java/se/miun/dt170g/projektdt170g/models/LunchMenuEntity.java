@@ -2,7 +2,8 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
+import java.io.Serializable;
+import java.util.Date;
 @NamedQueries({
         @NamedQuery(
                 name = "LunchMenuEntity.findByDate",
@@ -19,7 +20,7 @@ import java.sql.Date;
 })
 @Entity
 @Table(name = "lunch_menu", schema = "dt170gprojekt", catalog = "")
-public class LunchMenuEntity {
+public class LunchMenuEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "lunch_id", nullable = false)

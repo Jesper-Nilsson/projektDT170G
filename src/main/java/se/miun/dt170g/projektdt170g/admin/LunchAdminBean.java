@@ -3,24 +3,27 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import se.miun.dt170g.projektdt170g.models.Lunch;
+import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.API.LunchAPI;
+import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Logger;
+import jakarta.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import java.net.URI;
 
 @Named
 @SessionScoped
 public class LunchAdminBean implements Serializable {
 
 
-    private String lunchName;
-
-    private String lunchDescription;
+    @Inject
+    private LunchAPI lunchAPI;
+    private LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
     private String action; // Define the action property
-    private Date lunchDate;
 
-    private int lunchPrice = 99;
     private String message = "aa";
 
 
@@ -35,45 +38,41 @@ public class LunchAdminBean implements Serializable {
 
     public void addLunch(){
         // call api post lunch
-
-
-
-
         setMessage("tillagd");
-
-
+        setAction("none");
+        Response response = lunchAPI.addLunch(lunchMenuEntity);
     }
 
 
     public String getLunchName() {
-        return lunchName;
+        return lunchMenuEntity.getName();
     }
 
     public void setLunchName(String lunchName) {
-        this.lunchName = lunchName;
+        lunchMenuEntity.setName(lunchName);
     }
     public Date getLunchDate() {
-        return lunchDate;
+        return lunchMenuEntity.getDate();
     }
 
     public void setLunchDate(Date lunchDate) {
-        this.lunchDate = lunchDate;
+        lunchMenuEntity.setDate(lunchDate);
     }
 
     public String getLunchDescription() {
-        return lunchDescription;
+        return lunchMenuEntity.getDescription();
     }
 
     public void setLunchDescription(String lunchDescription) {
-        this.lunchDescription = lunchDescription;
+        lunchMenuEntity.setDescription(lunchDescription);
     }
 
     public int getLunchPrice() {
-        return lunchPrice;
+        return lunchMenuEntity.getPrice();
     }
 
     public void setLunchPrice(int lunchPrice) {
-        this.lunchPrice = lunchPrice;
+        lunchMenuEntity.setPrice(lunchPrice);
     }
 
     public String getMessage() {

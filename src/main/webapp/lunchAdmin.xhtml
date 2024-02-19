@@ -37,7 +37,23 @@
 
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'update'}">
-                <!-- Form for Updating Event -->
+                <h:selectOneMenu value="#{lunchAdminBean.selectedLunchId}">
+                    <f:selectItem itemLabel="Select Lunch" itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{lunchAdminBean.upcomingLunches}"
+                                   var="lunch"
+                                   itemValue="#{lunch.id}"
+                                   itemLabel="#{lunch.name} - #{lunch.date}"/>
+                </h:selectOneMenu>
+                <h:form rendered="#{lunchAdminBean.selectedLunchId != null}">
+                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.name}" />
+                    <h:inputTextarea value="#{lunchAdminBean.selectedLunchDetails.description}" />
+                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.price}" />
+                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.date}" />
+
+                    <h:commandButton value="Update Lunch" action="#{lunchAdminBean.updateLunch}" />
+                </h:form>
+
+
             </ui:fragment>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">
