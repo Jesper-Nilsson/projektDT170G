@@ -14,7 +14,7 @@
 };
 
     // Close the popup when clicking anywhere on the window
-    window.onclick = function() {
+window.onclick = function() {
     closePopup();
 };
 

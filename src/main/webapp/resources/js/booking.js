@@ -1,3 +1,17 @@
+const warningEmptyGuest = document.getElementById("warningChooseGuests");
+// Modify the chooseGuests button event listener
+document.getElementById('chooseGuests').addEventListener('click', function() {
+    const activeGuest = document.querySelector('.guest-list li.active');
+    // Check if a guest number has been selected
+    if (!activeGuest) {
+        // No guest selected, show warning
+        warningEmptyGuest.style.display = 'block';
+    } else {
+        // Proceed as normal if a guest is selected
+        closeModal('modalStep1');
+        openModal('modalStep2');
+    }
+});
 // Function to open a modal
 function openModal(modalId) {
     document.getElementById(modalId).style.display = 'block';
@@ -103,10 +117,13 @@ function openModal(modalId) {
 // JavaScript to handle guest selection from the list
 document.querySelectorAll('.guest-list li').forEach(item => {
     item.addEventListener('click', function() {
+        warningEmptyGuest.style.display = 'none';
+
         // Remove active class from all items
         document.querySelectorAll('.guest-list li').forEach(li => {
             li.classList.remove('active');
         });
+
 
         // Add active class to clicked item
         this.classList.add('active');

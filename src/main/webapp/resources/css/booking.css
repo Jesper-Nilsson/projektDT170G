@@ -60,13 +60,11 @@
     background-color: #e9ecef; /* Slightly darker on hover/focus */
     outline: none; /* Ensure no outline on focus as well */
 }
+
 .guest-list li:focus {
     /* Optional: Provide a visual cue for keyboard users, for example: */
     box-shadow: 0 0 0 2px #ffb709; /* A subtle shadow or border color change */
 }
-
-
-
 
 .back-arrow {
     position: absolute;
@@ -138,3 +136,25 @@ input[type="text"], input[type="tel"] {
 }
 
 
+#moreThanSixInfo{
+    max-width: 70%;
+    text-align: center;
+    border: #666666 1px solid;
+    margin: 0 auto;
+    padding: 0.3rem;
+    display: none;
+}
+#warningChooseGuests{
+    display: none;
+    color: red;
+}
+
+ /* On screens that are 992px wide or less */
+ @media screen and (max-width: 700px) {
+     .content-container{
+         width: 100%;
+     }
+     #modalTitle1, #modalTitle2, #modalTitle3 {
+         font-size: 1rem; /* Larger font size for titles */
+     }
+ }
