@@ -14,9 +14,6 @@
             <basic name="aLaCarteId">
                 <column name="a_la_carte_id" precision="11"/>
             </basic>
-            <basic name="antal">
-                <column name="antal" precision="11"/>
-            </basic>
         </attributes>
     </entity>
 </entity-mappings>

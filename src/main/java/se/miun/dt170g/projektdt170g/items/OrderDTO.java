@@ -11,7 +11,7 @@ import java.util.*;
 
 public class OrderDTO {
 
-    private int order_ID;
+    private Long order_ID;
 
     private String statusAppetizer;
 
@@ -28,7 +28,7 @@ public class OrderDTO {
 
     private ArrayList<Drink> drinks;
 
-    public OrderDTO(int order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
+    public OrderDTO(Long order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
         this.order_ID = order_ID;
         this.statusAppetizer = statusAppetizer;
         this.statusMain = statusMain;
@@ -44,11 +44,11 @@ public class OrderDTO {
     drinks = new ArrayList<Drink>();
     }
 
-    public int getOrder_ID() {
+    public Long getOrder_ID() {
         return order_ID;
     }
 
-    public void setOrder_ID(int order_ID) {
+    public void setOrder_ID(Long order_ID) {
         this.order_ID = order_ID;
     }
 

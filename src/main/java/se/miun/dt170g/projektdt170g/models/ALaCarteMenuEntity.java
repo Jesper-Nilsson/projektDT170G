@@ -23,7 +23,7 @@ public class ALaCarteMenuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "a_la_carte_id", nullable = false)
-    private int aLaCarteId;
+    private Long aLaCarteId;
     @Basic
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -39,11 +39,11 @@ public class ALaCarteMenuEntity {
     @OneToMany(mappedBy = "aLaCarteMenuByALaCarteId")
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;
 
-    public int getaLaCarteId() {
+    public Long getaLaCarteId() {
         return aLaCarteId;
     }
 
-    public void setaLaCarteId(int aLaCarteId) {
+    public void setaLaCarteId(Long aLaCarteId) {
         this.aLaCarteId = aLaCarteId;
     }
 
@@ -97,12 +97,12 @@ public class ALaCarteMenuEntity {
 
     @Override
     public int hashCode() {
-        int result = aLaCarteId;
+        Long result = aLaCarteId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + price;
-        return result;
+        return Math.toIntExact(result);
     }
 
    /* public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByALaCarteId() {

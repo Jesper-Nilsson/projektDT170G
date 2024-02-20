@@ -1,16 +1,17 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.OrderDTO;
 
 import java.util.Collection;
 
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
-public class RestaurantOrderEntity {
+public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "restaurant_order_id", nullable = false)
-    private int restaurantOrderId;
+    private Long restaurantOrderId;
     @Basic
     @Column(name = "status_appetizer", nullable = false, length = 255)
     private String statusAppetizer;
@@ -32,11 +33,22 @@ public class RestaurantOrderEntity {
     @OneToMany(mappedBy = "restaurantOrderByOrderId")
     private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;
 
-    public int getRestaurantOrderId() {
-        return restaurantOrderId;
+    public OrderEntity() {
+
     }
 
-    public void setRestaurantOrderId(int restaurantOrderId) {
+    public Long getRestaurantOrderId() {
+        return restaurantOrderId;
+    }
+    public OrderEntity(OrderDTO orderDTO){
+        this.comment = orderDTO.getComment();
+        this.restaurantTableId = orderDTO.getRestaurantTableId();
+        this.statusAppetizer = orderDTO.getStatusAppetizer();
+        this.statusMain = orderDTO.getStatusMain();
+        this.statusDessert = orderDTO.getStatusDessert();
+    }
+
+    public void setRestaurantOrderId(Long restaurantOrderId) {
         this.restaurantOrderId = restaurantOrderId;
     }
 
@@ -63,7 +75,7 @@ public class RestaurantOrderEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RestaurantOrderEntity that = (RestaurantOrderEntity) o;
+        OrderEntity that = (OrderEntity) o;
 
         if (restaurantOrderId != that.restaurantOrderId) return false;
         if (restaurantTableId != that.restaurantTableId) return false;
@@ -79,13 +91,13 @@ public class RestaurantOrderEntity {
 
     @Override
     public int hashCode() {
-        int result = restaurantOrderId;
+        Long result = restaurantOrderId;
         result = 31 * result + (statusAppetizer != null ? statusAppetizer.hashCode() : 0);
         result = 31 * result + (statusMain != null ? statusMain.hashCode() : 0);
         result = 31 * result + (statusDessert != null ? statusDessert.hashCode() : 0);
         result = 31 * result + restaurantTableId;
         result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        return result;
+        return Math.toIntExact(result);
     }
 
     public String getStatusAppetizer() {

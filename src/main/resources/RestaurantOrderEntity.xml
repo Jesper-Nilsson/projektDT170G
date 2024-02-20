@@ -2,7 +2,7 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity">
+    <entity class="se.miun.dt170g.projektdt170g.models.OrderEntity">
         <table name="restaurant_order" schema="dt170gprojekt" catalog=""/>
         <attributes>
             <id name="restaurantOrderId">

@@ -15,7 +15,7 @@ public class DrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "drink_id", nullable = false)
-    private int drinkId;
+    private Long drinkId;
     @Basic
     @Column(name = "name", nullable = false, length = 255)
     private String name;
@@ -28,11 +28,11 @@ public class DrinksEntity {
     @OneToMany(mappedBy = "drinksByDrinkId")
     private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;
 
-    public int getDrinkId() {
+    public Long getDrinkId() {
         return drinkId;
     }
 
-    public void setDrinkId(int drinkId) {
+    public void setDrinkId(Long drinkId) {
         this.drinkId = drinkId;
     }
 
@@ -77,11 +77,11 @@ public class DrinksEntity {
 
     @Override
     public int hashCode() {
-        int result = drinkId;
+        Long result = drinkId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + price;
-        return result;
+        return Math.toIntExact(result);
     }
 
     public Collection<PurchasedDrinksEntity> getPurchasedDrinksByDrinkId() {

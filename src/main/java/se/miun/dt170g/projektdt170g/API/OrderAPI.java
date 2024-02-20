@@ -1,29 +1,23 @@
 package se.miun.dt170g.projektdt170g.API;
 
-import jakarta.annotation.Resource;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.items.Drink;
-import se.miun.dt170g.projektdt170g.items.Order;
 import se.miun.dt170g.projektdt170g.items.OrderDTO;
 import se.miun.dt170g.projektdt170g.models.*;
-
-import javax.sql.DataSource;
-import java.sql.*;
-import java.util.ArrayList;
 
 /**
  * REST API endpoint class for managing a la carte menu items.
  * Allows retrieval of dinner menu items filtered by their type.
  */
 @Path("/order")
+@Stateless
 public class OrderAPI {
     @PersistenceContext
     private EntityManager entityManager;
@@ -42,7 +36,7 @@ public class OrderAPI {
         } else if (service) {
 
         }
-        RestaurantOrderEntity test = entityManager.find(RestaurantOrderEntity.class,orderID);
+        OrderEntity test = entityManager.find(OrderEntity.class,orderID);
 
         order_return.setOrder_ID(test.getRestaurantOrderId());
         order_return.setStatusAppetizer(test.getStatusAppetizer());
@@ -59,6 +53,26 @@ public class OrderAPI {
             order_return.addDrink(new Drink(drink));
         }
         return order_return;
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addOrder(OrderDTO orderDTO) {
+        OrderEntity order= new OrderEntity(orderDTO);
+        try {
+            entityManager.persist(order);
+            /*for (ALaCarteItem purchasedALaCarte : orderDTO.getFoods()){
+                entityManager.persist(new PurchasedALaCarteEntity(purchasedALaCarte,order));
+            }
+            for (Drink drink : orderDTO.getDrinks()){
+                entityManager.persist(new PurchasedDrinksEntity(drink,order));
+            }
+            */
+            return Response.status(Response.Status.CREATED).entity(order).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error saving lunch menu: " + e.getMessage()).build();
+        }
     }
 
 

@@ -27,7 +27,7 @@
         <class>se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.PurchasedDrinksEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.ReceiptEntity</class>
-        <class>se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity</class>
+        <class>se.miun.dt170g.projektdt170g.models.OrderEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.ShiftEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.TableSessionEntity</class>
 

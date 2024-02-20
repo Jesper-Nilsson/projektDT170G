@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 
 @Entity
 @Table(name = "purchased_a_la_carte", schema = "dt170gprojekt", catalog = "")
@@ -8,54 +9,54 @@ public class PurchasedALaCarteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "purchased_ID", nullable = false)
-    private int purchasedId;
+    private Long purchasedId;
     @Basic
     @Column(name = "order_id", nullable = false)
-    private int orderId;
+    private Long orderId;
     @Basic
     @Column(name = "a_la_carte_id", nullable = false)
-    private int aLaCarteId;
-    @Basic
-    @Column(name = "antal", nullable = false)
-    private int antal;
+    private Long aLaCarteId;
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
-    private RestaurantOrderEntity restaurantOrderByOrderId;
+    private OrderEntity restaurantOrderByOrderId;
     @ManyToOne
     @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false,updatable = false, insertable = false)
     private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;
 
-    public int getPurchasedId() {
+    public PurchasedALaCarteEntity(ALaCarteItem aLaCarteItem, OrderEntity order){
+        this.aLaCarteId = aLaCarteItem.getaLaCarteID();
+        this.orderId = order.getRestaurantOrderId();
+    }
+
+    public PurchasedALaCarteEntity() {
+
+    }
+
+    public Long getPurchasedId() {
         return purchasedId;
     }
 
-    public void setPurchasedId(int purchasedId) {
+    public void setPurchasedId(Long purchasedId) {
         this.purchasedId = purchasedId;
     }
 
-    public int getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    public int getaLaCarteId() {
+    public Long getaLaCarteId() {
         return aLaCarteId;
     }
 
-    public void setaLaCarteId(int aLaCarteId) {
+    public void setaLaCarteId(Long aLaCarteId) {
         this.aLaCarteId = aLaCarteId;
     }
 
-    public int getAntal() {
-        return antal;
-    }
 
-    public void setAntal(int antal) {
-        this.antal = antal;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -67,25 +68,24 @@ public class PurchasedALaCarteEntity {
         if (purchasedId != that.purchasedId) return false;
         if (orderId != that.orderId) return false;
         if (aLaCarteId != that.aLaCarteId) return false;
-        if (antal != that.antal) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = purchasedId;
+        Long result = purchasedId;
         result = 31 * result + orderId;
         result = 31 * result + aLaCarteId;
-        result = 31 * result + antal;
-        return result;
+
+        return Math.toIntExact(result);
     }
 
-    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
+    public OrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;
     }
 
-    public void setRestaurantOrderByOrderId(RestaurantOrderEntity restaurantOrderByOrderId) {
+    public void setRestaurantOrderByOrderId(OrderEntity restaurantOrderByOrderId) {
         this.restaurantOrderByOrderId = restaurantOrderByOrderId;
     }
 
