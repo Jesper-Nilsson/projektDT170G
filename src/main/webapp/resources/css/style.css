@@ -87,8 +87,8 @@ body {
     position: fixed;
     right: 1.4rem;
     bottom: 1.4rem;
-    background: #333;
-    color: white;
+    background: #ffb703;
+    color: black;
     padding: 0.7rem 1rem;
     text-decoration: none;
     font-size: 1rem;
@@ -99,5 +99,5 @@ body {
     display: block;
 }
 .top-link:hover {
-    background-color: #444444;
+   opacity: 0.8;
 }
