@@ -1,11 +1,11 @@
 package se.miun.dt170g.projektdt170g.API;
 
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
+@Stateless
 @Path("/lunch")
 public class LunchAPI {
     @PersistenceContext
@@ -48,4 +49,21 @@ public class LunchAPI {
         // Use the Response builder to return the list with proper status code
         return Response.ok(lunchMenus).build();
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addLunch(LunchMenuEntity lunchMenu) {
+        try {
+            entityManager.persist(lunchMenu);
+            return Response.status(Response.Status.CREATED).entity(lunchMenu).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error saving lunch menu: " + e.getMessage()).build();
+        }
+    }
+
+
+
 }
+
+

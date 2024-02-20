@@ -2,9 +2,20 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalTime;
+import java.time.LocalDate;
+
+@NamedQueries({
+        @NamedQuery(
+                name = "BookingEntity.findDate",
+                query = "SELECT l FROM BookingEntity l WHERE l.date = :date"
+        )
+})
+
 @Entity
 @Table(name = "booking", schema = "dt170gprojekt", catalog = "")
 public class BookingEntity {
+    public static final String findByDate = "BookingEntity.findDate";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "booking_id", nullable = false)
@@ -14,7 +25,16 @@ public class BookingEntity {
     private String name;
     @Basic
     @Column(name = "telephone", nullable = false)
-    private int telephone;
+    private String telephone;
+    @Basic
+    @Column(name = "amount", nullable = false)
+    private int amount;
+    @Basic
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
+    @Basic
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
 
     public int getBookingId() {
         return bookingId;
@@ -32,12 +52,36 @@ public class BookingEntity {
         this.name = name;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     @Override
@@ -58,7 +102,6 @@ public class BookingEntity {
     public int hashCode() {
         int result = bookingId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + telephone;
         return result;
     }
 }
