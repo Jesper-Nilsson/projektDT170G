@@ -1,23 +1,23 @@
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.annotation.Resource;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import se.miun.dt170g.projektdt170g.models.ALaCarteItem;
-import se.miun.dt170g.projektdt170g.models.Drink;
-import se.miun.dt170g.projektdt170g.models.Lunch;
-import se.miun.dt170g.projektdt170g.models.Order;
+import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
+import se.miun.dt170g.projektdt170g.items.Drink;
+import se.miun.dt170g.projektdt170g.items.Order;
+import se.miun.dt170g.projektdt170g.items.OrderDTO;
+import se.miun.dt170g.projektdt170g.models.*;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * REST API endpoint class for managing a la carte menu items.
@@ -25,53 +25,41 @@ import java.util.List;
  */
 @Path("/order")
 public class OrderAPI {
-    @Resource(name = "jdbc/database")
-    private DataSource dataSource;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getOrder(@QueryParam("orderID") int orderID,
-                           @QueryParam("kitchen") boolean kitchen,
-                           @QueryParam("service") boolean service) {
+    public OrderDTO getOrder(@QueryParam("orderID") int orderID,
+                             @QueryParam("kitchen") boolean kitchen,
+                             @QueryParam("service") boolean service) {
 
         //check orderID if not given, error or just everything today
 
+        OrderDTO order_return = new OrderDTO();
         if (kitchen) {
-            ArrayList<Order> orderList = fetchALaCarte(orderID);
+
         } else if (service) {
 
         }
+        RestaurantOrderEntity test = entityManager.find(RestaurantOrderEntity.class,orderID);
 
+        order_return.setOrder_ID(test.getRestaurantOrderId());
+        order_return.setStatusAppetizer(test.getStatusAppetizer());
+        order_return.setStatusMain(test.getStatusMain());
+        order_return.setStatusDessert(test.getStatusDessert());
+        order_return.setComment(test.getComment());
 
-        return null;
-    }
-
-    private ArrayList<Order> fetchALaCarte(int orderID) {
-        String query = "SELECT purchased_a_la_carte.order_id, "
-                + "a_la_carte_menu.*, "
-                + "purchased_a_la_carte.antal "
-                + "FROM purchased_a_la_carte "
-                + "JOIN a_la_carte_menu ON purchased_a_la_carte.a_la_carte_id = a_la_carte_menu.a_la_carte_id "
-                + "WHERE purchased_a_la_carte.order_id = ?";
-
-        ArrayList<Order> orders = new ArrayList<>();
-        ArrayList<ALaCarteItem> aLaCarteItems = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection();
-
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-
-            preparedStatement.setInt(1, orderID);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                aLaCarteItems.add(new ALaCarteItem(rs.getInt("a_la_carte_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Database error occurred while fetching lunches.", e);
+        for ( PurchasedALaCarteEntity purchasedALaCarte : test.getPurchasedALaCartesByRestaurantOrderId()){
+            ALaCarteMenuEntity food = entityManager.find(ALaCarteMenuEntity.class,purchasedALaCarte.getaLaCarteId());
+            order_return.addFood(new ALaCarteItem(food));
         }
-
-        return orders;
+        for (PurchasedDrinksEntity purchasedDrinks : test.getPurchasedDrinksByRestaurantOrderId() ){
+            DrinksEntity drink = entityManager.find(DrinksEntity.class, purchasedDrinks.getDrinkId());
+            order_return.addDrink(new Drink(drink));
+        }
+        return order_return;
     }
+
+
 }

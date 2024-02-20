@@ -1,17 +1,15 @@
 package se.miun.dt170g.projektdt170g.API;
 
-import jakarta.annotation.Resource;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarts.rs.QueryParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import se.miun.dt170g.projektdt170g.models.ALaCarteItem;
+import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
 
-import javax.sql.DataSource;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +19,8 @@ import java.util.List;
  */
 @Path("/a_la_carte")
 public class ALaCarteAPI {
-    @Resource(name = "jdbc/database")
-    private DataSource dataSource;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     /**
      * Retrieves a list of a la carte menu items filtered by the specified type.
@@ -33,39 +31,15 @@ public class ALaCarteAPI {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getItemsByType(@QueryParam("type") String type) {
-        List<ALaCarteItem> aLaCarteItems = fetchItemsFromDatabase(type);
-
-        try (Jsonb jsonb = JsonbBuilder.create()) {
-            return jsonb.toJson(aLaCarteItems);
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting a la carte items to JSON", e);
+    public Response getItemsByType(@QueryParam("type") String type) {
+        List<ALaCarteMenuEntity> aLaCarteItems = new ArrayList<>();
+        if (type != null) {
+            aLaCarteItems = entityManager.createNamedQuery(ALaCarteMenuEntity.findByType, ALaCarteMenuEntity.class).setParameter("type",type).getResultList();
+        }else {
+            aLaCarteItems = entityManager.createNamedQuery(ALaCarteMenuEntity.findAll,ALaCarteMenuEntity.class).getResultList();
         }
+        return Response.ok(aLaCarteItems).build();
     }
 
-    /**
-     * Fetches a list of a la carte menu items from the database filtered by the specified type.
-     *
-     * @param type The type of dinner menu items to filter by (e.g., "starter", "main", "dessert").
-     * @return A list of ALaCarteItem objects representing the filtered a la carte menu items.
-     */
-    private List<ALaCarteItem> fetchItemsFromDatabase(String type) {
-        List<ALaCarteItem> aLaCarteItems = new ArrayList<>();
 
-        String query = "SELECT * FROM a_la_carte_menu WHERE type = ?";
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
-
-            preparedStatement.setString(1, type); // Set the type parameter
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                aLaCarteItems.add(new ALaCarteItem(rs.getInt("a_la_carte_id"), rs.getInt("price"), rs.getString("name"), rs.getString("type"), rs.getString("description")));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Database error occurred while fetching a la carte items.", e);
-        }
-
-        return aLaCarteItems;
-    }
 }

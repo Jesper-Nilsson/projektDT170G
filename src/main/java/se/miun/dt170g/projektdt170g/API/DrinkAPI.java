@@ -1,20 +1,14 @@
 package se.miun.dt170g.projektdt170g.API;
 
-import jakarta.annotation.Resource;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import se.miun.dt170g.projektdt170g.models.Drink;
-import se.miun.dt170g.projektdt170g.models.Lunch;
+import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 
-import javax.sql.DataSource;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,40 +17,16 @@ import java.util.List;
  */
 @Path("/drinks")
 public class DrinkAPI {
-    @Resource(name = "jdbc/database")
-    private DataSource dataSource;
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getDrinks() {
+    public Response getDrinks() {
 
-        List<Drink> drinks = fetchDrinks();
-
-        try (Jsonb jsonb = JsonbBuilder.create()) {
-            return jsonb.toJson(drinks);
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting lunches to JSON", e);
-        }
-    }
-
-    private List<Drink> fetchDrinks() {
-        List<Drink> drinks = new ArrayList<>();
-        String baseQuery = "SELECT * FROM drinks";
-
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(baseQuery)) {
-
-            //binding the parameters
-
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                drinks.add(new Drink(rs.getInt("drink_id"), rs.getString("name"), rs.getString("description"), rs.getInt("price")));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Database error occurred while fetching lunches.", e);
-        }
-        return drinks;
+        List<DrinksEntity> drinks;
+        drinks = entityManager.createNamedQuery("DrinksEntity.findAll", DrinksEntity.class).getResultList();
+        return Response.ok(drinks).build();
     }
 }
 
