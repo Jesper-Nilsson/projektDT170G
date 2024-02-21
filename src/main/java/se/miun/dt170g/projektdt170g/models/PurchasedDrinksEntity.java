@@ -1,7 +1,6 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
-import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.items.Drink;
 
 @Entity
@@ -23,12 +22,12 @@ public class PurchasedDrinksEntity {
 
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
-    private OrderEntity restaurantOrderByOrderId;
+    private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
     @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false,updatable = false, insertable = false)
     private DrinksEntity drinksByDrinkId;
 
-    public PurchasedDrinksEntity(Drink drink, OrderEntity order){
+    public PurchasedDrinksEntity(Drink drink, RestaurantOrderEntity order){
         this.drinkId = drink.getDrink_ID();
         this.orderId = order.getRestaurantOrderId();
     }
@@ -93,11 +92,11 @@ public class PurchasedDrinksEntity {
         return Math.toIntExact(result);
     }
 
-    public OrderEntity getRestaurantOrderByOrderId() {
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;
     }
 
-    public void setRestaurantOrderByOrderId(OrderEntity restaurantOrderByOrderId) {
+    public void setRestaurantOrderByOrderId(RestaurantOrderEntity restaurantOrderByOrderId) {
         this.restaurantOrderByOrderId = restaurantOrderByOrderId;
     }
 

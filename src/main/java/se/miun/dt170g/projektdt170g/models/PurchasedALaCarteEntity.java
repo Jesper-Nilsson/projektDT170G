@@ -18,12 +18,12 @@ public class PurchasedALaCarteEntity {
     private Long aLaCarteId;
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
-    private OrderEntity restaurantOrderByOrderId;
+    private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
     @JoinColumn(name = "a_la_carte_id", referencedColumnName = "a_la_carte_id", nullable = false,updatable = false, insertable = false)
     private ALaCarteMenuEntity aLaCarteMenuByALaCarteId;
 
-    public PurchasedALaCarteEntity(ALaCarteItem aLaCarteItem, OrderEntity order){
+    public PurchasedALaCarteEntity(ALaCarteItem aLaCarteItem, RestaurantOrderEntity order){
         this.aLaCarteId = aLaCarteItem.getaLaCarteID();
         this.orderId = order.getRestaurantOrderId();
     }
@@ -81,11 +81,11 @@ public class PurchasedALaCarteEntity {
         return Math.toIntExact(result);
     }
 
-    public OrderEntity getRestaurantOrderByOrderId() {
+    public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;
     }
 
-    public void setRestaurantOrderByOrderId(OrderEntity restaurantOrderByOrderId) {
+    public void setRestaurantOrderByOrderId(RestaurantOrderEntity restaurantOrderByOrderId) {
         this.restaurantOrderByOrderId = restaurantOrderByOrderId;
     }
 

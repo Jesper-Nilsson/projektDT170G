@@ -7,7 +7,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
-public class OrderEntity {
+public class RestaurantOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "restaurant_order_id", nullable = false)
@@ -33,14 +33,14 @@ public class OrderEntity {
     @OneToMany(mappedBy = "restaurantOrderByOrderId")
     private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;
 
-    public OrderEntity() {
+    public RestaurantOrderEntity() {
 
     }
 
     public Long getRestaurantOrderId() {
         return restaurantOrderId;
     }
-    public OrderEntity(OrderDTO orderDTO){
+    public RestaurantOrderEntity(OrderDTO orderDTO){
         this.comment = orderDTO.getComment();
         this.restaurantTableId = orderDTO.getRestaurantTableId();
         this.statusAppetizer = orderDTO.getStatusAppetizer();
@@ -75,7 +75,7 @@ public class OrderEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderEntity that = (OrderEntity) o;
+        RestaurantOrderEntity that = (RestaurantOrderEntity) o;
 
         if (restaurantOrderId != that.restaurantOrderId) return false;
         if (restaurantTableId != that.restaurantTableId) return false;

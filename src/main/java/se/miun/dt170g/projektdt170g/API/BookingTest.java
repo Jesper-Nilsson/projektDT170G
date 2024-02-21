@@ -38,6 +38,7 @@ public class BookingTest {
         orderDTO.setStatusAppetizer("none");
         orderDTO.setStatusDessert("none");
         orderDTO.setRestaurantTableId(3);
+        orderDTO.setOrder_ID(1L);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1L)));
         Response response = orderAPI.addOrder(orderDTO);
         entityManager.flush();
