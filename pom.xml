@@ -26,6 +26,8 @@
             <scope>provided</scope>
         </dependency>
 
+
+
         <!-- JUnit Jupiter API and Engine for testing with the version specified in properties -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -39,7 +41,22 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>9.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Removed junit as it's older and not needed alongside JUnit Jupiter -->
         <!-- Removed the duplicated jakarta.faces-api and primefaces dependencies, keeping only the latest versions -->
 
@@ -64,11 +81,7 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>jakarta.platform</groupId>
-            <artifactId>jakarta.jakartaee-web-api</artifactId>
-            <version>8.0.0</version>
-        </dependency>
+
     </dependencies>
 
     <build>

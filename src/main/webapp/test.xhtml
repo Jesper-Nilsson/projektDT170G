@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet name="css/test.css"/>
+
+    <title>Document</title>
+
+</h:head>
+<h:body>
+    <h:form>
+        <p:commandButton value="Boka Bord" type="button" styleClass="first_page_btn" onclick="PF('modalStep1').show()"/>
+
+        <!-- Modal for Step 1: Choosing Number of Guests -->
+        <p:dialog widgetVar="modalStep1" header="Antons Skafferi" modal="true" dynamic="true">
+            <div class="content-container">
+                <h2 class="header-booking">Välj antal gäster</h2>
+                <p:selectOneListbox value="#{bookingBean.amount}" styleClass="guest-list">
+                    <f:selectItem itemValue="1" itemLabel="1 gäst"/>
+                    <f:selectItem itemValue="2" itemLabel="2 gäster"/>
+                    <!-- Additional guest options -->
+                </p:selectOneListbox>
+                <p:commandButton value="Fortsätt" oncomplete="PF('modalStep2').show()" update="@form"/>
+            </div>
+        </p:dialog>
+
+        <!-- Modal for Step 2: Choosing Date -->
+        <p:dialog widgetVar="modalStep2" header="Välj datum" modal="true" dynamic="true">
+            <div class="content-container">
+                <h2 class="header-booking">Välj datum</h2>
+                <p:calendar value="#{bookingBean.date}" pattern="dd/MM/yyyy"/>
+                <p:commandButton value="Fortsätt" oncomplete="PF('modalStep3').show()" update="@form"/>
+            </div>
+        </p:dialog>
+
+        <!-- Modal for Step 3: Entering User Information -->
+        <p:dialog widgetVar="modalStep3" header="Dina uppgifter" modal="true" dynamic="true">
+            <div class="content-container">
+                <h2 class="header-booking">Dina uppgifter</h2>
+                <p:inputText value="#{bookingBean.name}" placeholder="Ditt namn"/>
+                <p:inputMask value="#{bookingBean.telephone}" mask="(999) 999-9999" placeholder="Ditt telefonnummer"/>
+                <p:commandButton value="Boka nu" actionListener="#{bookingBean.submit()}" oncomplete="PF('modalStep3').hide()"/>
+            </div>
+        </p:dialog>
+    </h:form>
+</h:body>
+</html>

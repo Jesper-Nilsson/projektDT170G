@@ -1,11 +1,10 @@
-package se.miun.dt170g.projektdt170g.beans;
+package se.miun.dt170g.projektdt170g.booking;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,6 +12,7 @@ import java.util.Date;
 @SessionScoped
 public class TimeBean implements Serializable {
     private static final long serialVersionUID = 1L;
+
 
     @PersistenceContext
     private EntityManager entityManager;

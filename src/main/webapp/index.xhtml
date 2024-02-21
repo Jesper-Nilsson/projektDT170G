@@ -1,57 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:head>
-        <title>Date and Time Picker</title>
-    </h:head>
-    <h:body>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="en">
+<h:head>
+    <title>Document</title>
 
+</h:head>
+<h:body>
         <h:form>
-            <p:outputLabel for="dateTimePicker" value="Select Date and Time:" />
-            <p:datePicker id="dateTimePicker" value="#{timeBean.dateTime}"
-                          pattern="dd/MM/yyyy HH:mm"
-                          showTime="true"
-                          timeOnly="false"
-                          stepHour="1"
-                          minHour="9"
-                          maxHour="23"
-                          stepMinute="30"/>
-            <p:commandButton value="Submit" action="#{timeBean.submit}" update="@form messages"/>
+            <p:commandButton value="Boka Bord" type="button" styleClass="first_page_btn" onclick="PF('modalStep1').show()"/>
 
-            <p:growl id="messages" showDetail="true" />
+            <!-- Modal for Step 1: Choosing Number of Guests -->
+            <p:dialog widgetVar="modalStep1" header="Antons Skafferi" modal="true">
+                <h:panelGroup styleClass="content-container">
+                    <p:outputLabel value="Välj antal gäster" styleClass="header-booking"/>
+                    <p:selectOneMenu value="#{bookingBean.amount}">
+                        <f:selectItem itemValue="1" itemLabel="1 gäst"/>
+                        <!-- Repeat for other numbers -->
+                    </p:selectOneMenu>
+                    <p:commandButton value="Fortsätt" oncomplete="PF('modalStep1').hide(); PF('modalStep2').show();"/>
+                </h:panelGroup>
+            </p:dialog>
 
-            <!-- Display the combined Date and Time -->
-            <h:outputText value="Combined Date and Time: " rendered="#{not empty timeBean.dateTime}" />
-            <h:outputText value="#{timeBean.dateTime}"
-                          rendered="#{not empty timeBean.dateTime}"
-                          converter="javax.faces.convert.DateTimeConverter">
-                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-            </h:outputText>
 
-            <!-- Display the separated Date -->
-            <h:outputText value="Separated Date: #{timeBean.datePart}" rendered="#{not empty timeBean.dateTime}" />
+    <!-- Modals for Step 2 and Step 3 follow a similar structure -->
+        <!-- Modal for Step 2: Choosing Date -->
+        <p:dialog widgetVar="modalStep2" header="Antons Skafferi" modal="true" hideEffect="fade" showEffect="fade" resizable="false">
+            <h:form id="formStep2">
+                <h2 class="header-booking">Välj datum</h2>
+                <p:calendar id="bookingDate" value="#{bookingBean.date}" pattern="dd/MM/yyyy" showOn="button"/>
+                <p:commandButton value="Fortsätt" oncomplete="PF('modalStep2').hide(); PF('modalStep3').show();"/>
+            </h:form>
+        </p:dialog>
 
-            <!-- Display the separated Time -->
-            <h:outputText value="Separated Time: #{timeBean.timePart}" rendered="#{not empty timeBean.dateTime}" />
-
-            <!-- Optionally, display a confirmation message upon successful submission -->
-            <h:panelGroup id="confirmationSection" layout="block" rendered="#{not empty timeBean.dateTime}">
-                <h:outputText value="Submission Confirmation:" style="font-weight:bold;"/>
-                <br/>
-                <h:outputText value="Submitted Date and Time: " />
-                <h:outputText value="#{timeBean.dateTime}" converter="javax.faces.convert.DateTimeConverter">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                </h:outputText>
-                <br/>
-                <h:outputText value="Submitted Date: #{timeBean.datePart}" />
-                <br/>
-                <h:outputText value="Submitted Time: #{timeBean.timePart}" />
-            </h:panelGroup>
+        <!-- Modal for Step 3: Entering User Information -->
+        <p:dialog widgetVar="modalStep3" header="Antons Skafferi" modal="true" hideEffect="fade" showEffect="fade" resizable="false">
+            <h:form id="formStep3">
+                <h2 class="header-booking">Dina uppgifter</h2>
+                <p:inputText id="userName" value="#{bookingBean.name}" placeholder="Ditt namn"/>
+                <p:inputMask id="userPhone" value="#{bookingBean.telephone}" mask="(999) 999-9999" placeholder="Ditt telefonnummer"/>
+                <p:commandButton value="Boka nu" actionListener="#{bookingBean.submit()}" oncomplete="PF('modalStep3').hide();"/>
+            </h:form>
+        </p:dialog>
         </h:form>
 
-    </h:body>
-</f:view>
+</h:body>
 </html>
