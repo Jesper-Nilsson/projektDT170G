@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -16,6 +17,8 @@ import java.util.List;
 /**
  * REST API endpoint class for managing tables.
  */
+
+
 @Path("/tables")
 public class TablesAPI {
     @PersistenceContext
@@ -35,7 +38,7 @@ public class TablesAPI {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response updateDrink(@PathParam("id") int session_id, TableSessionEntity newTable) {
+    public Response updateTable(@PathParam("id") int session_id, TableSessionEntity newTable) {
         // Find the existing table in the database
         TableSessionEntity existingTable = entityManager.find(TableSessionEntity.class, session_id);
 
@@ -43,7 +46,7 @@ public class TablesAPI {
             return Response.status(Response.Status.NOT_FOUND).build(); // Table not found, return a 404
 
         // Update the existing table with the new information
-        existingTable.setTableStatus(newTable.getTableStatus());
+        existingTable.setStatus(newTable.getStatus());
 
         return Response.ok().build();
     }

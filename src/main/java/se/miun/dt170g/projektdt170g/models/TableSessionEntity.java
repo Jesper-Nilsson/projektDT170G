@@ -1,7 +1,10 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
-
+@NamedQuery(
+        name = "TableSessionEntity.findAll",
+        query = "SELECT l FROM TableSessionEntity l"
+)
 @Entity
 @Table(name = "table_session", schema = "dt170gprojekt", catalog = "")
 public class TableSessionEntity {
@@ -15,6 +18,10 @@ public class TableSessionEntity {
     @Basic
     @Column(name = "status", nullable = false, length = 255)
     private String status;
+    @Basic
+    @Column(name = "table_size", nullable = false)
+    private int tableSize;
+
 
     public int getSessionId() {
         return sessionId;
@@ -38,5 +45,13 @@ public class TableSessionEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getTableSize() {
+        return tableSize;
+    }
+
+    public void setTableSize(int tableSize) {
+        this.tableSize = tableSize;
     }
 }
