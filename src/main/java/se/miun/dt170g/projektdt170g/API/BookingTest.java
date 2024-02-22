@@ -9,6 +9,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
+import se.miun.dt170g.projektdt170g.items.Drink;
 import se.miun.dt170g.projektdt170g.items.OrderDTO;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -19,6 +20,7 @@ import java.time.Duration;
 
 import jakarta.inject.Inject;
 import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
+import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 import se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity;
 
 @Path("/test") // Class-level Path annotation
@@ -40,6 +42,8 @@ public class BookingTest {
         orderDTO.setStatusDessert("none");
         orderDTO.setRestaurantTableId(3);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1)));
+        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,2)));
+        orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 1)));
         Response response = orderAPI.addOrder(orderDTO);
         return Response.ok(response).build(); // Return the Response object directly
     }
