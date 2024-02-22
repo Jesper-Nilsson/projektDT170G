@@ -2,9 +2,18 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
+import java.sql.Time;
+@NamedQueries({
+        @NamedQuery(
+                name = "BookingEntity.findDate",
+                query = "SELECT l FROM BookingEntity l WHERE l.date = :date"
+        )
+})
 @Entity
 @Table(name = "booking", schema = "dt170gprojekt", catalog = "")
 public class BookingEntity {
+    public static final String findByDate = "BookingEntity.findDate";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "booking_id", nullable = false)
@@ -13,8 +22,17 @@ public class BookingEntity {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "telephone", nullable = false)
-    private int telephone;
+    @Column(name = "telephone", nullable = false, length = 12)
+    private String telephone;
+    @Basic
+    @Column(name = "amount", nullable = false)
+    private int amount;
+    @Basic
+    @Column(name = "date", nullable = false)
+    private Date date;
+    @Basic
+    @Column(name = "time", nullable = false)
+    private Time time;
 
     public int getBookingId() {
         return bookingId;
@@ -32,33 +50,35 @@ public class BookingEntity {
         this.name = name;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BookingEntity that = (BookingEntity) o;
-
-        if (bookingId != that.bookingId) return false;
-        if (telephone != that.telephone) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+    public int getAmount() {
+        return amount;
     }
 
-    @Override
-    public int hashCode() {
-        int result = bookingId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + telephone;
-        return result;
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 }

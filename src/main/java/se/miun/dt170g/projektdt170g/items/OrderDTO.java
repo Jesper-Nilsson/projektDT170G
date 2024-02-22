@@ -1,12 +1,5 @@
 package se.miun.dt170g.projektdt170g.items;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
-import se.miun.dt170g.projektdt170g.models.DrinksEntity;
-import se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity;
-import se.miun.dt170g.projektdt170g.models.PurchasedDrinksEntity;
-
 import java.util.*;
 
 public class OrderDTO {
