@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -8,13 +9,13 @@
 <f:view>
     <h:head>
         <title>Lunch Administration</title>
-        <h:outputStylesheet name="css/adminStyle.css" />
+        <h:outputStylesheet name="css/adminStyle.css"/>
     </h:head>
     <h:body>
         <h:form>
-            <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" />
-            <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" />
-            <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" />
+            <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button"/>
+            <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button"/>
+            <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button"/>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'add'}">
                 <h:panelGrid columns="2">
@@ -34,39 +35,27 @@
                 </h:panelGrid>
             </ui:fragment>
 
-
-
             <ui:fragment rendered="#{lunchAdminBean.action == 'update'}">
-                <h:selectOneMenu value="#{lunchAdminBean.selectedLunchId}">
-                    <f:selectItem itemLabel="Select Lunch" itemValue="" noSelectionOption="true"/>
-                    <f:selectItems value="#{lunchAdminBean.upcomingLunches}"
-                                   var="lunch"
-                                   itemValue="#{lunch.id}"
-                                   itemLabel="#{lunch.name} - #{lunch.date}"/>
-                </h:selectOneMenu>
-                <h:form rendered="#{lunchAdminBean.selectedLunchId != null}">
-                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.name}" />
-                    <h:inputTextarea value="#{lunchAdminBean.selectedLunchDetails.description}" />
-                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.price}" />
-                    <h:inputText value="#{lunchAdminBean.selectedLunchDetails.date}" />
-
-                    <h:commandButton value="Update Lunch" action="#{lunchAdminBean.updateLunch}" />
-                </h:form>
-
+                <!-- Update event here -->
 
             </ui:fragment>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">
-                <!-- Form for Deleting Event -->
-                <!-- Include your form fields here -->
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="deleteLunchId" value="Select Lunch to Delete:"/>
+                    <h:selectOneMenu id="deleteLunchId" value="#{lunchAdminBean.lunchIdToDelete}">
+                        <f:selectItem itemLabel="Select Lunch" itemValue="null" noSelectionOption="true"/>
+                        <f:selectItems value="#{lunchAdminBean.allLunches}"
+                                       var="lunch"
+                                       itemValue="#{lunch.lunchId}"
+                                       itemLabel="#{lunch.name} - #{lunch.date}"/>
+                    </h:selectOneMenu>
+                    <h:commandButton value="Delete Lunch" action="#{lunchAdminBean.deleteLunch}" />
+                </h:panelGrid>
             </ui:fragment>
 
             <h:outputText value="#{lunchAdminBean.message}" />
-
         </h:form>
-
-
-
     </h:body>
 </f:view>
 </html>

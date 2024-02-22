@@ -15,10 +15,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.io.Serializable;
 
 @Stateless
 @Path("/lunch")
-public class LunchAPI {
+public class LunchAPI implements Serializable{
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -49,6 +50,27 @@ public class LunchAPI {
         // Use the Response builder to return the list with proper status code
         return Response.ok(lunchMenus).build();
     }
+
+
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteLunch(@PathParam("id") Long id) {
+        try {
+            LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
+            if (lunchMenu != null) {
+                entityManager.remove(lunchMenu);
+                return Response.ok().entity("Lunch deleted successfully").build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND).entity("Lunch not found").build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error deleting lunch: " + e.getMessage()).build();
+        }
+    }
+
+
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
