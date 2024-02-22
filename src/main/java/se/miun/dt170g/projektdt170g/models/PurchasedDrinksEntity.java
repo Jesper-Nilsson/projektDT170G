@@ -9,9 +9,6 @@ public class PurchasedDrinksEntity {
     @Id
     @Column(name = "purchased_ID", nullable = false)
     private int purchasedId;
-    @Basic
-    @Column(name = "price", nullable = false)
-    private int price;
     @ManyToOne
     @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
@@ -39,13 +36,7 @@ public class PurchasedDrinksEntity {
 
 
 
-    public int getPrice() {
-        return price;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
     public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;

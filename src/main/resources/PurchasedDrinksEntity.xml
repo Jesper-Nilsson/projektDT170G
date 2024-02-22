@@ -8,9 +8,6 @@
             <id name="purchasedId">
                 <column name="purchased_ID" precision="11"/>
             </id>
-            <basic name="price">
-                <column name="price" precision="11"/>
-            </basic>
             <many-to-one name="restaurantOrderByOrderId" optional="true"
                          target-entity="se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity">
                 <join-column name="order_id" referenced-column-name="restaurant_order_id"/>

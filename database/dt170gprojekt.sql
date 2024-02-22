@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 02:35 PM
+-- Generation Time: Feb 22, 2024 at 08:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -186,7 +186,14 @@ CREATE TABLE `purchased_a_la_carte` (
 
 INSERT INTO `purchased_a_la_carte` (`purchased_ID`, `order_id`, `a_la_carte_id`) VALUES
 (1, 1, 1),
-(2, 1, 2);
+(2, 1, 2),
+(33, 53, 1),
+(38, 56, 1),
+(39, 56, 2),
+(40, 57, 1),
+(41, 57, 2),
+(42, 58, 1),
+(43, 58, 2);
 
 -- --------------------------------------------------------
 
@@ -198,16 +205,16 @@ DROP TABLE IF EXISTS `purchased_drinks`;
 CREATE TABLE `purchased_drinks` (
   `purchased_ID` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `drink_id` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `drink_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `purchased_drinks`
 --
 
-INSERT INTO `purchased_drinks` (`purchased_ID`, `order_id`, `drink_id`, `price`) VALUES
-(1, 1, 1, 1);
+INSERT INTO `purchased_drinks` (`purchased_ID`, `order_id`, `drink_id`) VALUES
+(1, 1, 1),
+(2, 58, 1);
 
 -- --------------------------------------------------------
 
@@ -242,7 +249,23 @@ CREATE TABLE `restaurant_order` (
 --
 
 INSERT INTO `restaurant_order` (`restaurant_order_id`, `status_appetizer`, `status_main`, `status_dessert`, `restaurant_table_id`, `comment`) VALUES
-(1, 'begun', '', '', 1, 'no cheese');
+(1, 'begun', '', '', 1, 'no cheese'),
+(13, 'none', 'begun', 'none', 3, 'test'),
+(14, 'none', 'begun', 'none', 3, 'test'),
+(15, 'none', 'begun', 'none', 3, 'test'),
+(16, 'none', 'begun', 'none', 3, 'test'),
+(17, 'none', 'begun', 'none', 3, 'test'),
+(22, 'none', 'begun', 'none', 3, 'test'),
+(24, 'none', 'begun', 'none', 3, 'test'),
+(33, 'none', 'begun', 'none', 3, 'test'),
+(37, 'none', 'begun', 'none', 3, 'test'),
+(43, 'none', 'begun', 'none', 3, 'test'),
+(44, 'none', 'begun', 'none', 3, 'test'),
+(52, 'none', 'begun', 'none', 3, 'test'),
+(53, 'none', 'begun', 'none', 3, 'test'),
+(56, 'none', 'begun', 'none', 3, 'test'),
+(57, 'none', 'begun', 'none', 3, 'test'),
+(58, 'none', 'begun', 'none', 3, 'test');
 
 -- --------------------------------------------------------
 
@@ -316,16 +339,16 @@ ALTER TABLE `lunch_menu`
 --
 ALTER TABLE `purchased_a_la_carte`
   ADD PRIMARY KEY (`purchased_ID`),
-  ADD KEY `FK_a_la_carte_id` (`a_la_carte_id`),
-  ADD KEY `FK_order_ID_a_la_carte` (`order_id`);
+  ADD KEY `aLaCartePuchasedByOrder` (`order_id`),
+  ADD KEY `ALaCartePurchasedByALaCarte` (`a_la_carte_id`);
 
 --
 -- Indexes for table `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
   ADD PRIMARY KEY (`purchased_ID`),
-  ADD KEY `FK_drink_id` (`drink_id`),
-  ADD KEY `FK_order_ID_drinks` (`order_id`);
+  ADD KEY `DrinkPurchasedByOrderID` (`order_id`),
+  ADD KEY `DrinkPurchasedByDrinkID` (`drink_id`);
 
 --
 -- Indexes for table `receipt`
@@ -383,25 +406,43 @@ ALTER TABLE `lunch_menu`
 -- AUTO_INCREMENT for table `purchased_a_la_carte`
 --
 ALTER TABLE `purchased_a_la_carte`
-  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
-  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `restaurant_order`
 --
 ALTER TABLE `restaurant_order`
-  MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `table_session`
 --
 ALTER TABLE `table_session`
   MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `purchased_a_la_carte`
+--
+ALTER TABLE `purchased_a_la_carte`
+  ADD CONSTRAINT `ALaCartePurchasedByALaCarte` FOREIGN KEY (`a_la_carte_id`) REFERENCES `a_la_carte_menu` (`a_la_carte_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `aLaCartePuchasedByOrder` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `purchased_drinks`
+--
+ALTER TABLE `purchased_drinks`
+  ADD CONSTRAINT `DrinkPurchasedByDrinkID` FOREIGN KEY (`drink_id`) REFERENCES `drinks` (`drink_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `DrinkPurchasedByOrderID` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
