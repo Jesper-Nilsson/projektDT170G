@@ -6,7 +6,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
-import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
 
 import java.sql.Date;

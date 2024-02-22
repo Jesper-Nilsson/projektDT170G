@@ -12,7 +12,16 @@
                 <column name="name"/>
             </basic>
             <basic name="telephone">
-                <column name="telephone" precision="11"/>
+                <column name="telephone" length="12"/>
+            </basic>
+            <basic name="amount">
+                <column name="amount" precision="11"/>
+            </basic>
+            <basic name="date">
+                <column name="date" precision="-1"/>
+            </basic>
+            <basic name="time">
+                <column name="time" precision="-1"/>
             </basic>
         </attributes>
     </entity>

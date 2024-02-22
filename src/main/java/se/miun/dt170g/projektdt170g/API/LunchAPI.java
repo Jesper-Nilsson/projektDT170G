@@ -1,8 +1,7 @@
+/*
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.*;
@@ -67,3 +66,4 @@ public class LunchAPI {
 }
 
 
+*/

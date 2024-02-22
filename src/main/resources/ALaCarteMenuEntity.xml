@@ -20,6 +20,8 @@
             <basic name="price">
                 <column name="price" precision="11"/>
             </basic>
+            <one-to-many name="purchasedALaCartesByALaCarteId" mapped-by="aLaCarteMenuByALaCarteId"
+                         target-entity="se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity"/>
         </attributes>
     </entity>
 </entity-mappings>

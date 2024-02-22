@@ -3,11 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 11:22 AM
+-- Generation Time: Feb 21, 2024 at 02:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
-SET SQL_MODE = "";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -177,17 +177,16 @@ DROP TABLE IF EXISTS `purchased_a_la_carte`;
 CREATE TABLE `purchased_a_la_carte` (
   `purchased_ID` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
-  `a_la_carte_id` int(11) NOT NULL,
-  `antal` int(11) NOT NULL
+  `a_la_carte_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `purchased_a_la_carte`
 --
 
-INSERT INTO `purchased_a_la_carte` (`purchased_ID`, `order_id`, `a_la_carte_id`, `antal`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 1);
+INSERT INTO `purchased_a_la_carte` (`purchased_ID`, `order_id`, `a_la_carte_id`) VALUES
+(1, 1, 1),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -379,6 +378,24 @@ ALTER TABLE `drinks`
 --
 ALTER TABLE `lunch_menu`
   MODIFY `lunch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `purchased_a_la_carte`
+--
+ALTER TABLE `purchased_a_la_carte`
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `purchased_drinks`
+--
+ALTER TABLE `purchased_drinks`
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `restaurant_order`
+--
+ALTER TABLE `restaurant_order`
+  MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `table_session`

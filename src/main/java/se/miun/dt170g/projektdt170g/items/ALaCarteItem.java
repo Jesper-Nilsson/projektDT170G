@@ -6,7 +6,7 @@ import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
  * this class represents a menu item in the a la carte menu
  */
 public class ALaCarteItem {
-    private Long aLaCarteID;
+    private int aLaCarteID;
 
     private int price;
     private String name;
@@ -15,7 +15,7 @@ public class ALaCarteItem {
 
 
 
-    public ALaCarteItem(Long aLaCarteID, int price, String name, String type, String description) {
+    public ALaCarteItem(int aLaCarteID, int price, String name, String type, String description) {
         this.aLaCarteID = aLaCarteID;
         this.price = price;
         this.name = name;
@@ -56,11 +56,11 @@ public class ALaCarteItem {
         this.description = description;
     }
 
-    public Long getaLaCarteID() {
+    public int getaLaCarteID() {
         return aLaCarteID;
     }
 
-    public void setaLaCarteID(Long aLaCarteID) {
+    public void setaLaCarteID(int aLaCarteID) {
         this.aLaCarteID = aLaCarteID;
     }
 

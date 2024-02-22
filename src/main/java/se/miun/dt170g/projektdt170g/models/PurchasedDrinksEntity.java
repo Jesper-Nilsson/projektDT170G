@@ -1,7 +1,6 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
-import se.miun.dt170g.projektdt170g.items.Drink;
 
 @Entity
 @Table(name = "purchased_drinks", schema = "dt170gprojekt", catalog = "")
@@ -9,56 +8,36 @@ public class PurchasedDrinksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "purchased_ID", nullable = false)
-    private Long purchasedId;
-    @Basic
-    @Column(name = "order_id", nullable = false)
-    private Long orderId;
-    @Basic
-    @Column(name = "drink_id", nullable = false)
-    private Long drinkId;
+    private int purchasedId;
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
-
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false,updatable = false, insertable = false)
+    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false)
     private DrinksEntity drinksByDrinkId;
 
-    public PurchasedDrinksEntity(Drink drink, RestaurantOrderEntity order){
-        this.drinkId = drink.getDrink_ID();
-        this.orderId = order.getRestaurantOrderId();
-    }
-
-    public PurchasedDrinksEntity() {
-
-    }
-
-    public Long getPurchasedId() {
+    public int getPurchasedId() {
         return purchasedId;
     }
 
-    public void setPurchasedId(Long purchasedId) {
+    public void setPurchasedId(int purchasedId) {
         this.purchasedId = purchasedId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public int getOrderId() {
+        return restaurantOrderByOrderId.getRestaurantOrderId();
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+
+
+    public int getDrinkId() {
+        return drinksByDrinkId.getDrinkId();
     }
 
-    public Long getDrinkId() {
-        return drinkId;
-    }
 
-    public void setDrinkId(Long drinkId) {
-        this.drinkId = drinkId;
-    }
 
     public int getPrice() {
         return price;
@@ -66,30 +45,6 @@ public class PurchasedDrinksEntity {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PurchasedDrinksEntity that = (PurchasedDrinksEntity) o;
-
-        if (purchasedId != that.purchasedId) return false;
-        if (orderId != that.orderId) return false;
-        if (drinkId != that.drinkId) return false;
-        if (price != that.price) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        Long result = purchasedId;
-        result = 31 * result + orderId;
-        result = 31 * result + drinkId;
-        result = 31 * result + price;
-        return Math.toIntExact(result);
     }
 
     public RestaurantOrderEntity getRestaurantOrderByOrderId() {

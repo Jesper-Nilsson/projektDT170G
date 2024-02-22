@@ -8,17 +8,18 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import se.miun.dt170g.projektdt170g.API.BookingAPI;
 import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.items.OrderDTO;
-import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
-import se.miun.dt170g.projektdt170g.models.BookingEntity;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.time.Duration;
 
 import jakarta.inject.Inject;
-import se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
+import se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity;
 
 @Path("/test") // Class-level Path annotation
 @Transactional
@@ -38,10 +39,8 @@ public class BookingTest {
         orderDTO.setStatusAppetizer("none");
         orderDTO.setStatusDessert("none");
         orderDTO.setRestaurantTableId(3);
-        orderDTO.setOrder_ID(1L);
-        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1L)));
+        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1)));
         Response response = orderAPI.addOrder(orderDTO);
-        entityManager.flush();
         return Response.ok(response).build(); // Return the Response object directly
     }
 }

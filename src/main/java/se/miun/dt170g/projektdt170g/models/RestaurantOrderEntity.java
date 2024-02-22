@@ -3,6 +3,7 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 import se.miun.dt170g.projektdt170g.items.OrderDTO;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -11,7 +12,7 @@ public class RestaurantOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "restaurant_order_id", nullable = false)
-    private Long restaurantOrderId;
+    private int restaurantOrderId;
     @Basic
     @Column(name = "status_appetizer", nullable = false, length = 255)
     private String statusAppetizer;
@@ -27,77 +28,34 @@ public class RestaurantOrderEntity {
     @Basic
     @Column(name = "comment", nullable = false, length = 255)
     private String comment;
-
-    @OneToMany(mappedBy = "restaurantOrderByOrderId")
+    @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId;
-    @OneToMany(mappedBy = "restaurantOrderByOrderId")
+    @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;
 
-    public RestaurantOrderEntity() {
 
-    }
 
-    public Long getRestaurantOrderId() {
-        return restaurantOrderId;
-    }
-    public RestaurantOrderEntity(OrderDTO orderDTO){
-        this.comment = orderDTO.getComment();
-        this.restaurantTableId = orderDTO.getRestaurantTableId();
+    public RestaurantOrderEntity(OrderDTO orderDTO) {
         this.statusAppetizer = orderDTO.getStatusAppetizer();
         this.statusMain = orderDTO.getStatusMain();
         this.statusDessert = orderDTO.getStatusDessert();
+        this.restaurantTableId = orderDTO.getRestaurantTableId();
+        this.comment = orderDTO.getComment();
+        this.purchasedALaCartesByRestaurantOrderId = new ArrayList<>();
+        this.purchasedDrinksByRestaurantOrderId = new ArrayList<>();
     }
 
-    public void setRestaurantOrderId(Long restaurantOrderId) {
+    public RestaurantOrderEntity() {
+        this.purchasedALaCartesByRestaurantOrderId = new ArrayList<>();
+        this.purchasedDrinksByRestaurantOrderId = new ArrayList<>();
+    }
+
+    public int getRestaurantOrderId() {
+        return restaurantOrderId;
+    }
+
+    public void setRestaurantOrderId(int restaurantOrderId) {
         this.restaurantOrderId = restaurantOrderId;
-    }
-
-
-
-    public int getRestaurantTableId() {
-        return restaurantTableId;
-    }
-
-    public void setRestaurantTableId(int restaurantTableId) {
-        this.restaurantTableId = restaurantTableId;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RestaurantOrderEntity that = (RestaurantOrderEntity) o;
-
-        if (restaurantOrderId != that.restaurantOrderId) return false;
-        if (restaurantTableId != that.restaurantTableId) return false;
-        if (statusAppetizer != null ? !statusAppetizer.equals(that.statusAppetizer) : that.statusAppetizer != null)
-            return false;
-        if (statusMain != null ? !statusMain.equals(that.statusMain) : that.statusMain != null) return false;
-        if (statusDessert != null ? !statusDessert.equals(that.statusDessert) : that.statusDessert != null)
-            return false;
-        if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        Long result = restaurantOrderId;
-        result = 31 * result + (statusAppetizer != null ? statusAppetizer.hashCode() : 0);
-        result = 31 * result + (statusMain != null ? statusMain.hashCode() : 0);
-        result = 31 * result + (statusDessert != null ? statusDessert.hashCode() : 0);
-        result = 31 * result + restaurantTableId;
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        return Math.toIntExact(result);
     }
 
     public String getStatusAppetizer() {
@@ -124,6 +82,22 @@ public class RestaurantOrderEntity {
         this.statusDessert = statusDessert;
     }
 
+    public int getRestaurantTableId() {
+        return restaurantTableId;
+    }
+
+    public void setRestaurantTableId(int restaurantTableId) {
+        this.restaurantTableId = restaurantTableId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByRestaurantOrderId() {
         return purchasedALaCartesByRestaurantOrderId;
     }
@@ -138,5 +112,9 @@ public class RestaurantOrderEntity {
 
     public void setPurchasedDrinksByRestaurantOrderId(Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId) {
         this.purchasedDrinksByRestaurantOrderId = purchasedDrinksByRestaurantOrderId;
+    }
+    public void addPurchasedALaCarte(PurchasedALaCarteEntity aLaCarteEntity){
+        purchasedALaCartesByRestaurantOrderId.add(aLaCarteEntity);
+        aLaCarteEntity.setRestaurantOrderByOrderId(this);
     }
 }

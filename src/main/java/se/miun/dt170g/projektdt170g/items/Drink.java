@@ -3,13 +3,13 @@ package se.miun.dt170g.projektdt170g.items;
 import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 
 public class Drink {
-    private Long drink_ID;
+    private int drink_ID;
 
     private String name;
     private String description;
     private int price;
 
-    public Drink(Long drink_id, String name, String description, int price) {
+    public Drink(int drink_id, String name, String description, int price) {
         this.drink_ID = drink_id;
         this.name = name;
         this.description = description;
@@ -22,11 +22,11 @@ public class Drink {
         this.price = drink.getPrice();
     }
 
-    public Long getDrink_ID() {
+    public int getDrink_ID() {
         return drink_ID;
     }
 
-    public void setDrink_ID(Long drink_ID) {
+    public void setDrink_ID(int drink_ID) {
         this.drink_ID = drink_ID;
     }
 

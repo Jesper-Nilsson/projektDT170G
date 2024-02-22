@@ -1,17 +1,10 @@
 package se.miun.dt170g.projektdt170g.items;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
-import se.miun.dt170g.projektdt170g.models.DrinksEntity;
-import se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity;
-import se.miun.dt170g.projektdt170g.models.PurchasedDrinksEntity;
-
 import java.util.*;
 
 public class OrderDTO {
 
-    private Long order_ID;
+    private int order_ID;
 
     private String statusAppetizer;
 
@@ -28,7 +21,7 @@ public class OrderDTO {
 
     private ArrayList<Drink> drinks;
 
-    public OrderDTO(Long order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
+    public OrderDTO(int order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
         this.order_ID = order_ID;
         this.statusAppetizer = statusAppetizer;
         this.statusMain = statusMain;
@@ -44,11 +37,11 @@ public class OrderDTO {
     drinks = new ArrayList<Drink>();
     }
 
-    public Long getOrder_ID() {
+    public int getOrder_ID() {
         return order_ID;
     }
 
-    public void setOrder_ID(Long order_ID) {
+    public void setOrder_ID(int order_ID) {
         this.order_ID = order_ID;
     }
 
