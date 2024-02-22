@@ -16,6 +16,8 @@ import jakarta.inject.Named;
 import jakarta.enterprise.context.RequestScoped;
 import java.net.URI;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TemporalType;
+
 
 @Named
 @SessionScoped
@@ -144,9 +146,17 @@ public class LunchAdminBean implements Serializable {
 
 
     // Method to get all lunches from the database for the dropdown
+
+/*
     public List<LunchMenuEntity> getAllLunches() {
         return entityManager.createNamedQuery("LunchMenuEntity.findAll", LunchMenuEntity.class)
                 .getResultList();
     }
-
+    */
+    public List<LunchMenuEntity> getAllLunches() {
+        Date today = new Date(); // Get today's date
+        return entityManager.createQuery("SELECT l FROM LunchMenuEntity l WHERE l.date > :currentDate", LunchMenuEntity.class)
+                .setParameter("currentDate", today, TemporalType.DATE)
+                .getResultList();
+    }
 }
