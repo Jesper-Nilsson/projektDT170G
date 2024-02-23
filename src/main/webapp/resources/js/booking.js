@@ -1,3 +1,17 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Get all elements with the class "test"
+    const buttons = document.querySelectorAll('.guestAmountBtn');
+
+    // Loop through each button
+    buttons.forEach(function(button) {
+        // Add event listener for click event
+        button.addEventListener('click', function() {
+            closeModal(1);
+            openModal(2);
+        });
+    });
+});
+
 // Function to open a modal
 function openModal(modalId) {
     document.getElementById("modalStep" + modalId).style.display = 'block';
@@ -17,20 +31,6 @@ document.getElementById('bookingButton').addEventListener('click', function() {
 });
 
 
-// Event listener for choosing number of guests
-document.addEventListener("DOMContentLoaded", function() {
-    // Get all elements with the class "test"
-    const buttons = document.querySelectorAll('.guestAmountBtn');
-
-    // Loop through each button
-    buttons.forEach(function(button) {
-        // Add event listener for click event
-        button.addEventListener('click', function() {
-            closeModal(1);
-            openModal(2);
-        });
-    });
-});
 
 // Event listener for choosing number of guests
 document.getElementById('chooseDate').addEventListener('click', function() {
@@ -73,12 +73,12 @@ document.getElementById('chooseDate').addEventListener('click', function() {
 // Here's an example for one, repeat for others
 document.querySelectorAll('.close').forEach(function(element) {
     element.addEventListener('click', function() {
-        var modalId = this.closest('.modal').getAttribute('id');
+        let modalId = this.closest('.modal').getAttribute('id');
         closeModal(modalId);
     });
 });
 
-// To enhance UX, consider closing modals on outside click
+// Close modals when clicking outside
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
         closeModal(1);
@@ -86,9 +86,6 @@ window.onclick = function(event) {
         closeModal(3);
     }
 }
-
-// Additional enhancements might be needed for accessibility, like trapping focus within the modal
-
 
 // Function to navigate back to the previous modal
 function goBackModal(currentModalId, previousModalId) {

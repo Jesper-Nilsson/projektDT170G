@@ -93,7 +93,6 @@
                         <f:ajax execute="@this" render="@none" event="click"/>
                     </h:commandButton>
                     <p id="moreThanSixInfo">För bokning med fler än 6 personer, ber vi er att maila eller ringa in till oss! Mail: antonsskafferi@gmail.se Tel: 08-301101</p>
-
             </div>
         </aside>
 
@@ -108,8 +107,15 @@
                 </div>
                 <h2 class="header-booking">Välj datum</h2>
                 <!-- Content for choosing a date -->
-                <input type="date" id="bookingDate"/>
-                <button id="chooseDate" type="button">Fortsätt</button>
+                <p:outputLabel for="test1" value="Välj ett datum"/>
+                <p:datePicker id="test1" styleClass="dateTimePicker" value="#{bookingBean.date}"
+                              pattern="dd/MM/yyyy HH:mm" showOnFocus="true"
+                              mindate="#{bookingBean.minBookingDate}"/>
+
+                <p:outputLabel for="test2" value="Välj en tid"/>
+                <p:datePicker id="test2" timeOnly="true" pattern="HH:mm" stepMinute="15" mindate="09:00" maxdate="22:00" value="#{bookingBean.time}"/>
+
+                <button id="chooseDate" type="button" class="continue-btn">Fortsätt</button>
             </div>
         </aside>
 
@@ -124,12 +130,16 @@
                 </div>
 
                 <h2 class="header-booking">Dina uppgifter</h2>
-                <!-- Content for entering user information -->
-                <!-- Correct self-closing tags for XHTML -->
-                <input type="text" id="userName" placeholder="Ditt namn" />
-                <input type="tel" id="userPhone" placeholder="Ditt telefonnummer" />
 
-                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="submit-button" />
+                <h:outputLabel for="userName" value="Ditt namn"/>
+                <h:inputText id="userName" value="#{bookingBean.name}"/>
+
+                <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
+                <h:inputText id="userPhone" value="#{bookingBean.telephone}"/>
+
+                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn">
+                    <f:ajax execute="@this" render="@none" event="click"/>
+                </h:commandButton>
             </div>
         </aside>
         </h:form>

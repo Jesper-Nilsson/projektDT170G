@@ -6,8 +6,10 @@ import se.miun.dt170g.projektdt170g.API.BookingAPI;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 
 @Named
@@ -18,6 +20,7 @@ public class BookingBean implements Serializable {
     @Inject
     private BookingAPI bookingAPI;
     private BookingEntity bookingEntity = new BookingEntity();
+    private String minBookingDate = getCurrentDate();
 
 
     public String getName() {
@@ -69,5 +72,15 @@ public class BookingBean implements Serializable {
         // This is where you would separate dateTime into date and time components and save them
 
         // Actual database saving logic goes here
+    }
+
+    public String getMinBookingDate() {
+        return minBookingDate;
+    }
+
+    public String getCurrentDate() {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(currentDate);
     }
 }

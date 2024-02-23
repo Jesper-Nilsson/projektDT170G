@@ -72,9 +72,7 @@
     cursor: pointer;
 }
 .content-container button,
-#chooseGuests,
-#chooseDate,
-#saveBooking {
+.continue-btn {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
@@ -135,6 +133,7 @@ input[type="text"], input[type="tel"] {
     padding: 0.3rem;
     display: none;
 }
+
 
 /* On screens that are 992px wide or less */
 @media screen and (max-width: 700px) {
