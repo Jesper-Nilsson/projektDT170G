@@ -79,12 +79,12 @@
     font-size: 1.3rem;
     color: #000;
     background-color:  #ffb703; /* Darker gold on hover for interaction feedback */
-
+    cursor: pointer;
     border: none;
     border-radius: 5px;
 }
 
-.content-container button:hover {
+.content-container button:hover, .continue-btn:hover {
     opacity: 0.8;
 }
 

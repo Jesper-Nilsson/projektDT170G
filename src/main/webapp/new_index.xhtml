@@ -137,7 +137,7 @@
                 <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
                 <h:inputText id="userPhone" value="#{bookingBean.telephone}"/>
 
-                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn">
+                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" onclick="closeModal(3)" styleClass="continue-btn">
                     <f:ajax execute="@this" render="@none" event="click"/>
                 </h:commandButton>
             </div>

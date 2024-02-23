@@ -66,14 +66,7 @@ public class BookingBean implements Serializable {
 
     public void submit() {
         // Save logic here, assuming you're saving dateTime as well as separate date and time parts
-        saveDateTime();
-    }
-
-    private void saveDateTime() {
-        // Example save logic, adjust according to your actual entity and persistence logic
-        // This is where you would separate dateTime into date and time components and save them
-
-        // Actual database saving logic goes here
+        bookingAPI.createBooking(bookingEntity);
     }
 
     public String getMinBookingDate() {
