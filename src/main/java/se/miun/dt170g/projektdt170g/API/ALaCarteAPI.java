@@ -8,6 +8,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
 
 import java.util.ArrayList;
@@ -33,12 +34,18 @@ public class ALaCarteAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getItemsByType(@QueryParam("type") String type) {
         List<ALaCarteMenuEntity> aLaCarteItems = new ArrayList<>();
+        List<ALaCarteItem> foods = new ArrayList<>();
         if (type != null) {
             aLaCarteItems = entityManager.createNamedQuery(ALaCarteMenuEntity.findByType, ALaCarteMenuEntity.class).setParameter("type",type).getResultList();
         }else {
             aLaCarteItems = entityManager.createNamedQuery(ALaCarteMenuEntity.findAll,ALaCarteMenuEntity.class).getResultList();
         }
-        return Response.ok(aLaCarteItems).build();
+        for (ALaCarteMenuEntity aLaCarteMenuEntity : aLaCarteItems){
+            foods.add(new ALaCarteItem(aLaCarteMenuEntity));
+        }
+
+
+        return Response.ok(foods).build();
     }
 
 

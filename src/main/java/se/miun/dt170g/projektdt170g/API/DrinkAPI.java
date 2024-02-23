@@ -7,8 +7,10 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.items.Drink;
 import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +26,12 @@ public class DrinkAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDrinks() {
 
-        List<DrinksEntity> drinks;
-        drinks = entityManager.createNamedQuery("DrinksEntity.findAll", DrinksEntity.class).getResultList();
+        List<DrinksEntity> drinksEntities;
+        List<Drink> drinks = new ArrayList<>();
+        drinksEntities = entityManager.createNamedQuery("DrinksEntity.findAll", DrinksEntity.class).getResultList();
+        for (DrinksEntity drink : drinksEntities){
+            drinks.add(new Drink(drink));
+        }
         return Response.ok(drinks).build();
     }
 }
