@@ -107,13 +107,13 @@
                 </div>
                 <h2 class="header-booking">Välj datum</h2>
                 <!-- Content for choosing a date -->
-                <p:outputLabel for="test1" value="Välj ett datum"/>
-                <p:datePicker id="test1" styleClass="dateTimePicker" value="#{bookingBean.date}"
-                              pattern="dd/MM/yyyy HH:mm" showOnFocus="true"
-                              mindate="#{bookingBean.minBookingDate}"/>
+                <p:outputLabel for="datePicker" value="Välj ett datum"/>
+                <p:datePicker id="datePicker" value="#{bookingBean.date}"
+                              pattern="dd/MM/yyyy" showOnFocus="true"
+                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
 
-                <p:outputLabel for="test2" value="Välj en tid"/>
-                <p:datePicker id="test2" timeOnly="true" pattern="HH:mm" stepMinute="15" mindate="09:00" maxdate="22:00" value="#{bookingBean.time}"/>
+                <p:outputLabel for="timePicker" value="Välj en tid"/>
+                <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="15" mindate="09:00" maxdate="22:00" value="#{bookingBean.time}" readonlyInput="true"/>
 
                 <button id="chooseDate" type="button" class="continue-btn">Fortsätt</button>
             </div>

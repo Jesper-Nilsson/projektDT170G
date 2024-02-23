@@ -31,11 +31,30 @@ document.getElementById('bookingButton').addEventListener('click', function() {
 });
 
 
+function validateInputs() {
+    // Get references to the input elements
+    var dateInput = document.getElementById("j_idt17:datePicker_input");
+    var timeInput = document.getElementById("j_idt17:timePicker_input");
+
+    // Check if the inputs are empty
+    var dateIsEmpty = dateInput.value.trim() === '';
+    var timeIsEmpty = timeInput.value.trim() === '';
+
+    // If both date and time are required fields
+    if (dateIsEmpty || timeIsEmpty) {
+        return false; // Return false if either date or time is empty
+    } else {
+        return true; // Return true if both date and time are provided
+    }
+}
+
 
 // Event listener for choosing number of guests
 document.getElementById('chooseDate').addEventListener('click', function() {
-    closeModal('2');
-    openModal('3');
+    if (validateInputs()) {
+        closeModal('2');
+        openModal('3');
+    }
 });
 
 // Event listener for saving booking
@@ -69,14 +88,7 @@ document.getElementById('chooseDate').addEventListener('click', function() {
     alert('Din bokning har sparats. Tack!');
 });*/
 
-// You might also want to add event listeners for the close buttons
-// Here's an example for one, repeat for others
-document.querySelectorAll('.close').forEach(function(element) {
-    element.addEventListener('click', function() {
-        let modalId = this.closest('.modal').getAttribute('id');
-        closeModal(modalId);
-    });
-});
+
 
 // Close modals when clicking outside
 window.onclick = function(event) {

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Calendar;
 
 
 @Named
@@ -62,6 +63,7 @@ public class BookingBean implements Serializable {
     public void setTime(LocalTime time) {
         bookingEntity.setTime(time);
     }
+
     public void submit() {
         // Save logic here, assuming you're saving dateTime as well as separate date and time parts
         saveDateTime();
@@ -79,7 +81,22 @@ public class BookingBean implements Serializable {
     }
 
     public String getCurrentDate() {
-        Date currentDate = new Date();
+        // Create a Calendar instance
+        Calendar calendar = Calendar.getInstance();
+
+        // Get the current hour
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+
+        // Check if the current time is later than 21:00
+        if (currentHour >= 21) {
+            // Increment the date by one day
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+
+        // Get the Date object corresponding to the adjusted date
+        Date currentDate = calendar.getTime();
+
+        // Format the date using SimpleDateFormat
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(currentDate);
     }
