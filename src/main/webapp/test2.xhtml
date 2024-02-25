@@ -6,29 +6,40 @@
 <h:head>
     <h:outputStylesheet name="css/test.css"/>
     <title>Document</title>
+    <script type="text/javascript">
+        function showModalStep2() {
+            PF('modalStep1').hide();
+            PF('modalStep2').show();
+        }
+        function showModalStep3() {
+            PF('modalStep2').hide();
+            PF('modalStep3').show();
+        }
+        function showModalStep4() {
+            PF('modalStep3').hide();
+            PF('modalStep4').show();
+        }
+    </script>
 </h:head>
 <h:body>
     <h:form>
         <p:commandButton value="Boka Bord" type="button" styleClass="first_page_btn" onclick="PF('modalStep1').show()"/>
 
         <!-- Modal for Step 1: Choosing Number of Guests -->
+        <!-- Modal for Step 1: Choosing Number of Guests -->
         <p:dialog widgetVar="modalStep1" header="Antons Skafferi" modal="true" dynamic="true">
             <div class="content-container">
                 <h2 class="header-booking">Välj antal gäster</h2>
-                <p:button value="1" oncomplete="PF('modalStep1').hide(); PF('modalStep2').show();"/>
                 <p:selectOneListbox value="#{bookingBean.amount}" styleClass="guest-list" id="numberOfGuestsSelect" required="true" requiredMessage="Vänligen välj antal gäster.">
-                    <f:selectItem itemValue="1" itemLabel="1 gäst" oncomplete="PF('modalStep1').hide(); PF('modalStep2').show();"/>
+                    <f:selectItem itemValue="1" itemLabel="1 gäst"/>
                     <f:selectItem itemValue="2" itemLabel="2 gäster"/>
                     <f:selectItem itemValue="3" itemLabel="3 gäst"/>
                     <f:selectItem itemValue="4" itemLabel="4 gäster"/>
                     <f:selectItem itemValue="5" itemLabel="5 gäst"/>
                     <f:selectItem itemValue="6" itemLabel="6 gäster"/>
                     <f:selectItem itemValue="7" itemLabel="7+ gäster"/>
-                    <p:ajax event="change" update="moreThanSixInfo" />
+                    <p:ajax listener="#{bookingBean.onGuestNumberChange}" event="change" update="moreThanSixInfo" />
                 </p:selectOneListbox>
-                <p:commandButton value="Fortsätt"
-                                 oncomplete="if (args &amp;&amp; !args.validationFailed) PF('modalStep2').show()"
-                                 update="@form" />
                 <p:outputPanel id="moreThanSixInfo">
                     <h:outputText value="För bokning för fler än 6 personer, ber vi er att maila eller ringa in till oss! Mail: antonsskafferi@gmail.se Tel: 08-301101"
                                   rendered="#{bookingBean.showMoreThanSixInfo}" escape="false"/>
@@ -36,19 +47,30 @@
             </div>
         </p:dialog>
 
-        <!-- Modal for Step 2: Choosing Date and Time -->
-        <p:dialog widgetVar="modalStep2" header="Välj datum och tid" modal="true" dynamic="true">
+
+
+
+        <!-- Modal for Step 2: Choosing Date -->
+        <p:dialog widgetVar="modalStep2" header="Välj datum" modal="true" dynamic="true">
             <div class="content-container">
                 <h2 class="header-booking">Välj datum</h2>
-                <p:calendar value="#{bookingBean.date}" pattern="dd/MM/yyyy" required="true" requiredMessage="Vänligen välj ett datum."/>
-                <h2 class="header-booking">Välj tid</h2>
-                <p:inputMask value="#{bookingBean.time}" mask="99:99" placeholder="HH:mm" styleClass="time-input" slotChar="HH:mm" required="true" requiredMessage="Vänligen ange en tid."/>
-                <p:commandButton value="Fortsätt" oncomplete="PF('modalStep3').show()" update="@form"/>
+                <p:calendar value="#{bookingBean.date}" pattern="dd/MM/yyyy" required="true" requiredMessage="Vänligen välj ett datum."
+                            mode="popup" navigator="true" showOn="button">
+                    <p:ajax event="dateSelect" listener="#{bookingBean.date}" update="@form" oncomplete="PF('modalStep2').hide(); PF('modalStep3').show();" />
+                </p:calendar>
             </div>
         </p:dialog>
+        <!-- Modal for Step 2: Choosing Time -->
+        <p:dialog widgetVar="modalStep3" header="Välj Tid" modal="true" dynamic="true">
+            <div class="content-container">
+                <h2 class="header-booking">Välj Tid</h2>
 
+                <p:inputMask value="#{bookingBean.time}" mask="99:99" placeholder="HH:mm" styleClass="time-input" slotChar="HH:mm" required="true" requiredMessage="Vänligen ange en tid."/>
+                <p:ajax event="change" listener="#{bookingBean.onTimeSelect}" update="@form" oncomplete="PF('modalStep4').show();" />
+            </div>
+        </p:dialog>
         <!-- Modal for Step 3: Entering User Information -->
-        <p:dialog widgetVar="modalStep3" header="Dina uppgifter" modal="true" dynamic="true">
+        <p:dialog widgetVar="modalStep4" header="Dina uppgifter" modal="true" dynamic="true">
             <div class="content-container">
                 <h2 class="header-booking">Dina uppgifter</h2>
                 <p:inputMask value="#{bookingBean.telephone}" mask="07-99999999" placeholder="Telefonnummer" styleClass="phone-input" required="true" requiredMessage="Ange ett telefonnummer."/>
@@ -59,5 +81,7 @@
         <!-- Place to display global messages -->
         <p:messages autoUpdate="true" closable="true"/>
     </h:form>
+
+
 </h:body>
 </html>

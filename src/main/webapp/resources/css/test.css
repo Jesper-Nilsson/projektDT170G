@@ -54,3 +54,25 @@
 .content-container {
     padding: 20px;
 }
+
+/* custom-styles.css */
+.content-container {
+    padding: 20px;
+}
+
+.header-booking {
+    margin-bottom: 20px;
+    color: #0056b3; /* Customize to fit your color scheme */
+}
+
+/* Adjust the button styles if needed */
+.btn-primary, .btn-success {
+    margin-top: 10px;
+}
+
+/* Add responsive design elements as needed */
+@media (max-width: 768px) {
+    .header-booking, .btn {
+        margin-top: 10px;
+    }
+}
