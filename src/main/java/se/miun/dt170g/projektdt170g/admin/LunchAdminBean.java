@@ -34,6 +34,17 @@ public class LunchAdminBean implements Serializable {
 
     private String message = "aa";
     private Long lunchIdToDelete;
+    // Id of the selected lunch for update
+    private Long selectedLunchId;
+
+
+
+    // Temporary here for update lunch
+    private String name;
+    private String description;
+    private Date date;
+    private int price;
+
 
 
     public String getAction() {
@@ -51,11 +62,7 @@ public class LunchAdminBean implements Serializable {
         Response response = lunchAPI.addLunch(lunchMenuEntity);
     }
 
-    public void updateLunch() {
-        setMessage("uppdaterad");
-        setAction("none");
-        //Response response = lunchAPI.updateLunch(lunchMenuEntity);
-    }
+
 
     public void deleteLunch(Long lunchId) {
         setMessage("borttagen");
@@ -127,7 +134,6 @@ public class LunchAdminBean implements Serializable {
             return;
         }
 
-
         try {
             Response response = lunchAPI.deleteLunch(lunchIdToDelete);
             if (response.getStatus() == Response.Status.OK.getStatusCode()) {
@@ -145,18 +151,84 @@ public class LunchAdminBean implements Serializable {
     }
 
 
-    // Method to get all lunches from the database for the dropdown
 
-/*
-    public List<LunchMenuEntity> getAllLunches() {
-        return entityManager.createNamedQuery("LunchMenuEntity.findAll", LunchMenuEntity.class)
-                .getResultList();
+
+
+    // Temporary here
+    public Long getSelectedLunchId() {
+        return selectedLunchId;
     }
-    */
+
+    public void setSelectedLunchId(Long selectedLunchId) {
+        this.selectedLunchId = selectedLunchId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+
+    // Method to get all lunches from the database for the dropdown
     public List<LunchMenuEntity> getAllLunches() {
         Date today = new Date(); // Get today's date
         return entityManager.createQuery("SELECT l FROM LunchMenuEntity l WHERE l.date > :currentDate", LunchMenuEntity.class)
                 .setParameter("currentDate", today, TemporalType.DATE)
                 .getResultList();
     }
+
+
+    // Loads the details of the selected lunch so the can be shown in the update form
+    public void loadSelectedLunch() {
+        LunchMenuEntity lunch = entityManager.find(LunchMenuEntity.class, selectedLunchId);
+
+        if (lunch != null) {
+            this.name = lunch.getName();
+            this.description = lunch.getDescription();
+            this.date = lunch.getDate();
+            this.price = lunch.getPrice();
+        }
+    }
+
+    public void updateLunch() {
+        LunchMenuEntity lunch = entityManager.find(LunchMenuEntity.class, selectedLunchId);
+
+        if (lunch != null) {
+            lunch.setName(this.name);
+            lunch.setDescription(this.description);
+            lunch.setDate(this.date);
+            lunch.setPrice(this.price);
+
+            entityManager.merge(lunch);
+        }
+    }
+
+
+
 }

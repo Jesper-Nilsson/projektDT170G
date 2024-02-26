@@ -5,15 +5,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      >
+      xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
         <title>Event Administration</title>
         <h:outputStylesheet name="css/adminStyle.css" />
     </h:head>
     <h:body>
-        <h:form>
+        <h:form enctype="multipart/form-data">
             <h:commandButton value="Add Event" action="#{eventAdminBean.setAction('add')}" styleClass="admin-button" />
             <h:commandButton value="Update Event" action="#{eventAdminBean.setAction('update')}" styleClass="admin-button" />
             <h:commandButton value="Delete Event" action="#{eventAdminBean.setAction('delete')}" styleClass="admin-button" />
@@ -29,14 +28,17 @@
                     <h:outputLabel for="eventDate" value="Date:"/>
                     <p:calendar id="eventDate" value="#{eventAdminBean.eventDate}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
 
-                    <h:outputLabel for="imageUrl" value="Image URL:"/>
-                    <h:inputText id="imageUrl" value="#{eventAdminBean.imageUrl}"/>
+                    <h:outputLabel for="file" value="Upload Image:"/>
+                    <p:fileUpload fileUploadListener="#{eventAdminBean.handleFileUpload}"
+                                  mode="advanced"
+                                  update="messages"
+                                  sizeLimit="10485760"
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 
-                    <p:commandButton value="Submit" action="#{eventAdminBean.addEvent}" update="@form"/>
+                    <p:commandButton value="Submit" action="#{eventAdminBean.addEvent}" ajax="false" update="@form"/>
                 </h:panelGrid>
+                <p:messages id="messages" />
             </ui:fragment>
-
-
 
             <ui:fragment rendered="#{eventAdminBean.action == 'update'}">
                 <!-- Form for Updating Event -->
@@ -48,7 +50,6 @@
                 <!-- Include your form fields here -->
             </ui:fragment>
         </h:form>
-
     </h:body>
 </f:view>
 </html>
