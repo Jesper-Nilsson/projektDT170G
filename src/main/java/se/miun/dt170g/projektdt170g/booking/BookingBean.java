@@ -17,7 +17,6 @@ import java.util.Calendar;
 @SessionScoped
 
 public class BookingBean implements Serializable {
-
     @Inject
     private BookingAPI bookingAPI;
     private BookingEntity bookingEntity = new BookingEntity();

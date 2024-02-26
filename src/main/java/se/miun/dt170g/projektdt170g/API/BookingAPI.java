@@ -6,7 +6,6 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
-import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
 
 import java.sql.Date;
@@ -19,7 +18,7 @@ import java.util.List;
 public class BookingAPI {
     @PersistenceContext
     private EntityManager entityManager;
-    @GET
+    /*@GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBookingsByDate(@QueryParam("date") Date SQLdate)  {
         List<BookingEntity> bookings;
@@ -31,18 +30,17 @@ public class BookingAPI {
                 .getResultList();
 
         return Response.ok(bookings).build();
-    }
+    }*/
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBooking(BookingEntity booking) {
+        String test = "hello";
         if (booking == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Booking information must be provided").build();
         }
-
         try {
-
             entityManager.persist(booking);
             return Response.status(Response.Status.CREATED).entity(booking).build();
         } catch (Exception e) {

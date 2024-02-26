@@ -2,20 +2,18 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalTime;
 import java.time.LocalDate;
-
+import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(
-                name = "BookingEntity.findDate",
+                name = "BookingEntity.findByDate",
                 query = "SELECT l FROM BookingEntity l WHERE l.date = :date"
         )
 })
-
 @Entity
 @Table(name = "booking", schema = "dt170gprojekt", catalog = "")
 public class BookingEntity {
-    public static final String findByDate = "BookingEntity.findDate";
+    public static final String findByDate = "BookingEntity.findByDate";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "booking_id", nullable = false)
@@ -24,7 +22,7 @@ public class BookingEntity {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "telephone", nullable = false)
+    @Column(name = "telephone", nullable = false, length = 12)
     private String telephone;
     @Basic
     @Column(name = "amount", nullable = false)
@@ -82,26 +80,5 @@ public class BookingEntity {
 
     public void setTime(LocalTime time) {
         this.time = time;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BookingEntity that = (BookingEntity) o;
-
-        if (bookingId != that.bookingId) return false;
-        if (telephone != that.telephone) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = bookingId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
     }
 }
