@@ -9,6 +9,7 @@ import se.miun.dt170g.projektdt170g.API.LunchAPI;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class LunchAdminBean implements Serializable {
     // Temporary here for update lunch
     private String name;
     private String description;
-    private Date date;
+    private LocalDate date;
     private int price;
 
 
@@ -62,13 +63,21 @@ public class LunchAdminBean implements Serializable {
         Response response = lunchAPI.addLunch(lunchMenuEntity);
     }
 
-
-
-    public void deleteLunch(int id) {
+    public void deleteLunch() {
         setMessage("borttagen");
         setAction("none");
-        Response response = lunchAPI.deleteLunch(id);
+        Response response = lunchAPI.deleteLunch(lunchMenuEntity.getLunchId());
     }
+
+
+    /*
+    public void updateLunch() {
+        setMessage("uppdaterad");
+        setAction("none");
+        Response response = lunchAPI.updateLunch(lunchMenuEntity.getLunchId(), this.lunchMenuEntity);
+    }
+*/
+
 
     public String getLunchName() {
         return lunchMenuEntity.getName();
@@ -77,11 +86,11 @@ public class LunchAdminBean implements Serializable {
     public void setLunchName(String lunchName) {
         lunchMenuEntity.setName(lunchName);
     }
-    public Date getLunchDate() {
+    public LocalDate getLunchDate() {
         return lunchMenuEntity.getDate();
     }
 
-    public void setLunchDate(Date lunchDate) {
+    public void setLunchDate(LocalDate lunchDate) {
         lunchMenuEntity.setDate(lunchDate);
     }
 
@@ -156,11 +165,11 @@ public class LunchAdminBean implements Serializable {
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
