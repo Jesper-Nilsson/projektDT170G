@@ -1,4 +1,4 @@
-/*
+
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.ejb.Stateless;
@@ -60,10 +60,42 @@ public class LunchAPI {
             return Response.status(Response.Status.BAD_REQUEST).entity("Error saving lunch menu: " + e.getMessage()).build();
         }
     }
-
-
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateLunch(@PathParam("id") int id, LunchMenuEntity updateEntity) {
+        try {
+            LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
+            if (lunchMenu == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Lunch menu item not found").build();
+            }
+            lunchMenu.setDate(updateEntity.getDate());
+            lunchMenu.setName(updateEntity.getName());
+            lunchMenu.setDescription(updateEntity.getDescription());
+            lunchMenu.setPrice(updateEntity.getPrice());
+            entityManager.merge(lunchMenu);
+            return Response.ok(lunchMenu).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating lunch menu: " + e.getMessage()).build();
+        }
+    }
+    @DELETE
+    @Path("/{id}")
+    public Response deleteLunch(@PathParam("id") int id) {
+        try {
+            LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
+            if (lunchMenu == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Lunch menu item not found").build();
+            }
+            entityManager.remove(lunchMenu);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error deleting lunch menu: " + e.getMessage()).build();
+        }
+    }
 
 }
 
 
-*/
+

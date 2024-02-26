@@ -3,10 +3,21 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+@NamedQueries({
+        @NamedQuery(
+                name = "EventsEntity.findComingDates",
+                query = "SELECT l FROM EventsEntity l WHERE l.date > :date ORDER BY l.date ASC"
+        )
+})
 
 @Entity
 @Table(name = "events", schema = "dt170gprojekt", catalog = "")
 public class EventsEntity {
+
+    public static final String findAfterDate = "EventsEntity.findComingDates";
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "event_id", nullable = false)
@@ -16,7 +27,10 @@ public class EventsEntity {
     private String name;
     @Basic
     @Column(name = "date", nullable = false)
-    private Timestamp date;
+    private LocalDate date;
+    @Basic
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
@@ -43,11 +57,11 @@ public class EventsEntity {
         this.name = name;
     }
 
-    public Timestamp getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -73,5 +87,13 @@ public class EventsEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

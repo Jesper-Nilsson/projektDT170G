@@ -21,6 +21,7 @@ import java.time.Duration;
 import jakarta.inject.Inject;
 import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
 import se.miun.dt170g.projektdt170g.models.DrinksEntity;
+import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 import se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity;
 
 @Path("/test") // Class-level Path annotation
@@ -31,8 +32,14 @@ public class BookingTest {
     private BookingAPI bookingAPI;
     @Inject
     private OrderAPI orderAPI;
+    @Inject
+    private ALaCarteAPI aLaCarteAPI;
+    @Inject
+    private LunchAPI lunchAPI;
+    @Inject
+    private DrinkAPI drinkAPI;
 
-    @GET // HTTP method annotation
+    /*@GET // HTTP method annotation
     @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
     public Response test() {
         OrderDTO orderDTO = new OrderDTO();
@@ -45,6 +52,14 @@ public class BookingTest {
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,2)));
         orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 1)));
         Response response = orderAPI.addOrder(orderDTO);
+        return Response.ok(response).build(); // Return the Response object directly
+    }*/
+    @GET // HTTP method annotation
+    @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
+    public Response test() {
+        DrinksEntity aa = entityManager.find(DrinksEntity.class,1);
+        aa.setDescription("EN TOAST");
+        Response response = drinkAPI.updateDrink(1,aa);
         return Response.ok(response).build(); // Return the Response object directly
     }
 }

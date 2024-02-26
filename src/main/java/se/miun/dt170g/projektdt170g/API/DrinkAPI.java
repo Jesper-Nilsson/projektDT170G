@@ -1,10 +1,9 @@
 package se.miun.dt170g.projektdt170g.API;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.items.Drink;
@@ -18,6 +17,7 @@ import java.util.List;
  * Allows retrieval of dinner menu items filtered by their type.
  */
 @Path("/drinks")
+@Stateless
 public class DrinkAPI {
     @PersistenceContext
     private EntityManager entityManager;
@@ -33,6 +33,55 @@ public class DrinkAPI {
             drinks.add(new Drink(drink));
         }
         return Response.ok(drinks).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateDrink(@PathParam("id") int id, DrinksEntity drinkUpdate) {
+        try {
+            DrinksEntity drink = entityManager.find(DrinksEntity.class, id);
+            if (drink == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Drink not found").build();
+            }
+            drink.setName(drinkUpdate.getName());
+            drink.setDescription(drinkUpdate.getDescription());
+            drink.setPrice(drinkUpdate.getPrice());
+            entityManager.merge(drink);
+            return Response.ok(new Drink(drink)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating drink: " + e.getMessage()).build();
+        }
+    }
+    @DELETE
+    @Path("/{id}")
+    public Response deleteDrink(@PathParam("id") int id) {
+        try {
+            DrinksEntity drink = entityManager.find(DrinksEntity.class, id);
+            if (drink == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Drink not found").build();
+            }
+            entityManager.remove(drink);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error deleting drink: " + e.getMessage()).build();
+        }
+    }
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createDrink(DrinksEntity drink) {
+        if (drink == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Drink information must be provided").build();
+        }
+        try {
+            entityManager.persist(drink);
+            entityManager.flush(); // Ensure the drink ID is generated
+            return Response.status(Response.Status.CREATED).entity(new Drink(drink)).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error creating drink: " + e.getMessage()).build();
+        }
     }
 }
 

@@ -3,6 +3,8 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+
 @NamedQueries({
         @NamedQuery(
                 name = "LunchMenuEntity.findByDate",
@@ -32,7 +34,7 @@ public class LunchMenuEntity {
     private String description;
     @Basic
     @Column(name = "date", nullable = false)
-    private Date date;
+    private LocalDate date;
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
@@ -61,11 +63,11 @@ public class LunchMenuEntity {
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

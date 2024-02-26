@@ -2,18 +2,18 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(
-                name = "BookingEntity.findDate",
+                name = "BookingEntity.findByDate",
                 query = "SELECT l FROM BookingEntity l WHERE l.date = :date"
         )
 })
 @Entity
 @Table(name = "booking", schema = "dt170gprojekt", catalog = "")
 public class BookingEntity {
-    public static final String findByDate = "BookingEntity.findDate";
+    public static final String findByDate = "BookingEntity.findByDate";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "booking_id", nullable = false)
@@ -29,10 +29,10 @@ public class BookingEntity {
     private int amount;
     @Basic
     @Column(name = "date", nullable = false)
-    private Date date;
+    private LocalDate date;
     @Basic
     @Column(name = "time", nullable = false)
-    private Time time;
+    private LocalTime time;
 
     public int getBookingId() {
         return bookingId;
@@ -66,19 +66,19 @@ public class BookingEntity {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 }
