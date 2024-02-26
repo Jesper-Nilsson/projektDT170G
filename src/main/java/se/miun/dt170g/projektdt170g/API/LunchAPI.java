@@ -55,7 +55,7 @@ public class LunchAPI implements Serializable{
 
     @DELETE
     @Path("/{id}")
-    public Response deleteLunch(@PathParam("id") Long id) {
+    public Response deleteLunch(@PathParam("id") int id) {
         try {
             LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
             if (lunchMenu != null) {

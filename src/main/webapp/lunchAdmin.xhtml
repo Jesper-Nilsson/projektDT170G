@@ -39,14 +39,14 @@
             <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">
                 <h:panelGrid columns="2">
                     <h:outputLabel for="deleteLunchId" value="Select Lunch to Delete:"/>
-                    <h:selectOneMenu id="deleteLunchId" value="#{lunchAdminBean.lunchIdToDelete}">
+                    <h:selectOneMenu id="deleteLunchId" value="#{lunchAdminBean.lunchMenuEntity.lunchId}">
                         <f:selectItem itemLabel="Select Lunch" itemValue="null" noSelectionOption="true"/>
                         <f:selectItems value="#{lunchAdminBean.allLunches}"
                                        var="lunch"
                                        itemValue="#{lunch.lunchId}"
                                        itemLabel="#{lunch.name} - #{lunch.date}"/>
                     </h:selectOneMenu>
-                    <h:commandButton value="Delete Lunch" action="#{lunchAdminBean.deleteLunch}" />
+                    <h:commandButton value="Delete Lunch" action="#{lunchAdminBean.deleteLunch(lunchAdminBean.lunchMenuEntity.lunchId)}" />
                 </h:panelGrid>
             </ui:fragment>
 

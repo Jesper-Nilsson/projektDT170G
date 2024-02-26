@@ -64,11 +64,10 @@ public class LunchAdminBean implements Serializable {
 
 
 
-    public void deleteLunch(Long lunchId) {
+    public void deleteLunch(int id) {
         setMessage("borttagen");
-        Response response = lunchAPI.deleteLunch(lunchId);
-
-        // Refresh the list of lunches or handle the UI update
+        setAction("none");
+        Response response = lunchAPI.deleteLunch(id);
     }
 
     public String getLunchName() {
@@ -127,28 +126,7 @@ public class LunchAdminBean implements Serializable {
     }
 
 
-    // Method to delete lunch
-    public void deleteLunch() {
-        if (lunchIdToDelete == null || lunchIdToDelete <= 0) {
-            message = "Invalid lunch ID";
-            return;
-        }
 
-        try {
-            Response response = lunchAPI.deleteLunch(lunchIdToDelete);
-            if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                message = "Lunch deleted successfully";
-                // Logic to refresh the lunch list can be added here if needed
-            } else {
-                message = "Failed to delete lunch: " + response.getStatusInfo().getReasonPhrase();
-            }
-        } catch (Exception e) {
-            message = "Error during deletion: " + e.getMessage();
-            // Log the exception and handle any rollback if necessary
-        }
-        // Reset the ID to delete after the operation
-        lunchIdToDelete = null;
-    }
 
 
 
