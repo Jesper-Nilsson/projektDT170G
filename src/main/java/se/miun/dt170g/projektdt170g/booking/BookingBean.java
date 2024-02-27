@@ -76,15 +76,6 @@ public class BookingBean implements Serializable {
         // Create a Calendar instance
         Calendar calendar = Calendar.getInstance();
 
-        // Get the current hour
-        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-
-        // Check if the current time is later than 21:00
-        if (currentHour >= 21) {
-            // Increment the date by one day
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-        }
-
         // Get the Date object corresponding to the adjusted date
         Date currentDate = calendar.getTime();
 
