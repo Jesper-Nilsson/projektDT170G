@@ -3,6 +3,8 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
+
 @NamedQueries({
         @NamedQuery(
                 name = "LunchMenuEntity.findByDate",
@@ -32,7 +34,7 @@ public class LunchMenuEntity {
     private String description;
     @Basic
     @Column(name = "date", nullable = false)
-    private Date date;
+    private LocalDate date;
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
@@ -61,11 +63,11 @@ public class LunchMenuEntity {
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -75,31 +77,5 @@ public class LunchMenuEntity {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        LunchMenuEntity that = (LunchMenuEntity) o;
-
-        if (lunchId != that.lunchId) return false;
-        if (price != that.price) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = lunchId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + price;
-        return result;
     }
 }

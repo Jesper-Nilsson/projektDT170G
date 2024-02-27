@@ -9,21 +9,11 @@ public class PurchasedDrinksEntity {
     @Id
     @Column(name = "purchased_ID", nullable = false)
     private int purchasedId;
-    @Basic
-    @Column(name = "order_id", nullable = false)
-    private int orderId;
-    @Basic
-    @Column(name = "drink_id", nullable = false)
-    private int drinkId;
-    @Basic
-    @Column(name = "price", nullable = false)
-    private int price;
-
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false,updatable = false, insertable = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "restaurant_order_id", nullable = false)
     private RestaurantOrderEntity restaurantOrderByOrderId;
     @ManyToOne
-    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false,updatable = false, insertable = false)
+    @JoinColumn(name = "drink_id", referencedColumnName = "drink_id", nullable = false)
     private DrinksEntity drinksByDrinkId;
 
     public int getPurchasedId() {
@@ -35,52 +25,18 @@ public class PurchasedDrinksEntity {
     }
 
     public int getOrderId() {
-        return orderId;
+        return restaurantOrderByOrderId.getRestaurantOrderId();
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+
 
     public int getDrinkId() {
-        return drinkId;
+        return drinksByDrinkId.getDrinkId();
     }
 
-    public void setDrinkId(int drinkId) {
-        this.drinkId = drinkId;
-    }
 
-    public int getPrice() {
-        return price;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PurchasedDrinksEntity that = (PurchasedDrinksEntity) o;
-
-        if (purchasedId != that.purchasedId) return false;
-        if (orderId != that.orderId) return false;
-        if (drinkId != that.drinkId) return false;
-        if (price != that.price) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = purchasedId;
-        result = 31 * result + orderId;
-        result = 31 * result + drinkId;
-        result = 31 * result + price;
-        return result;
-    }
 
     public RestaurantOrderEntity getRestaurantOrderByOrderId() {
         return restaurantOrderByOrderId;

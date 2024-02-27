@@ -30,24 +30,4 @@ public class ReceiptEntity {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ReceiptEntity that = (ReceiptEntity) o;
-
-        if (receiptId != that.receiptId) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = receiptId;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
-    }
 }

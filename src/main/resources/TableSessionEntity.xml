@@ -11,11 +11,9 @@
             <basic name="tableNumber">
                 <column name="table_number" precision="11"/>
             </basic>
-            <!--
             <basic name="status">
                 <column name="status"/>
             </basic>
-            -->
         </attributes>
     </entity>
 </entity-mappings>

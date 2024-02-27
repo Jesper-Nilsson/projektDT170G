@@ -3,10 +3,21 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+@NamedQueries({
+        @NamedQuery(
+                name = "EventsEntity.findComingDates",
+                query = "SELECT l FROM EventsEntity l WHERE l.date > :date ORDER BY l.date ASC"
+        )
+})
 
 @Entity
 @Table(name = "events", schema = "dt170gprojekt", catalog = "")
 public class EventsEntity {
+
+    public static final String findAfterDate = "EventsEntity.findComingDates";
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "event_id", nullable = false)
@@ -16,7 +27,10 @@ public class EventsEntity {
     private String name;
     @Basic
     @Column(name = "date", nullable = false)
-    private Timestamp date;
+    private LocalDate date;
+    @Basic
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
@@ -43,11 +57,11 @@ public class EventsEntity {
         this.name = name;
     }
 
-    public Timestamp getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -75,31 +89,11 @@ public class EventsEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EventsEntity that = (EventsEntity) o;
-
-        if (eventId != that.eventId) return false;
-        if (price != that.price) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (imageUrl != null ? !imageUrl.equals(that.imageUrl) : that.imageUrl != null) return false;
-
-        return true;
+    public LocalTime getTime() {
+        return time;
     }
 
-    @Override
-    public int hashCode() {
-        int result = eventId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + price;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (imageUrl != null ? imageUrl.hashCode() : 0);
-        return result;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

@@ -61,30 +61,4 @@ public class EmployeeEntity {
     public void setTelephone(int telephone) {
         this.telephone = telephone;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EmployeeEntity that = (EmployeeEntity) o;
-
-        if (employeeId != that.employeeId) return false;
-        if (telephone != that.telephone) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (role != null ? !role.equals(that.role) : that.role != null) return false;
-        if (adress != null ? !adress.equals(that.adress) : that.adress != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = employeeId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (adress != null ? adress.hashCode() : 0);
-        result = 31 * result + telephone;
-        return result;
-    }
 }
