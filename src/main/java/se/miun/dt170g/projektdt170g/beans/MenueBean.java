@@ -23,14 +23,12 @@ public class MenueBean implements Serializable {
 
     @Inject
     private LunchAPI lunchAPI;
-
+   private  LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
     private List<LunchMenuEntity> weeklyMenus = new ArrayList<>();
     public List<LunchMenuEntity> getWeeklyMenus() {
         return weeklyMenus;
     }
-    public MenueBean() {
-        // No-args constructor
-    }
+
 
     @PostConstruct
     public void init() {
@@ -43,7 +41,7 @@ public class MenueBean implements Serializable {
     }
 
     private void fetchWeeklyMenus() {
-        Response response = lunchAPI.getLunch(true, false);
+        Response response = lunchAPI.getLunch(false, true);
         if (response.getStatus() == Response.Status.OK.getStatusCode()) {
             this.weeklyMenus = response.readEntity(new GenericType<List<LunchMenuEntity>>(){});
         } else {
@@ -60,49 +58,7 @@ public class MenueBean implements Serializable {
         return mockData;
     }
 
-    // ... existing methods ...
 
-    /**
-     * Inner class to represent a menu item with the day name.
-     */
-    public static class MenuWithDayName {
-        private String dayOfWeek;
-        private String description;
-        private int price;
-
-        public MenuWithDayName(String dayOfWeek, String description, int price) {
-            this.dayOfWeek = dayOfWeek;
-            this.description = description;
-            this.price = price;
-        }
-
-        // Getters and Setters
-        public String getDayOfWeek() {
-            return dayOfWeek;
-        }
-
-        public void setDayOfWeek(String dayOfWeek) {
-            this.dayOfWeek = dayOfWeek;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setPrice(int price) {
-            this.price = price;
-        }
-    }
-
-/*
 
     public String getName() {
         return lunchMenuEntity.getName() ;
@@ -137,7 +93,6 @@ public class MenueBean implements Serializable {
     }
 
 
-*/
 
 
 
