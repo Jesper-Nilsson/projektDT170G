@@ -22,7 +22,7 @@
         </header>
         <ui:repeat value="#{menue.weeklyMenus}" var="menu">
             <article class="menu-item">
-                <h2>#{menu.dayOfWeek}</h2> <!-- Assuming you want to display the date. If you want the day of week, you'll need to adjust the model or use a converter. -->
+                <h2>#{menu.date}</h2> <!-- Assuming you want to display the date. If you want the day of week, you'll need to adjust the model or use a converter. -->
                 <p>#{menu.description}</p>
             </article>
         </ui:repeat>

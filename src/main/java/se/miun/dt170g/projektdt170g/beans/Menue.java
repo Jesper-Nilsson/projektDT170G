@@ -1,7 +1,9 @@
 package se.miun.dt170g.projektdt170g.beans;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import se.miun.dt170g.projektdt170g.API.LunchAPI;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
 import java.io.Serializable;
@@ -13,6 +15,9 @@ import java.util.List;
 @RequestScoped
 public class Menue implements Serializable {
 
+    @Inject
+    private LunchAPI lunchAPI;
+    /// Börja med dB koppling hemta lunch
     private List<LunchMenuEntity> weeklyMenus = new ArrayList<>();
 
     public Menue() {

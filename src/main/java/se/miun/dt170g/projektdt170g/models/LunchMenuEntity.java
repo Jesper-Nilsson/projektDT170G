@@ -40,7 +40,7 @@ public class LunchMenuEntity {
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
-    private String dayOfWeek;
+
 
 
 
@@ -67,16 +67,9 @@ public class LunchMenuEntity {
     public String getName() {
         return name;
     }
-    public String getDayOfWeek() {
-        if (this.date != null) {
-            return this.date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        }
-        return "";
-    }
 
-    public void setDayOfWeek(String dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
+
+
     public void setName(String name) {
         this.name = name;
     }
