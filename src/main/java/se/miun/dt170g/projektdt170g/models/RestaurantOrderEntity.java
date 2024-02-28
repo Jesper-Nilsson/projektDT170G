@@ -6,9 +6,14 @@ import se.miun.dt170g.projektdt170g.items.OrderDTO;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@NamedQuery(
+        name = "RestaurantOrderEntity.activeOrders",
+        query = "SELECT l FROM RestaurantOrderEntity l WHERE l.orderStatus = true"
+)
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
 public class RestaurantOrderEntity {
+    public static  final String allActiveOrders = "RestaurantOrderEntity.activeOrders";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "restaurant_order_id", nullable = false)
@@ -28,6 +33,11 @@ public class RestaurantOrderEntity {
     @Basic
     @Column(name = "comment", nullable = false, length = 255)
     private String comment;
+
+    @Basic
+    @Column(name = "order_status", nullable = false )
+    private boolean orderStatus;
+
     @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId;
     @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -41,6 +51,7 @@ public class RestaurantOrderEntity {
         this.statusDessert = orderDTO.getStatusDessert();
         this.restaurantTableId = orderDTO.getRestaurantTableId();
         this.comment = orderDTO.getComment();
+        this.orderStatus = orderDTO.getOrderStatus();
         this.purchasedALaCartesByRestaurantOrderId = new ArrayList<>();
         this.purchasedDrinksByRestaurantOrderId = new ArrayList<>();
     }
@@ -96,6 +107,14 @@ public class RestaurantOrderEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByRestaurantOrderId() {

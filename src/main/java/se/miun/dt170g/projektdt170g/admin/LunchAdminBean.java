@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.admin;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -21,7 +22,7 @@ import jakarta.persistence.TemporalType;
 
 
 @Named
-@SessionScoped
+@ViewScoped
 public class LunchAdminBean implements Serializable {
 
     @PersistenceContext(unitName = "default")
@@ -37,14 +38,15 @@ public class LunchAdminBean implements Serializable {
     private int lunchIdToDelete;
     // Id of the selected lunch for update
     private int selectedLunchId;
+     LunchAdminBean (){
+         lunchMenuEntity.setPrice(99);
+     }
+
 
 
 
     // Temporary here for update lunch
-    private String name;
-    private String description;
-    private LocalDate date;
-    private int price;
+
 
 
 
@@ -147,34 +149,34 @@ public class LunchAdminBean implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return lunchMenuEntity.getName();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.lunchMenuEntity.setName(name);
     }
     public String getDescription() {
-        return description;
+        return lunchMenuEntity.getDescription();
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        lunchMenuEntity.setDescription(description);
     }
 
     public LocalDate getDate() {
-        return date;
+        return lunchMenuEntity.getDate();
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        lunchMenuEntity.setDate(date);
     }
 
     public int getPrice() {
-        return price;
+        return lunchMenuEntity.getPrice();
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        this.lunchMenuEntity.setPrice(price);
     }
 
 
@@ -187,6 +189,9 @@ public class LunchAdminBean implements Serializable {
     // Loads the details of the selected lunch so the can be shown in the update form
     public void loadSelectedLunch() {
         this.lunchMenuEntity = lunchAPI.getLunch(selectedLunchId);
+        this.action = "showUpdate";
+        System.out.println("hej");
+
     }
 
 

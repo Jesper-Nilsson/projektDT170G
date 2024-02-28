@@ -17,6 +17,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.time.Duration;
+import java.util.List;
 
 import jakarta.inject.Inject;
 import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
@@ -50,7 +51,9 @@ public class BookingTest {
         orderDTO.setRestaurantTableId(3);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,5)));
         orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 12)));
-        Response response = orderAPI.updateOrder(orderDTO.getOrder_ID(),orderDTO);
+        orderDTO.setOrderStatus(true);
+        Response response = orderAPI.addOrder(orderDTO);
+
         return Response.ok(response).build(); // Return the Response object directly
     }
 
