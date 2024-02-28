@@ -42,10 +42,7 @@ public class LunchMenuEntity {
     private int price;
 
 
-
-
-    // Additional constructor to initialize fields
-    public LunchMenuEntity( String name, String description, LocalDate date, int price) {
+    public LunchMenuEntity(String name, String description, LocalDate date, int price) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -55,6 +52,7 @@ public class LunchMenuEntity {
     public LunchMenuEntity() {
 
     }
+
 
     public int getLunchId() {
         return lunchId;
