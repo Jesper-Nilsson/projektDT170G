@@ -5,9 +5,64 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Antons Skafferi</title>
-</h:head>
+    <title>Weekly Menu</title>
+    <style>
+        /* Your CSS styles here */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
 
+        .menu-container {
+            /* Your styles */
+            font-family: Arial, sans-serif;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            color: #333;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background: url('resources/images/menyBackground.jpg') no-repeat center center;
+            background-size: contain;
+        }
+
+        .menu-header, .menu-footer, .menu-item {
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 8px;
+            width: 70%;
+            text-align: center;
+        }
+
+        .menu-footer {
+            margin-bottom: 0;
+        }
+
+        .allergy-info {
+            font-style: italic;
+            color: #888;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .menu-container {
+                background: url('./menyBackgrounds.jpg') no-repeat center center;
+                padding: 1em;
+            }
+
+            .menu-header, .menu-footer, .menu-item {
+                padding: 0.5em;
+            }
+        }
+    </style>
+</h:head>
 <h:body>
     <!-- Weekly lunch section -->
     <section class="menu-container" id="weekly-lunch">
@@ -17,7 +72,7 @@
         </header>
         <ui:repeat value="#{menueBean.weeklyMenus}" var="menu">
             <article class="menu-item">
-                <h2>#{menu.date}</h2> <!-- Displaying the date -->
+                <h2>#{menu.date}</h2>
                 <p>#{menu.description}</p>
                 <p>Pris: #{menu.price}:-</p>
             </article>
@@ -26,9 +81,8 @@
             <p>Lunch 100:-</p>
             <p class="allergy-info">Allergisk? Fråga personalen så hjälper vi er med era frågor!</p>
             <p>Hemlagat från grunden och bara riktigt goda, ärliga maträtter!</p>
-            <p>SMÄKLIG MÅLTID</p>
+            <p>SMAKLIG MÅLTID</p>
         </footer>
-        <a href="#top" class="top-link">Till Toppen</a>
     </section>
 </h:body>
 </html>
