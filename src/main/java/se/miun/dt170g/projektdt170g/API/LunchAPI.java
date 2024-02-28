@@ -14,10 +14,11 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.io.Serializable;
 
 @Stateless
 @Path("/lunch")
-public class LunchAPI {
+public class LunchAPI implements Serializable {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -93,6 +94,7 @@ public class LunchAPI {
     @DELETE
     @Path("/{id}")
     public Response deleteLunch(@PathParam("id") int id) {
+
         try {
             LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
             if (lunchMenu == null) {

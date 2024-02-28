@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.sql.Date;
+import java.time.LocalDate;
+
 import jakarta.servlet.http.Part;
 
 @Named
@@ -18,11 +19,11 @@ public class EventAdminBean {
     private Part uploadedFile;
     private String eventName;
     private String eventDescription;
-    private Date eventDate;
+    private LocalDate eventDate;
     private String imageUrl;
 
     // Properties specific to other actions
-    private Long eventIdToDelete;
+    private int eventIdToDelete;
     private String action; // Define the action property
     public String getAction() {
         return action;
@@ -50,11 +51,11 @@ public class EventAdminBean {
         this.eventDescription = eventDescription;
     }
 
-    public Date getEventDate() {
+    public LocalDate getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -66,11 +67,11 @@ public class EventAdminBean {
         this.imageUrl = imageUrl;
     }
 
-    public Long getEventIdToDelete() {
+    public int getEventIdToDelete() {
         return eventIdToDelete;
     }
 
-    public void setEventIdToDelete(Long eventIdToDelete) {
+    public void setEventIdToDelete(int getIdToDelete) {
         this.eventIdToDelete = eventIdToDelete;
     }
 

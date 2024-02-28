@@ -34,9 +34,9 @@ public class LunchAdminBean implements Serializable {
     private String action; // Define the action property
 
     private String message = "aa";
-    private Long lunchIdToDelete;
+    private int lunchIdToDelete;
     // Id of the selected lunch for update
-    private Long selectedLunchId;
+    private int selectedLunchId;
 
 
 
@@ -69,15 +69,11 @@ public class LunchAdminBean implements Serializable {
         Response response = lunchAPI.deleteLunch(lunchMenuEntity.getLunchId());
     }
 
-
-    /*
     public void updateLunch() {
         setMessage("uppdaterad");
         setAction("none");
         Response response = lunchAPI.updateLunch(lunchMenuEntity.getLunchId(), this.lunchMenuEntity);
     }
-*/
-
 
     public String getLunchName() {
         return lunchMenuEntity.getName();
@@ -118,11 +114,11 @@ public class LunchAdminBean implements Serializable {
         this.message = message;
     }
 
-    public Long getLunchIdToDelete() {
+    public int getLunchIdToDelete() {
         return lunchIdToDelete;
     }
 
-    public void setLunchIdToDelete(Long lunchIdToDelete) {
+    public void setLunchIdToDelete(int lunchIdToDelete) {
         this.lunchIdToDelete = lunchIdToDelete;
     }
 
@@ -142,11 +138,11 @@ public class LunchAdminBean implements Serializable {
 
 
     // Temporary here
-    public Long getSelectedLunchId() {
+    public int getSelectedLunchId() {
         return selectedLunchId;
     }
 
-    public void setSelectedLunchId(Long selectedLunchId) {
+    public void setSelectedLunchId(int selectedLunchId) {
         this.selectedLunchId = selectedLunchId;
     }
 
