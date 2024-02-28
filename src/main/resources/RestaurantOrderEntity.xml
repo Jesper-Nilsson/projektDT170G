@@ -23,6 +23,9 @@
             <basic name="comment">
                 <column name="comment"/>
             </basic>
+            <basic name="orderStatus">
+                <column name="order_status"/>
+            </basic>
             <one-to-many name="purchasedALaCartesByRestaurantOrderId" mapped-by="restaurantOrderByOrderId"
                          target-entity="se.miun.dt170g.projektdt170g.models.PurchasedALaCarteEntity"/>
             <one-to-many name="purchasedDrinksByRestaurantOrderId" mapped-by="restaurantOrderByOrderId"

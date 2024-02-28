@@ -15,6 +15,7 @@ public class OrderDTO {
     private int restaurantTableId;
 
     private String comment;
+    private boolean orderStatus;
 
 
     private ArrayList<ALaCarteItem> foods;
@@ -85,7 +86,7 @@ public class OrderDTO {
         this.comment = comment;
     }
 
-    public List<ALaCarteItem> getFoods() {
+    public ArrayList<ALaCarteItem> getFoods() {
         return foods;
     }
 
@@ -93,7 +94,7 @@ public class OrderDTO {
         this.foods = foods;
     }
 
-    public List<Drink> getDrinks() {
+    public ArrayList<Drink> getDrinks() {
         return drinks;
     }
 
@@ -107,4 +108,11 @@ public class OrderDTO {
         foods.add(food);
     };
 
+    public boolean isOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 }

@@ -5,6 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.FlushModeType;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,6 +18,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * REST API endpoint class for managing a la carte menu items.
@@ -32,7 +34,6 @@ public class OrderAPI {
     private DataSource dataSource;;
 
     @GET
-
     @Produces(MediaType.APPLICATION_JSON)
     public OrderDTO getOrder(@QueryParam("orderID") int orderID,
                              @QueryParam("kitchen") boolean kitchen,
@@ -59,10 +60,45 @@ public class OrderAPI {
         }
         return order_return;
     }
+    @GET
+    @Path("/activeOrders")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<OrderDTO> getactiveOrders() {
 
+        //check orderID if not given, error or just everything today
+
+        List<OrderDTO> returnOrders = new ArrayList<>();
+        List<RestaurantOrderEntity> activeOrders = new ArrayList<>();
+
+        activeOrders = entityManager.createNamedQuery(RestaurantOrderEntity.allActiveOrders,RestaurantOrderEntity.class).getResultList();
+
+        for (RestaurantOrderEntity currentOrder : activeOrders) {
+            OrderDTO orderReturn = new OrderDTO();
+
+            orderReturn.setOrder_ID(currentOrder.getRestaurantOrderId());
+            orderReturn.setStatusAppetizer(currentOrder.getStatusAppetizer());
+            orderReturn.setStatusMain(currentOrder.getStatusMain());
+            orderReturn.setStatusDessert(currentOrder.getStatusDessert());
+            orderReturn.setComment(currentOrder.getComment());
+
+            for (PurchasedALaCarteEntity purchasedALaCarte : currentOrder.getPurchasedALaCartesByRestaurantOrderId()) {
+                ALaCarteMenuEntity food = entityManager.find(ALaCarteMenuEntity.class, purchasedALaCarte.getaLaCarteId());
+                orderReturn.addFood(new ALaCarteItem(food));
+            }
+            for (PurchasedDrinksEntity purchasedDrinks : currentOrder.getPurchasedDrinksByRestaurantOrderId()) {
+                DrinksEntity drink = entityManager.find(DrinksEntity.class, purchasedDrinks.getDrinkId());
+                orderReturn.addDrink(new Drink(drink));
+            }
+            returnOrders.add(orderReturn);
+        }
+        return returnOrders;
+    }
+
+
+    //@Produces(MediaType.APPLICATION_JSON)
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     public Response addOrder(OrderDTO orderDTO) {
         try (Connection connection = dataSource.getConnection()) {
             String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment) VALUES (?, ?, ?, ?, ?)";
