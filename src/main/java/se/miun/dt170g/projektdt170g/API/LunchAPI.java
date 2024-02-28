@@ -31,14 +31,14 @@ public class LunchAPI {
 
         if (today) {
             lunchMenus = entityManager.createNamedQuery("LunchMenuEntity.findByDate", LunchMenuEntity.class)
-                    .setParameter("date", Date.valueOf(todayDate))
+                    .setParameter("date", todayDate) // Directly use LocalDate
                     .getResultList();
         } else if (week) {
             LocalDate startOfWeek = todayDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
             LocalDate endOfWeek = todayDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
             lunchMenus = entityManager.createNamedQuery("LunchMenuEntity.findBetweenDates", LunchMenuEntity.class)
-                    .setParameter("startDate", Date.valueOf(startOfWeek))
-                    .setParameter("endDate", Date.valueOf(endOfWeek))
+                    .setParameter("startDate", startOfWeek) // Directly use LocalDate
+                    .setParameter("endDate", endOfWeek) // Directly use LocalDate
                     .getResultList();
         } else {
             // Define your fallback logic here, such as returning an empty list or all records
@@ -49,6 +49,7 @@ public class LunchAPI {
         // Use the Response builder to return the list with proper status code
         return Response.ok(lunchMenus).build();
     }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

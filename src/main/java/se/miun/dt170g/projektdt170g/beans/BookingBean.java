@@ -1,4 +1,4 @@
-package se.miun.dt170g.projektdt170g.booking;
+package se.miun.dt170g.projektdt170g.beans;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
