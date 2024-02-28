@@ -39,27 +39,19 @@ public class BookingTest {
     @Inject
     private DrinkAPI drinkAPI;
 
-    /*@GET // HTTP method annotation
-    @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
-    public Response test() {
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setComment("test");
-        orderDTO.setStatusMain("begun");
-        orderDTO.setStatusAppetizer("none");
-        orderDTO.setStatusDessert("none");
-        orderDTO.setRestaurantTableId(3);
-        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1)));
-        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,2)));
-        orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 1)));
-        Response response = orderAPI.addOrder(orderDTO);
-        return Response.ok(response).build(); // Return the Response object directly
-    }*/
     @GET // HTTP method annotation
     @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
     public Response test() {
-        DrinksEntity aa = entityManager.find(DrinksEntity.class,1);
-        aa.setDescription("EN TOAST");
-        Response response = drinkAPI.updateDrink(1,aa);
+        OrderDTO orderDTO = orderAPI.getOrder(59);
+        orderDTO.setComment("test");
+        orderDTO.setStatusMain("test");
+        orderDTO.setStatusAppetizer("test");
+        orderDTO.setStatusDessert("test");
+        orderDTO.setRestaurantTableId(3);
+        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,5)));
+        orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 12)));
+        Response response = orderAPI.updateOrder(orderDTO.getOrder_ID(),orderDTO);
         return Response.ok(response).build(); // Return the Response object directly
     }
+
 }
