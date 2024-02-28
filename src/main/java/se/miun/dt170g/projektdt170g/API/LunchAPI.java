@@ -12,6 +12,7 @@ import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 import java.sql.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import java.util.List;
 public class LunchAPI {
     @PersistenceContext
     private EntityManager entityManager;
+
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -48,6 +51,30 @@ public class LunchAPI {
         // Use the Response builder to return the list with proper status code
         return Response.ok(lunchMenus).build();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -121,7 +148,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
