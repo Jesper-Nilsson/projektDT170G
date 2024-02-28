@@ -65,6 +65,7 @@
                     <h2 id="modalTitle1">Antons Skafferi - Boka bord</h2>
                 </div>
                 <h2 class="header-booking">Välj antal gäster</h2>
+
                     <h:commandButton value="1 gäst" action="#{bookingBean.setAmount(1)}" styleClass="guestAmountBtn">
                         <f:ajax execute="@this" render="@none" event="click" />
                     </h:commandButton>
@@ -80,6 +81,7 @@
                     <h:commandButton value="4 gäster" action="#{bookingBean.setAmount(4)}" styleClass="guestAmountBtn">
                         <f:ajax execute="@this" render="@none" event="click"/>
                     </h:commandButton>
+
 
                     <h:commandButton value="5 gäster" action="#{bookingBean.setAmount(5)}" styleClass="guestAmountBtn">
                         <f:ajax execute="@this" render="@none" event="click"/>
@@ -137,8 +139,8 @@
                 <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
                 <h:inputText id="userPhone" value="#{bookingBean.telephone}"/>
 
-                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" onclick="closeModal(3)" styleClass="continue-btn">
-                    <f:ajax execute="@this" render="@none" event="click"/>
+                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" onclick="closeModal(3)" styleClass="continue-btn" update="@form">
+                    <f:ajax execute="@form" render="@none" event="click"/>
                 </h:commandButton>
             </div>
         </aside>
