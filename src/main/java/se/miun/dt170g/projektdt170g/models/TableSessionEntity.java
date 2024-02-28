@@ -12,6 +12,9 @@ public class TableSessionEntity {
     @Basic
     @Column(name = "table_number", nullable = false)
     private int tableNumber;
+    @Basic
+    @Column(name = "status", nullable = false, length = 255)
+    private String status;
 
     public int getSessionId() {
         return sessionId;
@@ -29,23 +32,11 @@ public class TableSessionEntity {
         this.tableNumber = tableNumber;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TableSessionEntity that = (TableSessionEntity) o;
-
-        if (sessionId != that.sessionId) return false;
-        if (tableNumber != that.tableNumber) return false;
-
-        return true;
+    public String getStatus() {
+        return status;
     }
 
-    @Override
-    public int hashCode() {
-        int result = sessionId;
-        result = 31 * result + tableNumber;
-        return result;
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

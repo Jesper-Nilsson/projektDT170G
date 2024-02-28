@@ -1,15 +1,10 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.OrderDTO;
 
+import java.util.ArrayList;
 import java.util.Collection;
-/*@NamedQueries({
-        @NamedQuery(name = "Order.findWithDetails",
-                query = "SELECT o FROM RestaurantOrderEntity o " +
-                        "LEFT JOIN FETCH o.purchasedALaCartesByRestaurantOrderId " +
-                        "LEFT JOIN FETCH o.purchasedDrinksByRestaurantOrderId " +
-                        "WHERE o.restaurantOrderId= :orderId")
-})*/
 
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
@@ -19,18 +14,41 @@ public class RestaurantOrderEntity {
     @Column(name = "restaurant_order_id", nullable = false)
     private int restaurantOrderId;
     @Basic
-    @Column(name = "status", nullable = false, length = 255)
-    private String status;
+    @Column(name = "status_appetizer", nullable = false, length = 255)
+    private String statusAppetizer;
+    @Basic
+    @Column(name = "status_main", nullable = false, length = 255)
+    private String statusMain;
+    @Basic
+    @Column(name = "status_dessert", nullable = false, length = 255)
+    private String statusDessert;
     @Basic
     @Column(name = "restaurant_table_id", nullable = false)
     private int restaurantTableId;
     @Basic
     @Column(name = "comment", nullable = false, length = 255)
     private String comment;
-   /* @OneToMany(mappedBy = "restaurantOrderByOrderId")
+    @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByRestaurantOrderId;
-    @OneToMany(mappedBy = "restaurantOrderByOrderId")
-    private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;*/
+    @OneToMany(mappedBy = "restaurantOrderByOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId;
+
+
+
+    public RestaurantOrderEntity(OrderDTO orderDTO) {
+        this.statusAppetizer = orderDTO.getStatusAppetizer();
+        this.statusMain = orderDTO.getStatusMain();
+        this.statusDessert = orderDTO.getStatusDessert();
+        this.restaurantTableId = orderDTO.getRestaurantTableId();
+        this.comment = orderDTO.getComment();
+        this.purchasedALaCartesByRestaurantOrderId = new ArrayList<>();
+        this.purchasedDrinksByRestaurantOrderId = new ArrayList<>();
+    }
+
+    public RestaurantOrderEntity() {
+        this.purchasedALaCartesByRestaurantOrderId = new ArrayList<>();
+        this.purchasedDrinksByRestaurantOrderId = new ArrayList<>();
+    }
 
     public int getRestaurantOrderId() {
         return restaurantOrderId;
@@ -40,12 +58,28 @@ public class RestaurantOrderEntity {
         this.restaurantOrderId = restaurantOrderId;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusAppetizer() {
+        return statusAppetizer;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusAppetizer(String statusAppetizer) {
+        this.statusAppetizer = statusAppetizer;
+    }
+
+    public String getStatusMain() {
+        return statusMain;
+    }
+
+    public void setStatusMain(String statusMain) {
+        this.statusMain = statusMain;
+    }
+
+    public String getStatusDessert() {
+        return statusDessert;
+    }
+
+    public void setStatusDessert(String statusDessert) {
+        this.statusDessert = statusDessert;
     }
 
     public int getRestaurantTableId() {
@@ -64,31 +98,7 @@ public class RestaurantOrderEntity {
         this.comment = comment;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RestaurantOrderEntity that = (RestaurantOrderEntity) o;
-
-        if (restaurantOrderId != that.restaurantOrderId) return false;
-        if (restaurantTableId != that.restaurantTableId) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (comment != null ? !comment.equals(that.comment) : that.comment != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = restaurantOrderId;
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + restaurantTableId;
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        return result;
-    }
-
-    /*public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByRestaurantOrderId() {
+    public Collection<PurchasedALaCarteEntity> getPurchasedALaCartesByRestaurantOrderId() {
         return purchasedALaCartesByRestaurantOrderId;
     }
 
@@ -102,5 +112,9 @@ public class RestaurantOrderEntity {
 
     public void setPurchasedDrinksByRestaurantOrderId(Collection<PurchasedDrinksEntity> purchasedDrinksByRestaurantOrderId) {
         this.purchasedDrinksByRestaurantOrderId = purchasedDrinksByRestaurantOrderId;
-    }*/
+    }
+    public void addPurchasedALaCarte(PurchasedALaCarteEntity aLaCarteEntity){
+        purchasedALaCartesByRestaurantOrderId.add(aLaCarteEntity);
+        aLaCarteEntity.setRestaurantOrderByOrderId(this);
+    }
 }

@@ -5,7 +5,18 @@
              version="3.0">
     <persistence-unit name="default" transaction-type="JTA">
         <jta-data-source>jdbc/database</jta-data-source>
-
+        <mapping-file>ALaCarteMenuEntity.xml</mapping-file>
+        <mapping-file>BookingEntity.xml</mapping-file>
+        <mapping-file>DrinksEntity.xml</mapping-file>
+        <mapping-file>EmployeeEntity.xml</mapping-file>
+        <mapping-file>EventsEntity.xml</mapping-file>
+        <mapping-file>LunchMenuEntity.xml</mapping-file>
+        <mapping-file>PurchasedALaCarteEntity.xml</mapping-file>
+        <mapping-file>PurchasedDrinksEntity.xml</mapping-file>
+        <mapping-file>ReceiptEntity.xml</mapping-file>
+        <mapping-file>RestaurantOrderEntity.xml</mapping-file>
+        <mapping-file>ShiftEntity.xml</mapping-file>
+        <mapping-file>TableSessionEntity.xml</mapping-file>
         <class>se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.BookingEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.DrinksEntity</class>
@@ -19,21 +30,10 @@
         <class>se.miun.dt170g.projektdt170g.models.ShiftEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.TableSessionEntity</class>
 
+
         <properties>
             <!-- JPA provider-specific properties here -->
             <!-- No direct JDBC connection properties needed for JTA-managed data source -->
-            <property name="toplink.jdbc.url" value="jdbc:mariadb://localhost:3306/dt170gprojekt"/>
-            <property name="toplink.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
-            <property name="toplink.jdbc.user" value="root"/>
-            <property name="toplink.jdbc.password" value="hejhej"/>
-            <property name="hibernate.connection.url" value="jdbc:mariadb://localhost:3306/dt170gprojekt"/>
-            <property name="hibernate.connection.driver_class" value="org.mariadb.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value="root"/>
-            <property name="hibernate.connection.password" value="hejhej"/>
-            <property name="openjpa.ConnectionURL" value="jdbc:mariadb://localhost:3306/dt170gprojekt"/>
-            <property name="openjpa.ConnectionDriverName" value="org.mariadb.jdbc.Driver"/>
-            <property name="openjpa.ConnectionUserName" value="root"/>
-            <property name="openjpa.ConnectionPassword" value="hejhej"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mariadb://localhost:3306/dt170gprojekt"/>
             <property name="eclipselink.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
             <property name="eclipselink.jdbc.user" value="root"/>
