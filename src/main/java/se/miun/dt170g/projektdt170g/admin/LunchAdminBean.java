@@ -184,37 +184,16 @@ public class LunchAdminBean implements Serializable {
 
     // Method to get all lunches from the database for the dropdown
     public List<LunchMenuEntity> getAllLunches() {
-        Date today = new Date(); // Get today's date
-        return entityManager.createQuery("SELECT l FROM LunchMenuEntity l WHERE l.date > :currentDate", LunchMenuEntity.class)
-                .setParameter("currentDate", today, TemporalType.DATE)
-                .getResultList();
+        return lunchAPI.getLunch(false,false,true);
     }
 
 
     // Loads the details of the selected lunch so the can be shown in the update form
     public void loadSelectedLunch() {
-        LunchMenuEntity lunch = entityManager.find(LunchMenuEntity.class, selectedLunchId);
-
-        if (lunch != null) {
-            this.name = lunch.getName();
-            this.description = lunch.getDescription();
-            this.date = lunch.getDate();
-            this.price = lunch.getPrice();
-        }
+        this.lunchMenuEntity = lunchAPI.getLunch(selectedLunchId);
     }
 
-    public void updateLunch() {
-        LunchMenuEntity lunch = entityManager.find(LunchMenuEntity.class, selectedLunchId);
 
-        if (lunch != null) {
-            lunch.setName(this.name);
-            lunch.setDescription(this.description);
-            lunch.setDate(this.date);
-            lunch.setPrice(this.price);
-
-            entityManager.merge(lunch);
-        }
-    }
 
 
 

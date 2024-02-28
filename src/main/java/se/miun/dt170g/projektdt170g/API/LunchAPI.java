@@ -23,8 +23,9 @@ public class LunchAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getLunch(@QueryParam("week") boolean week,
-                             @QueryParam("today") boolean today) {
+    public List<LunchMenuEntity> getLunch(@QueryParam("week") boolean week,
+                             @QueryParam("today") boolean today,
+                             @QueryParam("afterToday") boolean afterToday) {
         LocalDate todayDate = LocalDate.now();
         List<LunchMenuEntity> lunchMenus;
 
@@ -39,6 +40,8 @@ public class LunchAPI {
                     .setParameter("startDate", Date.valueOf(startOfWeek))
                     .setParameter("endDate", Date.valueOf(endOfWeek))
                     .getResultList();
+        } else if (afterToday) {
+            lunchMenus = entityManager.createNamedQuery(LunchMenuEntity.findAfterToday, LunchMenuEntity.class).setParameter("date",Date.valueOf(todayDate)).getResultList();
         } else {
             // Define your fallback logic here, such as returning an empty list or all records
             lunchMenus = entityManager.createNamedQuery("LunchMenuEntity.findAll", LunchMenuEntity.class)
@@ -46,8 +49,15 @@ public class LunchAPI {
         }
 
         // Use the Response builder to return the list with proper status code
-        return Response.ok(lunchMenus).build();
+        return lunchMenus;
     }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public LunchMenuEntity getLunch(@PathParam("id") int id){
+        return entityManager.find(LunchMenuEntity.class,id);
+    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
