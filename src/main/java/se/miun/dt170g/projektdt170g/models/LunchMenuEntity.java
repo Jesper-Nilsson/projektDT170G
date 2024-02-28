@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 @NamedQueries({
         @NamedQuery(
@@ -12,11 +14,11 @@ import java.time.LocalDate;
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findBetweenDates",
-                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate"
+                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate ORDER BY l.date ASC "
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findAll",
-                query = "SELECT l FROM LunchMenuEntity l"
+                query = "SELECT l FROM LunchMenuEntity l ORDER BY l.date ASC"
         )
 })
 @Entity
@@ -38,6 +40,19 @@ public class LunchMenuEntity {
     @Basic
     @Column(name = "price", nullable = false)
     private int price;
+    private String dayOfWeek;
+
+    // Additional constructor to initialize fields
+    public LunchMenuEntity( String name, String description, LocalDate date, int price) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.price = price;
+    }
+
+    public LunchMenuEntity() {
+
+    }
 
     public int getLunchId() {
         return lunchId;
@@ -50,7 +65,16 @@ public class LunchMenuEntity {
     public String getName() {
         return name;
     }
+    public String getDayOfWeek() {
+        if (this.date != null) {
+            return this.date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        }
+        return "";
+    }
 
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
     public void setName(String name) {
         this.name = name;
     }
