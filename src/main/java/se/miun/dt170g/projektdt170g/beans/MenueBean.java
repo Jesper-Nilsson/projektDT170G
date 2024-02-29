@@ -34,26 +34,21 @@ public class MenueBean implements Serializable {
     public void init() {
         try {
             fetchWeeklyMenus(); // Use this in production
-           // this.weeklyMenus = createMockData(); // Use this for testing
+           //this.weeklyMenus = createMockData(); // Use this for testing
         } catch (Exception e) {
             e.printStackTrace(); // Or use a logger to log the exception
         }
     }
 
     private void fetchWeeklyMenus() {
-        Response response = lunchAPI.getLunch(false, true);
-        if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-            this.weeklyMenus = response.readEntity(new GenericType<List<LunchMenuEntity>>(){});
-        } else {
-            // Handle the error appropriately, maybe log it or set weeklyMenus to an empty list
-            this.weeklyMenus = new ArrayList<>();
-        }
+        this.weeklyMenus = lunchAPI.getLunch(true, false,false);
+
     }
 
     private List<LunchMenuEntity> createMockData() {
         List<LunchMenuEntity> mockData = new ArrayList<>();
         // Add your mock data here
-        mockData.add(new LunchMenuEntity( "Mock Pasta", "Delicious pasta with tomato sauce", LocalDate.now(), 100));
+        //mockData.add(new LunchMenuEntity( "Mock Pasta", "Delicious pasta with tomato sauce", LocalDate.now(), 100));
         // Repeat for other days of the week
         return mockData;
     }
