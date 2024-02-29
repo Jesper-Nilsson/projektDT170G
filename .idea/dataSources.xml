@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="dt170gprojekt@localhost" uuid="4b4dd6f8-2963-4203-9e82-898e6647ea59">
+    <data-source source="LOCAL" name="dt170gprojekt@localhost" uuid="85ff4a86-0f53-43ca-8779-47c84a077fe8">
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
@@ -13,6 +13,9 @@
         <property name="com.intellij.clouds.kubernetes.db.container.port" />
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
+      <driver-properties>
+        <property name="autocommit" value="true" />
+      </driver-properties>
     </data-source>
     <data-source source="LOCAL" name="@localhost" uuid="aecea61c-a006-4b29-b360-a75851bea29c">
       <driver-ref>mariadb</driver-ref>

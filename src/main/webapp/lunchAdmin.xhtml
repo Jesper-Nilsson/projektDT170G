@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Lunch Administration</title>
+        <h:outputStylesheet name="css/adminStyle.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button"/>
+            <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button"/>
+            <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button"/>
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'add'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="lunchName" value="Name:"/>
+                    <h:inputText id="lunchName" value="#{lunchAdminBean.lunchName}" required="true" requiredMessage="The event name is required."/>
+
+                    <h:outputLabel for="lunchDescription" value="Description:"/>
+                    <h:inputTextarea id="lunchDescription" value="#{lunchAdminBean.lunchDescription}" required="true" requiredMessage="The event description is required."/>
+
+                    <h:outputLabel for="lunchDate" value="Date:"/>
+                    <p:calendar id="lunchDate" value="#{lunchAdminBean.lunchDate}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
+
+                    <h:outputLabel for="lunchPrice" value="Lunch price:"/>
+                    <h:inputText id="lunchPrice" value="#{lunchAdminBean.lunchPrice}"/>
+
+                    <h:commandButton value="Submit" action="#{lunchAdminBean.addLunch}" update="@form"/>
+                </h:panelGrid>
+            </ui:fragment>
+
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'delete'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="deleteLunchId" value="Select Lunch to Delete:"/>
+                    <h:selectOneMenu id="deleteLunchId" value="#{lunchAdminBean.lunchMenuEntity.lunchId}">
+                        <f:selectItem itemLabel="Select Lunch" itemValue="null" noSelectionOption="true"/>
+                        <f:selectItems value="#{lunchAdminBean.allLunches}"
+                                       var="lunch"
+                                       itemValue="#{lunch.lunchId}"
+                                       itemLabel="#{lunch.name} - #{lunch.date}"/>
+                    </h:selectOneMenu>
+                    <h:commandButton value="Delete Lunch" action="#{lunchAdminBean.deleteLunch(lunchAdminBean.lunchMenuEntity.lunchId)}" />
+                </h:panelGrid>
+            </ui:fragment>
+
+
+            <ui:fragment rendered="#{lunchAdminBean.action == 'update'}">
+                <h:panelGrid columns="1">
+                    <!-- Dropdown to select lunch -->
+                    <h:outputLabel value="Select Lunch:"/>
+                    <h:selectOneMenu value="#{lunchAdminBean.selectedLunchId}">
+                        <f:selectItem itemLabel="Select Lunch" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{lunchAdminBean.allLunches}" var="lunch"
+                                       itemValue="#{lunch.lunchId}" itemLabel="#{lunch.name} - #{lunch.date}"/>
+                        <f:ajax listener="#{lunchAdminBean.loadSelectedLunch}" render="updateLunchPanel" />
+                    </h:selectOneMenu>
+
+                    <!-- Nested panelGrid for Name -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateLunchName" value="Name:"/>
+                        <h:inputText id="updateLunchName" value="#{lunchAdminBean.name}" required="true"/>
+                    </h:panelGrid>
+
+                    <!-- Nested panelGrid for Description -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateLunchDescription" value="Description:"/>
+                        <h:inputTextarea id="updateLunchDescription" value="#{lunchAdminBean.description}" required="true"/>
+                    </h:panelGrid>
+
+                    <!-- Nested panelGrid for Date -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateLunchDate" value="Date:"/>
+                        <p:calendar id="updateLunchDate" value="#{lunchAdminBean.date}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
+                    </h:panelGrid>
+
+                    <!-- Nested panelGrid for Price -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateLunchPrice" value="Price:"/>
+                        <h:inputText id="updateLunchPrice" value="#{lunchAdminBean.price}"/>
+                    </h:panelGrid>
+
+                    <!-- Button to submit updates -->
+                    <h:commandButton value="Update Lunch" action="#{lunchAdminBean.updateLunch}" />
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+
+
+
+
+
+            <h:outputText value="#{lunchAdminBean.message}" />
+        </h:form>
+    </h:body>
+</f:view>
+</html>

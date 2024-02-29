@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 @NamedQueries({
         @NamedQuery(
@@ -14,11 +12,11 @@ import java.util.Locale;
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findBetweenDates",
-                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate ORDER BY l.date ASC "
+                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate"
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findAll",
-                query = "SELECT l FROM LunchMenuEntity l ORDER BY l.date ASC"
+                query = "SELECT l FROM LunchMenuEntity l"
         )
 })
 @Entity
@@ -41,19 +39,6 @@ public class LunchMenuEntity {
     @Column(name = "price", nullable = false)
     private int price;
 
-
-    public LunchMenuEntity(String name, String description, LocalDate date, int price) {
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.price = price;
-    }
-
-    public LunchMenuEntity() {
-
-    }
-
-
     public int getLunchId() {
         return lunchId;
     }
@@ -65,8 +50,6 @@ public class LunchMenuEntity {
     public String getName() {
         return name;
     }
-
-
 
     public void setName(String name) {
         this.name = name;

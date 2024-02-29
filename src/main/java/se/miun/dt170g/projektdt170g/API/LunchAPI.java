@@ -1,8 +1,7 @@
+
 package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.ejb.Stateless;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.*;
@@ -31,14 +30,14 @@ public class LunchAPI {
 
         if (today) {
             lunchMenus = entityManager.createNamedQuery("LunchMenuEntity.findByDate", LunchMenuEntity.class)
-                    .setParameter("date", todayDate) // Directly use LocalDate
+                    .setParameter("date", Date.valueOf(todayDate))
                     .getResultList();
         } else if (week) {
             LocalDate startOfWeek = todayDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
             LocalDate endOfWeek = todayDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
             lunchMenus = entityManager.createNamedQuery("LunchMenuEntity.findBetweenDates", LunchMenuEntity.class)
-                    .setParameter("startDate", startOfWeek) // Directly use LocalDate
-                    .setParameter("endDate", endOfWeek) // Directly use LocalDate
+                    .setParameter("startDate", Date.valueOf(startOfWeek))
+                    .setParameter("endDate", Date.valueOf(endOfWeek))
                     .getResultList();
         } else {
             // Define your fallback logic here, such as returning an empty list or all records
@@ -49,7 +48,6 @@ public class LunchAPI {
         // Use the Response builder to return the list with proper status code
         return Response.ok(lunchMenus).build();
     }
-
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -62,9 +60,42 @@ public class LunchAPI {
             return Response.status(Response.Status.BAD_REQUEST).entity("Error saving lunch menu: " + e.getMessage()).build();
         }
     }
-
-
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateLunch(@PathParam("id") int id, LunchMenuEntity updateEntity) {
+        try {
+            LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
+            if (lunchMenu == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Lunch menu item not found").build();
+            }
+            lunchMenu.setDate(updateEntity.getDate());
+            lunchMenu.setName(updateEntity.getName());
+            lunchMenu.setDescription(updateEntity.getDescription());
+            lunchMenu.setPrice(updateEntity.getPrice());
+            entityManager.merge(lunchMenu);
+            return Response.ok(lunchMenu).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating lunch menu: " + e.getMessage()).build();
+        }
+    }
+    @DELETE
+    @Path("/{id}")
+    public Response deleteLunch(@PathParam("id") int id) {
+        try {
+            LunchMenuEntity lunchMenu = entityManager.find(LunchMenuEntity.class, id);
+            if (lunchMenu == null) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Lunch menu item not found").build();
+            }
+            entityManager.remove(lunchMenu);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error deleting lunch menu: " + e.getMessage()).build();
+        }
+    }
 
 }
+
 
 

@@ -36,7 +36,6 @@ public class BookingAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBooking(BookingEntity booking) {
-        String test = "hello";
         if (booking == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Booking information must be provided").build();
         }
