@@ -12,16 +12,21 @@ import java.time.LocalDate;
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findBetweenDates",
-                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate"
+                query = "SELECT l FROM LunchMenuEntity l WHERE l.date BETWEEN :startDate AND :endDate ORDER BY l.date ASC "
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findAll",
-                query = "SELECT l FROM LunchMenuEntity l"
+                query = "SELECT l FROM LunchMenuEntity l ORDER BY l.date ASC"
+        ),
+        @NamedQuery(
+                name = "LunchMenuEntity.findAfterToday",
+                query = "SELECT l FROM LunchMenuEntity l WHERE l.date > :date ORDER BY l.date ASC"
         )
 })
 @Entity
 @Table(name = "lunch_menu", schema = "dt170gprojekt", catalog = "")
 public class LunchMenuEntity {
+    public static final String findAfterToday = "LunchMenuEntity.findAfterToday";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "lunch_id", nullable = false)
