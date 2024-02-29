@@ -31,7 +31,7 @@ document.getElementById('bookingButton').addEventListener('click', function() {
 });
 
 
-function validateInputs() {
+function validateDateTimeInputs() {
     // Get references to the input elements
     var dateInput = document.getElementById("j_idt17:datePicker_input");
     var timeInput = document.getElementById("j_idt17:timePicker_input");
@@ -48,48 +48,48 @@ function validateInputs() {
     }
 }
 
+function validateNamePhoneInputs() {
+    const nameInput = document.getElementById("j_idt17:userName");
+    const phoneInput = document.getElementById("j_idt17:userPhone");
+
+    // Check if the inputs are empty
+    const nameIsEmpty = nameInput.value.trim() === '';
+    const phoneIsEmpty = phoneInput.value.trim() === '';
+
+    // If both name and phone are required fields
+    if (nameIsEmpty || phoneIsEmpty) {
+        return false; // Return false if either name or phone is empty
+    } else {
+        return true; // Return true if both name and phone are provided
+    }
+}
 
 // Event listener for choosing number of guests
 document.getElementById('chooseDate').addEventListener('click', function() {
-    if (validateInputs()) {
+    if (validateDateTimeInputs()) {
         closeModal('2');
         openModal('3');
     }
 });
 
-// Event listener for saving booking
-/*document.getElementById('saveBooking').addEventListener('click', function() {
-    // Here you would typically collect all the booking information and send it to the server
-    // For the purpose of this example, we'll just log it to the console and close the modal
-    var numberOfGuests = document.getElementById('numberOfGuests').value;
-    var bookingDate = document.getElementById('bookingDate').value;
-    var userName = document.getElementById('userName').value;
-    var userPhone = document.getElementById('userPhone').value;
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
 
-    console.log('Booking details:',
-        'Number of Guests:', numberOfGuests,
-        'Date:', bookingDate,
-        'Name:', userName,
-        'Phone:', userPhone);
+    // Perform validation
+    if (validateNamePhoneInputs()) {
+        closeModal('3');
+        alert("Your booking has been saved!");
 
-    // After collecting data, you could send it to the server with an AJAX request or similar.
-
-    // Close the final modal
-    closeModal('modalStep3');
-
-    // Optionally, reset the form or provide a confirmation message
-    // Reset form example:
-    document.getElementById('numberOfGuests').selectedIndex = 0;
-    document.getElementById('bookingDate').value = '';
-    document.getElementById('userName').value = '';
-    document.getElementById('userPhone').value = '';
-
-    // Confirmation message example:
-    alert('Din bokning har sparats. Tack!');
-});*/
+        // Call the bookingBean.submit() method
+        document.getElementById('j_idt17:saveBooking').form.submit();
+    } else {
+        // Print error (input fields not filled)
+    }
+});
 
 
-
+/*
 // Close modals when clicking outside
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) {
@@ -97,7 +97,7 @@ window.onclick = function(event) {
         closeModal(2);
         closeModal(3);
     }
-}
+}*/
 
 // Function to navigate back to the previous modal
 function goBackModal(currentModalId, previousModalId) {

@@ -16,7 +16,7 @@ import java.time.LocalDate;
         ),
         @NamedQuery(
                 name = "LunchMenuEntity.findAll",
-                query = "SELECT l FROM LunchMenuEntity l"
+                query = "SELECT l FROM LunchMenuEntity l ORDER BY l.date ASC"
         )
 })
 @Entity

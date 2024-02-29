@@ -112,10 +112,12 @@
                 <p:outputLabel for="datePicker" value="Välj ett datum"/>
                 <p:datePicker id="datePicker" value="#{bookingBean.date}"
                               pattern="dd/MM/yyyy" showOnFocus="true"
-                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
+                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true" required="true"/>
 
                 <p:outputLabel for="timePicker" value="Välj en tid"/>
-                <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30" mindate="17:00" maxdate="20:30" value="#{bookingBean.time}" readonlyInput="true"/>
+                <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30"
+                              mindate="17:00" maxdate="20:30" value="#{bookingBean.time}"
+                              readonlyInput="true" required="true"/>
 
                 <button id="chooseDate" type="button" class="continue-btn">Fortsätt</button>
             </div>
@@ -134,14 +136,15 @@
                 <h2 class="header-booking">Dina uppgifter</h2>
 
                 <h:outputLabel for="userName" value="Ditt namn"/>
-                <h:inputText id="userName" value="#{bookingBean.name}"/>
+                <h:inputText id="userName" value="#{bookingBean.name}" required="true"/>
 
                 <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
-                <h:inputText id="userPhone" value="#{bookingBean.telephone}"/>
+                <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true"/>
 
-                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" onclick="closeModal(3)" styleClass="continue-btn" update="@form">
+                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
                     <f:ajax execute="@form" render="@none" event="click"/>
                 </h:commandButton>
+
             </div>
         </aside>
         </h:form>
@@ -169,12 +172,9 @@
 
 <ui:include src="WEB-INF/sections/weeklyLunch.xhtml" />
 
-
 <ui:include src="WEB-INF/sections/alacarte.xhtml" />
 
-
 <ui:include src="WEB-INF/sections/events.xhtml" />
-
 
 <ui:include src="WEB-INF/sections/footer.xhtml" />
 

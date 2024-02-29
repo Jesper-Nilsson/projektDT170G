@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/template.xhtml"> <!-- Adjust 'template.xhtml' as needed -->
+
+    <ui:define name="content">
+        <!-- Weekly lunch section -->
+        <section class="menu-container" id="weekly-lunch">
+            <header class="menu-header">
+                <h1>Veckans Lunch v.38</h1>
+                <p>Måndag - Fredag kl. 11.30-14.00</p>
+            </header>
+            <ui:repeat value="#{menue.menus}" var="menu">
+                <article class="menu-item">
+                    <h2>#{menu.dayOfWeek}</h2> <!-- Assuming 'dayOfWeek' is part of your LunchMenuEntity -->
+                    <p>#{menu.description}</p>
+                </article>
+            </ui:repeat>
+            <footer class="menu-footer">
+                <p>Lunch 100:-</p>
+                <p class="allergy-info">Allergisk? Fråga personalen så hjälper vi er med era frågor!</p>
+                <p>Hemlagat från grunden och bara riktigt goda, ärliga maträtter!</p>
+                <p>SMÄKLIG MÅLTID</p>
+            </footer>
+            <a href="#top" class="top-link">Till Toppen</a>
+        </section>
+    </ui:define>
+
+</ui:composition>
