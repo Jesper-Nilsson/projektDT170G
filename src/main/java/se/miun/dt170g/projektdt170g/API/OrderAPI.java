@@ -78,6 +78,7 @@ public class OrderAPI {
             orderReturn.setOrder_ID(currentOrder.getRestaurantOrderId());
             orderReturn.setStatusAppetizer(currentOrder.getStatusAppetizer());
             orderReturn.setStatusMain(currentOrder.getStatusMain());
+            orderReturn.setRestaurantTableId(currentOrder.getRestaurantTableId());
             orderReturn.setStatusDessert(currentOrder.getStatusDessert());
             orderReturn.setComment(currentOrder.getComment());
 
@@ -101,13 +102,14 @@ public class OrderAPI {
     @Transactional
     public Response addOrder(OrderDTO orderDTO) {
         try (Connection connection = dataSource.getConnection()) {
-            String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment) VALUES (?, ?, ?, ?, ?)";
-            try (PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
+            String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment, order_status) VALUES (?, ?, ?, ?, ?, ?)";
+             try (PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
                 orderStatement.setString(1, orderDTO.getStatusAppetizer());
                 orderStatement.setString(2, orderDTO.getStatusMain());
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
+                orderStatement.setInt(6, orderDTO.getOrderStatus());
 
                 int affectedRows = orderStatement.executeUpdate();
                 if (affectedRows == 0) {

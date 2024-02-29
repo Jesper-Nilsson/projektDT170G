@@ -22,7 +22,7 @@ public class OrderDTO {
 
     private ArrayList<Drink> drinks;
 
-    public OrderDTO(int order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
+    public OrderDTO(int order_ID, String statusAppetizer, String statusMain, String statusDessert, int restaurantTableId, String comment, boolean orderStatus, ArrayList<ALaCarteItem> foods, ArrayList<Drink> drinks) {
         this.order_ID = order_ID;
         this.statusAppetizer = statusAppetizer;
         this.statusMain = statusMain;
@@ -31,6 +31,7 @@ public class OrderDTO {
         this.comment = comment;
         this.foods = foods;
         this.drinks = drinks;
+        this.orderStatus = orderStatus;
     }
 
     public OrderDTO() {
@@ -108,8 +109,11 @@ public class OrderDTO {
         foods.add(food);
     };
 
-    public boolean isOrderStatus() {
-        return orderStatus;
+    public int getOrderStatus() {
+        if (orderStatus)
+            return 1;
+        else
+            return 0;
     }
 
     public void setOrderStatus(boolean orderStatus) {

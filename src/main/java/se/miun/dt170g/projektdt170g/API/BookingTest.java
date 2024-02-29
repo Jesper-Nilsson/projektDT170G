@@ -37,13 +37,16 @@ public class BookingTest {
     public Response test() {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setComment("test");
-        orderDTO.setStatusMain("begun");
-        orderDTO.setStatusAppetizer("none");
-        orderDTO.setStatusDessert("none");
+        orderDTO.setStatusMain("Skickat");
+        orderDTO.setStatusAppetizer("Skickat");
+        orderDTO.setStatusDessert("Skickat");
         orderDTO.setRestaurantTableId(3);
+        orderDTO.setOrderStatus(true);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1)));
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,2)));
+        orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,3)));
         orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 1)));
+        orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 2)));
         Response response = orderAPI.addOrder(orderDTO);
         return Response.ok(response).build(); // Return the Response object directly
     }
