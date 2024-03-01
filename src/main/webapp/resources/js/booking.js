@@ -6,30 +6,54 @@ document.addEventListener("DOMContentLoaded", function() {
     buttons.forEach(function(button) {
         // Add event listener for click event
         button.addEventListener('click', function() {
-            closeModal(1);
             openModal(2);
+            closeModal(1);
         });
     });
 });
 
 // Function to open a modal
 function openModal(modalId) {
-    document.getElementById("modalStep" + modalId).style.display = 'block';
-    document.getElementById("modalStep" + modalId).setAttribute('aria-hidden', 'false');
+    const modal = document.getElementById("modalStep" + modalId);
+    modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open'); // Add class to body
+    document.documentElement.style.overflow = 'hidden'; // Prevent scrolling on html element
 }
 
 // Function to close a modal
 function closeModal(modalId) {
-    document.getElementById("modalStep" + modalId).style.display = 'none';
-    document.getElementById("modalStep" + modalId).setAttribute('aria-hidden', 'true');
+    const modal = document.getElementById("modalStep" + modalId);
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+
+    // Check if any modals are still open
+    const modals = document.querySelectorAll('.modal')
+    let isOpen = false;
+
+    modals.forEach(modal => {
+        if (modal.style.display === 'block') {
+            isOpen = true;
+        }
+    });
+
+    if (!isOpen) {
+        document.body.classList.remove('modal-open'); // Remove class from body if no modals are open
+        document.documentElement.style.overflow = 'hidden scroll'; // Restore scrolling on html element
+    }
 }
 
 
+
+
 // Event listener for booking button
-document.getElementById('bookingButton').addEventListener('click', function() {
+document.getElementById('bookingButton1').addEventListener('click', function() {
     openModal('1');
 });
 
+document.getElementById('bookingButton2').addEventListener('click', function() {
+    openModal('1');
+});
 
 function validateDateTimeInputs() {
     // Get references to the input elements
@@ -48,27 +72,39 @@ function validateDateTimeInputs() {
     }
 }
 
-function validateNamePhoneInputs() {
-    const nameInput = document.getElementById("j_idt17:userName");
-    const phoneInput = document.getElementById("j_idt17:userPhone");
+function validateNamePhone() {
+    const nameInput = document.getElementById('j_idt17:userName');
+    const phoneInput = document.getElementById('j_idt17:userPhone');
 
-    // Check if the inputs are empty
-    const nameIsEmpty = nameInput.value.trim() === '';
-    const phoneIsEmpty = phoneInput.value.trim() === '';
-
-    // If both name and phone are required fields
-    if (nameIsEmpty || phoneIsEmpty) {
-        return false; // Return false if either name or phone is empty
+    if (nameInput.value.trim() === '' || phoneInput.value.trim() === '') {
+        // If either field is empty, disable the submit button and prevent form submission
+        return false;
     } else {
-        return true; // Return true if both name and phone are provided
+        // Validate phone number format
+        const phoneNumber = phoneInput.value.trim();
+        const phoneNumberRegex = /^(?:\d{10}|\d{3}-\d{3} \d{2} \d{2}|\d{3}-\d{7}|\d{3} \d{3} \d{2} \d{2})$/;
+        if (!phoneNumberRegex.test(phoneNumber)) {
+            return false; // Prevent form submission if phone number format is incorrect
+        }
+
+        // If both fields are filled and the phone number format is correct, allow form submission
+        return true;
+
+
+
+
+        // If both fields are filled, enable the submit button and allow form submission
+        return true;
     }
 }
 
 // Event listener for choosing number of guests
-document.getElementById('chooseDate').addEventListener('click', function() {
+document.getElementById('chooseDateTime').addEventListener('click', function() {
     if (validateDateTimeInputs()) {
-        closeModal('2');
         openModal('3');
+        closeModal('2');
+    } else {
+        showInvalidDateInput();
     }
 });
 
@@ -77,27 +113,20 @@ document.getElementById('j_idt17:saveBooking').addEventListener('click', functio
     event.preventDefault();
 
     // Perform validation
-    if (validateNamePhoneInputs()) {
+    if (validateNamePhone()) {
         closeModal('3');
         alert("Your booking has been saved!");
-
-        // Call the bookingBean.submit() method
+        document.getElementById('j_idt17').disabled = false;
+        document.getElementById('invalidNamePhoneInput').style.display = "none";
         document.getElementById('j_idt17:saveBooking').form.submit();
+        document.getElementById('j_idt17:saveBooking').form.reset();
+
     } else {
-        // Print error (input fields not filled)
+        document.getElementById('j_idt17').disabled = true;
+        document.getElementById('invalidNamePhoneInput').style.display = "block";
+
     }
 });
-
-
-/*
-// Close modals when clicking outside
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        closeModal(1);
-        closeModal(2);
-        closeModal(3);
-    }
-}*/
 
 // Function to navigate back to the previous modal
 function goBackModal(currentModalId, previousModalId) {
@@ -107,5 +136,10 @@ function goBackModal(currentModalId, previousModalId) {
 
 function showMoreThanSixInfo() {
     const moreThanSixInfo = document.getElementById("moreThanSixInfo");
+    moreThanSixInfo.style.display = "block";
+}
+
+function showInvalidDateInput() {
+    const moreThanSixInfo = document.getElementById("invalidDateTimeInput");
     moreThanSixInfo.style.display = "block";
 }

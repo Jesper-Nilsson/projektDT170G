@@ -7,7 +7,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(0,0,0,0.4);
 }
 
@@ -124,8 +124,11 @@ input[type="text"], input[type="tel"] {
     padding: 1rem;
 }
 
+.inputHeader {
+    margin-left: 1.5rem;
+}
 
-#moreThanSixInfo{
+#moreThanSixInfo, #invalidDateTimeInput, #invalidNamePhoneInput{
     max-width: 70%;
     text-align: center;
     border: #666666 1px solid;
@@ -143,4 +146,9 @@ input[type="text"], input[type="tel"] {
     #modalTitle1, #modalTitle2, #modalTitle3 {
         font-size: 1rem; /* Larger font size for titles */
     }
+}
+
+body.modal-open,
+html.modal-open {
+    overflow: hidden !important;
 }
