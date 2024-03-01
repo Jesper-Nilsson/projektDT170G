@@ -21,6 +21,7 @@ public class Drink {
         this.description = drink.getDescription();
         this.price = drink.getPrice();
     }
+    public Drink(){}
 
     public int getDrink_ID() {
         return drink_ID;

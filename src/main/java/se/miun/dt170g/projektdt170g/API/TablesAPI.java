@@ -42,6 +42,8 @@ public class TablesAPI {
         // Find the existing table in the database
         TableSessionEntity existingTable = entityManager.find(TableSessionEntity.class, session_id);
 
+        //SELECT TABLE FROM TABLES WHERE id = session_id
+
         if (existingTable == null)
             return Response.status(Response.Status.NOT_FOUND).build(); // Table not found, return a 404
 
