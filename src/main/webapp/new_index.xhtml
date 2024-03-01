@@ -23,172 +23,181 @@
 </h:head>
 <h:body>
 
-<!-- start header.xhtml -->
-<section class="start-page">
-    <img src="resources/images/background.png" alt="Logo" id="image_bg" />
-    <header class="site-header">
-        <div class="header-content">
-            <img src="resources/images/only_logo.png" alt="Logo" class="logo" />
-            <button class="nav-toggle" aria-label="Öppna menyn">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
-        <nav class="main-nav">
-            <ul class="menu" id="menu">
-                <li><a href="index2.xhtml">Hem</a></li>
-                <li><a href="#weekly-lunch">Veckans lunch</a></li>
-                <li><a href="#alacarte">A la carte</a></li>
-                <li><a href="#events">Eventer</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="welcome-text">
-        <h2>Välkommen till Antons Skafferi</h2>
-        <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
-    </div>
-    <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
-        <section class="daily-lunch">
-            <h2>Dagens lunch</h2>
-            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
-            <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
-        </section>
-    </ui:fragment>
-    <ui:fragment rendered="#{empty menueBean.todaysLunch}">
-        <section class="daily-lunch">
-            <h2>Dagens lunch</h2>
-            <p>Endast Vardagar</p>
-        </section>
-    </ui:fragment>
-    <section class="actions">
-        <a href="#alacarte" class="first_page_btn">Vår meny</a>
-        <button class="first_page_btn" id="bookingButton">Boka Bord</button>
-
-        <h:form>
-        <!-- Modal for Step 1: Choosing Lunch or Dinner -->
-        <aside id="modalStep1" class="modal" aria-labelledby="modalTitle1" aria-hidden="true">
-            <div class="content-container">
-                <div class="booking-titel">
-                    <span class="close" onclick="closeModal('1')">&#215;</span>
-                    <h2 id="modalTitle1">Antons Skafferi - Boka bord</h2>
-                </div>
-                <h2 class="header-booking">Välj antal gäster</h2>
-                    <h:commandButton value="1 gäst" action="#{bookingBean.setAmount(1)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click" />
-                    </h:commandButton>
-
-                    <h:commandButton value="2 gäster" action="#{bookingBean.setAmount(2)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click"/>
-                    </h:commandButton>
-
-                    <h:commandButton value="3 gäster" action="#{bookingBean.setAmount(3)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click" />
-                    </h:commandButton>
-
-                    <h:commandButton value="4 gäster" action="#{bookingBean.setAmount(4)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click"/>
-                    </h:commandButton>
-
-                    <h:commandButton value="5 gäster" action="#{bookingBean.setAmount(5)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click"/>
-                    </h:commandButton>
-
-                    <h:commandButton value="6 gäster" action="#{bookingBean.setAmount(6)}" styleClass="guestAmountBtn">
-                        <f:ajax execute="@this" render="@none" event="click"/>
-                    </h:commandButton>
-
-                    <h:commandButton value="7+ gäster" onclick="showMoreThanSixInfo()" styleClass="guestAmountOverLimitBtn">
-                        <f:ajax execute="@this" render="@none" event="click"/>
-                    </h:commandButton>
-                    <p id="moreThanSixInfo">För bokning med fler än 6 personer, ber vi er att maila eller ringa in till oss! Mail: antonsskafferi@gmail.se Tel: 08-301101</p>
+    <!-- start header.xhtml -->
+    <section class="start-page">
+        <img src="resources/images/background.png" alt="Logo" id="image_bg" />
+        <header class="site-header">
+            <div class="header-content">
+                <img src="resources/images/only_logo.png" alt="Logo" class="logo" />
+                <button class="nav-toggle" aria-label="Öppna menyn">
+                    <i class="fa fa-bars"></i>
+                </button>
             </div>
-        </aside>
-
-        <!-- Modal for Step 3: Choosing Date -->
-        <aside id="modalStep2" class="modal" aria-labelledby="modalTitle2" aria-hidden="true">
-            <div class="content-container">
-                <!-- Add back arrow to each modal except the first one -->
-                <div class="booking-titel">
-                    <div class="back-arrow" onclick="goBackModal('2', '1')">&#x2190;</div>
-                    <span class="close" onclick="closeModal('2')">&#215;</span>
-                    <h2 id="modalTitle2">Antons Skafferi - Boka bord</h2>
-                </div>
-                <h2 class="header-booking">Välj datum</h2>
-                <!-- Content for choosing a date -->
-                <p:outputLabel for="datePicker" value="Välj ett datum"/>
-                <p:datePicker id="datePicker" value="#{bookingBean.date}"
-                              pattern="dd/MM/yyyy" showOnFocus="true"
-                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
-
-                <p:outputLabel for="timePicker" value="Välj en tid"/>
-                <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30" mindate="17:00" maxdate="20:30" value="#{bookingBean.time}" readonlyInput="true"/>
-
-                <button id="chooseDate" type="button" class="continue-btn">Fortsätt</button>
-            </div>
-        </aside>
-
-        <!-- Modal for Step 4: Entering User Information -->
-        <aside id="modalStep3" class="modal" aria-labelledby="modalTitle3" aria-hidden="true">
-            <div class="content-container">
-                <!-- Add back arrow to each modal except the first one -->
-                <div class="booking-titel">
-                    <div class="back-arrow" onclick="goBackModal('3', '2')">&#x2190;</div>
-                    <span class="close" onclick="closeModal('3')">&#215;</span>
-                    <h2 id="modalTitle3">Antons Skafferi - Boka bord</h2>
-                </div>
-
-                <h2 class="header-booking">Dina uppgifter</h2>
-
-                <h:outputLabel for="userName" value="Ditt namn"/>
-                <h:inputText id="userName" value="#{bookingBean.name}"/>
-
-                <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
-                <h:inputText id="userPhone" value="#{bookingBean.telephone}"/>
-
-                <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" onclick="closeModal(3)" styleClass="continue-btn">
-                    <f:ajax execute="@this" render="@none" event="click"/>
-                </h:commandButton>
-            </div>
-        </aside>
-        </h:form>
-
-    </section>
-    <section class="event-pop-up">
-        <div id="popupEvent" class="popup">
-            <div class="popup-content">
-                <span onclick="closePopup()" class="close-btn">&#215;</span> <!-- Close button -->
-                <h2 id="popupHeader">Upcoming Events</h2>
-                <p id="popupText">Don't miss our special weekend events!</p>
-                <ul id="popupList">
-                    <li>25 Dec - Saturday: Live Music Night</li>
-                    <li>26 Dec - Sunday: Wine Tasting Event</li>
+            <nav class="main-nav">
+                <ul class="menu" id="menu">
+                    <li><a href="index2.xhtml">Hem</a></li>
+                    <li><a href="#weekly-lunch">Veckans lunch</a></li>
+                    <li><a href="#alacarte">A la carte</a></li>
+                    <li><a href="#events">Eventer</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
                 </ul>
-                <button onclick="location.href='#events';" id="pop_btn">More Info</button>
-            </div>
+            </nav>
+        </header>
+
+        <div class="welcome-text">
+            <h2>Välkommen till Antons Skafferi</h2>
+            <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
         </div>
+        <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
+            <section class="daily-lunch">
+                <h2>Dagens lunch</h2>
+                <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
+                <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
+            </section>
+        </ui:fragment>
+        <ui:fragment rendered="#{empty menueBean.todaysLunch}">
+            <section class="daily-lunch">
+                <h2>Dagens lunch</h2>
+                <p>Endast Vardagar</p>
+            </section>
+        </ui:fragment>
+        <section class="actions">
+            <a href="#alacarte" class="first_page_btn">Vår meny</a>
+            <button class="first_page_btn" id="bookingButton1">Boka Bord</button>
+
+            <h:form>
+                <!-- Modal for Step 1: Choosing Lunch or Dinner -->
+                <aside id="modalStep1" class="modal" aria-labelledby="modalTitle1" aria-hidden="true">
+                    <div class="content-container">
+                        <div class="booking-titel">
+                            <span class="close" onclick="closeModal('1')">&#215;</span>
+                            <h2 id="modalTitle1">Antons Skafferi - Boka bord</h2>
+                        </div>
+                        <h2 class="header-booking">Välj antal gäster</h2>
+
+                        <h:commandButton value="1 gäst" action="#{bookingBean.setAmount(1)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click" />
+                        </h:commandButton>
+
+                        <h:commandButton value="2 gäster" action="#{bookingBean.setAmount(2)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click"/>
+                        </h:commandButton>
+
+                        <h:commandButton value="3 gäster" action="#{bookingBean.setAmount(3)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click" />
+                        </h:commandButton>
+
+                        <h:commandButton value="4 gäster" action="#{bookingBean.setAmount(4)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click"/>
+                        </h:commandButton>
+
+
+                        <h:commandButton value="5 gäster" action="#{bookingBean.setAmount(5)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click"/>
+                        </h:commandButton>
+
+                        <h:commandButton value="6 gäster" action="#{bookingBean.setAmount(6)}" styleClass="guestAmountBtn">
+                            <f:ajax execute="@this" render="@none" event="click"/>
+                        </h:commandButton>
+
+                        <h:commandButton value="7+ gäster" onclick="showMoreThanSixInfo()" styleClass="guestAmountOverLimitBtn">
+                            <f:ajax execute="@this" render="@none" event="click"/>
+                        </h:commandButton>
+                        <p id="moreThanSixInfo">För bokning med fler än 6 personer, ber vi er att maila eller ringa in till oss! Mail: antonsskafferi@gmail.se Tel: 08-301101</p>
+                    </div>
+                </aside>
+
+                <!-- Modal for Step 3: Choosing Date -->
+                <aside id="modalStep2" class="modal" aria-labelledby="modalTitle2" aria-hidden="true">
+                    <div class="content-container">
+                        <!-- Add back arrow to each modal except the first one -->
+                        <div class="booking-titel">
+                            <div class="back-arrow" onclick="goBackModal('2', '1')">&#x2190;</div>
+                            <span class="close" onclick="closeModal('2')">&#215;</span>
+                            <h2 id="modalTitle2">Antons Skafferi - Boka bord</h2>
+                        </div>
+                        <h2 class="header-booking">Välj datum</h2>
+                        <!-- Content for choosing a date -->
+                        <p:outputLabel for="datePicker" value="Välj ett datum" styleClass="inputHeader"/>
+                        <p:datePicker id="datePicker" value="#{bookingBean.date}"
+                                      pattern="dd/MM/yyyy" showOnFocus="true"
+                                      mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
+
+                        <p:outputLabel for="timePicker" value="Välj en tid" styleClass="inputHeader"/>
+                        <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30"
+                                      mindate="17:00" maxdate="20:30" value="#{bookingBean.time}"
+                                      readonlyInput="true"/>
+
+                        <button id="chooseDateTime" type="button" class="continue-btn">Fortsätt</button>
+
+                        <p id="invalidDateTimeInput">Vänligen välj datum och tid innan du kan fortsätta</p>
+
+                    </div>
+                </aside>
+
+                <!-- Modal for Step 4: Entering User Information -->
+                <aside id="modalStep3" class="modal" aria-labelledby="modalTitle3" aria-hidden="true">
+                    <div class="content-container">
+                        <!-- Add back arrow to each modal except the first one -->
+                        <div class="booking-titel">
+                            <div class="back-arrow" onclick="goBackModal('3', '2')">&#x2190;</div>
+                            <span class="close" onclick="closeModal('3')">&#215;</span>
+                            <h2 id="modalTitle3">Antons Skafferi - Boka bord</h2>
+                        </div>
+
+                        <h2 class="header-booking">Dina uppgifter</h2>
+
+                        <h:outputLabel for="userName" value="Ditt namn" styleClass="inputHeader"/>
+                        <h:inputText id="userName" value="#{bookingBean.name}" required="true"/>
+
+                        <h:outputLabel for="userPhone" value="Ditt telefonnummer" styleClass="inputHeader"/>
+                        <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true">
+                            <f:validateRegex pattern="\d{3}-\d{3}-\d{4}||\d{10}" />
+                        </h:inputText>
+
+                        <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
+                            <f:ajax execute="@form" render="@none" event="click"/>
+                        </h:commandButton>
+
+                        <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
+
+                    </div>
+                </aside>
+            </h:form>
+
+        </section>
+        <section class="event-pop-up">
+            <div id="popupEvent" class="popup">
+                <div class="popup-content">
+                    <span onclick="closePopup()" class="close-btn">&#215;</span> <!-- Close button -->
+                    <h2 id="popupHeader">Upcoming Events</h2>
+                    <p id="popupText">Don't miss our special weekend events!</p>
+                    <ul id="popupList">
+                        <li>25 Dec - Saturday: Live Music Night</li>
+                        <li>26 Dec - Sunday: Wine Tasting Event</li>
+                    </ul>
+                    <button onclick="location.href='#events';" id="pop_btn">More Info</button>
+                </div>
+            </div>
+        </section>
+
+        <a href="#top" class="top-link">Till Toppen</a>
     </section>
-
-    <a href="#top" class="top-link">Till Toppen</a>
-</section>
-<!-- end header.xhtml -->
+    <!-- end header.xhtml -->
 
 
-<ui:include src="WEB-INF/section2/menue.xhtml" />
+    <ui:include src="WEB-INF/section2/menue.xhtml" />
 
+    <ui:include src="WEB-INF/section2/alacarteTest.xhtml" />
 
-<ui:include src="WEB-INF/section2/alacarteTest.xhtml" />
+    <ui:include src="WEB-INF/sections/events.xhtml" />
 
+    <ui:include src="WEB-INF/sections/footer.xhtml" />
 
-<ui:include src="WEB-INF/sections/events.xhtml" />
-
-
-<ui:include src="WEB-INF/sections/footer.xhtml" />
-
-<script src="resources/js/nav.js" type="text/javascript"></script>
-<script src="resources/js/event.js" type="text/javascript"></script>
-<script src="resources/js/booking.js" type="text/javascript"></script>
-<script src="resources/js/main.js" type="text/javascript"></script>
+    <script src="resources/js/nav.js" type="text/javascript"> </script>
+    <script src="resources/js/event.js" type="text/javascript"> </script>
+    <script src="resources/js/booking.js" type="text/javascript"> </script>
+    <script src="resources/js/main.js" type="text/javascript"> </script>
 
 </h:body>
 </html>
