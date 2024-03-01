@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 
 import java.util.Collection;
 @NamedQueries({
@@ -36,6 +37,14 @@ public class ALaCarteMenuEntity {
     private int price;
     @OneToMany(mappedBy = "aLaCarteMenuByALaCarteId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PurchasedALaCarteEntity> purchasedALaCartesByALaCarteId;
+
+    public ALaCarteMenuEntity(ALaCarteItem item) {
+        this.type = item.getType();
+        this.price = item.getPrice();
+        this.name = item.getName();
+        this.description = item.getDescription();
+    }
+    public ALaCarteMenuEntity(){}
 
     public int getaLaCarteId() {
         return aLaCarteId;

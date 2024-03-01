@@ -31,10 +31,9 @@ public class ALaCarteAPI {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getItemsByType(@QueryParam("type") String type) {
+    public List<ALaCarteItem> getItemsByType(@QueryParam("type") String type) {
         List<ALaCarteMenuEntity> aLaCarteItems = new ArrayList<>();
         List<ALaCarteItem> foods = new ArrayList<>();
-        String test = "ett test";
         if (type != null) {
             aLaCarteItems = entityManager.createNamedQuery(ALaCarteMenuEntity.findByType, ALaCarteMenuEntity.class).setParameter("type",type).getResultList();
         }else {
@@ -45,34 +44,28 @@ public class ALaCarteAPI {
         }
 
 
-        return Response.ok(foods).build();
+        return foods;
     }
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getItemById(@PathParam("id") int id) {
+    public ALaCarteItem getItemById(@PathParam("id") int id) {
         ALaCarteMenuEntity item = entityManager.find(ALaCarteMenuEntity.class, id);
-        if (item == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Item not found").build();
-        }
-        ALaCarteItem food = new ALaCarteItem(item);
-        return Response.ok(food).build();
+        return new ALaCarteItem(item);
+
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createItem(ALaCarteMenuEntity item) {
-        try {
-            entityManager.persist(item);
-            return Response.status(Response.Status.CREATED).entity(item).build();
-        } catch (Exception e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error creating item: " + e.getMessage()).build();
-        }
+    public Response createItem(ALaCarteItem item) {
+        ALaCarteMenuEntity menuEntity = new ALaCarteMenuEntity(item);
+        entityManager.persist(menuEntity);
+        return Response.ok(menuEntity).build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateItem(@QueryParam("id") int id, ALaCarteMenuEntity itemUpdate) {
+    public Response updateItem(@QueryParam("id") int id, ALaCarteItem itemUpdate) {
         try {
             ALaCarteMenuEntity item = entityManager.find(ALaCarteMenuEntity.class, id);
             if (item == null) {
@@ -82,6 +75,7 @@ public class ALaCarteAPI {
             item.setType(itemUpdate.getType());
             item.setDescription(itemUpdate.getDescription());
             item.setPrice(itemUpdate.getPrice());
+            item.setaLaCarteId(id);
             entityManager.merge(item);
             return Response.ok(item).build();
         } catch (Exception e) {

@@ -48,10 +48,19 @@
         <h2>Välkommen till Antons Skafferi</h2>
         <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
     </div>
-    <section class="daily-lunch">
-        <h2 >Dagens lunch </h2>
-        <p>Köttbullar med potatis</p>
-    </section>
+    <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
+        <section class="daily-lunch">
+            <h2>Dagens lunch</h2>
+            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
+            <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
+        </section>
+    </ui:fragment>
+    <ui:fragment rendered="#{empty menueBean.todaysLunch}">
+        <section class="daily-lunch">
+            <h2>Dagens lunch</h2>
+            <p>Endast Vardagar</p>
+        </section>
+    </ui:fragment>
     <section class="actions">
         <a href="#alacarte" class="first_page_btn">Vår meny</a>
         <button class="first_page_btn" id="bookingButton">Boka Bord</button>
@@ -168,7 +177,7 @@
 <ui:include src="WEB-INF/section2/menue.xhtml" />
 
 
-<ui:include src="WEB-INF/sections/alacarte.xhtml" />
+<ui:include src="WEB-INF/section2/alacarteTest.xhtml" />
 
 
 <ui:include src="WEB-INF/sections/events.xhtml" />

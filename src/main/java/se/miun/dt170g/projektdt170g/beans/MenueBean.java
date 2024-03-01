@@ -47,6 +47,19 @@ public class MenueBean implements Serializable {
 
 
 
+// Inom MenueBean-klassen
+
+    public LunchMenuEntity getTodaysLunch() {
+        LocalDate today = LocalDate.now();
+        for (LunchMenuEntity menu : weeklyMenus) {
+            if (menu.getDate() != null && menu.getDate().isEqual(today)) {
+                return menu;
+            }
+        }
+        return null; // Inget hittades för dagens datum, hantera detta fall lämpligt
+    }
+
+
 
     public String getName() {
         return lunchMenuEntity.getName() ;
