@@ -109,17 +109,20 @@
                 </div>
                 <h2 class="header-booking">Välj datum</h2>
                 <!-- Content for choosing a date -->
-                <p:outputLabel for="datePicker" value="Välj ett datum"/>
+                <p:outputLabel for="datePicker" value="Välj ett datum" styleClass="inputHeader"/>
                 <p:datePicker id="datePicker" value="#{bookingBean.date}"
                               pattern="dd/MM/yyyy" showOnFocus="true"
-                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true" required="true"/>
+                              mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
 
-                <p:outputLabel for="timePicker" value="Välj en tid"/>
+                <p:outputLabel for="timePicker" value="Välj en tid" styleClass="inputHeader"/>
                 <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30"
                               mindate="17:00" maxdate="20:30" value="#{bookingBean.time}"
-                              readonlyInput="true" required="true"/>
+                              readonlyInput="true"/>
 
-                <button id="chooseDate" type="button" class="continue-btn">Fortsätt</button>
+                <button id="chooseDateTime" type="button" class="continue-btn">Fortsätt</button>
+
+                <p id="invalidDateTimeInput">Vänligen välj datum och tid innan du kan fortsätta</p>
+
             </div>
         </aside>
 
@@ -135,15 +138,19 @@
 
                 <h2 class="header-booking">Dina uppgifter</h2>
 
-                <h:outputLabel for="userName" value="Ditt namn"/>
+                <h:outputLabel for="userName" value="Ditt namn" styleClass="inputHeader"/>
                 <h:inputText id="userName" value="#{bookingBean.name}" required="true"/>
 
-                <h:outputLabel for="userPhone" value="Ditt telefonnummer"/>
-                <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true"/>
+                <h:outputLabel for="userPhone" value="Ditt telefonnummer" styleClass="inputHeader"/>
+                <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true">
+                    <f:validateRegex pattern="\d{3}-\d{3}-\d{4}||\d{10}" />
+                </h:inputText>
 
                 <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
                     <f:ajax execute="@form" render="@none" event="click"/>
                 </h:commandButton>
+
+                <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 
             </div>
         </aside>
@@ -178,10 +185,10 @@
 
 <ui:include src="WEB-INF/sections/footer.xhtml" />
 
-<script src="resources/js/nav.js" type="text/javascript"></script>
-<script src="resources/js/event.js" type="text/javascript"></script>
-<script src="resources/js/booking.js" type="text/javascript"></script>
-<script src="resources/js/main.js" type="text/javascript"></script>
+<script src="resources/js/nav.js" type="text/javascript"> </script>
+<script src="resources/js/event.js" type="text/javascript"> </script>
+<script src="resources/js/booking.js" type="text/javascript"> </script>
+<script src="resources/js/main.js" type="text/javascript"> </script>
 
 </h:body>
 </html>

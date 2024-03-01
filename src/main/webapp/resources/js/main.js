@@ -1,27 +1,3 @@
-// Function to initialize event listeners on guest selection
-// Function to initialize event listeners on guest selection
-function initGuestSelection() {
-    const guestListItems = document.querySelectorAll('#numberOfGuests li');
-    const moreThanSixInfo = document.getElementById('moreThanSixInfo');
-
-    guestListItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Assuming you want to check the text content of the item to decide
-            // Convert item's text content to a number and compare
-            const guestNumber = parseInt(item.textContent, 10);
-
-            // Toggle the additional information for 7 or more guests
-            if (guestNumber >= 7) { // Changed to check if guestNumber is 7 or more
-                // If already displayed, hide it, otherwise show it
-                moreThanSixInfo.style.display = moreThanSixInfo.style.display === 'block' ? 'none' : 'block';
-            } else {
-                // Hide the information if any other option is selected
-                moreThanSixInfo.style.display = 'none';
-            }
-        });
-    });
-}
-
 
     window.addEventListener('scroll', function() {
     var scrollPosition = window.scrollY;
@@ -46,9 +22,5 @@ function initGuestSelection() {
 }
 });
 });
-
-
-// Call the function when the document is fully loaded
-document.addEventListener('DOMContentLoaded', initGuestSelection);
 
 

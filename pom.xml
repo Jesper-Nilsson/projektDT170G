@@ -18,20 +18,15 @@
     </properties>
 
     <dependencies>
-        <!-- Use the Jakarta EE Web API dependency that matches your Payara Server's capabilities -->
+        <!-- Kept the highest version for jakarta.jakartaee-web-api -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
-            <version>10.0.0</version> <!-- Adjust to match Payara's Jakarta EE version -->
+            <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- MariaDB JDBC Client -->
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>2.7.2</version> <!-- Use the latest version available -->
-        </dependency>
+
 
         <!-- JUnit Jupiter API and Engine for testing with the version specified in properties -->
         <dependency>
@@ -46,6 +41,24 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>9.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Removed junit as it's older and not needed alongside JUnit Jupiter -->
+        <!-- Removed the duplicated jakarta.faces-api and primefaces dependencies, keeping only the latest versions -->
 
         <!-- PrimeFaces latest version -->
         <dependency>
@@ -55,7 +68,6 @@
             <classifier>jakarta</classifier>
         </dependency>
 
-        <!-- Provided scope ensures that the application server provides these APIs at runtime -->
         <!-- Jakarta Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -63,9 +75,13 @@
             <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
 
-        <!-- CDI API should be included in jakarta.jakartaee-web-api, so this is likely not needed -->
-        <!-- If you remove this and any other Jakarta EE API specific dependencies, ensure you are importing them transitively through the jakarta.jakartaee-web-api dependency -->
     </dependencies>
 
     <build>
