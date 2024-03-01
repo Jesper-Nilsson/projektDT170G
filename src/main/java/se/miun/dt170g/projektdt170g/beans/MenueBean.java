@@ -45,13 +45,6 @@ public class MenueBean implements Serializable {
 
     }
 
-    private List<LunchMenuEntity> createMockData() {
-        List<LunchMenuEntity> mockData = new ArrayList<>();
-        // Add your mock data here
-        //mockData.add(new LunchMenuEntity( "Mock Pasta", "Delicious pasta with tomato sauce", LocalDate.now(), 100));
-        // Repeat for other days of the week
-        return mockData;
-    }
 
 
 
