@@ -47,10 +47,13 @@ function closeModal(modalId) {
 
 
 // Event listener for booking button
-document.getElementById('bookingButton').addEventListener('click', function() {
+document.getElementById('bookingButton1').addEventListener('click', function() {
     openModal('1');
 });
 
+document.getElementById('bookingButton2').addEventListener('click', function() {
+    openModal('1');
+});
 
 function validateDateTimeInputs() {
     // Get references to the input elements
