@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 @NamedQueries({
         @NamedQuery(
@@ -74,6 +76,15 @@ public class LunchMenuEntity {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+    // Hjälpmetod för att få veckodagens namn baserat på datumet
+    public String getDayName() {
+        if (this.date != null) {
+            Locale swedish = new Locale("sv", "SE");
+            return this.date.getDayOfWeek().getDisplayName(TextStyle.FULL, swedish);
+        } else {
+            return null;
+        }
     }
 
     public int getPrice() {

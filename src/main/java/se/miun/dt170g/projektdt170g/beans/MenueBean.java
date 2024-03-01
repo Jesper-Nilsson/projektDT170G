@@ -67,6 +67,9 @@ public class MenueBean implements Serializable {
     public LocalDate getDate() {
         return lunchMenuEntity.getDate();
     }
+    public String getDayName() {
+        return lunchMenuEntity.getDayName();
+    }
 
     public void setDate(LocalDate date) {
         lunchMenuEntity.setDate(date);
@@ -79,6 +82,7 @@ public class MenueBean implements Serializable {
     public void setPrice(int price) {
         lunchMenuEntity.setPrice(price);
     }
+
 
 
 
