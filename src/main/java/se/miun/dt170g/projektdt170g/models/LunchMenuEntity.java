@@ -27,6 +27,7 @@ import java.time.LocalDate;
 @Table(name = "lunch_menu", schema = "dt170gprojekt", catalog = "")
 public class LunchMenuEntity {
     public static final String findAfterToday = "LunchMenuEntity.findAfterToday";
+    public static final String findBetweenDates = "LunchMenuEntity.findBetweenDates";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "lunch_id", nullable = false)

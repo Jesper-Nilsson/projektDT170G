@@ -31,6 +31,10 @@ public class ALaCarteItem {
         this.description = aLaCarteEntity.getDescription();
     }
 
+    public ALaCarteItem() {
+
+    }
+
 
     public String getName() {
         return name;

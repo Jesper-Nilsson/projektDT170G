@@ -18,6 +18,9 @@ public class AdminBean {
 
         return "lunchAdmin?faces-redirect=true"; // Navigate to the eventAdmin.xhtml page
     }
+    public String goToALaCarteAdmin(){
+        return "alacarteAdmin?faces-redirect=true";
+    }
 
     // You can have additional methods for "insert new event", "update event", and "delete event" actions
 }

@@ -65,6 +65,10 @@ public class LunchAdminBean implements Serializable {
          this.action = action;
     }
 
+    public List<LunchMenuEntity> getLast14Lunches(){
+         return lunchAPI.getPreviousLunches();
+    }
+
 
 
     public void addLunch(){
@@ -198,7 +202,6 @@ public class LunchAdminBean implements Serializable {
     // Loads the details of the selected lunch so the can be shown in the update form
     public void loadSelectedLunch() {
         this.lunchMenuEntity = lunchAPI.getLunch(selectedLunchId);
-        this.action = "showUpdate";
         System.out.println("hej");
 
     }

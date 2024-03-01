@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>A La Carte Administration</title>
+        <h:outputStylesheet name="css/adminStyle.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <ui:fragment>
+                <h:commandButton value="lagg till a la carte" action="#{aLaCarteAdminBean.setAction('add')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="andra a la carte" action="#{aLaCarteAdminBean.setAction('update')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="ta bort a la carte" action="#{aLaCarteAdminBean.setAction('delete')}" styleClass="admin-button" update ="@form" immediate="true"/>
+            </ui:fragment>
+
+            <ui:fragment rendered="#{aLaCarteAdminBean.action == 'add'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="aLaCarteName" value="Name:"/>
+                    <h:inputText id="aLaCarteName" value="#{aLaCarteAdminBean.ALaCarteName}" required="true" requiredMessage="The event name is required."/>
+
+                    <h:outputLabel for="aLaCarteDescription" value="Description:"/>
+                    <h:inputTextarea id="aLaCarteDescription" value="#{aLaCarteAdminBean.ALaCarteDescription}" required="true" requiredMessage="The event description is required."/>
+
+                    <h:outputLabel for="aLaCarteType" value="Type:"/>
+                    <h:selectOneMenu id="aLaCarteType" value="#{aLaCarteAdminBean.ALaCarteType}">
+                        <f:selectItem itemLabel="Select Type" itemValue="" noSelectionOption="true"/>
+                        <f:selectItem itemLabel="Förrätt" itemValue="förrätt"/>
+                        <f:selectItem itemLabel="Huvudrätt" itemValue="huvudrätt"/>
+                        <f:selectItem itemLabel="Efterätt" itemValue="efterrätt"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="aLaCartePrice" value="Price:"/>
+                    <h:inputText id="aLaCartePrice" value="#{aLaCarteAdminBean.ALaCartePrice}"/>
+
+                    <h:commandButton value="Submit" action="#{aLaCarteAdminBean.addALaCarte}" update="@form"/>
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+
+            <ui:fragment rendered="#{aLaCarteAdminBean.action == 'delete'}">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="deleteALaCarteId" value="Select ALaCarte to Delete:"/>
+                    <h:selectOneMenu id="deleteALaCarteId" value="#{aLaCarteAdminBean.ALaCarteItem.aLaCarteID}">
+                        <f:selectItem itemLabel="Select ALaCarte" itemValue="null" noSelectionOption="true"/>
+                        <f:selectItems value="#{aLaCarteAdminBean.allALaCartes}"
+                                       var="aLaCarte"
+                                       itemValue="#{aLaCarte.aLaCarteID}"
+                                       itemLabel="#{aLaCarte.name} - #{aLaCarte.type}"/>
+                    </h:selectOneMenu>
+                    <!-- No parameter is passed directly in the action attribute -->
+                    <h:commandButton value="Delete ALaCarte" action="#{aLaCarteAdminBean.deleteALaCarte}" update="@form">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+
+            <ui:fragment rendered="#{aLaCarteAdminBean.action == 'update'}">
+                <h:panelGrid columns="1">
+                    <!-- Dropdown to select aLaCarte -->
+                    <h:outputLabel value="Select ALaCarte:"/>
+                    <h:selectOneMenu value="#{aLaCarteAdminBean.selectedALaCarteId}">
+                        <f:selectItem itemLabel="Select AlaCarte" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{aLaCarteAdminBean.allALaCartes}" var="aLaCarte"
+                                       itemValue="#{aLaCarte.aLaCarteID}" itemLabel="#{aLaCarte.name} - #{aLacarte.type}"/>
+                        <f:ajax listener="#{aLaCarteAdminBean.loadSelectedALaCarte}"  render="@form"/>
+                    </h:selectOneMenu>
+
+
+                    <!-- Nested panelGrid for Name -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateALaCarteName" value="Name:"/>
+                        <h:inputText id="updateALaCarteName" value="#{aLaCarteAdminBean.ALaCarteName}" required="true"/>
+                    </h:panelGrid>
+
+                    <!-- Nested panelGrid for Description -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateALaCarteDescription" value="Description:"/>
+                        <h:inputTextarea id="updateALaCarteDescription" value="#{aLaCarteAdminBean.ALaCarteDescription}" required="true"/>
+                    </h:panelGrid>
+
+                    <!-- Nested panelGrid for Type -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateALaCarteType" value="Type:"/>
+                        <h:selectOneMenu id="updateALaCarteType" value="#{aLaCarteAdminBean.selectedALaCarteType}">
+                            <f:selectItem itemLabel="Select Type" itemValue="" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Förrätt" itemValue="förrätt"/>
+                            <f:selectItem itemLabel="Huvudrätt" itemValue="huvudrätt"/>
+                            <f:selectItem itemLabel="Efterrätt" itemValue="efterrätt"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+
+
+                    <!-- Nested panelGrid for Price -->
+                    <h:panelGrid columns="1" style="width:100%">
+                        <h:outputLabel for="updateALaCartePrice" value="Price:"/>
+                        <h:inputText id="updateALaCartePrice" value="#{aLaCarteAdminBean.ALaCartePrice}"/>
+                    </h:panelGrid>
+
+                    <!-- Button to submit updates -->
+                    <h:commandButton value="Update ALaCarte" action="#{aLaCarteAdminBean.updateAlaCarte()}"/>
+
+                </h:panelGrid>
+            </ui:fragment>
+
+
+
+
+
+
+
+
+            <h:outputText value="#{aLaCarteAdminBean.message}" />
+        </h:form>
+    </h:body>
+</f:view>
+</html>

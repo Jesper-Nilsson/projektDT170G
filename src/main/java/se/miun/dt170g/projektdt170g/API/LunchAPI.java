@@ -9,7 +9,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -59,7 +59,14 @@ public class LunchAPI implements Serializable {
         return entityManager.find(LunchMenuEntity.class,id);
     }
 
-
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/previous")
+    public List<LunchMenuEntity> getPreviousLunches()
+    {
+        return entityManager.createNamedQuery("LunchMenuEntity.findAll", LunchMenuEntity.class).setMaxResults(14)
+                .getResultList(); // Assuming you have a named query to fetch all records
+    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
