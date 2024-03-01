@@ -2,7 +2,7 @@
 .menu-container_lunch {
     font-family: Arial, sans-serif;
     width: 70%;
-    margin: 0 auto;
+    margin: 0 auto 1rem auto;
     padding: 2em;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     color: #333;

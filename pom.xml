@@ -25,7 +25,11 @@
             <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>LATEST</version>
+        </dependency>
 
 
         <!-- JUnit Jupiter API and Engine for testing with the version specified in properties -->
