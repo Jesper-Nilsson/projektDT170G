@@ -1,30 +1,32 @@
-package se.miun.dt170g.projektdt170g.models;
+package se.miun.dt170g.projektdt170g.items;
 
-import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.models.ShiftEntity;
 
 import java.sql.Date;
 
-@NamedQuery(
-        name = "ShiftEntity.findAll",
-        query = "SELECT l FROM ShiftEntity l"
-)
+public class Shift {
 
-@Entity
-@Table(name = "shift", schema = "dt170gprojekt", catalog = "")
-public class ShiftEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "shift_id", nullable = false)
     private int shiftId;
-    @Basic
-    @Column(name = "date", nullable = false)
     private Date date;
-    @Basic
-    @Column(name = "type", nullable = false, length = 255)
     private String type;
-    @Basic
-    @Column(name = "employee_id", nullable = false)
     private int employeeId;
+
+    public Shift(int shiftId, Date date, String type, int employeeId) {
+        this.shiftId = shiftId;
+        this.date = date;
+        this.type = type;
+        this.employeeId = employeeId;
+    }
+
+    public Shift(ShiftEntity shift) {
+        this.shiftId = shift.getShiftId();
+        this.date = shift.getDate();
+        this.type = shift.getType();
+        this.employeeId = shift.getEmployeeId();
+
+    }
+
+    public Shift() {}
 
     public int getShiftId() {
         return shiftId;
