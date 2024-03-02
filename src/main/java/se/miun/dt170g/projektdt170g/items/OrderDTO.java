@@ -109,12 +109,16 @@ public class OrderDTO {
         foods.add(food);
     };
 
-    public int getOrderStatus() {
+    /*public int getOrderStatus() {
         if (orderStatus)
             return 1;
         else
             return 0;
+    }*/
+    public boolean getOrderStatus() {
+        return orderStatus;
     }
+
 
     public void setOrderStatus(boolean orderStatus) {
         this.orderStatus = orderStatus;

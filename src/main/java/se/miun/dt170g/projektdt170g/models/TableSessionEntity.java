@@ -22,7 +22,6 @@ public class TableSessionEntity {
     @Column(name = "table_size", nullable = false)
     private int tableSize;
 
-
     public int getSessionId() {
         return sessionId;
     }
@@ -54,4 +53,5 @@ public class TableSessionEntity {
     public void setTableSize(int tableSize) {
         this.tableSize = tableSize;
     }
+
 }

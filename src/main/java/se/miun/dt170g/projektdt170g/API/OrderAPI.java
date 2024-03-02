@@ -80,6 +80,7 @@ public class OrderAPI {
             orderReturn.setStatusMain(currentOrder.getStatusMain());
             orderReturn.setRestaurantTableId(currentOrder.getRestaurantTableId());
             orderReturn.setStatusDessert(currentOrder.getStatusDessert());
+            orderReturn.setOrderStatus(currentOrder.getOrderStatus());
             orderReturn.setComment(currentOrder.getComment());
 
             for (PurchasedALaCarteEntity purchasedALaCarte : currentOrder.getPurchasedALaCartesByRestaurantOrderId()) {
@@ -109,7 +110,12 @@ public class OrderAPI {
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
-                orderStatement.setInt(6, orderDTO.getOrderStatus());
+
+                if(orderDTO.getOrderStatus()){
+                    orderStatement.setInt(6, 1);
+                }else{
+                    orderStatement.setInt(6,0);
+                }
 
                 int affectedRows = orderStatement.executeUpdate();
                 if (affectedRows == 0) {
@@ -161,14 +167,19 @@ public class OrderAPI {
 
         try (Connection connection = dataSource.getConnection()) {
             // Update the order details
-            String updateOrderSQL = "UPDATE restaurant_order SET status_appetizer = ?, status_main = ?, status_dessert = ?, restaurant_table_id = ?, comment = ? WHERE restaurant_order_id = ?";
+            String updateOrderSQL = "UPDATE restaurant_order SET status_appetizer = ?, status_main = ?, status_dessert = ?, restaurant_table_id = ?, comment = ?, order_status = ? WHERE restaurant_order_id = ?";
             try (PreparedStatement orderStatement = connection.prepareStatement(updateOrderSQL)) {
                 orderStatement.setString(1, orderDTO.getStatusAppetizer());
                 orderStatement.setString(2, orderDTO.getStatusMain());
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
-                orderStatement.setInt(6, orderId);
+                if(orderDTO.getOrderStatus()){
+                    orderStatement.setInt(6, 1);
+                }else{
+                    orderStatement.setInt(6,0);
+                }
+                orderStatement.setInt(7, orderId);
 
                 int affectedRows = orderStatement.executeUpdate();
                 if (affectedRows == 0) {
@@ -223,6 +234,19 @@ public class OrderAPI {
     }
 
 
+    @GET
+    @Path("/lastOrderId")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Integer getLastOrderId() {
+
+        int orderId;
+
+
+       /* entityManager.createNamedQuery("TableSessionEntity.findAll", TableSessionEntity.class).getResultList();
+        return Response.ok(tables).build();*/
+
+        return 1;
+    }
 
 
 

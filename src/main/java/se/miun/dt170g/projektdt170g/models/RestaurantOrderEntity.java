@@ -6,10 +6,18 @@ import se.miun.dt170g.projektdt170g.items.OrderDTO;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@NamedQuery(
-        name = "RestaurantOrderEntity.activeOrders",
-        query = "SELECT l FROM RestaurantOrderEntity l WHERE l.orderStatus = true"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "RestaurantOrderEntity.activeOrders",
+                query = "SELECT l FROM RestaurantOrderEntity l WHERE l.orderStatus = true"
+        ),
+        /*@NamedQuery(
+                name = "RestaurantOrderEntity.orderId",
+                query = "SELECT l FROM RestaurantOrderEntity l WHERE l.orderStatus = true"
+        )*/
+})
+
+
 @Entity
 @Table(name = "restaurant_order", schema = "dt170gprojekt", catalog = "")
 public class RestaurantOrderEntity {
@@ -126,5 +134,13 @@ public class RestaurantOrderEntity {
     public void addPurchasedALaCarte(PurchasedALaCarteEntity aLaCarteEntity){
         purchasedALaCartesByRestaurantOrderId.add(aLaCarteEntity);
         aLaCarteEntity.setRestaurantOrderByOrderId(this);
+    }
+
+    public boolean getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(boolean orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
