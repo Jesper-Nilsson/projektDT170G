@@ -2,44 +2,43 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalTime;
+
 @NamedQueries({
         @NamedQuery(
                 name = "EventsEntity.findComingDates",
-                query = "SELECT l FROM EventsEntity l WHERE l.date > :date ORDER BY l.date ASC"
+                query = "SELECT e FROM EventsEntity e WHERE e.date > :date ORDER BY e.date ASC"
         )
 })
 
 @Entity
-@Table(name = "events", schema = "dt170gprojekt", catalog = "")
+@Table(name = "events", schema = "dt170gprojekt")
 public class EventsEntity {
 
     public static final String findAfterDate = "EventsEntity.findComingDates";
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id", nullable = false)
     private int eventId;
-    @Basic
+
     @Column(name = "name", nullable = false, length = 255)
     private String name;
-    @Basic
+
+    // Assuming 'date' is of type TIMESTAMP in the database and mapped to LocalDate in Java.
     @Column(name = "date", nullable = false)
     private LocalDate date;
-    @Basic
-    @Column(name = "time", nullable = false)
-    private LocalTime time;
-    @Basic
+
     @Column(name = "price", nullable = false)
     private int price;
-    @Basic
+
     @Column(name = "description", nullable = false, length = 255)
     private String description;
-    @Basic
+
     @Column(name = "image_url", nullable = false, length = 255)
     private String imageUrl;
+
+    // Getters and setters
 
     public int getEventId() {
         return eventId;
@@ -89,11 +88,5 @@ public class EventsEntity {
         this.imageUrl = imageUrl;
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
+    // Removed the getTime and setTime methods as the 'time' column does not exist in the schema.
 }
