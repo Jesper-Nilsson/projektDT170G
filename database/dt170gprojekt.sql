@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 28, 2024 at 07:44 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Värd: 127.0.0.1
+-- Tid vid skapande: 03 mars 2024 kl 20:54
+-- Serverversion: 10.4.32-MariaDB
+-- PHP-version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dt170gprojekt`
+-- Databas: `dt170gprojekt`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `a_la_carte_menu`
+-- Tabellstruktur `a_la_carte_menu`
 --
 
 CREATE TABLE `a_la_carte_menu` (
@@ -36,7 +36,7 @@ CREATE TABLE `a_la_carte_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `a_la_carte_menu`
+-- Dumpning av Data i tabell `a_la_carte_menu`
 --
 
 INSERT INTO `a_la_carte_menu` (`a_la_carte_id`, `name`, `description`, `type`, `price`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `a_la_carte_menu` (`a_la_carte_id`, `name`, `description`, `type`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `booking`
+-- Tabellstruktur `booking`
 --
 
 CREATE TABLE `booking` (
@@ -63,7 +63,7 @@ CREATE TABLE `booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `booking`
+-- Dumpning av Data i tabell `booking`
 --
 
 INSERT INTO `booking` (`booking_id`, `name`, `telephone`, `amount`, `date`, `time`) VALUES
@@ -73,7 +73,7 @@ INSERT INTO `booking` (`booking_id`, `name`, `telephone`, `amount`, `date`, `tim
 -- --------------------------------------------------------
 
 --
--- Table structure for table `drinks`
+-- Tabellstruktur `drinks`
 --
 
 CREATE TABLE `drinks` (
@@ -84,7 +84,7 @@ CREATE TABLE `drinks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `drinks`
+-- Dumpning av Data i tabell `drinks`
 --
 
 INSERT INTO `drinks` (`drink_id`, `name`, `description`, `price`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `drinks` (`drink_id`, `name`, `description`, `price`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Tabellstruktur `employee`
 --
 
 CREATE TABLE `employee` (
@@ -116,7 +116,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `employee`
+-- Dumpning av Data i tabell `employee`
 --
 
 INSERT INTO `employee` (`employee_id`, `name`, `role`, `adress`, `telephone`) VALUES
@@ -127,7 +127,7 @@ INSERT INTO `employee` (`employee_id`, `name`, `role`, `adress`, `telephone`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `events`
+-- Tabellstruktur `events`
 --
 
 CREATE TABLE `events` (
@@ -141,7 +141,7 @@ CREATE TABLE `events` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `events`
+-- Dumpning av Data i tabell `events`
 --
 
 INSERT INTO `events` (`event_id`, `name`, `date`, `time`, `price`, `description`, `image_url`) VALUES
@@ -150,7 +150,7 @@ INSERT INTO `events` (`event_id`, `name`, `date`, `time`, `price`, `description`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lunch_menu`
+-- Tabellstruktur `lunch_menu`
 --
 
 CREATE TABLE `lunch_menu` (
@@ -162,7 +162,7 @@ CREATE TABLE `lunch_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `lunch_menu`
+-- Dumpning av Data i tabell `lunch_menu`
 --
 
 INSERT INTO `lunch_menu` (`lunch_id`, `name`, `description`, `date`, `price`) VALUES
@@ -182,7 +182,7 @@ INSERT INTO `lunch_menu` (`lunch_id`, `name`, `description`, `date`, `price`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchased_a_la_carte`
+-- Tabellstruktur `purchased_a_la_carte`
 --
 
 CREATE TABLE `purchased_a_la_carte` (
@@ -191,34 +191,10 @@ CREATE TABLE `purchased_a_la_carte` (
   `a_la_carte_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `purchased_a_la_carte`
---
-
-INSERT INTO `purchased_a_la_carte` (`purchased_ID`, `order_id`, `a_la_carte_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(33, 53, 1),
-(38, 56, 1),
-(39, 56, 2),
-(40, 57, 1),
-(41, 57, 2),
-(42, 58, 1),
-(43, 58, 2),
-(54, 59, 1),
-(55, 59, 2),
-(56, 59, 5),
-(57, 59, 5),
-(58, 70, 1),
-(59, 70, 2),
-(60, 70, 5),
-(61, 70, 5),
-(62, 70, 5);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `purchased_drinks`
+-- Tabellstruktur `purchased_drinks`
 --
 
 CREATE TABLE `purchased_drinks` (
@@ -227,25 +203,10 @@ CREATE TABLE `purchased_drinks` (
   `drink_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `purchased_drinks`
---
-
-INSERT INTO `purchased_drinks` (`purchased_ID`, `order_id`, `drink_id`) VALUES
-(1, 1, 1),
-(2, 58, 1),
-(8, 59, 1),
-(9, 59, 12),
-(10, 59, 12),
-(11, 70, 1),
-(12, 70, 12),
-(13, 70, 12),
-(14, 70, 12);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `receipt`
+-- Tabellstruktur `receipt`
 --
 
 CREATE TABLE `receipt` (
@@ -256,7 +217,7 @@ CREATE TABLE `receipt` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `restaurant_order`
+-- Tabellstruktur `restaurant_order`
 --
 
 CREATE TABLE `restaurant_order` (
@@ -269,53 +230,38 @@ CREATE TABLE `restaurant_order` (
   `order_status` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `restaurant_order`
---
-
-INSERT INTO `restaurant_order` (`restaurant_order_id`, `status_appetizer`, `status_main`, `status_dessert`, `restaurant_table_id`, `comment`, `order_status`) VALUES
-(1, 'begun', '', '', 1, 'no cheese', NULL),
-(13, 'none', 'begun', 'none', 3, 'test', NULL),
-(14, 'none', 'begun', 'none', 3, 'test', NULL),
-(15, 'none', 'begun', 'none', 3, 'test', NULL),
-(16, 'none', 'begun', 'none', 3, 'test', NULL),
-(17, 'none', 'begun', 'none', 3, 'test', NULL),
-(22, 'none', 'begun', 'none', 3, 'test', NULL),
-(24, 'none', 'begun', 'none', 3, 'test', NULL),
-(33, 'none', 'begun', 'none', 3, 'test', NULL),
-(37, 'none', 'begun', 'none', 3, 'test', NULL),
-(43, 'none', 'begun', 'none', 3, 'test', NULL),
-(44, 'none', 'begun', 'none', 3, 'test', NULL),
-(52, 'none', 'begun', 'none', 3, 'test', NULL),
-(53, 'none', 'begun', 'none', 3, 'test', NULL),
-(56, 'none', 'begun', 'none', 3, 'test', NULL),
-(57, 'none', 'begun', 'none', 3, 'test', NULL),
-(58, 'none', 'begun', 'none', 3, 'test', NULL),
-(59, 'test', 'test', 'test', 3, 'test', NULL),
-(62, 'none', 'begun', 'none', 3, 'test', NULL),
-(64, 'none', 'begun', 'none', 3, 'test', NULL),
-(65, 'none', 'begun', 'none', 3, 'test', NULL),
-(66, 'none', 'begun', 'none', 3, 'test', NULL),
-(69, 'none', 'none', 'maybe', 3, 'hungry people', 1),
-(70, 'test', 'test', 'test', 3, 'test', NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shift`
+-- Tabellstruktur `shift`
 --
 
 CREATE TABLE `shift` (
   `shift_id` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `date` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumpning av Data i tabell `shift`
+--
+
+INSERT INTO `shift` (`shift_id`, `date`, `type`, `employee_id`) VALUES
+(1, '2024-03-01', 'kväll', 1),
+(2, '2024-03-02', 'kväll', 2),
+(3, '2024-03-01', 'morgon', 3),
+(4, '2024-03-03', 'kväll', 1),
+(5, '2024-03-03', 'kväll', 2),
+(6, '2024-03-03', 'kväll', 3),
+(7, '2024-03-04', 'morgon', 1),
+(8, '2024-03-05', 'kväll', 1),
+(9, '2024-03-05', 'morgon', 2);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `table_session`
+-- Tabellstruktur `table_session`
 --
 
 CREATE TABLE `table_session` (
@@ -326,61 +272,61 @@ CREATE TABLE `table_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `table_session`
+-- Dumpning av Data i tabell `table_session`
 --
 
 INSERT INTO `table_session` (`session_id`, `table_number`, `status`, `table_size`) VALUES
-(1, 1, 'Ledig', 4),
-(2, 2, 'Ledig', 4),
-(3, 3, 'Bokat', 4),
-(4, 4, 'Ledig', 4),
-(5, 5, 'Ledig', 6),
-(6, 6, 'Ledig', 6),
-(7, 7, 'Ledig', 6),
-(8, 8, 'Ledig', 6);
+(1, 1, 'Ledig', 6),
+(2, 2, 'Ledig', 6),
+(3, 3, 'Ledig', 6),
+(4, 4, 'Ledig', 6),
+(5, 5, 'Ledig', 4),
+(6, 6, 'Ledig', 4),
+(7, 7, 'Bokat', 4),
+(8, 8, 'Ledig', 4);
 
 --
--- Indexes for dumped tables
+-- Index för dumpade tabeller
 --
 
 --
--- Indexes for table `a_la_carte_menu`
+-- Index för tabell `a_la_carte_menu`
 --
 ALTER TABLE `a_la_carte_menu`
   ADD PRIMARY KEY (`a_la_carte_id`);
 
 --
--- Indexes for table `booking`
+-- Index för tabell `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`);
 
 --
--- Indexes for table `drinks`
+-- Index för tabell `drinks`
 --
 ALTER TABLE `drinks`
   ADD PRIMARY KEY (`drink_id`);
 
 --
--- Indexes for table `employee`
+-- Index för tabell `employee`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`employee_id`);
 
 --
--- Indexes for table `events`
+-- Index för tabell `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`event_id`);
 
 --
--- Indexes for table `lunch_menu`
+-- Index för tabell `lunch_menu`
 --
 ALTER TABLE `lunch_menu`
   ADD PRIMARY KEY (`lunch_id`);
 
 --
--- Indexes for table `purchased_a_la_carte`
+-- Index för tabell `purchased_a_la_carte`
 --
 ALTER TABLE `purchased_a_la_carte`
   ADD PRIMARY KEY (`purchased_ID`),
@@ -388,7 +334,7 @@ ALTER TABLE `purchased_a_la_carte`
   ADD KEY `ALaCartePurchasedByALaCarte` (`a_la_carte_id`);
 
 --
--- Indexes for table `purchased_drinks`
+-- Index för tabell `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
   ADD PRIMARY KEY (`purchased_ID`),
@@ -396,100 +342,100 @@ ALTER TABLE `purchased_drinks`
   ADD KEY `DrinkPurchasedByDrinkID` (`drink_id`);
 
 --
--- Indexes for table `receipt`
+-- Index för tabell `receipt`
 --
 ALTER TABLE `receipt`
   ADD PRIMARY KEY (`receipt_id`);
 
 --
--- Indexes for table `restaurant_order`
+-- Index för tabell `restaurant_order`
 --
 ALTER TABLE `restaurant_order`
   ADD PRIMARY KEY (`restaurant_order_id`);
 
 --
--- Indexes for table `shift`
+-- Index för tabell `shift`
 --
 ALTER TABLE `shift`
   ADD PRIMARY KEY (`shift_id`);
 
 --
--- Indexes for table `table_session`
+-- Index för tabell `table_session`
 --
 ALTER TABLE `table_session`
   ADD PRIMARY KEY (`session_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT för dumpade tabeller
 --
 
 --
--- AUTO_INCREMENT for table `a_la_carte_menu`
+-- AUTO_INCREMENT för tabell `a_la_carte_menu`
 --
 ALTER TABLE `a_la_carte_menu`
   MODIFY `a_la_carte_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `booking`
+-- AUTO_INCREMENT för tabell `booking`
 --
 ALTER TABLE `booking`
   MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `drinks`
+-- AUTO_INCREMENT för tabell `drinks`
 --
 ALTER TABLE `drinks`
   MODIFY `drink_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `events`
+-- AUTO_INCREMENT för tabell `events`
 --
 ALTER TABLE `events`
   MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `lunch_menu`
+-- AUTO_INCREMENT för tabell `lunch_menu`
 --
 ALTER TABLE `lunch_menu`
   MODIFY `lunch_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `purchased_a_la_carte`
+-- AUTO_INCREMENT för tabell `purchased_a_la_carte`
 --
 ALTER TABLE `purchased_a_la_carte`
-  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
--- AUTO_INCREMENT for table `purchased_drinks`
+-- AUTO_INCREMENT för tabell `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
-  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `purchased_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `restaurant_order`
+-- AUTO_INCREMENT för tabell `restaurant_order`
 --
 ALTER TABLE `restaurant_order`
-  MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `restaurant_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
--- AUTO_INCREMENT for table `table_session`
+-- AUTO_INCREMENT för tabell `table_session`
 --
 ALTER TABLE `table_session`
   MODIFY `session_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Restriktioner för dumpade tabeller
 --
 
 --
--- Constraints for table `purchased_a_la_carte`
+-- Restriktioner för tabell `purchased_a_la_carte`
 --
 ALTER TABLE `purchased_a_la_carte`
   ADD CONSTRAINT `ALaCartePurchasedByALaCarte` FOREIGN KEY (`a_la_carte_id`) REFERENCES `a_la_carte_menu` (`a_la_carte_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `aLaCartePuchasedByOrder` FOREIGN KEY (`order_id`) REFERENCES `restaurant_order` (`restaurant_order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `purchased_drinks`
+-- Restriktioner för tabell `purchased_drinks`
 --
 ALTER TABLE `purchased_drinks`
   ADD CONSTRAINT `DrinkPurchasedByDrinkID` FOREIGN KEY (`drink_id`) REFERENCES `drinks` (`drink_id`) ON DELETE CASCADE ON UPDATE CASCADE,

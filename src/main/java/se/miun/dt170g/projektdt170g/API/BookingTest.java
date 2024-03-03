@@ -27,6 +27,7 @@ import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
 import se.miun.dt170g.projektdt170g.models.DrinksEntity;
 import se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity;
 
+
 @Path("/test") // Class-level Path annotation
 @Transactional
 public class BookingTest {
@@ -71,6 +72,7 @@ public class BookingTest {
 
         //return Response.ok(response).build(); // Return the Response object directly
     }
+
 
 
 

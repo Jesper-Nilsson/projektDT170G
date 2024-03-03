@@ -39,6 +39,8 @@ public class OrderAPI {
                              @QueryParam("kitchen") boolean kitchen,
                              @QueryParam("service") boolean service) {
 
+
+
         //check orderID if not given, error or just everything today
 
         OrderDTO order_return = new OrderDTO();
@@ -64,6 +66,9 @@ public class OrderAPI {
     @Path("/activeOrders")
     @Produces(MediaType.APPLICATION_JSON)
     public List<OrderDTO> getactiveOrders() {
+
+        entityManager.clear();
+        entityManager.flush();
 
         //check orderID if not given, error or just everything today
 
@@ -230,25 +235,8 @@ public class OrderAPI {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating order: " + e.getMessage()).build();
         }
+
         return Response.ok().build();
     }
-
-
-    @GET
-    @Path("/lastOrderId")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Integer getLastOrderId() {
-
-        int orderId;
-
-
-       /* entityManager.createNamedQuery("TableSessionEntity.findAll", TableSessionEntity.class).getResultList();
-        return Response.ok(tables).build();*/
-
-        return 1;
-    }
-
-
-
 
 }
