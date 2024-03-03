@@ -7,11 +7,11 @@ import java.sql.Date;
 public class Shift {
 
     private int shiftId;
-    private Date date;
+    private String date;
     private String type;
     private int employeeId;
 
-    public Shift(int shiftId, Date date, String type, int employeeId) {
+    public Shift(int shiftId, String date, String type, int employeeId) {
         this.shiftId = shiftId;
         this.date = date;
         this.type = type;
@@ -36,11 +36,11 @@ public class Shift {
         this.shiftId = shiftId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

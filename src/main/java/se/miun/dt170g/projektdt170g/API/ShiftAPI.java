@@ -33,4 +33,16 @@ public class ShiftAPI {
         }
         return Response.ok(shifts).build();
     }
+
+    @GET
+    @Path("/{date}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getShiftByDate(@PathParam("date") String date) {
+
+        List<ShiftEntity> shifts = new ArrayList<>();
+        shifts = entityManager.createNamedQuery("ShiftEntity.findByDate", ShiftEntity.class).setParameter("date", date).getResultList();
+
+        return Response.ok(shifts).build();
+    }
+
 }
