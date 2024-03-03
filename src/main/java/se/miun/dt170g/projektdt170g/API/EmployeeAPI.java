@@ -21,7 +21,7 @@ public class EmployeeAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getShift() {
+    public Response getEmployee() {
 
         List<EmployeeEntity> employeeEntities;
         List<Employee> employees = new ArrayList<>();
