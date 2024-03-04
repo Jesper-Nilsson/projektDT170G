@@ -43,16 +43,16 @@ public class BookingTest {
     @GET // HTTP method annotation
     @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
     public Response test() {
-        OrderDTO orderDTO = orderAPI.getOrder(59);
-        orderDTO.setComment("test");
-        orderDTO.setStatusMain("test");
-        orderDTO.setStatusAppetizer("test");
-        orderDTO.setStatusDessert("test");
+        OrderDTO orderDTO = orderAPI.getOrder(98);
+        orderDTO.setComment("test2");
+        orderDTO.setStatusMain("test2");
+        orderDTO.setStatusAppetizer("test2");
+        orderDTO.setStatusDessert("test2");
         orderDTO.setRestaurantTableId(3);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,5)));
         orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 12)));
         orderDTO.setOrderStatus(true);
-        Response response = orderAPI.addOrder(orderDTO);
+        Response response = orderAPI.updateOrder(orderDTO.getOrder_ID(), orderDTO);
 
         return Response.ok(response).build(); // Return the Response object directly
     }

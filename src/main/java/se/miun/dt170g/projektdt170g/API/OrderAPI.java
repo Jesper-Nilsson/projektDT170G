@@ -63,6 +63,10 @@ public class OrderAPI {
     public List<OrderDTO> getactiveOrders() {
 
         //check orderID if not given, error or just everything today
+        entityManager.clear();
+        entityManager.flush();
+
+
 
         List<OrderDTO> returnOrders = new ArrayList<>();
         List<RestaurantOrderEntity> activeOrders = new ArrayList<>();
@@ -71,6 +75,9 @@ public class OrderAPI {
 
         for (RestaurantOrderEntity currentOrder : activeOrders) {
             OrderDTO orderReturn = new OrderDTO();
+
+            entityManager.refresh(currentOrder);
+            entityManager.flush();
 
             orderReturn.setOrder_ID(currentOrder.getRestaurantOrderId());
             orderReturn.setStatusAppetizer(currentOrder.getStatusAppetizer());
@@ -96,13 +103,19 @@ public class OrderAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addOrder(OrderDTO orderDTO) {
         try (Connection connection = dataSource.getConnection()) {
-            String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment) VALUES (?, ?, ?, ?, ?)";
+            String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment, order_status) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
                 orderStatement.setString(1, orderDTO.getStatusAppetizer());
                 orderStatement.setString(2, orderDTO.getStatusMain());
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
+
+                if(orderDTO.getOrderStatus()){
+                    orderStatement.setInt(6, 1);
+                }else{
+                    orderStatement.setInt(6,0);
+                }
 
                 int affectedRows = orderStatement.executeUpdate();
                 if (affectedRows == 0) {
@@ -143,7 +156,6 @@ public class OrderAPI {
         }
         return Response.ok().build();
     }
-
     @PUT
     @Path("/{orderId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -155,14 +167,20 @@ public class OrderAPI {
 
         try (Connection connection = dataSource.getConnection()) {
             // Update the order details
-            String updateOrderSQL = "UPDATE restaurant_order SET status_appetizer = ?, status_main = ?, status_dessert = ?, restaurant_table_id = ?, comment = ? WHERE restaurant_order_id = ?";
+            String updateOrderSQL = "UPDATE restaurant_order SET status_appetizer = ?, status_main = ?, status_dessert = ?, restaurant_table_id = ?, comment = ?, order_status = ? WHERE restaurant_order_id = ?";
             try (PreparedStatement orderStatement = connection.prepareStatement(updateOrderSQL)) {
                 orderStatement.setString(1, orderDTO.getStatusAppetizer());
                 orderStatement.setString(2, orderDTO.getStatusMain());
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
-                orderStatement.setInt(6, orderId);
+
+                if(orderDTO.getOrderStatus()){
+                    orderStatement.setInt(6, 1);
+                }else{
+                    orderStatement.setInt(6,0);
+                }
+                orderStatement.setInt(7, orderId);
 
                 int affectedRows = orderStatement.executeUpdate();
                 if (affectedRows == 0) {
@@ -211,8 +229,10 @@ public class OrderAPI {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            entityManager.clear();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating order: " + e.getMessage()).build();
         }
+        entityManager.clear();
         return Response.ok().build();
     }
 
