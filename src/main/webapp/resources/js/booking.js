@@ -57,8 +57,8 @@ document.getElementById('bookingButton2').addEventListener('click', function() {
 
 function validateDateTimeInputs() {
     // Get references to the input elements
-    var dateInput = document.getElementById("j_idt17:datePicker_input");
-    var timeInput = document.getElementById("j_idt17:timePicker_input");
+    var dateInput = document.getElementById("j_idt22:datePicker_input");
+    var timeInput = document.getElementById("j_idt22:timePicker_input");
 
     // Check if the inputs are empty
     var dateIsEmpty = dateInput.value.trim() === '';
@@ -73,8 +73,8 @@ function validateDateTimeInputs() {
 }
 
 function validateNamePhone() {
-    const nameInput = document.getElementById('j_idt17:userName');
-    const phoneInput = document.getElementById('j_idt17:userPhone');
+    const nameInput = document.getElementById('j_idt22:userName');
+    const phoneInput = document.getElementById('j_idt22:userPhone');
 
     if (nameInput.value.trim() === '' || phoneInput.value.trim() === '') {
         // If either field is empty, disable the submit button and prevent form submission
@@ -108,7 +108,7 @@ document.getElementById('chooseDateTime').addEventListener('click', function() {
     }
 });
 
-document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+document.getElementById('j_idt22:saveBooking').addEventListener('click', function(event) {
     // Prevent the default form submission behavior
     event.preventDefault();
 
@@ -116,15 +116,14 @@ document.getElementById('j_idt17:saveBooking').addEventListener('click', functio
     if (validateNamePhone()) {
         closeModal('3');
         alert("Your booking has been saved!");
-        document.getElementById('j_idt17').disabled = false;
+        document.getElementById('j_idt22').disabled = false;
         document.getElementById('invalidNamePhoneInput').style.display = "none";
-        document.getElementById('j_idt17:saveBooking').form.submit();
-        document.getElementById('j_idt17:saveBooking').form.reset();
+        document.getElementById('j_idt22:saveBooking').form.submit();
+        document.getElementById('j_idt22:saveBooking').form.reset();
 
-    } else {
-        document.getElementById('j_idt17').disabled = true;
+    } else{
+        document.getElementById('j_idt22').disabled = true;
         document.getElementById('invalidNamePhoneInput').style.display = "block";
-
     }
 });
 

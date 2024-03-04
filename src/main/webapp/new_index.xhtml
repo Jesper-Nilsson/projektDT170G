@@ -48,7 +48,45 @@
             <h2>Välkommen till Antons Skafferi</h2>
             <p>Där säsongens fisk och vilt tar huvudrollen på tallriken. Upplev vårt noggrant utvalda utbud av färska råvaror från hav och skog, skapade med passion och omsorg för att ge dig en smakupplevelse utöver det vanliga.</p>
         </div>
-        <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
+
+        <!-- Section for today's lunch, initially hidden -->
+        <section id="todaysLunchSection" class="daily-lunch" style="display: none;">
+            <h2>Dagens lunch</h2>
+            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
+            <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
+        </section>
+
+        <!-- Section for the "Endast Vardagar" message, also initially hidden -->
+        <section id="noLunchSection" class="daily-lunch" style="display: none;">
+            <h2>Dagens lunch</h2>
+            <p>Endast Vardagar</p>
+        </section>
+        <!-- Example using a hidden input. Set the value based on the server-side condition -->
+        <input type="hidden" id="lunchAvailable" value="#{not empty menueBean.todaysLunch ? 'true' : 'false'}" />
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var lunchAvailable = document.getElementById('lunchAvailable').value === 'true';
+                if (lunchAvailable) {
+                    document.getElementById('todaysLunchSection').style.display = 'block';
+                } else {
+                    document.getElementById('noLunchSection').style.display = 'block';
+                }
+            });
+        </script>
+
+
+
+
+
+
+        <!--
+
+                <section class="daily-lunch">
+            <h2>Dagens lunch</h2>
+            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
+            <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
+        </section>
+               <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
             <section class="daily-lunch">
                 <h2>Dagens lunch</h2>
                 <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
@@ -61,6 +99,8 @@
                 <p>Endast Vardagar</p>
             </section>
         </ui:fragment>
+
+        -->
         <section class="actions">
             <a href="#alacarte" class="first_page_btn">Vår meny</a>
             <button class="first_page_btn" id="bookingButton1">Boka Bord</button>
@@ -170,13 +210,39 @@
             <div id="popupEvent" class="popup">
                 <div class="popup-content">
                     <span onclick="closePopup()" class="close-btn">&#215;</span> <!-- Close button -->
-                    <h2 id="popupHeader">Upcoming Events</h2>
-                    <p id="popupText">Don't miss our special weekend events!</p>
+                    <h2 id="popupHeader">Kommande Event</h2>
+                    <p id="popupText">Missa inte våra speciella helgevenemang!</p>
                     <ul id="popupList">
+
+                        <!--
+                                <ui:repeat value="#{eventsBean.eventsEntities}" var="event">
+                            <article class="event-card">
+                                <div class="event-content">
+                                    <h2 class="event-title">#{event.name}</h2>
+                                    <p class="event-description">#{event.description}</p>
+                                    <time class="event-time">#{event.date}</time>
+                                </div>
+                                <img src="#{event.imageUrl}" alt="#{event.name}" class="event-image"/>
+                            </article>
+                        </ui:repeat>
+                            <li>25 Dec - Saturday: Live Music Night</li>
+                        <li>26 Dec - Sunday: Wine Tasting Event</li>
+                          <li>#{eventsBean.date} - #{eventsBean.date.dayOfWeek}: #{eventsBean.name } </li>
+                                 <ui:repeat value="#{eventsBean.eventsEntities}" var="event" id="popupList">
+                                    <h2 class="event-title">#{event.name}</h2>
+                                    <p class="event-description">#{event.description}</p>
+                                    <time class="event-time">#{event.date}</time>
+
+                        </ui:repeat>
+                        -->
                         <li>25 Dec - Saturday: Live Music Night</li>
                         <li>26 Dec - Sunday: Wine Tasting Event</li>
+
+
+
+
                     </ul>
-                    <button onclick="location.href='#events';" id="pop_btn">More Info</button>
+                    <button onclick="location.href='#events';" id="pop_btn">Mer Info</button>
                 </div>
             </div>
         </section>

@@ -3,6 +3,10 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 
 @NamedQueries({
         @NamedQuery(
@@ -43,6 +47,14 @@ public class EventsEntity {
     public int getEventId() {
         return eventId;
     }
+    public String getFormattedDate() {
+        if (this.date == null) return ""; // Handle null dates
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM");
+        String formattedDate = this.date.format(formatter);
+        String dayOfWeek = this.date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
+        return formattedDate + " - " + dayOfWeek;
+    }
+
 
     public void setEventId(int eventId) {
         this.eventId = eventId;

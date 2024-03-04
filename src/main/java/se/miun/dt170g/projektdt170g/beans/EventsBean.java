@@ -79,13 +79,21 @@ public class EventsBean  implements Serializable{
     }
 
     public LocalDate getDate() {
-        return events.getDate();
+        if (this.events != null) {
+            return events.getDate();
+        } else {
+            // Handle the case where events is null, possibly by logging or throwing a more descriptive error
+            return null; // or throw new IllegalStateException("Events is not initialized.");
+        }
     }
+
 
     public void setDate(LocalDate date) {
         events.setDate(date);
     }
-
+    public String getFormattedDate() {
+        return events.getFormattedDate();
+    }
     public int getPrice() {
         return events.getPrice();
     }
