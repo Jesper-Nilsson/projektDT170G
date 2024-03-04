@@ -72,7 +72,7 @@
                     <h:selectOneMenu value="#{aLaCarteAdminBean.selectedALaCarteId}">
                         <f:selectItem itemLabel="Select AlaCarte" itemValue="#{null}" noSelectionOption="true"/>
                         <f:selectItems value="#{aLaCarteAdminBean.allALaCartes}" var="aLaCarte"
-                                       itemValue="#{aLaCarte.aLaCarteID}" itemLabel="#{aLaCarte.name} - #{aLacarte.type}"/>
+                                       itemValue="#{aLaCarte.aLaCarteID}" itemLabel="#{aLaCarte.name} - #{aLaCarte.type}"/>
                         <f:ajax listener="#{aLaCarteAdminBean.loadSelectedALaCarte}"  render="@form"/>
                     </h:selectOneMenu>
 
