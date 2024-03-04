@@ -35,22 +35,25 @@ public class OrderAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public OrderDTO getOrder(@QueryParam("orderID") int orderID,
-                             @QueryParam("kitchen") boolean kitchen,
-                             @QueryParam("service") boolean service) {
+    public OrderDTO getOrder(@QueryParam("orderID") int orderID) {
 
-
+        entityManager.clear();
+        entityManager.flush();
 
         //check orderID if not given, error or just everything today
 
         OrderDTO order_return = new OrderDTO();
         RestaurantOrderEntity test = entityManager.find(RestaurantOrderEntity.class,orderID);
 
+        entityManager.refresh(test);
+
         order_return.setOrder_ID(test.getRestaurantOrderId());
         order_return.setStatusAppetizer(test.getStatusAppetizer());
         order_return.setStatusMain(test.getStatusMain());
         order_return.setStatusDessert(test.getStatusDessert());
         order_return.setComment(test.getComment());
+        order_return.setOrderStatus(test.getOrderStatus());
+        order_return.setRestaurantTableId(test.getRestaurantTableId());
 
         for ( PurchasedALaCarteEntity purchasedALaCarte : test.getPurchasedALaCartesByRestaurantOrderId()){
             ALaCarteMenuEntity food = entityManager.find(ALaCarteMenuEntity.class,purchasedALaCarte.getaLaCarteId());
@@ -79,6 +82,7 @@ public class OrderAPI {
 
         for (RestaurantOrderEntity currentOrder : activeOrders) {
             OrderDTO orderReturn = new OrderDTO();
+            entityManager.refresh(currentOrder);
 
             orderReturn.setOrder_ID(currentOrder.getRestaurantOrderId());
             orderReturn.setStatusAppetizer(currentOrder.getStatusAppetizer());
@@ -109,7 +113,7 @@ public class OrderAPI {
     public Response addOrder(OrderDTO orderDTO) {
         try (Connection connection = dataSource.getConnection()) {
             String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment, order_status) VALUES (?, ?, ?, ?, ?, ?)";
-             try (PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement orderStatement = connection.prepareStatement(insertOrderSQL, Statement.RETURN_GENERATED_KEYS)) {
                 orderStatement.setString(1, orderDTO.getStatusAppetizer());
                 orderStatement.setString(2, orderDTO.getStatusMain());
                 orderStatement.setString(3, orderDTO.getStatusDessert());

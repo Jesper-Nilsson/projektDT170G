@@ -40,12 +40,12 @@ public class BookingTest {
     @GET // HTTP method annotation
     @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
     public Response test() throws IOException, InterruptedException {
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setComment("test");
-        orderDTO.setStatusMain("Skickat");
-        orderDTO.setStatusAppetizer("Skickat");
-        orderDTO.setStatusDessert("Skickat");
-        orderDTO.setRestaurantTableId(3);
+        OrderDTO orderDTO = orderAPI.getOrder(98);
+        orderDTO.setComment("det fungerar ");
+        orderDTO.setStatusMain("färdig");
+        orderDTO.setStatusAppetizer("färdig");
+        orderDTO.setStatusDessert("färdig");
+        orderDTO.setRestaurantTableId(99);
         orderDTO.setOrderStatus(true);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,1)));
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,2)));
@@ -59,10 +59,10 @@ public class BookingTest {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/projektDT170G-1.0-SNAPSHOT/api/order")) // Specify the target URL
+                .uri(URI.create("http://localhost:8080/projektDT170G-1.0-SNAPSHOT/api/order" + "/" + orderDTO.getOrder_ID())) // Specify the target URL
                 .timeout(Duration.ofMinutes(1))
                 .header("Content-Type", "application/json")
-                .POST(BodyPublishers.ofString(json))
+                .PUT(BodyPublishers.ofString(json))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

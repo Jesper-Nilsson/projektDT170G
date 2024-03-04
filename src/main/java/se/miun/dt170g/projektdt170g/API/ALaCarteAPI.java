@@ -1,5 +1,6 @@
 package se.miun.dt170g.projektdt170g.API;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,7 @@ import java.util.List;
  * Allows retrieval of dinner menu items filtered by their type.
  */
 @Path("/a_la_carte")
+@Stateless
 public class ALaCarteAPI {
     @PersistenceContext
     private EntityManager entityManager;
