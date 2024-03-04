@@ -44,11 +44,11 @@ public class BookingTest {
     @Produces(MediaType.APPLICATION_JSON) // Specifies the response content type
     public Response test() {
         OrderDTO orderDTO = orderAPI.getOrder(98);
-        orderDTO.setComment("test2");
-        orderDTO.setStatusMain("test2");
-        orderDTO.setStatusAppetizer("test2");
-        orderDTO.setStatusDessert("test2");
-        orderDTO.setRestaurantTableId(3);
+        orderDTO.setComment("test4");
+        orderDTO.setStatusMain("test4");
+        orderDTO.setStatusAppetizer("test4");
+        orderDTO.setStatusDessert("test4");
+        orderDTO.setRestaurantTableId(2);
         orderDTO.addFood(new ALaCarteItem(entityManager.find(ALaCarteMenuEntity.class,5)));
         orderDTO.addDrink(new Drink(entityManager.find(DrinksEntity.class, 12)));
         orderDTO.setOrderStatus(true);

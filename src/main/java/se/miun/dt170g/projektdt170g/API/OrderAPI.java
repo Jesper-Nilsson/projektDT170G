@@ -5,6 +5,7 @@ import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.FlushModeType;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -36,16 +37,23 @@ public class OrderAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public OrderDTO getOrder(@QueryParam("orderID") int orderID) {
 
+        entityManager.clear();
+        entityManager.flush();
+
         //check orderID if not given, error or just everything today
 
         OrderDTO order_return = new OrderDTO();
         RestaurantOrderEntity test = entityManager.find(RestaurantOrderEntity.class,orderID);
+
+        entityManager.refresh(test);
 
         order_return.setOrder_ID(test.getRestaurantOrderId());
         order_return.setStatusAppetizer(test.getStatusAppetizer());
         order_return.setStatusMain(test.getStatusMain());
         order_return.setStatusDessert(test.getStatusDessert());
         order_return.setComment(test.getComment());
+        order_return.setOrderStatus(test.getOrderStatus());
+        order_return.setRestaurantTableId(test.getRestaurantTableId());
 
         for ( PurchasedALaCarteEntity purchasedALaCarte : test.getPurchasedALaCartesByRestaurantOrderId()){
             ALaCarteMenuEntity food = entityManager.find(ALaCarteMenuEntity.class,purchasedALaCarte.getaLaCarteId());
@@ -62,11 +70,10 @@ public class OrderAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<OrderDTO> getactiveOrders() {
 
-        //check orderID if not given, error or just everything today
         entityManager.clear();
         entityManager.flush();
 
-
+        //check orderID if not given, error or just everything today
 
         List<OrderDTO> returnOrders = new ArrayList<>();
         List<RestaurantOrderEntity> activeOrders = new ArrayList<>();
@@ -75,14 +82,14 @@ public class OrderAPI {
 
         for (RestaurantOrderEntity currentOrder : activeOrders) {
             OrderDTO orderReturn = new OrderDTO();
-
             entityManager.refresh(currentOrder);
-            entityManager.flush();
 
             orderReturn.setOrder_ID(currentOrder.getRestaurantOrderId());
             orderReturn.setStatusAppetizer(currentOrder.getStatusAppetizer());
             orderReturn.setStatusMain(currentOrder.getStatusMain());
+            orderReturn.setRestaurantTableId(currentOrder.getRestaurantTableId());
             orderReturn.setStatusDessert(currentOrder.getStatusDessert());
+            orderReturn.setOrderStatus(currentOrder.getOrderStatus());
             orderReturn.setComment(currentOrder.getComment());
 
             for (PurchasedALaCarteEntity purchasedALaCarte : currentOrder.getPurchasedALaCartesByRestaurantOrderId()) {
@@ -98,9 +105,11 @@ public class OrderAPI {
         return returnOrders;
     }
 
+
+    @Produces(MediaType.APPLICATION_JSON)
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     public Response addOrder(OrderDTO orderDTO) {
         try (Connection connection = dataSource.getConnection()) {
             String insertOrderSQL = "INSERT INTO restaurant_order (status_appetizer, status_main, status_dessert, restaurant_table_id, comment, order_status) VALUES (?, ?, ?, ?, ?, ?)";
@@ -174,7 +183,6 @@ public class OrderAPI {
                 orderStatement.setString(3, orderDTO.getStatusDessert());
                 orderStatement.setInt(4, orderDTO.getRestaurantTableId());
                 orderStatement.setString(5, orderDTO.getComment());
-
                 if(orderDTO.getOrderStatus()){
                     orderStatement.setInt(6, 1);
                 }else{
@@ -229,18 +237,10 @@ public class OrderAPI {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            entityManager.clear();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error updating order: " + e.getMessage()).build();
         }
-        entityManager.clear();
+
         return Response.ok().build();
     }
-
-
-
-
-
-
-
 
 }
