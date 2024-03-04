@@ -40,7 +40,7 @@
             <ui:fragment rendered="#{aLaCarteAdminBean.action == 'delete'}">
                 <h:panelGrid columns="2">
                     <h:outputLabel for="deleteALaCarteId" value="Select ALaCarte to Delete:"/>
-                    <h:selectOneMenu id="deleteALaCarteId" value="#{aLaCarteAdminBean.ALaCarteIdToDelete}">
+                    <h:selectOneMenu id="deleteALaCarteId" value="#{aLaCarteAdminBean.aLaCarteIdToDelete}">
                         <f:selectItem itemLabel="Select ALaCarte" itemValue="null" noSelectionOption="true"/>
                         <f:selectItems value="#{aLaCarteAdminBean.allALaCartes}"
                                        var="aLaCarte"
@@ -53,6 +53,8 @@
                 </h:panelGrid>
             </ui:fragment>
 
+
+
             <ui:fragment rendered="#{aLaCarteAdminBean.action == 'update'}">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Select ALaCarte:"/>
@@ -60,7 +62,7 @@
                         <f:selectItem itemLabel="Select AlaCarte" itemValue="null" noSelectionOption="true"/>
                         <f:selectItems value="#{aLaCarteAdminBean.allALaCartes}" var="aLaCarte"
                                        itemValue="#{aLaCarte.aLaCarteID}" itemLabel="#{aLaCarte.name} - #{aLaCarte.type}"/>
-                        <f:ajax listener="#{aLaCarteAdminBean.loadSelectedLunch}" render="@form"/>
+                        <f:ajax listener="#{aLaCarteAdminBean.loadSelectedALaCarte}" render="@form"/>
                     </h:selectOneMenu>
 
                     <h:outputLabel for="updateALaCarteName" value="Name:"/>

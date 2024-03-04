@@ -39,7 +39,7 @@ public class ALaCarteAdminBean implements Serializable {
     private String action; // Define the action property
 
     private String message = "aa";
-    private int alacarteIdToDelete;
+    private int aLaCarteIdToDelete;
     // Id of the selected a la carte for update
     private int selectedALaCarteId;
 
@@ -77,7 +77,7 @@ public class ALaCarteAdminBean implements Serializable {
     public void deleteALaCarte() {
         setMessage("borttagen");
         setAction("none");
-        Response response = alacarteAPI.deleteItem(this.alacarteIdToDelete);
+        Response response = alacarteAPI.deleteItem(this.aLaCarteIdToDelete);
     }
 
     public void updateAlaCarte() {
@@ -125,12 +125,12 @@ public class ALaCarteAdminBean implements Serializable {
         this.message = message;
     }
 
-    public int getALaCarteIdToDelete() {
-        return alacarteIdToDelete;
+    public int getaLaCarteIdToDelete() {
+        return aLaCarteIdToDelete;
     }
 
-    public void setALaCarteIdToDelete(int aLaCarteIdToDelete) {
-        this.alacarteIdToDelete = alacarteIdToDelete;
+    public void setaLaCarteIdToDelete(int aLaCarteIdToDelete) {
+        this.aLaCarteIdToDelete = aLaCarteIdToDelete;
     }
 
     public ALaCarteItem getALaCarteItem() {
