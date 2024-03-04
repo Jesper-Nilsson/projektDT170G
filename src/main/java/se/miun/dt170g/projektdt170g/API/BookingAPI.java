@@ -5,12 +5,14 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.items.Booking;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Path("/bookings")
@@ -20,16 +22,17 @@ public class BookingAPI {
     private EntityManager entityManager;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBookingsByDate(@QueryParam("date") Date SQLdate)  {
-        List<BookingEntity> bookings;
-        LocalDate date;
-        date = SQLdate.toLocalDate();
+    public List<Booking> getBookingsByDate(@QueryParam("date") String dateString)  {
+        List<BookingEntity> bookingEntities;
+        List<Booking> bookings;
+        LocalDate date = LocalDate.parse(dateString);
 
-        bookings = entityManager.createNamedQuery(BookingEntity.findByDate, BookingEntity.class)
+        bookingEntities = entityManager.createNamedQuery(BookingEntity.findByDate, BookingEntity.class)
                 .setParameter("date", date)
                 .getResultList();
+        bookings = bookingEntities.stream().map(Booking::new).collect(Collectors.toList());
+        return bookings;
 
-        return Response.ok(bookings).build();
     }
 
     @POST

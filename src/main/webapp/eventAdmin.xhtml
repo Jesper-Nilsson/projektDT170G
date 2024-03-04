@@ -13,6 +13,7 @@
     </h:head>
     <h:body>
         <h:form enctype="multipart/form-data">
+            <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
             <h:commandButton value="Add Event" action="#{eventAdminBean.setAction('add')}" styleClass="admin-button" />
             <h:commandButton value="Update Event" action="#{eventAdminBean.setAction('update')}" styleClass="admin-button" />
             <h:commandButton value="Delete Event" action="#{eventAdminBean.setAction('delete')}" styleClass="admin-button" />

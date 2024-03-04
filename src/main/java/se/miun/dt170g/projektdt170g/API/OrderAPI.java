@@ -3,7 +3,6 @@ package se.miun.dt170g.projektdt170g.API;
 import jakarta.annotation.Resource;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.FlushModeType;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -17,7 +16,6 @@ import se.miun.dt170g.projektdt170g.models.*;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -150,7 +148,7 @@ public class OrderAPI {
                         try (PreparedStatement drinkStatement = connection.prepareStatement(insertPurchasedDrinkSQL)) {
                             for (Drink drink : orderDTO.getDrinks()) {
                                 drinkStatement.setInt(1, orderId);
-                                drinkStatement.setInt(2, drink.getDrink_ID());
+                                drinkStatement.setInt(2, drink.getDrinkID());
                                 drinkStatement.executeUpdate();
                             }
                         }
@@ -231,7 +229,7 @@ public class OrderAPI {
             try (PreparedStatement drinkStatement = connection.prepareStatement(insertPurchasedDrinkSQL)) {
                 for (Drink drink : orderDTO.getDrinks()) {
                     drinkStatement.setInt(1, orderId);
-                    drinkStatement.setInt(2, drink.getDrink_ID());
+                    drinkStatement.setInt(2, drink.getDrinkID());
                     drinkStatement.executeUpdate();
                 }
             }
