@@ -93,8 +93,7 @@ function validateNamePhone() {
 
 
 
-        // If both fields are filled, enable the submit button and allow form submission
-        return true;
+
     }
 }
 
@@ -108,9 +107,24 @@ document.getElementById('chooseDateTime').addEventListener('click', function() {
     }
 });
 
-document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
+// This function is triggered when the "Checka Info" button is clicked
+function checkInfoAndProceed() {
+    if (validateNamePhone()) {
+        closeModal('3'); // Close the current modal (Step 3)
+        openModal('4'); // Open the next modal (Step 4 for confirmation)
+       document.getElementById('j_idt17').disabled = false; // Assuming 'j_idt17' needs to be enabled
+        document.getElementById('invalidNamePhoneInput').style.display = "none";
+    } else {
+        //document.getElementById('j_idt17').disabled = true;
+        document.getElementById('invalidNamePhoneInput').style.display = "block";
+    }
+}
+
+// Attach the function to the button's click event
+document.getElementById('checkInfoButton').addEventListener('click', checkInfoAndProceed);
+
+
+// Event listener for submitting booking
 
     // Perform validation
     if (validateNamePhone()) {
@@ -142,3 +156,5 @@ function showInvalidDateInput() {
     const moreThanSixInfo = document.getElementById("invalidDateTimeInput");
     moreThanSixInfo.style.display = "block";
 }
+////////
+
