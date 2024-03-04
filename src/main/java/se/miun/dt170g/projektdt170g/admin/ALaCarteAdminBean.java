@@ -43,6 +43,7 @@ public class ALaCarteAdminBean implements Serializable {
     // Id of the selected a la carte for update
     private int selectedALaCarteId;
 
+    private String selectedALaCarteType;
 
 
 
@@ -195,12 +196,19 @@ public class ALaCarteAdminBean implements Serializable {
 
 
     // Loads the details of the selected a la carte so the can be shown in the update form
-    public void loadSelectedLunch() {
+    public void loadSelectedALaCarte() {
         this.aLaCarteItem = alacarteAPI.getItemById(selectedALaCarteId);
         System.out.println("hej");
 
     }
 
+    public String getSelectedALaCarteType() {
+        return selectedALaCarteType;
+    }
+
+    public void setSelectedALaCarteType(String selectedALaCarteType) {
+        this.selectedALaCarteType = selectedALaCarteType;
+    }
 
 
 
