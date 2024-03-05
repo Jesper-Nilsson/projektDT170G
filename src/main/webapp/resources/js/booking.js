@@ -90,10 +90,6 @@ function validateNamePhone() {
         // If both fields are filled and the phone number format is correct, allow form submission
         return true;
 
-
-
-
-
     }
 }
 
@@ -121,15 +117,16 @@ function checkInfoAndProceed() {
 }
 
 // Attach the function to the button's click event
-document.getElementById('j_idt17:saveBooking').addEventListener('click', function() {
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+    event.preventDefault();
     // Perform validation
     if (validateNamePhone()) {
         closeModal('3');
+        alert("Booking done")
         document.getElementById('j_idt17').disabled = false;
         document.getElementById('invalidNamePhoneInput').style.display = "none";
         document.getElementById('j_idt17:saveBooking').form.submit();
         document.getElementById('j_idt17:saveBooking').form.reset();
-        openModal("4");
     } else {
         document.getElementById('j_idt17').disabled = true;
         document.getElementById('invalidNamePhoneInput').style.display = "block";

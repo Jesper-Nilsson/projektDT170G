@@ -165,7 +165,7 @@
                         <h:outputLabel for="userPhone" value="Ditt telefonnummer" styleClass="inputHeader"/>
                         <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true"/>
 
-                        <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
+                        <h:commandButton id="saveBooking" type="button" value="Boka" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
                             <f:ajax execute="@form" render="@none" event="click"/>
                         </h:commandButton>
 

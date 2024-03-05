@@ -14,6 +14,8 @@ public class Booking {
     private LocalDate date;
     private LocalTime time;
 
+    public Booking() {}
+
     public Booking(BookingEntity booking){
         this.bookingId = booking.getBookingId();
         this.name = booking.getName();

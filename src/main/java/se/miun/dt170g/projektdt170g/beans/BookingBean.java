@@ -20,7 +20,7 @@ import java.util.Calendar;
 public class BookingBean implements Serializable {
     @Inject
     private BookingAPI bookingAPI;
-    private Booking booking;
+    private Booking booking = new Booking();
     private String minBookingDate = getCurrentDate();
 
 
