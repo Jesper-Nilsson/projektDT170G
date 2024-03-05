@@ -1,60 +1,61 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.Event;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Locale;
-
-
+import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(
                 name = "EventsEntity.findComingDates",
-                query = "SELECT e FROM EventsEntity e WHERE e.date > :date ORDER BY e.date ASC"
+                query = "SELECT l FROM EventsEntity l WHERE l.date >= :date ORDER BY l.date ASC"
         )
 })
 
 @Entity
-@Table(name = "events", schema = "dt170gprojekt")
+@Table(name = "events", schema = "dt170gprojekt", catalog = "")
 public class EventsEntity {
 
     public static final String findAfterDate = "EventsEntity.findComingDates";
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "event_id", nullable = false)
     private int eventId;
-
+    @Basic
     @Column(name = "name", nullable = false, length = 255)
     private String name;
-
-    // Assuming 'date' is of type TIMESTAMP in the database and mapped to LocalDate in Java.
+    @Basic
     @Column(name = "date", nullable = false)
     private LocalDate date;
-
+    @Basic
+    @Column(name = "time", nullable = false)
+    private LocalTime time;
+    @Basic
     @Column(name = "price", nullable = false)
     private int price;
-
+    @Basic
     @Column(name = "description", nullable = false, length = 255)
     private String description;
-
+    @Basic
     @Column(name = "image_url", nullable = false, length = 255)
     private String imageUrl;
 
-    // Getters and setters
+    public EventsEntity(){}
+    public EventsEntity(Event event){
+        this.eventId = event.getEventID();
+        this.name = event.getName();
+        this.price = event.getPrice();
+        this.date = event.getDate();
+        this.time = event.getTime();
+        this.description = event.getDescription();
+        this.imageUrl = event.getImagePath();
+    }
 
     public int getEventId() {
         return eventId;
     }
-    public String getFormattedDate() {
-        if (this.date == null) return ""; // Handle null dates
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM");
-        String formattedDate = this.date.format(formatter);
-        String dayOfWeek = this.date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.getDefault());
-        return formattedDate + " - " + dayOfWeek;
-    }
-
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
@@ -100,5 +101,11 @@ public class EventsEntity {
         this.imageUrl = imageUrl;
     }
 
-    // Removed the getTime and setTime methods as the 'time' column does not exist in the schema.
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
 }

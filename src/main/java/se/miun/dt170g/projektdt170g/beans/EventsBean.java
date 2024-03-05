@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.API.BookingAPI;
 import se.miun.dt170g.projektdt170g.API.EventAPI;
+import se.miun.dt170g.projektdt170g.items.Event;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 import se.miun.dt170g.projektdt170g.models.EventsEntity;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
@@ -30,8 +31,8 @@ public class EventsBean  implements Serializable{
     @Inject
     private EventAPI eventAPI;
 
-    private List<EventsEntity> eventsEntities;
-    private EventsEntity events;
+    private List<Event> eventsEntities = new ArrayList<>();
+    private Event events = new Event();
     private static final Logger LOGGER = Logger.getLogger(EventsBean.class.getName());
 
     @PostConstruct
@@ -51,11 +52,11 @@ public class EventsBean  implements Serializable{
     // The rest of your getters and setters for the bean properties.
     // ...
 
-    public List<EventsEntity> getEventsEntities() {
+    public List<Event> getEventsEntities() {
         return eventsEntities;
     }
 
-    public void setEventsEntities(List<EventsEntity> eventsEntities) {
+    public void setEventsEntities(List<Event> eventsEntities) {
         this.eventsEntities = eventsEntities;
     }
 
@@ -63,7 +64,7 @@ public class EventsBean  implements Serializable{
 
     // Getters and Setters
 
-    public List<EventsEntity> getEvents() {
+    public List<Event> getEvents() {
         return eventsEntities;
     }
 
@@ -92,7 +93,7 @@ public class EventsBean  implements Serializable{
         events.setDate(date);
     }
     public String getFormattedDate() {
-        return events.getFormattedDate();
+        return events.getDate().toString();
     }
     public int getPrice() {
         return events.getPrice();
@@ -111,7 +112,7 @@ public class EventsBean  implements Serializable{
     }
 
     public String getImageUrl() {
-        return events.getImageUrl();
+        return events.getImagePath();
     }
 
 }
