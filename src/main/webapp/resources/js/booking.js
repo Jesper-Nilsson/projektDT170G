@@ -1,6 +1,9 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
     // Get all elements with the class "test"
     const buttons = document.querySelectorAll('.guestAmountBtn');
+
 
     // Loop through each button
     buttons.forEach(function(button) {
@@ -57,8 +60,8 @@ document.getElementById('bookingButton2').addEventListener('click', function() {
 
 function validateDateTimeInputs() {
     // Get references to the input elements
-    var dateInput = document.getElementById("j_idt22:datePicker_input");
-    var timeInput = document.getElementById("j_idt22:timePicker_input");
+    var dateInput = document.getElementById("j_idt17:datePicker_input");
+    var timeInput = document.getElementById("j_idt17:timePicker_input");
 
     // Check if the inputs are empty
     var dateIsEmpty = dateInput.value.trim() === '';
@@ -73,8 +76,8 @@ function validateDateTimeInputs() {
 }
 
 function validateNamePhone() {
-    const nameInput = document.getElementById('j_idt22:userName');
-    const phoneInput = document.getElementById('j_idt22:userPhone');
+    const nameInput = document.getElementById('j_idt17:userName');
+    const phoneInput = document.getElementById('j_idt17:userPhone');
 
     if (nameInput.value.trim() === '' || phoneInput.value.trim() === '') {
         // If either field is empty, disable the submit button and prevent form submission
@@ -90,11 +93,6 @@ function validateNamePhone() {
         // If both fields are filled and the phone number format is correct, allow form submission
         return true;
 
-
-
-
-        // If both fields are filled, enable the submit button and allow form submission
-        return true;
     }
 }
 
@@ -107,22 +105,27 @@ document.getElementById('chooseDateTime').addEventListener('click', function() {
         showInvalidDateInput();
     }
 });
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    // ... your existing code to capture values and validate them
 
-document.getElementById('j_idt22:saveBooking').addEventListener('click', function(event) {
-    // Prevent the default form submission behavior
-    event.preventDefault();
-
-    // Perform validation
     if (validateNamePhone()) {
-        closeModal('3');
-        alert("Your booking has been saved!");
-        document.getElementById('j_idt22').disabled = false;
-        document.getElementById('invalidNamePhoneInput').style.display = "none";
-        document.getElementById('j_idt22:saveBooking').form.submit();
-        document.getElementById('j_idt22:saveBooking').form.reset();
+        // Assuming this part populates and shows the confirmation
+        let userName = document.getElementById('j_idt17:userName').value;
+        let userPhone = document.getElementById('j_idt17:userPhone').value;
+        document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: \n" + userName + ", med telefonnummer: " + userPhone;
+        openModal('4'); // Show the modal with booking details
 
+        // Set a timer to hide the modal or clear the message after 10 seconds
+        setTimeout(() => {
+            closeModal('3'); // Hide the confirmation modal
+            // Or clear the message without closing if you prefer
+            // document.getElementById('bookingDetails').innerText = '';
+            closeModal('4'); // Hide the confirmation modal
+        }, 10000); // 10000 milliseconds = 10 seconds
+
+        // Your code to submit the form data (AJAX call or form.submit() if needed)
     } else{
-        document.getElementById('j_idt22').disabled = true;
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
 });
@@ -142,3 +145,4 @@ function showInvalidDateInput() {
     const moreThanSixInfo = document.getElementById("invalidDateTimeInput");
     moreThanSixInfo.style.display = "block";
 }
+

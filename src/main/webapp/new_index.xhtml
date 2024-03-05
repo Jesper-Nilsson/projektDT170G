@@ -73,34 +73,6 @@
                 }
             });
         </script>
-
-
-
-
-
-
-        <!--
-
-                <section class="daily-lunch">
-            <h2>Dagens lunch</h2>
-            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
-            <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
-        </section>
-               <ui:fragment rendered="#{not empty menueBean.todaysLunch}">
-            <section class="daily-lunch">
-                <h2>Dagens lunch</h2>
-                <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
-                <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
-            </section>
-        </ui:fragment>
-        <ui:fragment rendered="#{empty menueBean.todaysLunch}">
-            <section class="daily-lunch">
-                <h2>Dagens lunch</h2>
-                <p>Endast Vardagar</p>
-            </section>
-        </ui:fragment>
-
-        -->
         <section class="actions">
             <a href="#alacarte" class="first_page_btn">Vår meny</a>
             <button class="first_page_btn" id="bookingButton1">Boka Bord</button>
@@ -203,6 +175,17 @@
 
                     </div>
                 </aside>
+                <!-- Confirmation Modal -->
+                <aside id="modalStep4" class="modal" aria-hidden="true" style="display:none;">
+                    <div class="content-container">
+                        <div class="booking-confirmation">
+                            <span class="close" onclick="closeModal('4')">&#215;</span>
+                            <h2>Booking Confirmation</h2>
+                            <p id="bookingDetails"></p>
+                        </div>
+                    </div>
+                </aside>
+
             </h:form>
 
         </section>
@@ -210,39 +193,13 @@
             <div id="popupEvent" class="popup">
                 <div class="popup-content">
                     <span onclick="closePopup()" class="close-btn">&#215;</span> <!-- Close button -->
-                    <h2 id="popupHeader">Kommande Event</h2>
-                    <p id="popupText">Missa inte våra speciella helgevenemang!</p>
+                    <h2 id="popupHeader">Upcoming Events</h2>
+                    <p id="popupText">Don't miss our special weekend events!</p>
                     <ul id="popupList">
-
-                        <!--
-                                <ui:repeat value="#{eventsBean.eventsEntities}" var="event">
-                            <article class="event-card">
-                                <div class="event-content">
-                                    <h2 class="event-title">#{event.name}</h2>
-                                    <p class="event-description">#{event.description}</p>
-                                    <time class="event-time">#{event.date}</time>
-                                </div>
-                                <img src="#{event.imageUrl}" alt="#{event.name}" class="event-image"/>
-                            </article>
-                        </ui:repeat>
-                            <li>25 Dec - Saturday: Live Music Night</li>
-                        <li>26 Dec - Sunday: Wine Tasting Event</li>
-                          <li>#{eventsBean.date} - #{eventsBean.date.dayOfWeek}: #{eventsBean.name } </li>
-                                 <ui:repeat value="#{eventsBean.eventsEntities}" var="event" id="popupList">
-                                    <h2 class="event-title">#{event.name}</h2>
-                                    <p class="event-description">#{event.description}</p>
-                                    <time class="event-time">#{event.date}</time>
-
-                        </ui:repeat>
-                        -->
                         <li>25 Dec - Saturday: Live Music Night</li>
                         <li>26 Dec - Sunday: Wine Tasting Event</li>
-
-
-
-
                     </ul>
-                    <button onclick="location.href='#events';" id="pop_btn">Mer Info</button>
+                    <button onclick="location.href='#events';" id="pop_btn">More Info</button>
                 </div>
             </div>
         </section>
