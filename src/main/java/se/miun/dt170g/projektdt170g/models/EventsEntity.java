@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.Event;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(
                 name = "EventsEntity.findComingDates",
-                query = "SELECT l FROM EventsEntity l WHERE l.date > :date ORDER BY l.date ASC"
+                query = "SELECT l FROM EventsEntity l WHERE l.date >= :date ORDER BY l.date ASC"
         )
 })
 
@@ -40,6 +41,17 @@ public class EventsEntity {
     @Basic
     @Column(name = "image_url", nullable = false, length = 255)
     private String imageUrl;
+
+    public EventsEntity(){}
+    public EventsEntity(Event event){
+        this.eventId = event.getEventID();
+        this.name = event.getName();
+        this.price = event.getPrice();
+        this.date = event.getDate();
+        this.time = event.getTime();
+        this.description = event.getDescription();
+        this.imageUrl = event.getImagePath();
+    }
 
     public int getEventId() {
         return eventId;
