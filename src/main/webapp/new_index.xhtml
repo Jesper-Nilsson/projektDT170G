@@ -164,47 +164,32 @@
 
                         <h:outputLabel for="userPhone" value="Ditt telefonnummer" styleClass="inputHeader"/>
                         <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true">
-                            <f:validateRegex pattern="\d{3}-\d{3}-\d{4}|\d{10}" />
+                            <f:validateRegex pattern="\d{3}-\d{3}-\d{4}||\d{10}" />
                         </h:inputText>
 
+                        <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
+                            <f:ajax execute="@form" render="@none" event="click"/>
+                        </h:commandButton>
 
                         <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 
                     </div>
                 </aside>
-
-
-
-
-
-                <aside id="modalStep4" class="modal" aria-labelledby="modalTitle4" aria-hidden="true">
+                <!-- Confirmation Modal -->
+                <aside id="modalStep4" class="modal" aria-hidden="true" style="display:none;">
                     <div class="content-container">
-                        <div class="booking-title">
-                            <div class="back-arrow" onclick="goBackModal('4', '3')">&#x2190;</div>
-                            <h2 id="modalTitle4">Bokningsbekräftelse</h2>
+                        <div class="booking-confirmation">
+                            <span class="close" onclick="closeModal('4')">&#215;</span>
+                            <h2>Booking Confirmation</h2>
+                            <p id="bookingDetails"></p>
                         </div>
-
-                        <h2 class="header-booking">Din bokning har sparats</h2>
-
-                        <div class="confirmation-details">
-                            <p><strong>Namn:</strong> #{bookingBean.name}</p>
-                            <p><strong>Telefonnummer:</strong> #{bookingBean.telephone}</p>
-                            <p><strong>Datum:</strong> #{bookingBean.date}</p>
-                            <p><strong>Tid:</strong> #{bookingBean.time}</p>
-                            <p><strong>Antal gäster:</strong> #{bookingBean.amount}</p>
-                        </div>
-                        <h:commandButton value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn">
-                            <f:ajax execute="@form" render="confirmationDetails" />
-                        </h:commandButton>
-
                     </div>
                 </aside>
 
 
             </h:form>
+
         </section>
-
-
         <section class="event-pop-up">
             <div id="popupEvent" class="popup">
                 <div class="popup-content">

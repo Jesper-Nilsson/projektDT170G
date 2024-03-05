@@ -1,6 +1,9 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
     // Get all elements with the class "test"
     const buttons = document.querySelectorAll('.guestAmountBtn');
+
 
     // Loop through each button
     buttons.forEach(function(button) {
@@ -90,10 +93,6 @@ function validateNamePhone() {
         // If both fields are filled and the phone number format is correct, allow form submission
         return true;
 
-
-
-
-
     }
 }
 
@@ -106,39 +105,29 @@ document.getElementById('chooseDateTime').addEventListener('click', function() {
         showInvalidDateInput();
     }
 });
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    // ... your existing code to capture values and validate them
 
-// This function is triggered when the "Checka Info" button is clicked
-function checkInfoAndProceed() {
     if (validateNamePhone()) {
-        closeModal('3'); // Close the current modal (Step 3)
-        openModal('4'); // Open the next modal (Step 4 for confirmation)
-       document.getElementById('j_idt17').disabled = false; // Assuming 'j_idt17' needs to be enabled
-        document.getElementById('invalidNamePhoneInput').style.display = "none";
-    } else {
-        //document.getElementById('j_idt17').disabled = true;
-        document.getElementById('invalidNamePhoneInput').style.display = "block";
-    }
-}
+        // Assuming this part populates and shows the confirmation
+        let userName = document.getElementById('j_idt17:userName').value;
+        let userPhone = document.getElementById('j_idt17:userPhone').value;
+        document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: \n" + userName + ", med telefonnummer: " + userPhone;
+        openModal('4'); // Show the modal with booking details
 
-// Attach the function to the button's click event
-document.getElementById('checkInfoButton').addEventListener('click', checkInfoAndProceed);
+        // Set a timer to hide the modal or clear the message after 10 seconds
+        setTimeout(() => {
+            closeModal('3'); // Hide the confirmation modal
+            // Or clear the message without closing if you prefer
+            // document.getElementById('bookingDetails').innerText = '';
+            closeModal('4'); // Hide the confirmation modal
+        }, 10000); // 10000 milliseconds = 10 seconds
 
-
-// Event listener for submitting booking
-
-    // Perform validation
-    if (validateNamePhone()) {
-        closeModal('3');
-        document.getElementById('j_idt17').disabled = false;
-        document.getElementById('invalidNamePhoneInput').style.display = "none";
-        document.getElementById('j_idt17:saveBooking').form.submit();
-        document.getElementById('j_idt17:saveBooking').form.reset();
-
+        // Your code to submit the form data (AJAX call or form.submit() if needed)
     } else{
-        document.getElementById('j_idt17').disabled = true;
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
-    openModal("4");
 });
 
 // Function to navigate back to the previous modal
@@ -156,5 +145,4 @@ function showInvalidDateInput() {
     const moreThanSixInfo = document.getElementById("invalidDateTimeInput");
     moreThanSixInfo.style.display = "block";
 }
-////////
 
