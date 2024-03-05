@@ -8,27 +8,45 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
     <h:head>
-        <title>Drink Administration</title>
+        <title>Booking Administration</title>
         <h:outputStylesheet name="css/adminStyle.css"/>
     </h:head>
     <h:body>
         <ui:fragment>
-            <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
-            <h:panelGroup layout="block">
-                <ui:repeat value="#{bookingAdminBean.bookings}" var="booking">
-                    <h:panelGroup layout="block" styleClass="booking-item">
+            <h:commandButton value="Back" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
+            <h:form>
+            <h:dataTable value="#{bookingAdminBean.bookings}" var="booking" styleClass="booking-table" headerClass="booking-header" rowClasses="booking-row-odd,booking-row-even">
+                <h:column>
+                    <f:facet name="header">Time</f:facet>
+                    #{booking.time}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{booking.name}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Amount</f:facet>
+                    #{booking.amount}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Telephone</f:facet>
+                    #{booking.telephone}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Table Number</f:facet>
+                    <p:inputNumber value="#{bookingAdminBean.tableAssignments[booking.bookingId]}" decimalPlaces="0">
+                        <f:convertNumber integerOnly="true"/>
+                    </p:inputNumber>
 
-                        <!-- Customize as needed -->
-                        <h:outputText value="#{booking.time}" />
-                        <h:outputText value="#{booking.name}" />
-                        <h:outputText value="#{booking.amount}" />
-                        <h:outputText value="#{booking.telephone}" />
-                        <!-- Add more properties here -->
-                    </h:panelGroup>
-                </ui:repeat>
-            </h:panelGroup>
+
+
+                </h:column>
+                <!-- Add more columns as needed -->
+            </h:dataTable>
+            <h:commandButton value="Assign All" action="#{bookingAdminBean.assignTables}" styleClass="assign-all-button" />
+                <!-- Add more columns as needed -->
+            </h:form>
         </ui:fragment>
     </h:body>
-
 </f:view>
 </html>

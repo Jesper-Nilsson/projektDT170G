@@ -31,6 +31,7 @@ public class Event {
     public int getEventID() {
         return eventID;
     }
+    public Event(){}
 
     public void setEventID(int eventID) {
         this.eventID = eventID;

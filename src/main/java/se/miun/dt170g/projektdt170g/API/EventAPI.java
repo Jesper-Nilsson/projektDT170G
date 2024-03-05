@@ -8,8 +8,10 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import se.miun.dt170g.projektdt170g.items.ALaCarteItem;
 import se.miun.dt170g.projektdt170g.items.Booking;
 import se.miun.dt170g.projektdt170g.items.Event;
+import se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity;
 import se.miun.dt170g.projektdt170g.models.EventsEntity;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
 
@@ -30,12 +32,29 @@ public class EventAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    public Event getEventById(@PathParam("id") int id){
+        return new Event(entityManager.find(EventsEntity.class,id));
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Event> getThreeNextEvents() {
         LocalDate today = LocalDate.now();
 
 
         List<EventsEntity> eventsEntities = entityManager.createNamedQuery(EventsEntity.findAfterDate, EventsEntity.class)
                 .setMaxResults(3)
+                .setParameter("date", today)
+                .getResultList();
+
+        return eventsEntities.stream().map(Event::new).collect(Collectors.toList());
+    }
+    @GET
+    @Path("/allEvents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Event> getComingEvents(){
+        LocalDate today = LocalDate.now();
+        List<EventsEntity> eventsEntities = entityManager.createNamedQuery(EventsEntity.findAfterDate, EventsEntity.class)
                 .setParameter("date", today)
                 .getResultList();
 

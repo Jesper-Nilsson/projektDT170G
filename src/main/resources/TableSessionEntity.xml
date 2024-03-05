@@ -5,14 +5,14 @@
     <entity class="se.miun.dt170g.projektdt170g.models.TableSessionEntity">
         <table name="table_session" schema="dt170gprojekt" catalog=""/>
         <attributes>
-            <id name="sessionId">
-                <column name="session_id" precision="11"/>
-            </id>
-            <basic name="tableNumber">
+            <id name="tableNumber">
                 <column name="table_number" precision="11"/>
-            </basic>
+            </id>
             <basic name="status">
                 <column name="status"/>
+            </basic>
+            <basic name="tableSize">
+                <column name="table_size"/>
             </basic>
         </attributes>
     </entity>

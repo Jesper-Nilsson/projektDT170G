@@ -23,6 +23,7 @@ public class Booking {
         this.date =bookingEntity.getDate();
         this.time = bookingEntity.getTime();
     }
+    public Booking(){}
 
     public int getBookingId() {
         return bookingId;

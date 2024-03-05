@@ -2,32 +2,52 @@
 package se.miun.dt170g.projektdt170g.admin;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.annotation.View;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.servlet.ServletContext;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Context;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
+import se.miun.dt170g.projektdt170g.API.ALaCarteAPI;
+import se.miun.dt170g.projektdt170g.API.EventAPI;
+import se.miun.dt170g.projektdt170g.items.Event;
 import jakarta.servlet.http.Part;
 import jakarta.ws.rs.core.Response;
 
 @Named
-@RequestScoped
-public class EventAdminBean {
-    private Part uploadedFile;
-    private String eventName;
-    private String eventDescription;
-    private LocalDate eventDate;
+@ViewScoped
+public class EventAdminBean implements Serializable {
+
+    @Context
+    private ServletContext context;
+
+    private Event event = new Event();
 
 
-    private String imageUrl;
+    private String temporaryFileName;
 
-    // Properties specific to other actions
+    private String message = "aa";
+
+    private int selectedEventId;
+
     private int eventIdToDelete;
     private String action; // Define the action property
+
+    @Inject
+    private EventAPI eventAPI;
     public String getAction() {
         return action;
     }
@@ -37,35 +57,42 @@ public class EventAdminBean {
     }
 
     public String getEventName() {
-        return eventName;
+        return event.getName();
     }
 
     public void setEventName(String eventName) {
-        this.eventName = eventName;
+        this.event.setName(eventName);
     }
 
     public String getEventDescription() {
-        return eventDescription;
+        return event.getDescription();
     }
 
     public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+        this.event.setDescription(eventDescription);
+    }
+
+    public int getEventPrice() {
+        return event.getPrice();
+    }
+
+    public void setEventPrice(int eventPrice) {
+        this.event.setPrice(eventPrice);
     }
 
     public LocalDate getEventDate() {
-        return eventDate;
+        return event.getDate();
     }
-
     public void setEventDate(LocalDate eventDate) {
-        this.eventDate = eventDate;
+        this.event.setDate(eventDate);
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public int getSelectedEventId() {
+        return selectedEventId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setSelectedEventId(int selectedEventId) {
+        this.selectedEventId = selectedEventId;
     }
 
     public int getEventIdToDelete() {
@@ -73,29 +100,41 @@ public class EventAdminBean {
     }
 
     public void setEventIdToDelete(int getIdToDelete) {
-        this.eventIdToDelete = eventIdToDelete;
+        this.eventIdToDelete = getIdToDelete;
     }
 
-    /*
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<Event> getAllEvents() {
+        return eventAPI.getComingEvents();
+    }
+
+
     public void addEvent(){
-        // call api post event
         setMessage("tillagd");
         setAction("none");
-        Response response = eventAPI.addEvent(eventEntity);
+        eventAPI.addEvent(this.event);
     }
 
     public void deleteEvent() {
         setMessage("borttagen");
         setAction("none");
-        Response response = eventAPI.deleteEvent(eventEntity.getEventId());
+        Response response = eventAPI.deleteEvent(this.eventIdToDelete);
+
     }
 
     public void updateEvent() {
         setMessage("uppdaterad");
         setAction("none");
-        Response response = eventAPI.updateEvent(eventEntity.getEventId(), this.eventEntity);
+        Response response = eventAPI.updateEvent(selectedEventId,event);
     }
-*/
+
 
 
     private String saveFile(Part file) throws IOException {
@@ -135,6 +174,40 @@ public class EventAdminBean {
             }
         }
         return null; // Or you could throw an exception or return a default name
+    }
+
+    public void loadSelectedEvent() {
+        this.event = eventAPI.getEventById(selectedEventId);
+        System.out.println("hej");
+
+    }
+
+    public void getHandleFileUpload(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+
+        // Assuming 'context' is accessible here; if not, you'll need to obtain it.
+        String directoryPath = context.getInitParameter("eventImagesDirectory");
+
+        // Generate a unique file name. This could be based on a database ID, timestamp, etc.
+        // For this example, I'll use a simple timestamp approach.
+        String fileName = System.currentTimeMillis() + ".jpeg"; // Consider a more robust approach for production.
+
+        File outputFile = new File(directoryPath, fileName);
+
+        try (InputStream input = file.getInputStream()) {
+            // Ensure directory exists.
+            new File(directoryPath).mkdirs();
+
+            // Copy file to the target directory.
+            Files.copy(input, outputFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Log success or further process the file as needed.
+            System.out.println("Uploaded file successfully saved as " + outputFile.getAbsolutePath());
+        } catch (IOException e) {
+            // Handle exceptions (e.g., logging, throwing a runtime exception)
+            e.printStackTrace();
+            throw new WebApplicationException("Error saving uploaded file", Response.Status.INTERNAL_SERVER_ERROR);
+        }
     }
 
 

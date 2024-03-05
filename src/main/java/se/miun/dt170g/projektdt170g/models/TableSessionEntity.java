@@ -1,27 +1,30 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
-
+@NamedQuery(
+        name = "TableSessionEntity.findAll",
+        query = "SELECT l FROM TableSessionEntity l"
+)
 @Entity
 @Table(name = "table_session", schema = "dt170gprojekt", catalog = "")
 public class TableSessionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "session_id", nullable = false)
-    private int sessionId;
-    @Basic
     @Column(name = "table_number", nullable = false)
     private int tableNumber;
     @Basic
     @Column(name = "status", nullable = false, length = 255)
     private String status;
+    @Basic
+    @Column(name = "table_size", nullable = false)
+    private int tableSize;
 
-    public int getSessionId() {
-        return sessionId;
+    public int getTableSize() {
+        return tableSize;
     }
 
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
+    public void setTableSize(int tableSize) {
+        this.tableSize = tableSize;
     }
 
     public int getTableNumber() {
