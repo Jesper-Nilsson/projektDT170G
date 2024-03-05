@@ -22,9 +22,17 @@ public class DrinkAPI {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDrinks() {
+    public Drink getDrinkByID(int id) {
+        return new Drink(entityManager.find(DrinksEntity.class, id));
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Drink> getAllDrinks() {
 
         List<DrinksEntity> drinksEntities;
         List<Drink> drinks = new ArrayList<>();
@@ -32,14 +40,14 @@ public class DrinkAPI {
         for (DrinksEntity drink : drinksEntities){
             drinks.add(new Drink(drink));
         }
-        return Response.ok(drinks).build();
+        return drinks;
     }
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateDrink(@PathParam("id") int id, DrinksEntity drinkUpdate) {
+    public Response updateDrink(@PathParam("id") int id, Drink drinkUpdate) {
         try {
             DrinksEntity drink = entityManager.find(DrinksEntity.class, id);
             if (drink == null) {
@@ -71,14 +79,15 @@ public class DrinkAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createDrink(DrinksEntity drink) {
+    public Response createDrink(Drink drink) {
         if (drink == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Drink information must be provided").build();
         }
         try {
-            entityManager.persist(drink);
+            DrinksEntity drinksEntity = new DrinksEntity(drink);
+            entityManager.persist(drinksEntity);
             entityManager.flush(); // Ensure the drink ID is generated
-            return Response.status(Response.Status.CREATED).entity(new Drink(drink)).build();
+            return Response.status(Response.Status.CREATED).entity(new Drink(drinksEntity)).build();
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error creating drink: " + e.getMessage()).build();
         }

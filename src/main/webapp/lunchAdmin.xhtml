@@ -12,10 +12,14 @@
         <h:outputStylesheet name="css/adminStyle.css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" update ="@form"/>
-            <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" update ="@form"/>
-            <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" update ="@form"/>
+        <div class="admin-container">
+        <h:form styleClass="form-container">
+            <ui:fragment>
+                <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
+                <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" update ="@form" immediate="true"/>
+            </ui:fragment>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'add'}">
                 <h:panelGrid columns="2">
@@ -49,7 +53,7 @@
                     </h:selectOneMenu>
                     <!-- No parameter is passed directly in the action attribute -->
                     <h:commandButton value="Delete Lunch" action="#{lunchAdminBean.deleteLunch}" update="@form">
-                        <f:ajax execute="@form" render="@form"/>
+                        <f:ajax execute="@form" render="@form" />
                     </h:commandButton>
                 </h:panelGrid>
             </ui:fragment>
@@ -65,7 +69,7 @@
                         <f:selectItem itemLabel="Select Lunch" itemValue="#{null}" noSelectionOption="true"/>
                         <f:selectItems value="#{lunchAdminBean.allLunches}" var="lunch"
                                        itemValue="#{lunch.lunchId}" itemLabel="#{lunch.name} - #{lunch.date}"/>
-                        <f:ajax listener="#{lunchAdminBean.loadSelectedLunch}" render="updateLunchPanel"/>
+                        <f:ajax listener="#{lunchAdminBean.loadSelectedLunch}"  render="@form"/>
                     </h:selectOneMenu>
 
 
@@ -107,7 +111,25 @@
 
 
             <h:outputText value="#{lunchAdminBean.message}" />
+
+
         </h:form>
+            <h:panelGroup layout="block" styleClass="lunch-list-container">
+                <h:dataTable value="#{lunchAdminBean.getLast14Lunches()}" var="lunch" styleClass="lunch-list">
+                    <h:column>
+                        <f:facet name="header">Lunch Name</f:facet>
+                        #{lunch.name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Date</f:facet>
+                        #{lunch.date}
+                    </h:column>
+                    <!-- Add more columns as needed -->
+                </h:dataTable>
+            </h:panelGroup>
+        </div>
+
+
     </h:body>
 </f:view>
 </html>

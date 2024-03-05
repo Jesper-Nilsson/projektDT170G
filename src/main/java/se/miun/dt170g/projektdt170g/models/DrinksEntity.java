@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.Drink;
 
 import java.util.Collection;
 @NamedQuery(
@@ -25,6 +26,14 @@ public class DrinksEntity {
     private int price;
     @OneToMany(mappedBy = "drinksByDrinkId")
     private Collection<PurchasedDrinksEntity> purchasedDrinksByDrinkId;
+
+    public DrinksEntity(){}
+    public DrinksEntity(Drink drink){
+        this.drinkId = drink.getDrinkID();
+        this.name = drink.getName();
+        this.price = drink.getPrice();
+        this.description = drink.getDescription();
+    }
 
     public int getDrinkId() {
         return drinkId;

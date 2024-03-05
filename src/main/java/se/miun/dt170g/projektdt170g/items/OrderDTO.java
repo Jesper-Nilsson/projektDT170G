@@ -35,8 +35,8 @@ public class OrderDTO {
     }
 
     public OrderDTO() {
-    foods = new ArrayList<ALaCarteItem>();
-    drinks = new ArrayList<Drink>();
+        foods = new ArrayList<ALaCarteItem>();
+        drinks = new ArrayList<Drink>();
     }
 
     public int getOrder_ID() {
@@ -87,7 +87,7 @@ public class OrderDTO {
         this.comment = comment;
     }
 
-    public List<ALaCarteItem> getFoods() {
+    public ArrayList<ALaCarteItem> getFoods() {
         return foods;
     }
 
@@ -95,7 +95,7 @@ public class OrderDTO {
         this.foods = foods;
     }
 
-    public List<Drink> getDrinks() {
+    public ArrayList<Drink> getDrinks() {
         return drinks;
     }
 
@@ -109,9 +109,16 @@ public class OrderDTO {
         foods.add(food);
     };
 
+    /*public int getOrderStatus() {
+        if (orderStatus)
+            return 1;
+        else
+            return 0;
+    }*/
     public boolean getOrderStatus() {
         return orderStatus;
     }
+
 
     public void setOrderStatus(boolean orderStatus) {
         this.orderStatus = orderStatus;

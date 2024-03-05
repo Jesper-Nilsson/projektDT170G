@@ -1,6 +1,9 @@
 package se.miun.dt170g.projektdt170g.admin;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.ViewHandler;
+import jakarta.faces.component.UIViewRoot;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -55,8 +58,18 @@ public class LunchAdminBean implements Serializable {
     }
 
     public void setAction(String action) {
-        this.action = action;
+
+        if("add".equals(action) || "update".equals(action) || "delete".equals(action)) {
+            lunchMenuEntity = new LunchMenuEntity();
+        }
+         this.action = action;
     }
+
+    public List<LunchMenuEntity> getLast14Lunches(){
+         return lunchAPI.getPreviousLunches();
+    }
+
+
 
     public void addLunch(){
         // call api post lunch
@@ -189,7 +202,6 @@ public class LunchAdminBean implements Serializable {
     // Loads the details of the selected lunch so the can be shown in the update form
     public void loadSelectedLunch() {
         this.lunchMenuEntity = lunchAPI.getLunch(selectedLunchId);
-        this.action = "showUpdate";
         System.out.println("hej");
 
     }
