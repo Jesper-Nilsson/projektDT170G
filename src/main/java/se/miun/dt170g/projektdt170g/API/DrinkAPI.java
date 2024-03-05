@@ -33,18 +33,5 @@ public class DrinkAPI {
         }
         return Response.ok(drinks).build();
     }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Response addDrink(DrinksEntity newDrink) {
-        if (newDrink != null) {
-            entityManager.persist(newDrink);
-            return Response.status(Response.Status.CREATED).build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-    }
-
 }
 
