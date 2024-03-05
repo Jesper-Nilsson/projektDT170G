@@ -121,11 +121,7 @@ function checkInfoAndProceed() {
 }
 
 // Attach the function to the button's click event
-document.getElementById('checkInfoButton').addEventListener('click', checkInfoAndProceed);
-
-
-// Event listener for submitting booking
-
+document.getElementById('checkInfoButton').addEventListener('click', function() {
     // Perform validation
     if (validateNamePhone()) {
         closeModal('3');
@@ -133,12 +129,11 @@ document.getElementById('checkInfoButton').addEventListener('click', checkInfoAn
         document.getElementById('invalidNamePhoneInput').style.display = "none";
         document.getElementById('j_idt17:saveBooking').form.submit();
         document.getElementById('j_idt17:saveBooking').form.reset();
-
-    } else{
+        openModal("4");
+    } else {
         document.getElementById('j_idt17').disabled = true;
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
-    openModal("4");
 });
 
 // Function to navigate back to the previous modal

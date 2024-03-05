@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.API.BookingAPI;
 import se.miun.dt170g.projektdt170g.API.EventAPI;
+import se.miun.dt170g.projektdt170g.items.Event;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 import se.miun.dt170g.projektdt170g.models.EventsEntity;
 import se.miun.dt170g.projektdt170g.models.LunchMenuEntity;
@@ -30,8 +31,8 @@ public class EventsBean  implements Serializable{
     @Inject
     private EventAPI eventAPI;
 
-    private List<EventsEntity> eventsEntities;
-    private EventsEntity events;
+    private List<Event> eventItems;
+    private Event event;
     private static final Logger LOGGER = Logger.getLogger(EventsBean.class.getName());
 
     @PostConstruct
@@ -41,8 +42,8 @@ public class EventsBean  implements Serializable{
 
     private void fetchEvents() {
         try {
-            this.eventsEntities = eventAPI.getThreeNextEvents();
-            LOGGER.info("Fetched events: " + eventsEntities);
+            this.eventItems = eventAPI.getThreeNextEvents();
+            LOGGER.info("Fetched events: " + eventItems);
         } catch (Exception e) {
             LOGGER.severe("Error fetching events: " + e.getMessage());
         }
@@ -51,36 +52,36 @@ public class EventsBean  implements Serializable{
     // The rest of your getters and setters for the bean properties.
     // ...
 
-    public List<EventsEntity> getEventsEntities() {
-        return eventsEntities;
+    public List<Event> getEventsEntities() {
+        return eventItems;
     }
 
-    public void setEventsEntities(List<EventsEntity> eventsEntities) {
-        this.eventsEntities = eventsEntities;
+    public void setEventsEntities(List<Event> eventsEntities) {
+        this.eventItems = eventsEntities;
     }
 
 
 
     // Getters and Setters
 
-    public List<EventsEntity> getEvents() {
-        return eventsEntities;
+    public List<Event> getEvents() {
+        return eventItems;
     }
 
 
 
 
     public String getName() {
-        return events.getName();
+        return event.getName();
     }
 
     public void setName(String name) {
-        events.setName(name);
+        event.setName(name);
     }
 
     public LocalDate getDate() {
-        if (this.events != null) {
-            return events.getDate();
+        if (this.event != null) {
+            return event.getDate();
         } else {
             // Handle the case where events is null, possibly by logging or throwing a more descriptive error
             return null; // or throw new IllegalStateException("Events is not initialized.");
@@ -89,29 +90,29 @@ public class EventsBean  implements Serializable{
 
 
     public void setDate(LocalDate date) {
-        events.setDate(date);
+        event.setDate(date);
     }
-    public String getFormattedDate() {
-        return events.getFormattedDate();
-    }
+
+    //public String getFormattedDate() { return event.getFormattedDate(); }
+
     public int getPrice() {
-        return events.getPrice();
+        return event.getPrice();
     }
 
     public void setPrice(int price) {
-        events.setPrice(price);
+        event.setPrice(price);
     }
 
     public String getDescription() {
-        return events.getDescription();
+        return event.getDescription();
     }
 
     public void setDescription(String description) {
-        events.setDescription(description);
+        event.setDescription(description);
     }
 
     public String getImageUrl() {
-        return events.getImageUrl();
+        return event.getImagePath();
     }
 
 }
