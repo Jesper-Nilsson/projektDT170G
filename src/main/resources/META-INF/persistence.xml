@@ -18,7 +18,7 @@
         <mapping-file>ShiftEntity.xml</mapping-file>
         <mapping-file>TableSessionEntity.xml</mapping-file>
         <class>se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity</class>
-        <class>se.miun.dt170g.projektdt170g.models.BookingEntity</class>
+        <class>se.miun.dt170g.projektdt170g.models.Booking</class>
         <class>se.miun.dt170g.projektdt170g.models.DrinksEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.EmployeeEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.EventsEntity</class>

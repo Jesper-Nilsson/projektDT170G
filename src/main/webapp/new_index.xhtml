@@ -163,16 +163,17 @@
                         <h:inputText id="userName" value="#{bookingBean.name}" required="true"/>
 
                         <h:outputLabel for="userPhone" value="Ditt telefonnummer" styleClass="inputHeader"/>
-                        <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true">
-                            <f:validateRegex pattern="\d{3}-\d{3}-\d{4}|\d{10}" />
-                        </h:inputText>
+                        <h:inputText id="userPhone" value="#{bookingBean.telephone}" required="true"/>
 
+                        <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
+                            <f:ajax execute="@form" render="@none" event="click"/>
+                        </h:commandButton>
 
                         <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 
                     </div>
                 </aside>
-
+                <!-- Model 4 booking
                 <aside id="modalStep4" class="modal" aria-labelledby="modalTitle4" aria-hidden="true">
                     <div class="content-container">
                         <div class="booking-title">
@@ -195,7 +196,7 @@
 
                     </div>
                 </aside>
-
+                -->
 
             </h:form>
         </section>

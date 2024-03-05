@@ -9,7 +9,6 @@ import se.miun.dt170g.projektdt170g.items.Booking;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,15 +21,15 @@ public class BookingAPI {
     private EntityManager entityManager;
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Booking> getBookingsByDate(@QueryParam("date") String dateString)  {
+    public List<se.miun.dt170g.projektdt170g.items.Booking> getBookingsByDate(@QueryParam("date") String dateString)  {
         List<BookingEntity> bookingEntities;
-        List<Booking> bookings;
+        List<se.miun.dt170g.projektdt170g.items.Booking> bookings;
         LocalDate date = LocalDate.parse(dateString);
 
         bookingEntities = entityManager.createNamedQuery(BookingEntity.findByDate, BookingEntity.class)
                 .setParameter("date", date)
                 .getResultList();
-        bookings = bookingEntities.stream().map(Booking::new).collect(Collectors.toList());
+        bookings = bookingEntities.stream().map(se.miun.dt170g.projektdt170g.items.Booking::new).collect(Collectors.toList());
         return bookings;
 
     }
@@ -38,7 +37,7 @@ public class BookingAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBooking(BookingEntity booking) {
+    public Response createBooking(Booking booking) {
         if (booking == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Booking information must be provided").build();
         }

@@ -2,7 +2,7 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="se.miun.dt170g.projektdt170g.models.BookingEntity">
+    <entity class="se.miun.dt170g.projektdt170g.models.Booking">
         <table name="booking" schema="dt170gprojekt" catalog=""/>
         <attributes>
             <id name="bookingId">

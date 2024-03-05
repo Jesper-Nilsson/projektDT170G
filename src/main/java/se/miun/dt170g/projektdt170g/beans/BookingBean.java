@@ -3,7 +3,8 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import se.miun.dt170g.projektdt170g.API.BookingAPI;
-import se.miun.dt170g.projektdt170g.models.BookingEntity;
+import se.miun.dt170g.projektdt170g.items.Booking;
+
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -19,53 +20,53 @@ import java.util.Calendar;
 public class BookingBean implements Serializable {
     @Inject
     private BookingAPI bookingAPI;
-    private BookingEntity bookingEntity = new BookingEntity();
+    private Booking booking;
     private String minBookingDate = getCurrentDate();
 
 
     public String getName() {
-        return bookingEntity.getName();
+        return booking.getName();
     }
 
     public void setName(String name) {
-        bookingEntity.setName(name);
+        booking.setName(name);
     }
 
     public String getTelephone() {
-        return bookingEntity.getTelephone();
+        return booking.getTelephone();
     }
 
     public void setTelephone(String telephone) {
-        bookingEntity.setTelephone(telephone);
+        booking.setTelephone(telephone);
     }
 
     public int getAmount() {
-        return bookingEntity.getAmount();
+        return booking.getAmount();
     }
 
     public void setAmount(int amount) {
-        bookingEntity.setAmount(amount);
+        booking.setAmount(amount);
     }
 
     public LocalDate getDate() {
-        return bookingEntity.getDate();
+        return booking.getDate();
     }
 
     public void setDate(LocalDate date) {
-        bookingEntity.setDate(date);
+        booking.setDate(date);
     }
 
     public LocalTime getTime() {
-        return bookingEntity.getTime();
+        return booking.getTime();
     }
 
     public void setTime(LocalTime time) {
-        bookingEntity.setTime(time);
+        booking.setTime(time);
     }
 
     public void submit() {
         // Save logic here, assuming you're saving dateTime as well as separate date and time parts
-        bookingAPI.createBooking(bookingEntity);
+        bookingAPI.createBooking(booking);
     }
 
     public String getMinBookingDate() {

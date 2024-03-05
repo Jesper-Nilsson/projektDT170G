@@ -121,7 +121,7 @@ function checkInfoAndProceed() {
 }
 
 // Attach the function to the button's click event
-document.getElementById('checkInfoButton').addEventListener('click', function() {
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function() {
     // Perform validation
     if (validateNamePhone()) {
         closeModal('3');

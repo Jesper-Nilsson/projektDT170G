@@ -1,6 +1,5 @@
 package se.miun.dt170g.projektdt170g.items;
 
-import jakarta.persistence.*;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 
 import java.time.LocalDate;
@@ -15,13 +14,13 @@ public class Booking {
     private LocalDate date;
     private LocalTime time;
 
-    public Booking(BookingEntity bookingEntity){
-        this.bookingId = bookingEntity.getBookingId();
-        this.name = bookingEntity.getName();
-        this.telephone = bookingEntity.getTelephone();
-        this.amount = bookingEntity.getAmount();
-        this.date =bookingEntity.getDate();
-        this.time = bookingEntity.getTime();
+    public Booking(BookingEntity booking){
+        this.bookingId = booking.getBookingId();
+        this.name = booking.getName();
+        this.telephone = booking.getTelephone();
+        this.amount = booking.getAmount();
+        this.date = booking.getDate();
+        this.time = booking.getTime();
     }
 
     public int getBookingId() {
