@@ -3,12 +3,17 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import se.miun.dt170g.projektdt170g.API.EventAPI;
 import se.miun.dt170g.projektdt170g.items.Event;
 import se.miun.dt170g.projektdt170g.models.EventsEntity;
 
-import java.io.Serializable;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -78,6 +83,11 @@ public class EventsBean  implements Serializable{
         }
     }
 
+
+    public String fetchEventImageAsBase64(int id) throws IOException {
+        byte[] imageData = eventAPI.getEventImage(id);
+        return Base64.getEncoder().encodeToString(imageData);
+    }
 
     public void setDate(LocalDate date) {
         events.setDate(date);

@@ -104,6 +104,7 @@ public class EventsEntity {
         this.imageUrl = imageUrl;
     }
 
+
     public LocalTime getTime() {
         return time;
     }
