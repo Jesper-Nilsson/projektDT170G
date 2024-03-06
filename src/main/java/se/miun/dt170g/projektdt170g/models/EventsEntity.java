@@ -5,7 +5,10 @@ import se.miun.dt170g.projektdt170g.items.Event;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 @NamedQueries({
         @NamedQuery(
                 name = "EventsEntity.findComingDates",
@@ -107,5 +110,16 @@ public class EventsEntity {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public String getFormattedDate() {
+        // Combine date and time into a LocalDateTime object
+        LocalDateTime dateTime = LocalDateTime.of(date, time);
+
+        // Define a formatter with the desired format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm");
+
+        // Format the dateTime object and return it as a string
+        return dateTime.format(formatter);
     }
 }
