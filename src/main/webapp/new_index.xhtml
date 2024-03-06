@@ -167,9 +167,15 @@
                             <f:validateRegex pattern="\d{3}-\d{3}-\d{4}||\d{10}" />
                         </h:inputText>
 
-                        <h:commandButton id="saveBooking" value="Submit" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
+                        <h:commandButton id="saveBooking" value="Boka" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
                             <f:ajax execute="@form" render="@none" event="click"/>
                         </h:commandButton>
+
+                        <h:inputHidden value="#{bookingBean.}"/>
+
+                        <div id="bookingMessage">
+                            <h:outputText value="#{bookingBean.bookingLimitMessage}" styleClass="limit-message" rendered="#{bookingBean.bookingLimitMessage != null}"/>
+                        </div>
 
                         <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 

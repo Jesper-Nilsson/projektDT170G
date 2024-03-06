@@ -3,6 +3,7 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import se.miun.dt170g.projektdt170g.API.BookingAPI;
+import se.miun.dt170g.projektdt170g.items.Booking;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.List;
 
 
 @Named
@@ -19,54 +21,52 @@ import java.util.Calendar;
 public class BookingBean implements Serializable {
     @Inject
     private BookingAPI bookingAPI;
-    private BookingEntity bookingEntity = new BookingEntity();
+    private Booking  bookingItem = new Booking();
     private String minBookingDate = getCurrentDate();
+    private List<Booking> bookingList;
 
 
     public String getName() {
-        return bookingEntity.getName();
+        return bookingItem.getName();
     }
 
     public void setName(String name) {
-        bookingEntity.setName(name);
+        bookingItem.setName(name);
     }
 
     public String getTelephone() {
-        return bookingEntity.getTelephone();
+        return bookingItem.getTelephone();
     }
 
     public void setTelephone(String telephone) {
-        bookingEntity.setTelephone(telephone);
+        bookingItem.setTelephone(telephone);
     }
 
     public int getAmount() {
-        return bookingEntity.getAmount();
+        return bookingItem.getAmount();
     }
 
     public void setAmount(int amount) {
-        bookingEntity.setAmount(amount);
+        bookingItem.setAmount(amount);
     }
 
     public LocalDate getDate() {
-        return bookingEntity.getDate();
+        return bookingItem.getDate();
     }
 
     public void setDate(LocalDate date) {
-        bookingEntity.setDate(date);
+        bookingItem.setDate(date);
     }
 
     public LocalTime getTime() {
-        return bookingEntity.getTime();
+        return bookingItem.getTime();
     }
 
     public void setTime(LocalTime time) {
-        bookingEntity.setTime(time);
+        bookingItem.setTime(time);
     }
 
-    public void submit() {
-        // Save logic here, assuming you're saving dateTime as well as separate date and time parts
-        bookingAPI.createBooking(bookingEntity);
-    }
+
 
     public String getMinBookingDate() {
         return minBookingDate;
@@ -83,4 +83,30 @@ public class BookingBean implements Serializable {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.format(currentDate);
     }
+
+
+    public String getBookingLimitMessage() {
+        return bookingLimitMessage;
+    }
+    private String bookingLimitMessage = null;
+
+
+    public void submit() {
+            bookingList = bookingAPI.getBookingsByDate(bookingItem.getDate().toString());
+            if(bookingList.size() < 4) {
+                bookingAPI.createBooking(bookingItem);
+                bookingLimitMessage = null; // Reset the message
+            }else{
+                 bookingLimitMessage = "Bokningsgränsen nådd för detta datum. Ring eller maila oss för din bokning på 070000000, anton@gmail.com";
+
+            }
+
+
+    }
+
+    public int getAmountOfBookings(LocalDate date) {
+        
+
+    }
+
 }

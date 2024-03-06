@@ -1,6 +1,7 @@
 package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
+import se.miun.dt170g.projektdt170g.items.Booking;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -33,6 +34,20 @@ public class BookingEntity {
     @Basic
     @Column(name = "time", nullable = false)
     private LocalTime time;
+
+    public BookingEntity(Booking booking) {
+        this.bookingId = booking.getBookingId();
+        this.name = booking.getName();
+        this.date = booking.getDate();
+        this.time = booking.getTime();
+        this.amount = booking.getAmount();
+        this.telephone = booking.getTelephone();
+
+    }
+
+    public BookingEntity() {
+
+    }
 
     public int getBookingId() {
         return bookingId;

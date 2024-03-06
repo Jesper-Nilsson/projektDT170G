@@ -34,21 +34,23 @@ public class BookingAPI {
         return bookings;
 
     }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createBooking(BookingEntity booking) {
+    public Response createBooking(Booking booking) {
         if (booking == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Booking information must be provided").build();
         }
         try {
-            entityManager.persist(booking);
+            entityManager.persist(new BookingEntity(booking));
             return Response.status(Response.Status.CREATED).entity(booking).build();
         } catch (Exception e) {
 
             return Response.status(Response.Status.BAD_REQUEST).entity("Error creating the booking").build();
         }
     }
+
+
+
 
 }
