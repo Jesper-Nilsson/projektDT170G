@@ -12,6 +12,7 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 
 import jakarta.servlet.http.Part;
+import jakarta.ws.rs.core.Response;
 
 @Named
 @RequestScoped
@@ -20,6 +21,8 @@ public class EventAdminBean {
     private String eventName;
     private String eventDescription;
     private LocalDate eventDate;
+
+
     private String imageUrl;
 
     // Properties specific to other actions
@@ -32,8 +35,6 @@ public class EventAdminBean {
     public void setAction(String action) {
         this.action = action;
     }
-
-    // Other properties and methods...
 
     public String getEventName() {
         return eventName;
@@ -75,17 +76,27 @@ public class EventAdminBean {
         this.eventIdToDelete = eventIdToDelete;
     }
 
-    public void addEvent() {
-        if (uploadedFile != null) {
-            try {
-                String fileName = saveFile(uploadedFile);
-                setImageUrl(fileName);
-            }
-            catch (IOException e) {
-                // Handle file save error
-            }
-        }
+    /*
+    public void addEvent(){
+        // call api post event
+        setMessage("tillagd");
+        setAction("none");
+        Response response = eventAPI.addEvent(eventEntity);
     }
+
+    public void deleteEvent() {
+        setMessage("borttagen");
+        setAction("none");
+        Response response = eventAPI.deleteEvent(eventEntity.getEventId());
+    }
+
+    public void updateEvent() {
+        setMessage("uppdaterad");
+        setAction("none");
+        Response response = eventAPI.updateEvent(eventEntity.getEventId(), this.eventEntity);
+    }
+*/
+
 
     private String saveFile(Part file) throws IOException {
         // Check if the file part has a valid file name

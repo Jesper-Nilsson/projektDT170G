@@ -13,6 +13,7 @@
     </h:head>
     <h:body>
         <h:form enctype="multipart/form-data">
+            <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
             <h:commandButton value="Add Event" action="#{eventAdminBean.setAction('add')}" styleClass="admin-button" />
             <h:commandButton value="Update Event" action="#{eventAdminBean.setAction('update')}" styleClass="admin-button" />
             <h:commandButton value="Delete Event" action="#{eventAdminBean.setAction('delete')}" styleClass="admin-button" />
@@ -46,8 +47,20 @@
             </ui:fragment>
 
             <ui:fragment rendered="#{eventAdminBean.action == 'delete'}">
-                <!-- Form for Deleting Event -->
-                <!-- Include your form fields here -->
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="deleteEventId" value="Select Event to Delete:"/>
+                    <h:selectOneMenu id="deleteEventId" value="#{eventAdminBean.eventIdToDelete}">
+                        <f:selectItem itemLabel="Select Event" itemValue="null" noSelectionOption="true"/>
+                        <f:selectItems value="#{eventAdminBean.allEvents}"
+                                       var="event"
+                                       itemValue="#{event.eventId}"
+                                       itemLabel="#{event.name} - #{event.date}"/>
+                    </h:selectOneMenu>
+                    <!-- No parameter is passed directly in the action attribute -->
+                    <h:commandButton value="Delete Event" action="#{eventAdminBean.deleteEvent}" update="@form">
+                        <f:ajax execute="@form" render="@form" />
+                    </h:commandButton>
+                </h:panelGrid>
             </ui:fragment>
         </h:form>
     </h:body>
