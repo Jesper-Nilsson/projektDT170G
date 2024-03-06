@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import jakarta.servlet.ServletContext;
@@ -115,6 +116,13 @@ public class EventAdminBean implements Serializable {
         return eventAPI.getComingEvents();
     }
 
+    public LocalTime getEventTime(){
+        return event.getTime();
+    }
+    public void setEventTime(LocalTime time){
+        event.setTime(time);
+    }
+
 
     public void addEvent(){
         setMessage("tillagd");
@@ -180,6 +188,11 @@ public class EventAdminBean implements Serializable {
         this.event = eventAPI.getEventById(selectedEventId);
         System.out.println("hej");
 
+    }
+    public void testAction() throws InterruptedException {
+
+        Thread.sleep(100);
+        System.out.println("Test action called!");
     }
 
     public void getHandleFileUpload(FileUploadEvent event) {

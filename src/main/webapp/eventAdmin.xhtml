@@ -29,15 +29,21 @@
                     <h:outputLabel for="eventDate" value="Date:"/>
                     <p:calendar id="eventDate" value="#{eventAdminBean.eventDate}" navigator="true" pattern="dd/MM/yyyy" showOn="button"/>
 
+                    <h:outputLabel for="eventTime" value="Time:"/>
+                    <p:datePicker timeOnly="true" id="eventTime" value="#{eventAdminBean.eventTime}" />
+
                     <h:outputLabel for="eventPrice" value="Price:"/>
                     <h:inputText id="eventPrice" value="#{eventAdminBean.eventPrice}" required="true" requiredMessage="The event price is required."/>
 
                     <h:outputLabel for="file" value="Upload Image:"/>
-                    <p:fileUpload id="file" fileUploadListener="#{eventAdminBean.handleFileUpload}"
-                                  mode="advanced"
+                    <p:fileUpload id="file" fileUploadListener="#{eventAdminBean.getHandleFileUpload}"
                                   update="messages"
                                   sizeLimit="10485760"
-                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                  allowTypes="/(\.|\/)(jpe?g|png)$/"
+                    />
+
+                    <p:commandButton value="Test Action" actionListener="#{eventAdminBean.testAction}" />
+
 
                     <p:commandButton value="Submit" action="#{eventAdminBean.addEvent}" ajax="false" update="@form"/>
                 </h:panelGrid>
