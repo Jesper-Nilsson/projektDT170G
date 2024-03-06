@@ -47,7 +47,7 @@ public class BookingAdminBean implements Serializable {
 
     private String action; // Define the action property
 
-    private String message = "aa";
+    private String message = "";
 
     List<Booking> bookings;
     private Map<Integer, BigDecimal> tableAssignments = new HashMap<>();

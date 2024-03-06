@@ -37,7 +37,7 @@ public class LunchAdminBean implements Serializable {
     private LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
     private String action; // Define the action property
 
-    private String message = "aa";
+    private String message = "";
     private int lunchIdToDelete;
     // Id of the selected lunch for update
     private int selectedLunchId;
@@ -61,6 +61,7 @@ public class LunchAdminBean implements Serializable {
 
         if("add".equals(action) || "update".equals(action) || "delete".equals(action)) {
             lunchMenuEntity = new LunchMenuEntity();
+            setMessage("");
         }
          this.action = action;
     }
@@ -73,19 +74,19 @@ public class LunchAdminBean implements Serializable {
 
     public void addLunch(){
         // call api post lunch
-        setMessage("tillagd");
+        setMessage("Tillagd");
         setAction("none");
         Response response = lunchAPI.addLunch(lunchMenuEntity);
     }
 
     public void deleteLunch() {
-        setMessage("borttagen");
+        setMessage("Borttagen");
         setAction("none");
         Response response = lunchAPI.deleteLunch(lunchMenuEntity.getLunchId());
     }
 
     public void updateLunch() {
-        setMessage("uppdaterad");
+        setMessage("Uppdaterad");
         setAction("none");
         Response response = lunchAPI.updateLunch(lunchMenuEntity.getLunchId(), this.lunchMenuEntity);
     }

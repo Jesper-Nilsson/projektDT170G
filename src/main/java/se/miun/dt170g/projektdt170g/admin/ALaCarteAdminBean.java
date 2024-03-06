@@ -38,7 +38,7 @@ public class ALaCarteAdminBean implements Serializable {
     private ALaCarteItem aLaCarteItem = new ALaCarteItem();
     private String action; // Define the action property
 
-    private String message = "aa";
+    private String message = "";
     private int aLaCarteIdToDelete;
     // Id of the selected a la carte for update
     private int selectedALaCarteId;
@@ -61,7 +61,10 @@ public class ALaCarteAdminBean implements Serializable {
 
         if("add".equals(action) || "update".equals(action) || "delete".equals(action)) {
             aLaCarteItem = new ALaCarteItem();
+            setMessage("");
         }
+
+
         this.action = action;
     }
 
@@ -69,19 +72,19 @@ public class ALaCarteAdminBean implements Serializable {
 
     public void addALaCarte(){
         // call api post a la carte
-        setMessage("tillagd");
+        setMessage("Tillagd");
         setAction("none");
         alacarteAPI.createItem(aLaCarteItem);
     }
 
     public void deleteALaCarte() {
-        setMessage("borttagen");
+        setMessage("Borttagen");
         setAction("none");
         Response response = alacarteAPI.deleteItem(this.aLaCarteIdToDelete);
     }
 
     public void updateAlaCarte() {
-        setMessage("uppdaterad");
+        setMessage("Uppdaterad");
         setAction("none");
         Response response = alacarteAPI.updateItem(selectedALaCarteId,aLaCarteItem);
     }

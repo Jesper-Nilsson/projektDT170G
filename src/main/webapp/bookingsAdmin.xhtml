@@ -12,7 +12,7 @@
         <h:outputStylesheet name="css/adminStyle.css"/>
     </h:head>
     <h:body>
-        <ui:fragment>
+        <ui:fragment rendered="#{bookingAdminBean.action == 'begin'}">
             <h:commandButton value="Back" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
             <h:form>
             <h:dataTable value="#{bookingAdminBean.bookings}" var="booking" styleClass="booking-table" headerClass="booking-header" rowClasses="booking-row-odd,booking-row-even">

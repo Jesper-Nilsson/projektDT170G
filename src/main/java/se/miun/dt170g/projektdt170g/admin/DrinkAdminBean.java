@@ -23,7 +23,7 @@ import se.miun.dt170g.projektdt170g.items.Drink;
         private Drink drink = new Drink();
         private String action; // Define the action property
 
-        private String message = "aa";
+        private String message = "";
         private int drinkIdToDelete;
         private int selectedDrinkId;
 
@@ -44,6 +44,7 @@ import se.miun.dt170g.projektdt170g.items.Drink;
 
             if("add".equals(action) || "update".equals(action) || "delete".equals(action)) {
                 drink = new Drink();
+                setMessage("");
             }
             this.action = action;
         }
@@ -52,20 +53,20 @@ import se.miun.dt170g.projektdt170g.items.Drink;
 
         public void addDrink(){
             // call api post a la carte
-            setMessage("tillagd");
+            setMessage("Tillagd");
             setAction("none");
             drinkApi.createDrink(drink);
 
         }
 
         public void deleteDrink() {
-            setMessage("borttagen");
+            setMessage("Borttagen");
             setAction("none");
             Response response = drinkApi.deleteDrink(this.drinkIdToDelete);
         }
 
         public void updateDrink() {
-            setMessage("uppdaterad");
+            setMessage("Uppdaterad");
             setAction("none");
             Response response = drinkApi.updateDrink(selectedDrinkId, drink);
         }

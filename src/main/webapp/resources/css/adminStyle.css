@@ -12,7 +12,7 @@
     height: 50px;
     font-size: 16px;
     margin: 10px;
-    background-color: indianred; /* Example background color */
+    background-color: #ffb703; /* Example background color */
     border: 1px solid #ddd; /* Example border */
     border-radius: 5px; /* Rounded corners */
 }
@@ -32,6 +32,17 @@
     /* Styles for your list container */
     flex-grow: 1; /* Allows the list to grow and use up space as needed */
     margin-left: 20px; /* Adds some space between the form and the list */
+}
+.message {
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 32px;
+    margin: 10px;
+    color: green;
+    clear-side:both;
+    clear: both;
+
 }
 
 /* Keep your existing .
