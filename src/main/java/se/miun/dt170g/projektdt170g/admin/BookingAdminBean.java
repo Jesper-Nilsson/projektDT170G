@@ -56,6 +56,7 @@ public class BookingAdminBean implements Serializable {
     public void init() {
 
         this.bookings = bookingAPI.getBookingsByDate(LocalDate.now().toString());
+        setAction("begin");
 
 
         };
@@ -71,16 +72,18 @@ public class BookingAdminBean implements Serializable {
 
     public void setTableAssignments( Map<Integer, BigDecimal> tableAssignments) {
         this.tableAssignments = tableAssignments;
+
     }
 
     // Method to process table assignments
-    public String assignTables() {
+    public void assignTables() {
 
         tablesAPI.bookMultipleTables(new ArrayList<>(tableAssignments.values().stream()
                 .map(BigDecimal::intValue) // Converts BigDecimal to int, note: this truncates decimal parts without rounding
                 .collect(Collectors.toList())));
 
-        return "success"; // Navigation outcome or refresh
+        setMessage("Dagens bokningar, tilldelade bord");
+        setAction("done");
     }
 
 

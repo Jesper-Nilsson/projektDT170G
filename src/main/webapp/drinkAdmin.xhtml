@@ -15,9 +15,9 @@
         <h:form>
             <ui:fragment>
                 <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
-                <h:commandButton value="lagg till Drink" action="#{drinkAdminBean.setAction('add')}" styleClass="admin-button" update="@form" immediate="true"/>
-                <h:commandButton value="andra Drink" action="#{drinkAdminBean.setAction('update')}" styleClass="admin-button" update="@form" immediate="true"/>
-                <h:commandButton value="ta bort Drink" action="#{drinkAdminBean.setAction('delete')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Lägg till Drink" action="#{drinkAdminBean.setAction('add')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Ändra Drink" action="#{drinkAdminBean.setAction('update')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Ta bort Drink" action="#{drinkAdminBean.setAction('delete')}" styleClass="admin-button" update="@form" immediate="true"/>
             </ui:fragment>
 
             <ui:fragment rendered="#{drinkAdminBean.action == 'add'}">

@@ -16,9 +16,9 @@
         <h:form styleClass="form-container">
             <ui:fragment>
                 <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
-                <h:commandButton value="lagg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" update ="@form" immediate="true"/>
-                <h:commandButton value="andra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" update ="@form" immediate="true"/>
-                <h:commandButton value="ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="Lägg till lunch" action="#{lunchAdminBean.setAction('add')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="Ändra lunch" action="#{lunchAdminBean.setAction('update')}" styleClass="admin-button" update ="@form" immediate="true"/>
+                <h:commandButton value="Ta bort lunch" action="#{lunchAdminBean.setAction('delete')}" styleClass="admin-button" update ="@form" immediate="true"/>
             </ui:fragment>
 
             <ui:fragment rendered="#{lunchAdminBean.action == 'add'}">

@@ -15,9 +15,9 @@
         <h:form>
             <ui:fragment>
                 <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
-                <h:commandButton value="lagg till a la carte" action="#{aLaCarteAdminBean.setAction('add')}" styleClass="admin-button" update="@form" immediate="true"/>
-                <h:commandButton value="andra a la carte" action="#{aLaCarteAdminBean.setAction('update')}" styleClass="admin-button" update="@form" immediate="true"/>
-                <h:commandButton value="ta bort a la carte" action="#{aLaCarteAdminBean.setAction('delete')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Lägg till a la carte" action="#{aLaCarteAdminBean.setAction('add')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Ändra a la carte" action="#{aLaCarteAdminBean.setAction('update')}" styleClass="admin-button" update="@form" immediate="true"/>
+                <h:commandButton value="Ta bort a la carte" action="#{aLaCarteAdminBean.setAction('delete')}" styleClass="admin-button" update="@form" immediate="true"/>
             </ui:fragment>
 
             <ui:fragment rendered="#{aLaCarteAdminBean.action == 'add'}">
