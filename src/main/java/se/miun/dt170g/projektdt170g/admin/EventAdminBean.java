@@ -34,9 +34,19 @@ public class EventAdminBean implements Serializable {
 
     @Context
     private ServletContext context;
+    private FileUploadManagedBean fileUploadManagedBean;
 
     private Event event = new Event();
 
+    UploadedFile file;
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
 
     private String temporaryFileName;
 
@@ -128,6 +138,8 @@ public class EventAdminBean implements Serializable {
         setMessage("tillagd");
         setAction("none");
         eventAPI.addEvent(this.event);
+        dummyAction(eventAPI.getLatestEventId());
+
     }
 
     public void deleteEvent() {
@@ -141,6 +153,7 @@ public class EventAdminBean implements Serializable {
         setMessage("uppdaterad");
         setAction("none");
         Response response = eventAPI.updateEvent(selectedEventId,event);
+        dummyAction(selectedEventId);
     }
 
 
@@ -195,15 +208,13 @@ public class EventAdminBean implements Serializable {
         System.out.println("Test action called!");
     }
 
-    public void getHandleFileUpload(FileUploadEvent event) {
-        UploadedFile file = event.getFile();
 
-        // Assuming 'context' is accessible here; if not, you'll need to obtain it.
+    public void dummyAction(int id) {
         String directoryPath = context.getInitParameter("eventImagesDirectory");
 
         // Generate a unique file name. This could be based on a database ID, timestamp, etc.
         // For this example, I'll use a simple timestamp approach.
-        String fileName = System.currentTimeMillis() + ".jpeg"; // Consider a more robust approach for production.
+        String fileName = id + ".jpeg"; // Consider a more robust approach for production.
 
         File outputFile = new File(directoryPath, fileName);
 

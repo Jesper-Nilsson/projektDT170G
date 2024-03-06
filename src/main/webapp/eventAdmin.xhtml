@@ -12,13 +12,14 @@
         <h:outputStylesheet name="css/adminStyle.css" />
     </h:head>
     <h:body>
-        <h:form enctype="multipart/form-data">
+        <h:form>
             <h:commandButton value="Tillbaka" action="#{adminBean.goToMainAdmin()}" styleClass="back-button" immediate="true"/>
             <h:commandButton value="Add Event" action="#{eventAdminBean.setAction('add')}" styleClass="admin-button"  update="@form" immediate="true" />
             <h:commandButton value="Update Event" action="#{eventAdminBean.setAction('update')}" styleClass="admin-button"  update="@form" immediate="true"/>
             <h:commandButton value="Delete Event" action="#{eventAdminBean.setAction('delete')}" styleClass="admin-button" update="@form" immediate="true" />
-
+        </h:form>
             <ui:fragment rendered="#{eventAdminBean.action == 'add'}">
+                <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2">
                     <h:outputLabel for="eventName" value="Name:"/>
                     <h:inputText id="eventName" value="#{eventAdminBean.eventName}" required="true" requiredMessage="The event name is required."/>
@@ -35,27 +36,18 @@
                     <h:outputLabel for="eventPrice" value="Price:"/>
                     <h:inputText id="eventPrice" value="#{eventAdminBean.eventPrice}" required="true" requiredMessage="The event price is required."/>
 
-                    <h:outputLabel for="file" value="Upload Image:"/>
-                    <p:fileUpload id="file" fileUploadListener="#{eventAdminBean.getHandleFileUpload}"
-                                  update="messages"
-                                  sizeLimit="10485760"
-                                  allowTypes="/(\.|\/)(jpe?g|png)$/"
-                    />
-
-                    <p:commandButton value="Test Action" actionListener="#{eventAdminBean.testAction}" />
-
+                    <p:fileUpload value="#{eventAdminBean.file}"  mode="simple"/><br></br>
 
                     <p:commandButton value="Submit" action="#{eventAdminBean.addEvent}" ajax="false" update="@form"/>
-                </h:panelGrid>
-                <p:messages id="messages" />
-            </ui:fragment>
 
-            <ui:fragment rendered="#{eventAdminBean.action == 'update'}">
-                <!-- Form for Updating Event -->
-                <!-- Include your form fields here -->
+                </h:panelGrid>
+                </h:form>
+
+              <!--  <p:messages id="messages" /> -->
             </ui:fragment>
 
             <ui:fragment rendered="#{eventAdminBean.action == 'delete'}">
+                <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel for="deleteEventId" value="Select Event to Delete:"/>
                     <h:selectOneMenu id="deleteEventId" value="#{eventAdminBean.eventIdToDelete}">
@@ -70,9 +62,11 @@
                         <f:ajax execute="@form" render="@form" />
                     </h:commandButton>
                 </h:panelGrid>
+                </h:form>
             </ui:fragment>
 
             <ui:fragment rendered="#{eventAdminBean.action == 'update'}">
+                <h:form enctype="multipart/form-data">
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Select Event:"/>
                     <h:selectOneMenu value="#{eventAdminBean.selectedEventId}">
@@ -94,12 +88,16 @@
                     <h:outputLabel for="updateEventPrice" value="Price:"/>
                     <h:inputText id="updateEventPrice" value="#{eventAdminBean.eventPrice}"/>
 
+                    <p:fileUpload value="#{eventAdminBean.file}"  mode="simple"/><br></br>
+
                     <h:commandButton value="Update Event" action="#{eventAdminBean.updateEvent}" update="@form"/>
                 </h:panelGrid>
+                </h:form>
             </ui:fragment>
 
             <h:outputText value="#{eventAdminBean.message}" />
-        </h:form>
+
+
     </h:body>
 </f:view>
 </html>

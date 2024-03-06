@@ -2,6 +2,7 @@ package se.miun.dt170g.projektdt170g.API;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.ServletContext;
 import jakarta.ws.rs.*;
@@ -64,11 +65,25 @@ public class EventAPI {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addEvent(Event event) {
+    public int addEvent(Event event) {
         EventsEntity eventToAdd = new EventsEntity(event);
         entityManager.persist(eventToAdd);
-        return Response.ok(eventToAdd).build();
+        entityManager.flush();
+        return eventToAdd.getEventId();
     }
+
+    // this is real stupid but my transactions are wierldy handled
+    // and my teacher didnt see why either so this is my current solution
+    public int getLatestEventId() {
+        try {
+            int latestId = entityManager.createQuery("SELECT MAX(e.eventId) FROM EventsEntity e", int.class)
+                    .getSingleResult();
+            return latestId != 0 ? latestId : -1; // Return -1 or any indicator for "not found"
+        } catch (NoResultException e) {
+            return -1; // Handle the case where there are no entries yet
+        }
+    }
+
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
