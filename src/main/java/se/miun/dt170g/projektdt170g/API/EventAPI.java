@@ -94,7 +94,6 @@ public class EventAPI {
         eventsEntity.setName(updateEvent.getName());
         eventsEntity.setTime(updateEvent.getTime());
         eventsEntity.setPrice(updateEvent.getPrice());
-        eventsEntity.setImageUrl(updateEvent.getImagePath());
         entityManager.merge(eventsEntity);
         return Response.ok(eventsEntity).build();
     }

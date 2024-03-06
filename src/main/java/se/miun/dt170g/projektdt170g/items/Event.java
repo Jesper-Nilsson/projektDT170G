@@ -15,7 +15,7 @@ public class Event {
     private LocalTime time;
     private int price;
     private String description;
-    private String imagePath;
+
 
     public Event(EventsEntity eventsEntity){
         this.eventID = eventsEntity.getEventId();
@@ -24,7 +24,7 @@ public class Event {
         this.date = eventsEntity.getDate();
         this.time = eventsEntity.getTime();
         this.description = eventsEntity.getDescription();
-        this.imagePath = eventsEntity.getImageUrl();
+
     }
 
 
@@ -77,11 +77,5 @@ public class Event {
         this.description = description;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 }

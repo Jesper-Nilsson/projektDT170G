@@ -103,17 +103,8 @@
                 </h:panelGrid>
             </ui:fragment>
 
-
-
-
-
-
-
-
             <h:outputText value="#{lunchAdminBean.message}" styleClass="message" />
 
-
-        </h:form>
             <h:panelGroup layout="block" styleClass="lunch-list-container">
                 <h:dataTable value="#{lunchAdminBean.getLast14Lunches()}" var="lunch" styleClass="lunch-list">
                     <h:column>
@@ -127,6 +118,10 @@
                     <!-- Add more columns as needed -->
                 </h:dataTable>
             </h:panelGroup>
+
+
+        </h:form>
+
         </div>
 
 

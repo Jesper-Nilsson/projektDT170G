@@ -20,9 +20,6 @@
             <basic name="description">
                 <column name="description"/>
             </basic>
-            <basic name="imageUrl">
-                <column name="image_url"/>
-            </basic>
         </attributes>
     </entity>
 </entity-mappings>

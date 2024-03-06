@@ -41,9 +41,6 @@ public class LunchAdminBean implements Serializable {
     private int lunchIdToDelete;
     // Id of the selected lunch for update
     private int selectedLunchId;
-     LunchAdminBean (){
-         lunchMenuEntity.setPrice(99);
-     }
 
 
 
@@ -62,6 +59,9 @@ public class LunchAdminBean implements Serializable {
         if("add".equals(action) || "update".equals(action) || "delete".equals(action)) {
             lunchMenuEntity = new LunchMenuEntity();
             setMessage("");
+            if ("add".equals(action)){
+                setPrice(99);
+            }
         }
          this.action = action;
     }

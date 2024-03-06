@@ -3,11 +3,11 @@ package se.miun.dt170g.projektdt170g.models;
 import jakarta.persistence.*;
 @NamedQuery(
         name = "TableSessionEntity.findAll",
-        query = "SELECT l FROM TableSessionEntity l"
+        query = "SELECT l FROM TableEntity l"
 )
 @Entity
-@Table(name = "table_session", schema = "dt170gprojekt", catalog = "")
-public class TableSessionEntity {
+@Table(name = "tables", schema = "dt170gprojekt", catalog = "")
+public class TableEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "table_number", nullable = false)

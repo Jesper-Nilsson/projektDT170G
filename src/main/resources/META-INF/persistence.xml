@@ -16,7 +16,7 @@
         <mapping-file>ReceiptEntity.xml</mapping-file>
         <mapping-file>RestaurantOrderEntity.xml</mapping-file>
         <mapping-file>ShiftEntity.xml</mapping-file>
-        <mapping-file>TableSessionEntity.xml</mapping-file>
+        <mapping-file>TableEntity.xml</mapping-file>
         <class>se.miun.dt170g.projektdt170g.models.ALaCarteMenuEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.BookingEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.DrinksEntity</class>
@@ -28,7 +28,7 @@
         <class>se.miun.dt170g.projektdt170g.models.ReceiptEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.RestaurantOrderEntity</class>
         <class>se.miun.dt170g.projektdt170g.models.ShiftEntity</class>
-        <class>se.miun.dt170g.projektdt170g.models.TableSessionEntity</class>
+        <class>se.miun.dt170g.projektdt170g.models.TableEntity</class>
 
 
         <properties>
