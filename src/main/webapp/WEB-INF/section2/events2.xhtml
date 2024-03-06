@@ -10,7 +10,6 @@
                     <div class="event-content">
                         <h2 class="event-title">#{event.name}</h2>
                         <p class="event-description">#{event.description}</p>
-                        <p class="event-description">#{event.eventID}</p>
                         <time class="event-time">#{event.formattedDate}</time>
                     </div>
                     <img src="data:image/jpeg;base64,#{eventsBean.fetchEventImageAsBase64(event.eventID)}" alt="#{event.name}" class="event-image"/>

@@ -196,13 +196,16 @@
                     <h2 id="popupHeader">Upcoming Events</h2>
                     <p id="popupText">Don't miss our special weekend events!</p>
                     <ul id="popupList">
-                        <li>25 Dec - Saturday: Live Music Night</li>
-                        <li>26 Dec - Sunday: Wine Tasting Event</li>
+                        <ui:repeat value="#{eventsBean.eventsEntities}" var="event">
+                            <li>#{event.formattedDate} - #{event.name}</li>
+                        </ui:repeat>
                     </ul>
+
                     <button onclick="location.href='#events';" id="pop_btn">More Info</button>
                 </div>
             </div>
         </section>
+
 
         <a href="#top" class="top-link">Till Toppen</a>
     </section>
