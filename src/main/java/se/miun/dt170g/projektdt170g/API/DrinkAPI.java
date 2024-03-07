@@ -25,8 +25,9 @@ public class DrinkAPI {
 
 
     @GET
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Drink getDrinkByID(int id) {
+    public Drink getDrinkByID( @PathParam("id") int id) {
         return new Drink(entityManager.find(DrinksEntity.class, id));
     }
 
