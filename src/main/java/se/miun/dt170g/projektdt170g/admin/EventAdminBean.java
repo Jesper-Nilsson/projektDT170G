@@ -1,8 +1,8 @@
 
 package se.miun.dt170g.projektdt170g.admin;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.annotation.View;
+//import jakarta.enterprise.context.RequestScoped;
+//import jakarta.faces.annotation.View;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
