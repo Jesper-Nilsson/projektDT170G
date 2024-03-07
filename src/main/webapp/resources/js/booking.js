@@ -105,6 +105,7 @@ document.getElementById('chooseDateTime').addEventListener('click', function() {
         showInvalidDateInput();
     }
 });
+/*
 document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
     // ... your existing code to capture values and validate them
@@ -129,6 +130,39 @@ document.getElementById('j_idt17:saveBooking').addEventListener('click', functio
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
 });
+*/
+document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    // Assuming you have an AJAX call here that submits the booking and updates part of the page
+
+    // Use a brief timeout to allow the AJAX response to update the page
+   // setTimeout(() => {
+        const messageArea = document.getElementById('bookingMessageArea');
+        const limitMessage = messageArea.querySelector('.limit-message');
+
+        // Check if the limit message is displayed and contains text
+        if (limitMessage && limitMessage.innerHTML.trim() !== '') {
+            // Booking limit reached, show the error message and do not open the confirmation modal
+            alert(limitMessage.innerHTML); // Or use a more user-friendly way to display the message
+        } else {
+            // Booking was successful, proceed with showing the confirmation
+            let userName = document.getElementById('j_idt17:userName').value;
+            let userPhone = document.getElementById('j_idt17:userPhone').value;
+            document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: " + userName + ", med telefonnummer: " + userPhone;
+            openModal('4'); // Show the modal with booking details
+            closeModal('3');
+            setTimeout(() => {
+                closeModal('4'); // Hide the confirmation modal after some time
+            }, 10000); // Adjust timing as needed
+        }
+
+    //}, 500); // Adjust the timeout as needed to ensure it works with your AJAX setup
+});
+
+function resetForm() {
+    document.getElementById('userName').value = '';
+    document.getElementById('userPhone').value = '';
+}
 
 // Function to navigate back to the previous modal
 function goBackModal(currentModalId, previousModalId) {

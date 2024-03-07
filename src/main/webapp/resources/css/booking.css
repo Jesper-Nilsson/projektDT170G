@@ -154,3 +154,14 @@ body.modal-open,
 html.modal-open {
     overflow: hidden !important;
 }
+
+#bookingDetails {
+    font-size: 16px; /* Sets the font size */
+    font-family: Arial, sans-serif; /* Sets the font family */
+    color: #333; /* Sets the text color */
+    padding: 20px; /* Adds space around the text */
+    background-color: #f0f0f0; /* Sets a background color */
+    border-radius: 8px; /* Adds rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    margin: 20px 0; /* Adds margin above and below the element */
+}

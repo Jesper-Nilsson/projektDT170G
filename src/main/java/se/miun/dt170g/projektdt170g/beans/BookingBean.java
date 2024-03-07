@@ -2,6 +2,7 @@ package se.miun.dt170g.projektdt170g.beans;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import org.primefaces.PrimeFaces;
 import se.miun.dt170g.projektdt170g.API.BookingAPI;
 import se.miun.dt170g.projektdt170g.items.Booking;
 import se.miun.dt170g.projektdt170g.models.BookingEntity;
@@ -109,4 +110,3 @@ public class BookingBean implements Serializable {
 
     }
 
-}

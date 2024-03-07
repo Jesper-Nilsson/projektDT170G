@@ -52,7 +52,8 @@
         <!-- Section for today's lunch, initially hidden -->
         <section id="todaysLunchSection" class="daily-lunch" style="display: none;">
             <h2>Dagens lunch</h2>
-            <p>#{menueBean.todaysLunch.name} - #{menueBean.todaysLunch.description}</p>
+            <p>#{menueBean.todaysLunch.name}</p>
+            <p>#{menueBean.todaysLunch.description}</p>
             <p>Pris: #{menueBean.todaysLunch.price} SEK</p>
         </section>
 
@@ -131,13 +132,13 @@
                         <h2 class="header-booking">Välj datum</h2>
                         <!-- Content for choosing a date -->
                         <p:outputLabel for="datePicker" value="Välj ett datum" styleClass="inputHeader"/>
-                        <p:datePicker id="datePicker" value="#{bookingBean.date}"
+                        <p:datePicker id="datePicker" value="#{bookingBean.date}"  widgetVar="datePickerWidgetVar"
                                       pattern="dd/MM/yyyy" showOnFocus="true"
                                       mindate="#{bookingBean.minBookingDate}" readonlyInput="true"/>
 
                         <p:outputLabel for="timePicker" value="Välj en tid" styleClass="inputHeader"/>
                         <p:datePicker id="timePicker" timeOnly="true" pattern="HH:mm" stepMinute="30"
-                                      mindate="17:00" maxdate="20:30" value="#{bookingBean.time}"
+                                      mindate="17:00" maxdate="20:30" value="#{bookingBean.time}"  widgetVar="timePickerWidgetVar"
                                       readonlyInput="true"/>
 
                         <button id="chooseDateTime" type="button" class="continue-btn">Fortsätt</button>
@@ -167,27 +168,31 @@
                             <f:validateRegex pattern="\d{3}-\d{3}-\d{4}||\d{10}" />
                         </h:inputText>
 
-                        <h:commandButton id="saveBooking" value="Boka" action="#{bookingBean.submit()}" styleClass="continue-btn" update="@form">
-                            <f:ajax execute="@form" render="@none" event="click"/>
+                        <h:commandButton id="saveBooking" value="Boka" action="#{bookingBean.submit}" styleClass="continue-btn">
+                            <f:ajax execute="@form" render="bookingMessageArea" resetValues="true"/>
                         </h:commandButton>
-
-                        <h:inputHidden value="#{bookingBean.}"/>
-
-                        <div id="bookingMessage">
-                            <h:outputText value="#{bookingBean.bookingLimitMessage}" styleClass="limit-message" rendered="#{bookingBean.bookingLimitMessage != null}"/>
+                        <div id="bookingMessageArea">
+                            <h:outputText value="#{bookingBean.bookingLimitMessage}" styleClass="limit-message" rendered="#{bookingBean.bookingLimitMessage != null}" />
                         </div>
 
                         <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 
                     </div>
                 </aside>
+                <script type="text/javascript">
+                    function refreshPage() {
+                        window.location.reload();
+                    }
+                </script>
+
                 <!-- Confirmation Modal -->
                 <aside id="modalStep4" class="modal" aria-hidden="true" style="display:none;">
                     <div class="content-container">
                         <div class="booking-confirmation">
-                            <span class="close" onclick="closeModal('4')">&#215;</span>
+                            <span class="close" onclick="closeModal('4'); closeModal('3'); refreshPage();">&#215;</span>
                             <h2>Booking Confirmation</h2>
                             <p id="bookingDetails"></p>
+
                         </div>
                     </div>
                 </aside>
@@ -199,8 +204,8 @@
             <div id="popupEvent" class="popup">
                 <div class="popup-content">
                     <span onclick="closePopup()" class="close-btn">&#215;</span> <!-- Close button -->
-                    <h2 id="popupHeader">Upcoming Events</h2>
-                    <p id="popupText">Don't miss our special weekend events!</p>
+                    <h2 id="popupHeader">Kommande Event</h2>
+                    <p id="popupText">Missa inte våra speciella helgevenemang!</p>
                     <ul id="popupList">
                         <ui:repeat value="#{eventsBean.eventsEntities}" var="event">
                             <li>#{event.formattedDate} - #{event.name}</li>
