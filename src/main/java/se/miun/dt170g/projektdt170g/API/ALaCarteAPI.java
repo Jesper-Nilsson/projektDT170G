@@ -59,8 +59,8 @@ public class ALaCarteAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createItem(ALaCarteItem item) {
         ALaCarteMenuEntity menuEntity = new ALaCarteMenuEntity(item);
-            entityManager.persist(menuEntity);
-            return Response.ok(menuEntity).build();
+        entityManager.persist(menuEntity);
+        return Response.ok(menuEntity).build();
     }
 
     @PUT

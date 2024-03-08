@@ -18,12 +18,21 @@
     </properties>
 
     <dependencies>
+        <!-- Kept the highest version for jakarta.jakartaee-web-api -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-web-api</artifactId>
             <version>10.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>LATEST</version>
+        </dependency>
+
+
+        <!-- JUnit Jupiter API and Engine for testing with the version specified in properties -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -37,9 +46,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jakarta.faces</groupId>
-            <artifactId>jakarta.faces-api</artifactId>
-            <version>3.0.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>9.1.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -47,14 +61,31 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Removed junit as it's older and not needed alongside JUnit Jupiter -->
+        <!-- Removed the duplicated jakarta.faces-api and primefaces dependencies, keeping only the latest versions -->
 
-
+        <!-- PrimeFaces latest version -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>11.0.0</version>
             <classifier>jakarta</classifier>
         </dependency>
+
+        <!-- Jakarta Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

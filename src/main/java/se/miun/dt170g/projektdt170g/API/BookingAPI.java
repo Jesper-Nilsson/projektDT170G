@@ -34,7 +34,6 @@ public class BookingAPI {
         return bookings;
 
     }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,5 +49,8 @@ public class BookingAPI {
             return Response.status(Response.Status.BAD_REQUEST).entity("Error creating the booking").build();
         }
     }
+
+
+
 
 }

@@ -4,7 +4,9 @@ import se.miun.dt170g.projektdt170g.models.EventsEntity;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
     private int eventID;
@@ -26,7 +28,16 @@ public class Event {
         this.description = eventsEntity.getDescription();
 
     }
+    public String getFormattedDate() {
+        // Combine date and time into a LocalDateTime object
+        LocalDateTime dateTime = LocalDateTime.of(date, time);
 
+        // Define a formatter with the desired format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm");
+
+        // Format the dateTime object and return it as a string
+        return dateTime.format(formatter);
+    }
 
     public int getEventID() {
         return eventID;
