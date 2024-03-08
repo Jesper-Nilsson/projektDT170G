@@ -454,7 +454,7 @@ DELIMITER $$
 -- Events
 --
 DROP EVENT IF EXISTS `reset_bookings_daily`$$
-CREATE DEFINER=`root`@`localhost` EVENT `reset_bookings_daily` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-06 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE table_session  SET status = "Free"$$
+CREATE DEFINER=`root`@`localhost` EVENT `reset_bookings_daily` ON SCHEDULE EVERY 1 DAY STARTS '2024-03-06 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE tables  SET status = "Free"$$
 
 DELIMITER ;
 COMMIT;

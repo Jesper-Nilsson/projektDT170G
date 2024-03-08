@@ -113,9 +113,7 @@ public class EventsBean  implements Serializable{
         events.setDescription(description);
     }
 
-    public String getImageUrl() {
-        return events.getImageUrl();
-    }
+
 
 }
 
