@@ -98,26 +98,31 @@ function validateNamePhone() {
 
 // Event listener for choosing number of guests
 
-
 document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
 
     if (validateNamePhone()) {
-        // Assuming this part populates and shows the confirmation
+        // Populate and show the confirmation
         let userName = document.getElementById('j_idt17:userName').value;
         let userPhone = document.getElementById('j_idt17:userPhone').value;
         document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: \n" + userName + ", med telefonnummer: " + userPhone;
+
         openModal('4'); // Show the modal with booking details
-        document.getElementById('j_idt17:saveBooking').form.submit();
-        document.getElementById('j_idt17:saveBooking').form.reset();
+
+        // Delayed actions after showing the modal
         setTimeout(() => {
-            closeModal('4'); // Hide the confirmation modal after some time
-            closeModal('3'); // Hide the confirmation modal after some time
+            closeModal('4'); // Hide the confirmation modal
+            closeModal('3'); // You might want to check if you need to close another modal here
+
+            // Refresh the page or perform other cleanup actions here
+            // If you're handling form submission asynchronously,
+            // you might want to include it here or adjust according to your app's flow
+            window.location.reload(); // This refreshes the page
         }, 10000); // Adjust timing as needed
+
     } else {
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
-
 });
 
 function resetForm() {
