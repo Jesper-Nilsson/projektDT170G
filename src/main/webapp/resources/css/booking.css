@@ -130,7 +130,7 @@ input[type="text"], input[type="tel"] {
     margin-left: 1.5rem;
 }
 
-#moreThanSixInfo, #invalidDateTimeInput, #invalidNamePhoneInput{
+#moreThanSixInfo, #invalidDateTimeInput, #invalidNamePhoneInput, #fullBooked{
     max-width: 70%;
     text-align: center;
     border: #666666 1px solid;

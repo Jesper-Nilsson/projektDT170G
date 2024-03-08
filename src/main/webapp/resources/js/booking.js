@@ -97,18 +97,10 @@ function validateNamePhone() {
 }
 
 // Event listener for choosing number of guests
-document.getElementById('chooseDateTime').addEventListener('click', function() {
-    if (validateDateTimeInputs()) {
-        openModal('3');
-        closeModal('2');
-    } else {
-        showInvalidDateInput();
-    }
-});
-/*
+
+
 document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
-    // ... your existing code to capture values and validate them
 
     if (validateNamePhone()) {
         // Assuming this part populates and shows the confirmation
@@ -116,47 +108,16 @@ document.getElementById('j_idt17:saveBooking').addEventListener('click', functio
         let userPhone = document.getElementById('j_idt17:userPhone').value;
         document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: \n" + userName + ", med telefonnummer: " + userPhone;
         openModal('4'); // Show the modal with booking details
-
-        // Set a timer to hide the modal or clear the message after 10 seconds
+        document.getElementById('j_idt17:saveBooking').form.submit();
+        document.getElementById('j_idt17:saveBooking').form.reset();
         setTimeout(() => {
-            closeModal('3'); // Hide the confirmation modal
-            // Or clear the message without closing if you prefer
-            // document.getElementById('bookingDetails').innerText = '';
-            closeModal('4'); // Hide the confirmation modal
-        }, 10000); // 10000 milliseconds = 10 seconds
-
-        // Your code to submit the form data (AJAX call or form.submit() if needed)
-    } else{
+            closeModal('4'); // Hide the confirmation modal after some time
+            closeModal('3'); // Hide the confirmation modal after some time
+        }, 10000); // Adjust timing as needed
+    } else {
         document.getElementById('invalidNamePhoneInput').style.display = "block";
     }
-});
-*/
-document.getElementById('j_idt17:saveBooking').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    // Assuming you have an AJAX call here that submits the booking and updates part of the page
 
-    // Use a brief timeout to allow the AJAX response to update the page
-   // setTimeout(() => {
-        const messageArea = document.getElementById('bookingMessageArea');
-        const limitMessage = messageArea.querySelector('.limit-message');
-
-        // Check if the limit message is displayed and contains text
-        if (limitMessage && limitMessage.innerHTML.trim() !== '') {
-            // Booking limit reached, show the error message and do not open the confirmation modal
-            alert(limitMessage.innerHTML); // Or use a more user-friendly way to display the message
-        } else {
-            // Booking was successful, proceed with showing the confirmation
-            let userName = document.getElementById('j_idt17:userName').value;
-            let userPhone = document.getElementById('j_idt17:userPhone').value;
-            document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: " + userName + ", med telefonnummer: " + userPhone;
-            openModal('4'); // Show the modal with booking details
-            closeModal('3');
-            setTimeout(() => {
-                closeModal('4'); // Hide the confirmation modal after some time
-            }, 10000); // Adjust timing as needed
-        }
-
-    //}, 500); // Adjust the timeout as needed to ensure it works with your AJAX setup
 });
 
 function resetForm() {
@@ -180,3 +141,48 @@ function showInvalidDateInput() {
     moreThanSixInfo.style.display = "block";
 }
 
+document.getElementById('chooseDateTime').addEventListener('click', async function() {
+    if (validateDateTimeInputs()) {
+        // Perform the availability check asynchronously
+        try {
+            const isAvailable = await checkAvailableBookings();
+            if (isAvailable) {
+                openModal('3');
+                closeModal('2');
+            } else {
+                // Handle the case when bookings are full (isAvailable is false)
+                // You might want to inform the user that no bookings are available
+                // For example:
+                showFullBooked();
+            }
+        } catch (error) {
+            console.error('Error checking booking availability:', error);
+            // Optionally handle errors, e.g., show an error message to the user
+        }
+    } else {
+        showInvalidDateInput();
+    }
+});
+function showFullBooked() {
+    const moreThanSixInfo = document.getElementById("fullBooked");
+    moreThanSixInfo.style.display = "block";
+}
+
+async function checkAvailableBookings() {
+
+    const datePickerValue = document.getElementById("j_idt17:datePicker_input").value;
+    const parts = datePickerValue.split('/'); // For "MM/DD/YYYY", split by "/"
+
+    // Reorder the parts to "YYYY-MM-DD"
+    // Adjust the indices [2], [1], [0] based on your input format
+    const formattedDate = parts[2] + "-" + parts[1] + "-" + parts[0];
+
+    const url = "http://localhost:8080/projektDT170G-1.0-SNAPSHOT/api/bookings?date=" + formattedDate;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return (data.length < 4);
+}

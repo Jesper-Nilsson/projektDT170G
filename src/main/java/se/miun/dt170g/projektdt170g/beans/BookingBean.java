@@ -22,7 +22,7 @@ import java.util.List;
 public class BookingBean implements Serializable {
     @Inject
     private BookingAPI bookingAPI;
-    private Booking  bookingItem = new Booking();
+    private Booking bookingItem = new Booking();
     private String minBookingDate = getCurrentDate();
     private List<Booking> bookingList;
 
@@ -68,7 +68,6 @@ public class BookingBean implements Serializable {
     }
 
 
-
     public String getMinBookingDate() {
         return minBookingDate;
     }
@@ -89,24 +88,22 @@ public class BookingBean implements Serializable {
     public String getBookingLimitMessage() {
         return bookingLimitMessage;
     }
+
     private String bookingLimitMessage = null;
 
 
     public void submit() {
-            bookingList = bookingAPI.getBookingsByDate(bookingItem.getDate().toString());
-            if(bookingList.size() < 4) {
-                bookingAPI.createBooking(bookingItem);
-                bookingLimitMessage = null; // Reset the message
-            }else{
-                 bookingLimitMessage = "Bokningsgränsen nådd för detta datum. Ring eller maila oss för din bokning på 070000000, anton@gmail.com";
+        bookingList = bookingAPI.getBookingsByDate(bookingItem.getDate().toString());
+        if (bookingList.size() < 4) {
+            bookingAPI.createBooking(bookingItem);
+            bookingLimitMessage = null; // Reset the message
+        } else {
+            bookingLimitMessage = "Bokningsgränsen nådd för detta datum. Ring eller maila oss för din bokning på 070000000, anton@gmail.com";
 
-            }
+        }
 
-
-    }
-
-    public int getAmountOfBookings(LocalDate date) {
-        
 
     }
+
+}
 
