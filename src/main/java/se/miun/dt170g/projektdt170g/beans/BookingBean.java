@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.List;
@@ -44,6 +45,7 @@ public class BookingBean implements Serializable {
     }
 
     public int getAmount() {
+
         return bookingItem.getAmount();
     }
 
@@ -52,7 +54,14 @@ public class BookingBean implements Serializable {
     }
 
     public LocalDate getDate() {
+
         return bookingItem.getDate();
+    }
+    public String getFormattedDate() {
+        if (bookingItem.getDate() != null) {
+            return bookingItem.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        }
+        return ""; // Return an empty string or a default value as necessary
     }
 
     public void setDate(LocalDate date) {
@@ -62,8 +71,17 @@ public class BookingBean implements Serializable {
     public LocalTime getTime() {
         return bookingItem.getTime();
     }
+    public int getLimit() {
+        return limit;
+    }
+    public void setLimit(int limits) {
+        this.limit =  bookingList.size();
+    }
 
-    public void setTime(LocalTime time) {
+    private int limit;
+    public void setTime(LocalTime time)
+    {
+
         bookingItem.setTime(time);
     }
 
@@ -100,8 +118,8 @@ public class BookingBean implements Serializable {
         } else {
             bookingLimitMessage = "Bokningsgränsen nådd för detta datum. Ring eller maila oss för din bokning på 070000000, anton@gmail.com";
 
-        }
 
+        }
 
     }
 
