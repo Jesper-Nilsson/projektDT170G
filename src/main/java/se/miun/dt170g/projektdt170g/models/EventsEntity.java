@@ -41,7 +41,9 @@ public class EventsEntity {
     @Basic
     @Column(name = "description", nullable = false, length = 255)
     private String description;
-
+    @Basic
+    @Column(name = "image_url", nullable = false, length = 255)
+    private String imageUrl;
 
     public EventsEntity(){}
     public EventsEntity(Event event){
@@ -51,6 +53,7 @@ public class EventsEntity {
         this.date = event.getDate();
         this.time = event.getTime();
         this.description = event.getDescription();
+        this.imageUrl = event.getImagePath();
     }
 
     public int getEventId() {
@@ -93,6 +96,13 @@ public class EventsEntity {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
 
     public LocalTime getTime() {

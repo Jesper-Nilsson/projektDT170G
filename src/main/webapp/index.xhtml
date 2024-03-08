@@ -173,9 +173,6 @@
                         <h:commandButton id="saveBooking" value="Boka" action="#{bookingBean.submit}" styleClass="continue-btn">
                             <f:ajax execute="@form" render="bookingMessageArea" resetValues="true"/>
                         </h:commandButton>
-                        <div id="bookingMessageArea">
-                            <h:outputText value="#{bookingBean.bookingLimitMessage}" styleClass="limit-message" rendered="#{bookingBean.bookingLimitMessage != null}" />
-                        </div>
 
                         <p id="invalidNamePhoneInput">Vänligen fyll i namn och telefonnummer innan du kan boka</p>
 
@@ -214,7 +211,7 @@
                         </ui:repeat>
                     </ul>
 
-                    <button onclick="location.href='#events';" id="pop_btn">More Info</button>
+                    <button onclick="location.href='#events';" id="pop_btn">Mer Information</button>
                 </div>
             </div>
         </section>

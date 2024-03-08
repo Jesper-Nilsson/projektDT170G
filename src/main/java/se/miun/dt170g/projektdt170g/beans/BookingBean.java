@@ -84,25 +84,8 @@ public class BookingBean implements Serializable {
         return dateFormat.format(currentDate);
     }
 
-
-    public String getBookingLimitMessage() {
-        return bookingLimitMessage;
-    }
-
-    private String bookingLimitMessage = null;
-
-
     public void submit() {
-        bookingList = bookingAPI.getBookingsByDate(bookingItem.getDate().toString());
-        if (bookingList.size() < 4) {
-            bookingAPI.createBooking(bookingItem);
-            bookingLimitMessage = null; // Reset the message
-        } else {
-            bookingLimitMessage = "Bokningsgränsen nådd för detta datum. Ring eller maila oss för din bokning på 070000000, anton@gmail.com";
-
-        }
-
-
+        bookingAPI.createBooking(bookingItem);
     }
 
 }

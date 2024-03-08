@@ -17,7 +17,9 @@ public class Event {
     private LocalTime time;
     private int price;
     private String description;
+    private String imagePath;
 
+    public Event() {}
 
     public Event(EventsEntity eventsEntity){
         this.eventID = eventsEntity.getEventId();
@@ -26,7 +28,7 @@ public class Event {
         this.date = eventsEntity.getDate();
         this.time = eventsEntity.getTime();
         this.description = eventsEntity.getDescription();
-
+        this.imagePath = eventsEntity.getImageUrl();
     }
     public String getFormattedDate() {
         // Combine date and time into a LocalDateTime object
@@ -42,7 +44,6 @@ public class Event {
     public int getEventID() {
         return eventID;
     }
-    public Event(){}
 
     public void setEventID(int eventID) {
         this.eventID = eventID;
@@ -88,5 +89,11 @@ public class Event {
         this.description = description;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 }
