@@ -1,53 +1,59 @@
-<section class="menu-container" id="alacarte" >
-    <header class="menu-header">
-        <h1>À la Carte Menu</h1>
-    </header>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <section class="menu-container_alacarte" id="alacarte">
+        <img src="resources/images/menyBackground.jpg" alt="Meny Background" class="background-image"/>
 
-    <section class="menu-section">
-        <header class="menu-section-header">
-            <h2>Förrätter</h2>
+        <header class="menu-header">
+            <h1>À la Carte Menu</h1>
         </header>
-        <article class="menu-item">
-            <h2>Gravad Lax</h2>
-            <p>Med hovmästarsås och dillstuvad potatis</p>
-        </article>
-        <article class="menu-item">
-            <h2>Soppa</h2>
-            <p>Tomatsoppa serverad med créme fraiche och färsk basilika</p>
-        </article>
-    </section>
 
-    <section class="menu-section">
-        <header class="menu-section-header">
-            <h2>Huvudrätter</h2>
-        </header>
-        <article class="menu-item">
-            <h2>Pepparstek</h2>
-            <p>Med brända grönsaker och rödvinssås</p>
-        </article>
-        <article class="menu-item">
-            <h2>Halstrad Röding</h2>
-            <p>Serverad med potatispuré och skirat smör</p>
-        </article>
-    </section>
+        <!-- Förrätter -->
+        <section class="menu-section">
+            <header class="menu-section-header">
+                <h2>Förrätter</h2>
+            </header>
+            <ui:repeat value="#{alaCarteBean.aLaCarteStarter }" var="item" >
+                <article class="menu-item">
+                    <h2>#{item.name}</h2>
+                    <p>#{item.description}</p>
+                    <p>#{item.price}</p>
+                </article>
+            </ui:repeat>
+        </section>
 
-    <section class="menu-section">
-        <header class="menu-section-header">
-            <h2>Efterrätter</h2>
-        </header>
-        <article class="menu-item">
-            <h2>Chokladfondant</h2>
-            <p>Med vaniljglass och färska bär</p>
-        </article>
-        <article class="menu-item">
-            <h2>Crème Brûlée</h2>
-            <p>Klassisk Crème Brûlée med karamelliserat socker</p>
-        </article>
-    </section>
+        <!-- Huvudrätter -->
+        <section class="menu-section">
+            <header class="menu-section-header">
+                <h2>Huvudrätter</h2>
+            </header>
+            <ui:repeat value="#{alaCarteBean.aLaCarteMainDish}" var="item" >
+                <article class="menu-item">
+                    <h2>#{item.name}</h2>
+                    <p>#{item.description}</p>
+                    <p>#{item.price}</p>
+                </article>
+            </ui:repeat>
+        </section>
 
-    <footer class="menu-footer">
-        <p class="allergy-info">Har ni allergier eller önskemål, tala med vår personal.</p>
-        <p>Vi använder alltid färska råvaror för bästa kvalitet och smakupplevelse.</p>
-    </footer>
-    <a href="#top" class="top-link">Till Toppen</a>
-</section>
+        <!-- Efterrätter -->
+        <section class="menu-section">
+            <header class="menu-section-header">
+                <h2>Efterrätter</h2>
+            </header>
+            <ui:repeat value="#{alaCarteBean.aLaCarteDesert}" var="item" >
+                <article class="menu-item">
+                    <h2>#{item.name}</h2>
+                    <p>#{item.description}</p>
+                    <p>#{item.price}</p>
+                </article>
+            </ui:repeat>
+        </section>
+
+        <footer class="menu-footer">
+            <p class="allergy-info">Har ni allergier eller önskemål, tala med vår personal.</p>
+            <p>Vi använder alltid färska råvaror för bästa kvalitet och smakupplevelse.</p>
+        </footer>
+        <a href="#top" class="top-link">Till Toppen</a>
+    </section>
+</ui:composition>
