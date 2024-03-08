@@ -6,6 +6,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+
 }
 
 .event-card {
@@ -68,4 +69,17 @@
 #header_event{
     text-align: center;
     color: #f4f4f4;
+}
+
+
+@media (max-width: 768px) {
+    .events-container {
+        flex-direction: column;
+        height: auto; /* Adjust height for vertical scrolling */
+        padding: 10px; /* Reduce padding */
+    }
+
+
+
+
 }

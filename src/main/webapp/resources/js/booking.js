@@ -77,7 +77,6 @@ function validateDateTimeInputs() {
         return true; // Return true if both date and time are provided
     }
 }
-
 function validateNamePhone() {
     const nameInput = document.getElementById('j_idt17:userName');
     const phoneInput = document.getElementById('j_idt17:userPhone');
@@ -86,16 +85,16 @@ function validateNamePhone() {
         // If either field is empty, disable the submit button and prevent form submission
         return false;
     } else {
-        // Validate phone number format
+        // Validate phone number for valid characters (digits, spaces, dashes, parentheses)
         const phoneNumber = phoneInput.value.trim();
-        const phoneNumberRegex = /^(?:\d{10}|\d{3}-\d{3} \d{2} \d{2}|\d{3}-\d{7}|\d{3} \d{3} \d{2} \d{2})$/;
+        const phoneNumberRegex = /^[\d\s\-()]+$/; // Allow digits, spaces, dashes, and parentheses
+
         if (!phoneNumberRegex.test(phoneNumber)) {
-            return false; // Prevent form submission if phone number format is incorrect
+            return false; // Prevent form submission if phone number contains invalid characters
         }
 
-        // If both fields are filled and the phone number format is correct, allow form submission
+        // If both fields are filled and the phone number contains only valid characters, allow form submission
         return true;
-
     }
 }
 
@@ -108,7 +107,7 @@ document.getElementById('j_idt17:saveBooking').addEventListener('click', functio
         // Populate and show the confirmation
         let userName = document.getElementById('j_idt17:userName').value;
         let userPhone = document.getElementById('j_idt17:userPhone').value;
-        document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: \n" + userName + ", med telefonnummer: " + userPhone;
+        document.getElementById('bookingDetails').innerText = "Bokningen sparades på namnet: " + userName + "\nTelefonnummer: " + userPhone;
 
         openModal('4'); // Show the modal with booking details
 

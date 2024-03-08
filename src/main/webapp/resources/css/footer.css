@@ -92,6 +92,7 @@
 }
 
 @media (max-width: 768px) {
+
     .contact-info,
     .action-buttons,
     .social-media {
@@ -110,3 +111,5 @@
         margin-bottom: 10px;
     }
 }
+
+
