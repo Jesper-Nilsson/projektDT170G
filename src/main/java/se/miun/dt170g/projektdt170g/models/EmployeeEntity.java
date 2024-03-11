@@ -2,6 +2,10 @@ package se.miun.dt170g.projektdt170g.models;
 
 import jakarta.persistence.*;
 
+@NamedQuery(
+        name = "EmployeeEntity.findAll",
+        query = "SELECT l FROM EmployeeEntity l"
+)
 @Entity
 @Table(name = "employee", schema = "dt170gprojekt", catalog = "")
 public class EmployeeEntity {

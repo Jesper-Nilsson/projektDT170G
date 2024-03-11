@@ -4,6 +4,19 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+
+
+@NamedQueries({
+        @NamedQuery(
+                name = "ShiftEntity.findAll",
+                query = "SELECT l FROM ShiftEntity l"
+        ),
+        @NamedQuery(
+                name = "ShiftEntity.findByDate",
+                query = "SELECT l FROM ShiftEntity l WHERE l.date = :date"
+        )
+})
+
 @Entity
 @Table(name = "shift", schema = "dt170gprojekt", catalog = "")
 public class ShiftEntity {
@@ -13,7 +26,7 @@ public class ShiftEntity {
     private int shiftId;
     @Basic
     @Column(name = "date", nullable = false)
-    private Date date;
+    private String date;
     @Basic
     @Column(name = "type", nullable = false, length = 255)
     private String type;
@@ -29,11 +42,11 @@ public class ShiftEntity {
         this.shiftId = shiftId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
